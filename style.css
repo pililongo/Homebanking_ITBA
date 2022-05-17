@@ -1,25 +1,24 @@
 * {
-    background-color: #4577ac;
     text-decoration: none;
 }
 footer {
     width: 100%;
-    color: white;
+    color: black;
     text-align: center;
     font-family: 'Roboto', sans-serif;
     font-size: 65%;
 }
 
 a:link /*cuando no fue seleccionado*/ {
-    color: white;
+    color: black;
 }
 
 a:visited /*liks visitados*/ {
-    color: rgb(201, 196, 196);
+    color: black;
 }
 
 a:hover {
-    color: rgb(0, 0, 0);
+    color: blue;
 }
 
 a:active {
