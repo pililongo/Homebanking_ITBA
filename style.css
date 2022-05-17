@@ -1,7 +1,27 @@
+* {
+    background-color: #4577ac;
+    text-decoration: none;
+}
 footer {
-    background-color: #2A68A9;
     width: 100%;
-    height: 70px;
     color: white;
     text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 65%;
+}
+
+a:link /*cuando no fue seleccionado*/ {
+    color: white;
+}
+
+a:visited /*liks visitados*/ {
+    color: rgb(201, 196, 196);
+}
+
+a:hover {
+    color: rgb(0, 0, 0);
+}
+
+a:active {
+    color: red;
 }
