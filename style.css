@@ -1,12 +1,29 @@
-* {
-    text-decoration: none;
-}
-footer {
+header {
+    margin: 5px auto;
+    padding: 10px;
     width: 100%;
+    height: auto;
+}
+
+header img {
+    margin: 1rem 2rem;
+    width: 15%;
+    height: 75%;
+}
+
+footer {
+    margin: 5px auto;
+    padding: 2px 15%;
+    width: 100%;
+    height: auto;
     color: black;
     text-align: center;
     font-family: 'Roboto', sans-serif;
-    font-size: 65%;
+    font-size: 70%;
+}
+
+footer a {
+    text-decoration: none;
 }
 
 a:link /*cuando no fue seleccionado*/ {
@@ -17,10 +34,10 @@ a:visited /*liks visitados*/ {
     color: black;
 }
 
-a:hover {
-    color: blue;
+a:hover /*cuando paso por encima del link*/{
+    color: rgb(17, 17, 203);
 }
 
-a:active {
-    color: red;
+a:active /*cuando lo presiono*/{
+    color: rgb(210, 18, 18);
 }
