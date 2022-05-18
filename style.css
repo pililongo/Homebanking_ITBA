@@ -1,6 +1,87 @@
 * {
     text-decoration: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+body {
+    font-size: "Roboto", sans-serif;
+}
+.form-login {
+    width: 400px;
+    height: 370px;
+    background: #2A68A9;
+    margin: auto;
+    margin-top: 170px;
+    box-shadow: 7px 13px 37px blueviolet;
+    padding: 20px 30px;
+    border-top: 4px solid white;
+    margin-bottom: auto;
+    color: white;
+}
+
+.form-login h5 {
+    margin: 0;
+    text-align: center;
+    height: 40px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid;
+    font-size: 20px;
+}
+.controls {
+    width: 100%;
+    border: 1px solid white;
+    margin-bottom: 15px;
+    padding: 11px 10px;
+    background: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.buttons {
+    width: 100%;
+    height: 40px;
+    background: white;
+    border: none;
+    color: black;
+    margin-bottom: 16px;
+}
+
+.form-login .recuperar {
+    height: 40px;
+    text-align: center;
+    border-bottom: 1px solid;
+}
+
+.form-login .a1 {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.form-login .a1:hover {
+    text-decoration: underline;
+}
+
+.form-login .registro {
+    height: 40px;
+    text-align: center;
+    border-bottom: 1px solid;
+}
+
+.form-login .a2 {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.form-login .a2:hover {
+    text-decoration: underline;
+}
+
+.form-login .a1:hover {
+    text-decoration: underline;
+
 footer {
     width: 100%;
     color: black;
