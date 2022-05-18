@@ -13,9 +13,9 @@ body {
     background: #2A68A9;
     margin: auto;
     margin-top: 170px;
-    box-shadow: 7px 13px 37px blueviolet;
+    box-shadow: 7px 13px 37px black;
     padding: 20px 30px;
-    border-top: 4px solid white;
+    border-top: 4px solid blueviolet;
     margin-bottom: auto;
     color: white;
 }
@@ -30,12 +30,13 @@ body {
 }
 .controls {
     width: 100%;
-    border: 1px solid white;
+    border: 1px solid black;
     margin-bottom: 15px;
     padding: 11px 10px;
     background: white;
     font-size: 14px;
     font-weight: bold;
+    color: black;
 }
 
 .buttons {
