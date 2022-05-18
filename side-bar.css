@@ -6,3 +6,7 @@
 .flex-gap {
     gap: 1rem;
 }
+
+.hover-cuadros :hover {
+    cursor: pointer;
+}
