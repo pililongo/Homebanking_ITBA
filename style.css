@@ -5,67 +5,86 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: "Roboto", sans-serif;
+    background: rgb(241, 240, 253);
+}
+
 header {
-    margin: 5px auto;
+    margin: 2.5px;
     padding: 10px;
+    width: 100%;
+    height: auto;
 }
 
 header img {
-    margin: 1rem 2rem;
-    width: 15%;
-    height: 75%;
-}
-
-body {
-    font-size: "Roboto", sans-serif;
+    margin: 1.5%;
+    margin-left: 5%;
+    /* padding: 1%; */
+    width: 20%;
+    height: 100%;
+    /* background-color: white; */
 }
 
 .form-login {
-    width: 400px;
-    height: 370px;
-    background: #2A68A9;
-    margin: auto;
-    margin-top: 170px;
-    box-shadow: 7px 13px 37px black;
-    padding: 20px 30px;
-    border-top: 4px solid blueviolet;
-    margin-bottom: auto;
+    width: 23rem;
+    height: 25rem;
+    background: /*#304697*/ linear-gradient(-10deg, rgb(48, 70, 151) 25%,rgb(142, 115, 178));
+    margin: 1.5625rem auto;
+    padding: 0.9375rem;
+    box-shadow: 5px 5px 15px 1px #343434;
     color: white;
 }
 
-.form-login h5 {
-    margin: 0;
+.form-login h2 {
+    margin: 1.5% 0.5%;
+    padding: 1%;
     text-align: center;
-    height: 40px;
-    margin-bottom: 30px;
-    border-bottom: 1px solid;
-    font-size: 20px;
+    font-weight: bold;
+    height: 50px;
+    /* margin-bottom: 30px; */
+    /* border-bottom: 1px solid; */
+    font-size: 1.375rem;
 }
 
 .controls {
     width: 100%;
-    border: 1px solid black;
-    margin-bottom: 15px;
-    padding: 11px 10px;
-    background: white;
-    font-size: 14px;
-    font-weight: bold;
-    color: black;
+    height: auto;
+    margin: 1.5% 0.5%;
+    border: 1px transparent;
+    padding: 10px;
+    /* background: white; */
+    font-size: 0.875rem;
+    border-radius: 10px;
+    /* font-weight: bold; */
 }
 
 .buttons {
     width: 100%;
-    height: 40px;
-    background: white;
-    border: none;
-    color: black;
-    margin-bottom: 16px;
+    height: auto;
+    margin: 1.8% 0.5%;
+    padding: 10px;
+    border-radius: 10px;
+    color: rgb(0, 0, 0);
+    border: 0;
+    font-size: 0.875rem;
+    text-align: center;
+    background-color: rgb(255, 255, 255);                                    
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6), inset -2px -2px 3px rgba(0, 0, 0, .6);
+}
+    
+.buttons:hover {
+    background-color: rgb(230, 227, 255);
+}
+    
+.buttons:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6), inset 2px 2px 3px rgba(0, 0, 0, .6);
 }
 
 .form-login .recuperar {
     height: 40px;
     text-align: center;
-    border-bottom: 1px solid;
+    border-bottom: 1px;
 }
 
 .form-login .a1 {
@@ -81,7 +100,7 @@ body {
 .form-login .registro {
     height: 40px;
     text-align: center;
-    border-bottom: 1px solid;
+    border-bottom: 1px;
 }
 
 .form-login .a2 {
@@ -94,17 +113,8 @@ body {
     text-decoration: underline;
 }
 
-.form-login .a1:hover {
-    text-decoration: underline;
-}
-
 footer {
-    width: 100%;
-    height: auto;
-}
-
-footer {
-    margin: 5px auto;
+    margin: 25px auto;
     padding: 2px 15%;
     width: 100%;
     height: auto;
@@ -114,6 +124,9 @@ footer {
     font-size: 70%;
 }
 
+footer p {
+    margin: 0.4rem;
+}
 footer a {
     text-decoration: none;
 }
