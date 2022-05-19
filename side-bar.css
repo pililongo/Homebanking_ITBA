@@ -1,0 +1,12 @@
+.card-side-bar :hover {
+    cursor: pointer;
+    background-color: #0b5ed7;
+}
+
+.flex-gap {
+    gap: 1rem;
+}
+
+.hover-cuadros :hover {
+    cursor: pointer;
+}

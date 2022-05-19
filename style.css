@@ -127,6 +127,7 @@ footer {
 footer p {
     margin: 0.4rem;
 }
+
 footer a {
     text-decoration: none;
 }
@@ -139,10 +140,10 @@ a:visited /*liks visitados*/ {
     color: black;
 }
 
-a:hover /*cuando paso por encima del link*/{
-    color: rgb(17, 17, 203);
+a:hover {
+    color: blue;
 }
 
-a:active /*cuando lo presiono*/{
-    color: rgb(210, 18, 18);
+a:active {
+    color: red;
 }
