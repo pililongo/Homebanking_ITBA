@@ -30,18 +30,60 @@ body {
 
 /*--header--*/
 .navbar {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     background-color: var(--clr-small-box);
-    justify-content: space-between;
+    align-items: center;
+    /* height: 8rem; */
 }
 
 .logo {
     width: 20rem;
-    padding: 0.5rem 0.8rem 0.1rem;
+    margin-left: 2.5rem;
+    text-align: left;
+    align-items: center;
+    padding: 1.5rem 0;
 }
 
 .logo img {
     max-width: 100%;
+}
+
+/*--footer--*/
+footer {
+    display: grid;
+    grid-template-columns: 20rem 1fr;
+    background-color: var(--clr-small-box);
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+.social-networks{
+  margin: 0;
+  padding: 0; 
+}
+
+.social-networks ul {
+    list-style: none;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-left: 3rem;
+    padding: 0;
+}
+
+.social-networks ul li i {
+    font-size: 3rem;
+}
+.social-networks ul li i:hover {
+    cursor: pointer;
+}
+.rights {
+    color: white;
+    text-align: end;
+    margin-right: 2rem;
+    font-size: 2rem;
 }
 
 /*---------------*/
@@ -51,7 +93,7 @@ body {
 /*--hamburger menu--*/
 
 .hamburger-menu {
-    text-align: center;
+    text-align: right;
     padding: 0.5rem 2rem;
     font-size: 3rem;
     color: white;
@@ -67,7 +109,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 1rem;
+    margin: 1.5rem 0 ;
 }
 
 /*--menu mobile--*/
