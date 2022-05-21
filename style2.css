@@ -137,12 +137,11 @@ body {
 
 .small-card {
     display: grid;
-    grid-template-columns: 20% 1fr;
+    grid-template-columns: 33% 1fr;
     justify-content: center;
     border: 0.2rem solid var(--purple-color);
     border-radius: 0.7rem;
     align-items: center;
-    padding: 0 3rem 0;
 }
 
 .small-card:hover {
@@ -172,7 +171,7 @@ body {
 /*----------------*/
 
 
-@media screen and (min-width: 50rem) {
+@media screen and (min-width: 60rem) {
     /*--hamburger-menu--*/
     .hamburger-menu {
         display: none;
@@ -214,6 +213,10 @@ body {
         border-radius: 0.7rem;
         align-items: center;
         padding: 0;
+    }
+
+    .card-content {
+        margin-left: 1rem;
     }
     
     /*------------*/
