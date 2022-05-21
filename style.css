@@ -18,19 +18,19 @@ body {
 }
 
 header {
-    margin: 2.5px;
-    padding: 10px;
-    width: 100%;
+    margin: auto;
+    padding: 5px;
+    width: auto;
     height: auto;
     background: /*#304697*/ linear-gradient(-10deg, rgb(48, 70, 151) 25%,rgb(142, 115, 178));
 }
 
 header img {
-    margin: 1.5%;
+    margin: auto;
     margin-left: 5%;
     /* padding: 1%; */
     width: 20%;
-    height: 100%;
+    height: 80%;
     /* background-color: white; */
 }
 
@@ -39,6 +39,7 @@ header img {
     height: 25rem;
     background: /*#304697*/ linear-gradient(-10deg, rgb(48, 70, 151) 25%,rgb(142, 115, 178));
     margin: 1.5625rem auto;
+    margin-top: 10rem;
     padding: 0.9375rem;
     box-shadow: 5px 5px 15px 1px #343434;
     color: white;
