@@ -8,6 +8,8 @@
 body {
     font-family: "Roboto", sans-serif;
     background: rgb(241, 240, 253);
+    /*hola soy lu*/
+    margin: 0;
 }
 
 header {
@@ -15,6 +17,7 @@ header {
     padding: 10px;
     width: 100%;
     height: auto;
+    background: /*#304697*/ linear-gradient(-10deg, rgb(48, 70, 151) 25%,rgb(142, 115, 178));
 }
 
 header img {
@@ -34,6 +37,7 @@ header img {
     padding: 0.9375rem;
     box-shadow: 5px 5px 15px 1px #343434;
     color: white;
+    border-radius: 1rem;
 }
 
 .form-login h2 {
@@ -61,8 +65,8 @@ header img {
 
 .buttons {
     width: 100%;
-    height: auto;
-    margin: 1.8% 0.5%;
+    height: 40px;
+    margin: 3% 0.5%;
     padding: 10px;
     border-radius: 10px;
     color: rgb(0, 0, 0);
@@ -85,6 +89,8 @@ header img {
     height: 40px;
     text-align: center;
     border-bottom: 1px;
+    margin: 1.8% 0.5%;
+    padding: 10px;
 }
 
 .form-login .a1 {
@@ -101,6 +107,8 @@ header img {
     height: 40px;
     text-align: center;
     border-bottom: 1px;
+    margin: 1% 0.5%;
+    padding: 10px;
 }
 
 .form-login .a2 {
@@ -121,7 +129,7 @@ footer {
     color: black;
     text-align: center;
     font-family: 'Roboto', sans-serif;
-    font-size: 70%;
+    font-size: 80%;
 }
 
 footer p {
