@@ -9,6 +9,7 @@ body {
     font-family: "Roboto", sans-serif;
     background: rgb(241, 240, 253);
     /*hola soy lu*/
+    margin: 0;
 }
 
 header {
@@ -64,8 +65,8 @@ header img {
 
 .buttons {
     width: 100%;
-    height: auto;
-    margin: 1.8% 0.5%;
+    height: 40px;
+    margin: 3% 0.5%;
     padding: 10px;
     border-radius: 10px;
     color: rgb(0, 0, 0);
@@ -88,6 +89,8 @@ header img {
     height: 40px;
     text-align: center;
     border-bottom: 1px;
+    margin: 1.8% 0.5%;
+    padding: 10px;
 }
 
 .form-login .a1 {
@@ -104,6 +107,8 @@ header img {
     height: 40px;
     text-align: center;
     border-bottom: 1px;
+    margin: 1% 0.5%;
+    padding: 10px;
 }
 
 .form-login .a2 {
@@ -124,7 +129,7 @@ footer {
     color: black;
     text-align: center;
     font-family: 'Roboto', sans-serif;
-    font-size: 70%;
+    font-size: 80%;
 }
 
 footer p {
