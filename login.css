@@ -5,6 +5,11 @@
     box-sizing: border-box;
 }
 
+:root { 
+    --blue-color: #304697;
+}
+
+
 body {
     font-family: "Roboto", sans-serif;
     background: rgb(241, 240, 253);
