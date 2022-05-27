@@ -165,3 +165,32 @@ a:hover {
 a:active {
     color: red;
 }
+
+/* ----estilos de validaciones---- */
+.grupo__usuario,
+.grupo__contraseña{
+    position: relative;
+}
+
+.icon  {
+    position: absolute;
+    top: 1.2rem;
+    right: 1rem;
+}
+
+.error-border {
+    border: 0.125rem solid red;
+}
+
+.correcto-border {
+    border: 0.125rem solid green;
+}
+
+.correcto .icon {
+    color: green;
+}
+
+.incorrecto .icon {
+    color: red;
+}
+
