@@ -3,3 +3,16 @@
     color: white;
     text-align: center;
 }
+
+#inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+.resultados {
+    border: 2px solid black;
+}
+
+.total {
+    border: 2px solid black;
+}
