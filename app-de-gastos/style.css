@@ -3,12 +3,14 @@
 html {
   box-sizing: border-box;
   font-size: 62.5%;
+  margin: 2rem;
 }
 
 *, *::before, *::after {
   box-sizing: inherit;
+  font-family:"Roboto", sans-serif;
+  
 }
-
 body {
   font-size: 1.6rem;
   margin: 0;
@@ -16,6 +18,10 @@ body {
 
 header {
   text-align: center;
+  border: 0.2rem gray outset;
+  border-radius: 0.8rem;
+  margin-bottom: 2rem;
+  background: /*#304697*/ linear-gradient(-10deg, rgb(104, 108, 121) 15%,rgb(216, 214, 218));
 }
 
 form {
@@ -27,13 +33,19 @@ form {
 
 input {
   padding: 1.2rem;
-  border: 0.2rem solid black;
+  border: 0.2rem black solid;
   border-radius: 0.8rem;
   margin-bottom: 1.3rem;
+  margin-top: 0.5rem;
+  background-color: rgb(241, 239, 243);
 }
 
 button {
   padding: 1.2rem;
+  color: black;
+  border-radius: 0.5rem;
+  border: 0.2rem black solid;
+  background-color: rgb(179, 181, 184);
 }
 
 .list {
@@ -51,6 +63,7 @@ ul {
   border: 0.2rem solid black;
   border-radius: 0.8rem;
   margin-bottom: 1rem;
+  background-color: rgb(241, 239, 243);
 }
 
 .nombre-monto {
