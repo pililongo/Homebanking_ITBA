@@ -22,15 +22,67 @@ const Items = () => {
 							<div class="descripcion">
 								<p>${descripcion.value}</p>
 							</div>
-							<div class="icons-container"> hola </div>
+							<div class="icons-container"> 
+								<i class="remove">tachito</i>
+							</div>
 						</div>
 					</li>`
 }
 
+const grupoDePersonas = []
+
+const adherirPersonas = () => {
+
+	if (grupoDePersonas.length === 0) {
+		grupoDePersonas.push({nombre: nombre.value, monto: monto.value});
+		listItems.innerHTML += Items();
+		suma();
+	}
+
+	// ver si funciona si inicializo la variable como false
+
+	let existe;
+	
+	for (let i = 0; i < grupoDePersonas.length; i++) {
+		if (nombre.value === grupoDePersonas[i].nombre) {
+			existe = true;
+			break;
+		} else {
+			existe = nombre.value === grupoDePersonas[i].nombre;
+		}
+	}
+
+	if (existe === false) {
+		grupoDePersonas.push({nombre: nombre.value, monto: monto.value});
+		listItems.innerHTML += Items();
+		suma();
+	}
+}
+
+
+const borrarItems = (item) => {
+	for (let i = 0; i < listItems.children.length; i++) {
+		if (listItems.children[i].children[0].children[2].children[0] === item) {
+		  listItems.removeChild(listItems.children[i]);
+		}
+	}
+}
 
 formBoton.addEventListener('click', (e) => {
 	e.preventDefault();
 
-	listItems.innerHTML += Items();
-	suma();
+	//listItems.innerHTML += Items();
+	//suma();
+	adherirPersonas();
+	//console.log(grupoDePersonas);
+
+	listItems.querySelectorAll('.remove').forEach(rmBtn => {
+		rmBtn.addEventListener('click', () => {
+			//console.log(rmBtn);
+			borrarItems(rmBtn);
+		})
+	})
+
 })
+
+
