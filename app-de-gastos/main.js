@@ -14,19 +14,19 @@ const suma = () => {
 
 const Items = () => {
 	return	`<li>
-						<div class="items-container">
-							<div class="nombre-monto">
-								<p>${nombre.value}</p>
-								<p>$ ${monto.value}</p>
-							</div>
-							<div class="descripcion">
-								<p>${descripcion.value}</p>
-							</div>
-							<div class="icons-container"> 
-								<i class="remove">tachito</i>
-							</div>
-						</div>
-					</li>`
+				<div class="items-container">
+					<div class="nombre-monto">
+						<p>${nombre.value}</p>
+						<p>$ ${monto.value}</p>
+					</div>
+					<div class="descripcion">
+						<p>${descripcion.value}</p>
+					</div>
+					<div class="icons-container"> 
+						<i class="remove"><img src="tachito.jpeg" alt=""></i>
+					</div>
+				</div>
+			</li>`
 }
 
 const grupoDePersonas = []
