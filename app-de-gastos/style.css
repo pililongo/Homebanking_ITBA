@@ -1,14 +1,14 @@
-
-
 html {
   box-sizing: border-box;
   font-size: 62.5%;
+  margin: 2rem;
 }
 
 *, *::before, *::after {
   box-sizing: inherit;
+  font-family:"Roboto", sans-serif;
+  
 }
-
 body {
   font-size: 1.6rem;
   margin: 0;
@@ -16,6 +16,11 @@ body {
 
 header {
   text-align: center;
+  color: white;
+  border: 0.2rem transparent outset;
+  border-radius: 0.8rem;
+  margin-bottom: 2rem;
+  background: /*#304697*/ linear-gradient(-10deg,  rgb(48, 70, 151) 25%,rgb(142, 115, 178));
 }
 
 form {
@@ -27,13 +32,36 @@ form {
 
 input {
   padding: 1.2rem;
-  border: 0.2rem solid black;
+  border: 0.05rem rgb(87, 87, 87) solid;
   border-radius: 0.8rem;
   margin-bottom: 1.3rem;
+  margin-top: 0.5rem;
+  background-color: rgb(221, 220, 232);
 }
 
 button {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
   padding: 1.2rem;
+  color: black;
+  border-radius: 0.5rem;
+  border: 0.05rem rgb(87, 87, 87) solid;
+  background-color: rgb(221, 220, 232);
+  cursor: pointer;
+  box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6), inset -2px -2px 3px rgba(0, 0, 0, .6)
+}
+
+button:active {
+  color: white;
+  font-weight: bold;
+  background: linear-gradient(-10deg,  rgb(48, 70, 151) 25%,rgb(142, 115, 178));
+  box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6), inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .list {
@@ -48,9 +76,10 @@ ul {
 .items-container {
   display: grid;
   grid-template-columns: 12rem 32rem 8rem;
-  border: 0.2rem solid black;
+  border: 0.150rem solid rgb(0, 0, 0);
   border-radius: 0.8rem;
   margin-bottom: 1rem;
+  background-color: rgb(255, 255, 255);
 }
 
 .nombre-monto {
@@ -58,12 +87,10 @@ ul {
 }
 
 .descripcion, .icons-container{
-  border-left: 0.2rem solid black;
+  border-left: 0.150rem solid rgb(0, 0, 0);
 }
 
-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  
+h2 {
+  font-size: x-large;
+  font-weight: 500;
 }
