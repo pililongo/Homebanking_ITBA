@@ -41,7 +41,7 @@ const adherirPersonas = () => {
 
 	// ver si funciona si inicializo la variable como false
 
-	let existe;
+	let existe = false;
 	
 	for (let i = 0; i < grupoDePersonas.length; i++) {
 		if (nombre.value === grupoDePersonas[i].nombre) {
@@ -49,8 +49,18 @@ const adherirPersonas = () => {
 			break;
 		} else {
 			existe = nombre.value === grupoDePersonas[i].nombre;
-		}
+		} 
 	}
+	
+	//const existe = grupoDePersonas.find(grup => nombre.value === grup.nombre)
+	//console.log(existe)
+
+	//if (existe === undefined) {
+		//grupoDePersonas.push({nombre: nombre.value, monto: monto.value});
+		//listItems.innerHTML += Items();
+		//suma();
+	//}
+	
 
 	if (existe === false) {
 		grupoDePersonas.push({nombre: nombre.value, monto: monto.value});
@@ -64,6 +74,9 @@ const borrarItems = (item) => {
 	for (let i = 0; i < listItems.children.length; i++) {
 		if (listItems.children[i].children[0].children[2].children[0] === item) {
 		  listItems.removeChild(listItems.children[i]);
+			resultado -= grupoDePersonas[i].monto;
+			total.textContent = `Total: $ ${resultado}`;
+			grupoDePersonas.splice(i, 1);
 		}
 	}
 }
