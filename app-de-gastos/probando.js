@@ -17,10 +17,10 @@ const Items = (person) => {
             <div class="items-container">
               <div class="nombre-monto">
                 <p>${person.nombre}</p>
-                <p>$ ${person.monto}</p>
+                <p class="total-persona">$ ${person.monto}</p>
               </div>
-              <div class="descripcion">
-                <p>${person.descripcion}</p>
+              <div id="${person.nombre}" class="descripcion">
+                <p>${person.descripcion} $${person.monto}</p>
               </div>
               <div class="icons-container"> 
                 <i id="${person.id}" class="remove"><img src="tachito.jpeg" alt=""></i>
@@ -29,12 +29,18 @@ const Items = (person) => {
           </li>`
 }
 
+const Descripcion = (descripcion, monto) => {
+  return `<p>${descripcion} $${monto}</p>`
+}
+
 const grupoDePersonas = [];
+const repDescripcion = [];
 
 const creaAñade = () => {
     const person = {
       nombre: nombre.value,
       monto: monto.value,
+      descripcion: descripcion.value,
       id: grupoDePersonas.length + 1,
     };
 
@@ -51,6 +57,24 @@ const adherirPersonas = () => {
 
   const existe = grupoDePersonas.find((grup) => nombre.value === grup.nombre);
 
+  if (existe && descripcion.value !== existe.descripcion) {
+    const divDescripcion = document.querySelector(`#${existe.nombre}`);
+
+    if (repDescripcion.length === 0) {
+      repDescripcion.push(existe.descripcion)
+    }
+
+    const existeDescripcion = repDescripcion.find((grup) => grup === descripcion.value);
+
+    if (existeDescripcion === undefined) {
+      repDescripcion.push(descripcion.value)
+      divDescripcion.innerHTML += Descripcion(descripcion.value, monto.value);
+    }
+
+
+  }
+
+  
   if (existe === undefined) {
     creaAñade();
   }
