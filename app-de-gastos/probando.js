@@ -92,7 +92,7 @@ formBoton.addEventListener("click", (e) => {
 
   listItems.querySelectorAll(".remove").forEach((rmBtn) => {
     rmBtn.addEventListener("click", () => {
-      ConfirmDelete();
+      // ConfirmDelete();
       if (ConfirmDelete() === true){ 
         borrarItems(rmBtn.id);
       }
