@@ -7,10 +7,6 @@ const total = document.querySelector(".total");
 
 let resultado = 0;
 
-const suma = () => {
-  resultado += +monto.value;
-  total.textContent = `Total: $ ${resultado}`;
-};
 
 function ConfirmDelete(){
   var respuesta = confirm ("¿Estás seguro que deseas eliminar este gasto?");
@@ -29,7 +25,7 @@ const Items = (person) => {
             <div class="items-container">
               <div class="nombre-monto">
                 <p>${person.nombre}</p>
-                <p class="total-persona">$ ${person.monto}</p>
+    <p  id="total-${person.nombre}" class="total-persona"> Total: $ ${person.monto}</p>
               </div>
               <div id="${person.nombre}" class="descripcion">
                 <p>${person.descripcion} $${person.monto}</p>
@@ -46,50 +42,49 @@ const Descripcion = (descripcion, monto) => {
 }
 
 const grupoDePersonas = [];
-const repDescripcion = [];
 
 const creaAñade = () => {
     const person = {
       nombre: nombre.value,
-      monto: monto.value,
-      descripcion: descripcion.value,
+      monto: +monto.value,
+      descripcion: [descripcion.value],
       id: grupoDePersonas.length + 1,
     };
 
     grupoDePersonas.push(person);
     listItems.innerHTML += Items(person);
-
-    suma();
 }
 
 const adherirPersonas = () => {
-  if (grupoDePersonas.length === 0) {
-    creaAñade();
-  }
-
   const existe = grupoDePersonas.find((grup) => nombre.value === grup.nombre);
 
-  if (existe && descripcion.value !== existe.descripcion) {
+  if (existe && grupoDePersonas.length > 0) {
+
     const divDescripcion = document.querySelector(`#${existe.nombre}`);
+    const totalPersona = document.querySelector(`#total-${existe.nombre}`);
 
-    if (repDescripcion.length === 0) {
-      repDescripcion.push(existe.descripcion)
-    }
-
-    const existeDescripcion = repDescripcion.find((grup) => grup === descripcion.value);
-
-    if (existeDescripcion === undefined) {
-      repDescripcion.push(descripcion.value)
-      divDescripcion.innerHTML += Descripcion(descripcion.value, monto.value);
-    }
-
-
+    divDescripcion.innerHTML += Descripcion(descripcion.value, monto.value);
+    
+    grupoDePersonas.forEach((grup) => {
+      if (existe.nombre === grup.nombre) {
+        grup.monto += +monto.value;
+        totalPersona.textContent = `Total: $ ${grup.monto}`;
+      }
+    })
+    
   }
 
-  
   if (existe === undefined) {
     creaAñade();
   }
+
+  let totalTotal = 0;
+
+  grupoDePersonas.forEach((grup) => {
+    totalTotal += grup.monto;
+  })
+  resultado = totalTotal;
+  total.textContent = `Total: $ ${totalTotal}`;
 };
 
 const borrarItems = (itemId) => {
