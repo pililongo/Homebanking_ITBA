@@ -12,6 +12,18 @@ const suma = () => {
   total.textContent = `Total: $ ${resultado}`;
 };
 
+function ConfirmDelete(){
+  var respuesta = confirm ("¿Estás seguro que deseas eliminar este gasto?");
+  if (respuesta == true)
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
 const Items = (person) => {
 	return `<li id="${person.id}">
             <div class="items-container">
@@ -80,7 +92,10 @@ formBoton.addEventListener("click", (e) => {
 
   listItems.querySelectorAll(".remove").forEach((rmBtn) => {
     rmBtn.addEventListener("click", () => {
-      borrarItems(rmBtn.id);
+      ConfirmDelete();
+      if (ConfirmDelete() === true){ 
+        borrarItems(rmBtn.id);
+      }
     });
   });
 });
