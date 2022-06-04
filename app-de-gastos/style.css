@@ -5,22 +5,23 @@ html {
 
 *, *::before, *::after {
   box-sizing: inherit;
-  
 }
 
 body {
   font-size: 1.6rem;
   margin: 0;
   font-family: "roboto", sans-serif;
+  /* background-color: whitesmoke; */
 }
 
 header {
   text-align: center;
+  letter-spacing: 0.1rem;
   color: white;
-  border: 0.2rem transparent outset;
-  border-radius: 0.8rem;
+  border: transparent outset;
+  border-radius: 0.5rem;
   margin-bottom: 2rem;
-  background: /*#304697*/ linear-gradient(-10deg,  rgb(48, 70, 151) 25%,rgb(142, 115, 178));
+  background: linear-gradient(-10deg,  rgb(48, 70, 151) 25%,rgb(142, 115, 178));
   width: 60%;
   margin-left: auto;
   margin-right: auto;
@@ -33,23 +34,38 @@ form {
   margin: 0 auto;
 }
 
+label {
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.84);
+}
+
 input {
   padding: 1.2rem;
-  border: 0.05rem rgb(87, 87, 87) solid;
-  border-radius: 0.8rem;
+  border: 0.15rem rgb(48, 70, 151) solid;
+  /* border: 0.10rem transparent solid; */
+  border-radius: 0.4rem;
   margin-bottom: 1.3rem;
   margin-top: 0.5rem;
-  background-color: rgb(221, 220, 232);
+  background-color: white;
+  /* background-color: rgba(82, 120, 255, 0.84); */
+  /* color: white; */
+}
+
+input:focus{
+  outline: none;
+  box-shadow: inset -2px -2px 3px rgba(0, 0, 0, 0.150), inset 2px 2px 3px rgba(0, 0, 0, 0.150);
 }
 
 button {
   margin-bottom: 1rem;
   margin-top: 1rem;
   padding: 1.2rem;
-  color: black;
-  border-radius: 0.5rem;
-  border: 0.05rem rgb(87, 87, 87) solid;
-  background-color: rgb(221, 220, 232);
+  color: white;
+  font-weight: bold;
+  border-radius: 1rem;
+  border: transparent;
+  background: linear-gradient(-10deg,  rgb(48, 70, 151) 25%,rgb(142, 115, 178));
+  /* background-color: rgba(48, 70, 151, 0.959); */
   cursor: pointer;
   box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6), inset -2px -2px 3px rgba(0, 0, 0, .6)
 }
@@ -79,46 +95,33 @@ ul {
 .items-container {
   display: grid;
   grid-template-columns: 1fr 2fr 12rem;
-  border: 0.15rem solid rgb(0, 0, 0);
-  border-radius: 0.8rem;
+  /* border: 0 rgb(48, 70, 151) solid; */
+  border-radius: 0.4rem;
+  box-shadow: inset -3px -3px 3px rgba(142, 115, 178, 0.829), inset 3px 3px 3px rgba(48, 70, 151, 0.68);
   margin-bottom: 1rem;
-  background-color: white;
-}
-
-.nombre-monto {
-  margin: 0 auto;
-}
-
-.descripcion, .icons-container{
-  border-left: 0.150rem solid rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
 }
 
 .nombre-monto, .descripcion, .icons-container {
   width: 100%;
+  /* border: black solid; */
 }
 
-h2 {
-  font-size: x-large;
-  font-weight: 500;
-}
-
-
-ul li i img {
-  width: 60%;
-  height: 60%;
-  margin: 20%;  
-}
-
-ul li .descripcion p{
-  margin-left: 5rem;
-  text-transform: capitalize;
-}
-
-ul li .nombre-monto {
+.nombre-monto {
+  margin: 0 auto;
   text-align: center;
 }
 
-ul li .nombre-monto:first-child {
+.nombre-monto:first-child {
+  text-transform: capitalize;
+}
+
+/* .descripcion {
+  box-shadow: inset -2px 0 3px rgba(142, 115, 178, 0.829), inset 2px 0 3px rgba(48, 70, 151, 0.68);
+} */
+
+.descripcion p {
+  margin-left: 7rem;
   text-transform: capitalize;
 }
 
@@ -131,11 +134,17 @@ ul li .nombre-monto:first-child {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 3rem;
+  font-size: 2.2rem;
   cursor: pointer;
+  color: rgba(0, 0, 0, 0.829);
 }
 
 .remove:hover {
   color: #304697;
 }
 
+h2 {
+  font-size: x-large;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.84);
+}
