@@ -1,38 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" href="style.css">
-	<title>App de gastos</title>
-</head>
-<body>
-	<main>
-		<header>
-			<h1>GASTOS</h1>
-		</header>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="style.css">
+    <!----FONTS---->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <!----FONTS---->
+		<script src="https://kit.fontawesome.com/f08bdc1e65.js" crossorigin="anonymous"></script>
+		<title>App de gastos</title>
+	</head>
+	<body>
+		<main>
+			<header>
+				<h1>GASTOS</h1>
+			</header>
 
-		<form>
-			<label for="nombre">Nombre</label>
-			<input type="text" id="nombre">
-			<label for="monto">Monto</label>
-			<input type="number" id="monto">
-			<label for="desc">Descripción</label>
-			<input type="text" id="desc">
-			<button class="form-boton">Agregar</button>
-		</form>
-		<section>
-			<article class="list">
-				<ul class="items-list">
-				</ul>
-			</article>
-			<h2 class="total">Total: </h2>
-			<article>
-				<h2 class="deber">Se debe a: </h2>
-			</article>
-		</section>
-	</main>
-	
-	<script src="probando.js"></script>
-</body>
+			<form>
+				<label for="nombre">Nombre</label>
+				<input type="text" id="nombre">
+				<label for="monto">Monto</label>
+				<input type="number" id="monto">
+				<label for="desc">Descripción</label>
+				<input type="text" id="desc">
+				<button class="form-boton">Agregar</button>
+			</form>
+			<section>
+				<article class="list">
+					<ul class="items-list">
+					</ul>
+				</article>
+				<h2 class="total">Total: </h2>
+				<article>
+					<!--<h2 class="deber">Se debe a: </h2>-->
+				</article>
+			</section>
+		</main>
+		
+		<script src="main.js"></script>
+	</body>
 </html>

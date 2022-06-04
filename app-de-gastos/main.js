@@ -1,101 +1,119 @@
-const nombre = document.querySelector('#nombre');
-const monto = document.querySelector('#monto');
-const descripcion = document.querySelector('#desc');
-const formBoton = document.querySelector('.form-boton');
-const listItems = document.querySelector('.items-list');
-const total = document.querySelector('.total');
+const nombre = document.querySelector("#nombre");
+const monto = document.querySelector("#monto");
+const descripcion = document.querySelector("#desc");
+const formBoton = document.querySelector(".form-boton");
+const listItems = document.querySelector(".items-list");
+const total = document.querySelector(".total");
 
 let resultado = 0;
 
-const suma = () => {
-	resultado += +monto.value;
-	total.textContent = `Total: $ ${resultado}`;
+function ConfirmDelete(){
+  var respuesta = confirm ("¿Estás seguro que deseas eliminar este gasto?");
+  if (respuesta == true)
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
 }
 
-const Items = () => {
-	return	`<li>
-				<div class="items-container">
-					<div class="nombre-monto">
-						<p>${nombre.value}</p>
-						<p>$ ${monto.value}</p>
-					</div>
-					<div class="descripcion">
-						<p>${descripcion.value}</p>
-					</div>
-					<div class="icons-container"> 
-						<i class="remove"><img src="tachito.jpeg" alt=""></i>
-					</div>
-				</div>
-			</li>`
+const Items = (person) => {
+	return `<li id="${person.id}">
+            <div class="items-container">
+              <div class="nombre-monto">
+                <p>${person.nombre}</p>
+    <p  id="total-${person.nombre}" class="total-persona"> Total: $ ${person.monto.toLocaleString()}</p>
+              </div>
+              <div id="${person.nombre}" class="descripcion">
+                <p>${person.descripcion} $${person.monto.toLocaleString()}</p>
+              </div>
+              <div class="icons-container"> 
+									<i id="${person.id}" class="fa-solid fa-trash-can remove"></i>
+              </div>
+            </div>
+          </li>`
 }
 
-const grupoDePersonas = []
+const Descripcion = (descripcion, monto) => {
+  return `<p>${descripcion} $${monto}</p>`
+}
+
+const grupoDePersonas = [];
+
+const creaAñade = () => {
+    const person = {
+      nombre: nombre.value,
+      monto: +monto.value,
+      descripcion: descripcion.value,
+      id: grupoDePersonas.length + 1,
+    };
+
+    grupoDePersonas.push(person);
+    listItems.innerHTML += Items(person);
+}
 
 const adherirPersonas = () => {
+  const existe = grupoDePersonas.find((grup) => nombre.value === grup.nombre);
 
-	if (grupoDePersonas.length === 0) {
-		grupoDePersonas.push({nombre: nombre.value, monto: monto.value});
-		listItems.innerHTML += Items();
-		suma();
-	}
+  if (existe && grupoDePersonas.length > 0) {
 
-	// ver si funciona si inicializo la variable como false
+    const divDescripcion = document.querySelector(`#${existe.nombre}`);
+    const totalPersona = document.querySelector(`#total-${existe.nombre}`);
 
-	let existe = false;
-	
-	for (let i = 0; i < grupoDePersonas.length; i++) {
-		if (nombre.value === grupoDePersonas[i].nombre) {
-			existe = true;
-			break;
-		} else {
-			existe = nombre.value === grupoDePersonas[i].nombre;
-		} 
-	}
-	
-	//const existe = grupoDePersonas.find(grup => nombre.value === grup.nombre)
-	//console.log(existe)
+    divDescripcion.innerHTML += Descripcion(descripcion.value, Number(monto.value).toLocaleString());
+    
+    grupoDePersonas.forEach((grup) => {
+      if (existe.nombre === grup.nombre) {
+        grup.monto += +monto.value;
+        totalPersona.textContent = `Total: $ ${grup.monto.toLocaleString()}`;
+      }
+    })
+    
+  }
 
-	//if (existe === undefined) {
-		//grupoDePersonas.push({nombre: nombre.value, monto: monto.value});
-		//listItems.innerHTML += Items();
-		//suma();
-	//}
-	
+  if (existe === undefined) {
+    creaAñade();
+  }
 
-	if (existe === false) {
-		grupoDePersonas.push({nombre: nombre.value, monto: monto.value});
-		listItems.innerHTML += Items();
-		suma();
-	}
-}
+  let totalTotal = 0;
 
+  grupoDePersonas.forEach((grup) => {
+    totalTotal += grup.monto;
+  })
+  resultado = totalTotal;
+  total.textContent = `Total: $ ${totalTotal.toLocaleString()}`;
+};
 
-const borrarItems = (item) => {
-	for (let i = 0; i < listItems.children.length; i++) {
-		if (listItems.children[i].children[0].children[2].children[0] === item) {
-		  listItems.removeChild(listItems.children[i]);
-			resultado -= grupoDePersonas[i].monto;
-			total.textContent = `Total: $ ${resultado}`;
-			grupoDePersonas.splice(i, 1);
-		}
-	}
-}
+const borrarItems = (itemId) => {
+  listItems.removeChild(document.getElementById(itemId));
+  const nuevoGrupo = grupoDePersonas.filter(
+    (persona) => +itemId === persona.id
+  );
 
-formBoton.addEventListener('click', (e) => {
-	e.preventDefault();
+  resultado -= nuevoGrupo.reduce((objeto, persona) => {
+    return persona.monto;
+  }, 0)
 
-	//listItems.innerHTML += Items();
-	//suma();
-	adherirPersonas();
-	//console.log(grupoDePersonas);
+  const index = grupoDePersonas.findIndex(grup => { return grup.id === +itemId});
+  grupoDePersonas.splice(index, 1);
 
-	listItems.querySelectorAll('.remove').forEach(rmBtn => {
-		rmBtn.addEventListener('click', () => {
-			//console.log(rmBtn);
-			borrarItems(rmBtn);
-		})
-	})
+  total.textContent = `Total: $ ${resultado.toLocaleString()}`;
 
-})
+};
 
+formBoton.addEventListener("click", (e) => {
+  e.preventDefault();
 
+  adherirPersonas();
+
+  listItems.querySelectorAll(".remove").forEach((rmBtn) => {
+    rmBtn.addEventListener("click", () => {
+      // ConfirmDelete();
+      if (ConfirmDelete() === true){ 
+        borrarItems(rmBtn.id);
+      }
+    });
+  });
+});
