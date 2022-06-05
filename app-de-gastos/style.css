@@ -34,26 +34,64 @@ form {
   margin: 0 auto;
 }
 
-label {
+.input-container {
+  width: 100%;
+  position: relative;
+  margin: 1rem 0;
+}
+
+.label {
+  position: absolute;
   font-weight: 600;
-  color: rgba(0, 0, 0, 0.84);
+  left: 10px;
+  top: 11.5px;
+  transition: all 0.2s;
+  padding: 0 2px;
+  z-index: 1;
+  color: rgb(48, 70, 151);
 }
-
-input {
-  padding: 1.2rem;
-  border: 0.15rem rgb(48, 70, 151) solid;
-  /* border: 0.10rem transparent solid; */
-  border-radius: 0.4rem;
-  margin-bottom: 1.3rem;
-  margin-top: 0.5rem;
-  background-color: white;
-  /* background-color: rgba(82, 120, 255, 0.84); */
-  /* color: white; */
-}
-
-input:focus{
+.text-input {
+  padding: 0.8rem;
+  width: 100%;
+  height: 100%;
+  border: 2px solid rgb(48, 70, 151);
+  background: white;
+  border-radius: 5px;
+  font-size: 18px;
   outline: none;
-  box-shadow: inset -2px -2px 3px rgba(0, 0, 0, 0.150), inset 2px 2px 3px rgba(0, 0, 0, 0.150);
+  transition: all 0.3s;
+  color: black;
+}
+
+.label::before {
+  content: "";
+  height: 5px;
+  position: absolute;
+  background: white;
+  left: 0px;
+  top: 10px;
+  width: 100%;
+  z-index: -1;
+}
+
+.text-input:focus {
+  border: 2px solid #632ab8;
+}
+
+.text-input:focus + .label,
+.filled {
+  top: -10px;
+  color: #632ab8;
+  font-size: 14px;
+}
+
+.text-input::placeholder {
+  font-size: 16px;
+  opacity: 0;
+  transition: all 0.3s;
+}
+.text-input:focus::placeholder {
+  opacity: 1;
 }
 
 button {
@@ -65,7 +103,6 @@ button {
   border-radius: 1rem;
   border: transparent;
   background: linear-gradient(-10deg,  rgb(48, 70, 151) 25%,rgb(142, 115, 178));
-  /* background-color: rgba(48, 70, 151, 0.959); */
   cursor: pointer;
   box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6), inset -2px -2px 3px rgba(0, 0, 0, .6)
 }
@@ -95,7 +132,6 @@ ul {
 .items-container {
   display: grid;
   grid-template-columns: 1fr 2fr 12rem;
-  /* border: 0 rgb(48, 70, 151) solid; */
   border-radius: 0.4rem;
   box-shadow: inset -3px -3px 3px rgba(142, 115, 178, 0.829), inset 3px 3px 3px rgba(48, 70, 151, 0.68);
   margin-bottom: 1rem;
@@ -104,21 +140,16 @@ ul {
 
 .nombre-monto, .descripcion, .icons-container {
   width: 100%;
-  /* border: black solid; */
 }
 
 .nombre-monto {
-  margin: 0 auto;
+  margin: auto auto;
   text-align: center;
 }
 
 .nombre-monto:first-child {
   text-transform: capitalize;
 }
-
-/* .descripcion {
-  box-shadow: inset -2px 0 3px rgba(142, 115, 178, 0.829), inset 2px 0 3px rgba(48, 70, 151, 0.68);
-} */
 
 .descripcion p {
   margin-left: 7rem;

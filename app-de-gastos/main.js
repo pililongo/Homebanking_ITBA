@@ -24,7 +24,7 @@ const Items = (person) => {
             <div class="items-container">
               <div class="nombre-monto">
                 <p>${person.nombre}</p>
-    <p  id="total-${person.nombre}" class="total-persona"> Total: $ ${person.monto.toLocaleString()}</p>
+                <p  id="total-${person.nombre}" class="total-persona"> Total: $ ${person.monto.toLocaleString()}</p>
               </div>
               <div id="${person.nombre}" class="descripcion">
                 <p>${person.descripcion} $${person.monto.toLocaleString()}</p>
@@ -52,6 +52,13 @@ const creaAñade = () => {
 
     grupoDePersonas.push(person);
     listItems.innerHTML += Items(person);
+    listItems.querySelectorAll(".remove").forEach((rmBtn) => {
+      rmBtn.addEventListener("click", () => {
+        if (ConfirmDelete() === true){ 
+          borrarItems(rmBtn.id);
+        }
+      });
+    });
 }
 
 const adherirPersonas = () => {
@@ -107,13 +114,14 @@ formBoton.addEventListener("click", (e) => {
   e.preventDefault();
 
   adherirPersonas();
+});
 
-  listItems.querySelectorAll(".remove").forEach((rmBtn) => {
-    rmBtn.addEventListener("click", () => {
-      // ConfirmDelete();
-      if (ConfirmDelete() === true){ 
-        borrarItems(rmBtn.id);
-      }
-    });
+document.querySelectorAll(".text-input").forEach((element) => {
+  element.addEventListener("blur", (event) => {
+    if (event.target.value != "") {
+      event.target.nextElementSibling.classList.add("filled");
+    } else {
+      event.target.nextElementSibling.classList.remove("filled");
+    }
   });
 });
