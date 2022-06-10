@@ -52,14 +52,6 @@ const saldo = (group) => {
   });
 }
 
-// const borrarResultados = () => {
-//   grupoDePersonas.forEach(element => {
-//     console.log(element.nombre.toLocaleString())
-//     result.removeChild(document.getElementsByClassName(element.nombre.toLocaleString()));  
-//   });
- 
-// }
-
 const Descripcion = (descripcion, monto) => {
   return `<p>${descripcion} $${monto}</p>`
 }
@@ -68,7 +60,7 @@ const grupoDePersonas = [];
 
 const creaAñade = () => {
     const person = {
-      nombre: nombre.value,
+      nombre: nombre.value.charAt(0).toUpperCase() + nombre.value.slice(1),
       monto: +monto.value,
       descripcion: descripcion.value,
       id: grupoDePersonas.length + 1,
@@ -78,21 +70,17 @@ const creaAñade = () => {
     grupoDePersonas.push(person);
     listItems.innerHTML += Items(person);
     listItems.querySelectorAll(".remove").forEach((rmBtn) => {
-      // rmBtn.addEventListener("click", () => {
-      //   borrarResultados();
-  
-      // });
-    
       rmBtn.addEventListener("click", () => {
         if (ConfirmDelete() === true){ 
           borrarItems(rmBtn.id);
+          result.innerHTML = "";
         }
       });
     });
 }
 
 const adherirPersonas = () => {
-  const existe = grupoDePersonas.find((grup) => nombre.value === grup.nombre);
+  const existe = grupoDePersonas.find((grup) => nombre.value.charAt(0).toUpperCase() + nombre.value.slice(1) === grup.nombre);
 
   if (existe && grupoDePersonas.length > 0) {
 
@@ -153,6 +141,11 @@ formBoton.addEventListener("click", (e) => {
   e.preventDefault();
 
   adherirPersonas();
+
+  nombre.value = "";
+  monto.value = "";
+  descripcion.value = "";
+  
 });
 
 calcBtn.addEventListener("click", (e) => {
