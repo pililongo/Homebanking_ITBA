@@ -4,6 +4,9 @@ const descripcion = document.querySelector("#desc");
 const formBoton = document.querySelector(".form-boton");
 const listItems = document.querySelector(".items-list");
 const total = document.querySelector(".total");
+const calcBtn = document.querySelector(".calc-boton");
+const result = document.querySelector(".resultados");
+
 
 let resultado = 0;
 
@@ -36,6 +39,27 @@ const Items = (person) => {
           </li>`
 }
 
+const saldo = (group) => {
+  group.map(element => {
+    if (element.debe > 0) {
+      result.innerHTML += `<li class="${element.nombre}">${element.nombre} debe: $ ${Math.floor(element.debe)}</li>`
+    }     
+  });
+  group.map(element => {
+    if (element.debe < 0) {
+      result.innerHTML += `<li class="${element.nombre}">A ${element.nombre} le deben: $ ${Math.floor(-element.debe)}</li>`
+    }     
+  });
+}
+
+// const borrarResultados = () => {
+//   grupoDePersonas.forEach(element => {
+//     console.log(element.nombre.toLocaleString())
+//     result.removeChild(document.getElementsByClassName(element.nombre.toLocaleString()));  
+//   });
+ 
+// }
+
 const Descripcion = (descripcion, monto) => {
   return `<p>${descripcion} $${monto}</p>`
 }
@@ -48,11 +72,17 @@ const creaAñade = () => {
       monto: +monto.value,
       descripcion: descripcion.value,
       id: grupoDePersonas.length + 1,
+      debe: 0,
     };
 
     grupoDePersonas.push(person);
     listItems.innerHTML += Items(person);
     listItems.querySelectorAll(".remove").forEach((rmBtn) => {
+      // rmBtn.addEventListener("click", () => {
+      //   borrarResultados();
+  
+      // });
+    
       rmBtn.addEventListener("click", () => {
         if (ConfirmDelete() === true){ 
           borrarItems(rmBtn.id);
@@ -77,7 +107,6 @@ const adherirPersonas = () => {
         totalPersona.textContent = `Total: $ ${grup.monto.toLocaleString()}`;
       }
     })
-    
   }
 
   if (existe === undefined) {
@@ -110,11 +139,28 @@ const borrarItems = (itemId) => {
 
 };
 
+const calculoPorPersona = () => {
+  let poniendo = resultado / grupoDePersonas.length;
+
+  grupoDePersonas.forEach ((grup) => {
+    grup.debe = - grup.monto + poniendo;
+  })
+  
+  saldo(grupoDePersonas);
+};
+
 formBoton.addEventListener("click", (e) => {
   e.preventDefault();
 
   adherirPersonas();
 });
+
+calcBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  calculoPorPersona();
+});
+
 
 document.querySelectorAll(".text-input").forEach((element) => {
   element.addEventListener("blur", (event) => {
@@ -125,3 +171,4 @@ document.querySelectorAll(".text-input").forEach((element) => {
     }
   });
 });
+
