@@ -40,6 +40,7 @@ const Items = (person) => {
 }
 
 const saldo = (group) => {
+  result.innerHTML = "";
   group.map(element => {
     if (element.debe > 0) {
       result.innerHTML += `<li class="${element.nombre}">${element.nombre} debe: $ ${Math.floor(element.debe)}</li>`
@@ -146,6 +147,9 @@ formBoton.addEventListener("click", (e) => {
   monto.value = "";
   descripcion.value = "";
   
+  document.querySelectorAll(".text-input").forEach((element) => {
+    element.nextElementSibling.classList.remove("filled");
+  })
 });
 
 calcBtn.addEventListener("click", (e) => {
