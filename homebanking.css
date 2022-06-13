@@ -25,9 +25,13 @@ html {
 
 /*--body--*/
 body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   font-size: 1.6rem;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "roboto";
+  height: 100vh;
 }
 
 /*--header--*/
@@ -183,6 +187,7 @@ footer {
   width: 100%;
 }
 .graphic img {
+  width: 40rem;
   max-width: 100%;
 }
 
