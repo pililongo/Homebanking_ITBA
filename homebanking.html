@@ -17,8 +17,9 @@
       crossorigin="anonymous"
     ></script>
     <title>Homebanking</title>
-    <script src="cotizaciones.js" defer></script>
-    <script src="toggle-menu.js"  defer></script>
+    <script src="cotizaciones.js"   defer></script>
+    <script src="toggle-menu.js"    defer></script>
+    <script src="toggle-acounts.js" defer></script>
   </head>
   <body>
     <header>
@@ -63,20 +64,32 @@
 
       <section class="section-grid">
         <div class="big-card">
-          <div class="small-card pesos">
-            <i class="fa-solid fa-dollar-sign icon-cards"></i>
-            <h2>Caja de ahorro ARG 30,000$</h2>
+          <div class="cuentas">
+            <div class="panel active">
+              <h2 class="label">CA ARS</h2>
+              <h3 class="titulo">Caja de ahorro</h3>
+              <p class="nro-cuenta">8230128973</p>
+              <h3 class="saldo">Saldo</h3>
+              <p class="monto">ARS $87690</p>
+            </div>
+            <div class="panel">
+              <h2 class="label">CC ARS</h2>
+              <h3 class="titulo">Cuenta corriente</h3>
+              <p class="nro-cuenta">4512316532</p>
+              <h3 class="saldo">Saldo</h3>
+              <p class="monto">ARS $-2470</p>
+            </div>
+            <div class="panel">
+              <h2 class="label">CA USD</h2>
+              <h3 class="titulo">Caja de ahorro</h3>
+              <p class="nro-cuenta">63914927618</p>
+              <h3 class="saldo">Saldo</h3>
+              <p class="monto">USD $6581</p>
+            </div>
           </div>
-
-          <div class="small-card usd">
-            <i class="fa-solid fa-dollar-sign icon-cards"></i>
-            <h2>Caja de Ahorro USD 142,43$</h2>
-          </div>
-          <div class="graphic">
-            <img
-              src="Grafico tortita.png"
-              alt=""
-            />
+                  
+          <div class="analizador-gastos">
+            <img src="analisis-gastos.jpg" alt="">
           </div>
         </div>
 
