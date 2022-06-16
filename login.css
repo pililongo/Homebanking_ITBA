@@ -11,7 +11,11 @@
 
 body {
     font-family: "Roboto", sans-serif;
-    background: rgb(241, 240, 253);
+    /* background: rgb(241, 240, 253); */
+    background-image: radial-gradient(#dcdcdcf1 2px, transparent 2px), radial-gradient(#dcdcdcf1 2px, transparent 2px);
+    background-size: 85px 85px;
+    background-position: 0 0, 42.5px 42.5px;
+    background-color: #fdfdfd;
     margin: 0;
 }
 
@@ -26,16 +30,14 @@ header {
     padding: 5px;
     width: auto;
     height: auto;
-    background: /*#304697*/ linear-gradient(-10deg, rgb(48, 70, 151) 25%,rgb(142, 115, 178));
+    background: linear-gradient(-10deg, rgb(48, 70, 151) 25%,rgb(142, 115, 178));
 }
 
 header img {
     margin: auto;
     margin-left: 5%;
-    /* padding: 1%; */
     width: 20%;
     height: 80%;
-    /* background-color: white; */
 }
 
 .form-login {
@@ -56,8 +58,6 @@ header img {
     text-align: center;
     font-weight: bold;
     height: 50px;
-    /* margin-bottom: 30px; */
-    /* border-bottom: 1px solid; */
     font-size: 1.375rem;
 }
 
@@ -67,10 +67,8 @@ header img {
     margin: 1.5% 0.5%;
     border: 1px transparent;
     padding: 10px;
-    /* background: white; */
     font-size: 0.875rem;
     border-radius: 10px;
-    /* font-weight: bold; */
 }
 
 .buttons {
@@ -88,7 +86,7 @@ header img {
 }
     
 .buttons:hover {
-    background-color: rgb(230, 227, 255);
+    background-color: rgb(242, 242, 242);
 }
     
 .buttons:active {
@@ -147,7 +145,7 @@ footer {
 }
 
 footer p {
-    margin: 0.4rem;
+    margin: 0.6rem;
 }
 
 footer a {
@@ -198,3 +196,13 @@ a:active {
     color: red;
 }
 
+@media screen and (max-width: 375px) {
+    .form-login{
+        width: 90%;
+        box-shadow: 4px 4px 10px 1px #343434;
+    }
+
+    .form-login h2{
+        margin-bottom: 1rem;
+    }
+}
