@@ -54,8 +54,8 @@ body {
   flex: 1;
   margin: 0.5rem;
   position: relative;
-  transition: flex 200ms ease-in;
-  -webkit-transition: all 500ms ease-in;
+  transition: flex 600ms ease-in-out 200ms;
+  -webkit-transition: all 600ms ease-in;
 }
 
 .panel .label {
@@ -80,9 +80,10 @@ body {
 
 .panel.active {
   background-color: var(--clr-small-box-hover);
-  transition: background-color 200ms ease-in;
+  transition: background-color 600ms ease-in 200ms;
   margin: 0.5rem;
   flex: 5;
+  transition: flex 600ms ease-in-out 200ms;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -95,13 +96,13 @@ body {
 .panel.active p {
   position: relative;
   opacity: 1;
-  transition: opacity 300ms ease-in;
+  transition: opacity 200ms ease-in 600ms;
   left: 0;
 }
 .panel.active h3 {
   position: relative;
   opacity: 1;
-  transition: opacity 300ms ease-in;
+  transition: opacity 200ms ease-in 600ms;
   left: 0;
 }
 
