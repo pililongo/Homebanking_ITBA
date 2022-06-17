@@ -68,11 +68,13 @@ body {
 
 .panel p {
   position: absolute;
+  left: -50vw;
   opacity: 0; 
 }
 
 .panel h3 {
   position: absolute;
+  left: -50vw;
   opacity: 0;
 }
 
@@ -93,12 +95,14 @@ body {
 .panel.active p {
   position: relative;
   opacity: 1;
-  transition: opacity 200ms ease-in 300ms;
+  transition: opacity 300ms ease-in;
+  left: 0;
 }
 .panel.active h3 {
   position: relative;
   opacity: 1;
-  transition: opacity 200ms ease-in 300ms;
+  transition: opacity 300ms ease-in;
+  left: 0;
 }
 
 .titulo, .nro-cuenta, .saldo, .moneda, .monto {
