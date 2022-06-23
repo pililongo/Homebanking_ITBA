@@ -143,10 +143,10 @@ body {
 
 /*--footer--*/
 footer {
-  display: grid;
-  grid-template-columns: 20rem 1fr;
-  background: var(--gradient-color);
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  background: var(--gradient-color);
   padding: 0;
   margin: 0;
 }
@@ -161,21 +161,22 @@ footer {
   color: white;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  margin-left: 3rem;
   padding: 0;
+  margin: 0;
 }
 
 .social-networks ul li i {
   font-size: 3rem;
+  margin: 1rem;
 }
 .social-networks ul li i:hover {
   cursor: pointer;
 }
 .rights {
   color: white;
-  text-align: end;
-  margin-right: 2rem;
-  font-size: 2rem;
+  text-align: center;
+  font-size: 1.1rem;
+  margin: 0 0 0.7rem;
 }
 
 /*---------------*/
@@ -337,7 +338,7 @@ footer {
 .dolar-nombre {
   font-size: 2.2rem;
   font-weight: 800;
-  margin: 2rem;
+  margin: 1rem;
 }
 
 .dolar-compra span, .dolar-venta span {
@@ -538,6 +539,24 @@ footer {
   .cotizaciones .dolar-div:nth-child(n+3) .dolar-nombre {
     font-size: 1.9rem;
     font-weight: 800;
-    margin-left: 2rem;
+    margin: auto auto auto 2rem;
+    position: relative;
+    inset: 0;
+  }
+
+  footer{
+    display: grid;
+    grid-template-columns: 20rem 1fr;
+    padding: 2rem;
+  }
+
+  .social-networks ul li i{
+    margin: 0;
+  }
+
+  .rights {
+    text-align: end;
+    margin-bottom: 0;
+    font-size: 1.5rem;
   }
 }
