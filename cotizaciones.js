@@ -12,7 +12,7 @@ fetch('https://www.dolarsi.com/api/api.php?type=valoresprincipales')
     if (regex.test(element.casa.nombre) || regex2.test(element.casa.nombre)) {
 
         const usd = {
-            nombre: element.casa.nombre === 'Dolar Contado con Liqui' ? 'Dolar CCL' : element.casa.nombre,
+            nombre: element.casa.nombre === 'Dolar Contado con Liqui' ? 'Dolar CCL' : (element.casa.nombre === 'Dolar turista' ? "Dolar Turista" : element.casa.nombre),
             compra: Number.parseFloat(element.casa.compra.replace(',', '.')),
             venta: Number.parseFloat(element.casa.venta.replace(',', '.'))
         };
