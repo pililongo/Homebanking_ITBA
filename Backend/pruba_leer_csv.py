@@ -2,43 +2,66 @@
 
 import csv
 import datetime
+import os
+
+# path = os.getcwd()
 
 
 def csvToDic(fileName):
-    dic = {}
+    ''' 
+    Convierte un archivo .csv en un diccionario. Utiliza la primera fila   
+    del archivo .csv para establecer las keywords del diccionario.
+
+    Argumento: 
+        fileName: nombre del arcivo .csv.
+    Salida: 
+        dicc: diccionario.
+    ''' 
+    # constant  
+    dicc = {}
     i = 0
     # open the CSV file
-    with open(fileName, 'r')as file:
-        
+    with open(fileName, 'r') as file:
         # read the CSV file
         csvfile = csv.reader(file)
         row1 = next(csvfile)
-        # transform csv to dic
+        # sets the keywords
         for name in row1:
-            dic[name] = []
-
+            dicc[name] = []
+        # fill the empty dicc with the content of the .csv file
         for row in csvfile:
             for column in row:
-                dic[row1[i]].append(column)
+                dicc[row1[i]].append(column)
                 i += 1
             i = 0
-    return dic
+    # outputs dicc 
+    return dicc
 
 def finderLittleThings(dicName, keyName, param):
-    finalDic = {}
-    i = 0
-    for key in dicName:
-        finalDic[key] = []
-    
-    for elem in dicName[keyName]:
-    
-        if elem == param:
-        
-            for key in dicName:
-                finalDic[key].append(dicName[key][i])
+    '''
+    Filtra un diccionario mediante una keyword y un parametro dado.
 
-        i += 1        
-    print(finalDic)
+    Argumentos:
+        dicName: diccionario a filtrar.
+        keyName: keyword donde se filtra.
+        param: parametro utilizado para filtrar.
+    Salida:
+        filteredDic: diccionario filtrado.
+    '''
+    # constant
+    filteredDic = {}
+    i = 0
+    # sets the keywords
+    for key in dicName:
+        filteredDic[key] = []
+    # fills the dicc with the filtered elements
+    for elem in dicName[keyName]:
+        if elem == param:
+            for key in dicName:
+                filteredDic[key].append(dicName[key][i])
+        i += 1 
+    # outputs dicc 
+    return filteredDic
 
           
 
@@ -46,10 +69,11 @@ def finderLittleThings(dicName, keyName, param):
 fileName = 'file.csv'
 #dni = str(input('ingrese dni: '))
 dict_chesques = csvToDic(fileName)
+print(dict_chesques)
 #finderLittleThings(dict_chesques, "DNI", "23665789")
 
 
-readable = datetime.datetime.fromtimestamp(1617591371).isoformat()
+readable = datetime.datetime.fromtimestamp(3870633556).isoformat()
 print(readable)
 
 '''{
