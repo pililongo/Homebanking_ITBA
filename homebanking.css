@@ -234,6 +234,15 @@ footer {
   margin-bottom: 0.7rem;
 }
 
+a{
+  text-decoration: none;
+  color: white;
+}
+
+a:active{
+  color:white;
+}
+
 .colored {
   display: grid;
   grid-template-columns: 20% 1fr;
@@ -422,6 +431,10 @@ footer {
     margin-bottom: 0.7rem;
   }
 
+  a {
+    text-decoration: none;
+  }
+
   .colored {
     align-items: center;
     border: none;
@@ -436,13 +449,14 @@ footer {
     cursor: pointer;
     background-color: var(--clr-small-box-hover);
   }
+
   .big-card {
     display: grid;
     grid-template-areas:
       "small-card-pesos graphic"
       "small-card-usd graphic";
   }
-  .pesos {
+  /* .pesos {
     grid-area: small-card-pesos;
   }
   .usd {
@@ -454,7 +468,7 @@ footer {
   }
   .graphic img {
     max-width: 100%;
-  }
+  } */
 
   /*--cotizaciones--*/
 
