@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import csv
-import datetime
+from datetime import datetime
 import os
 
 # path = os.getcwd()
@@ -17,7 +17,7 @@ def csvToDic(fileName):
     Salida: 
         dicc: diccionario.
     ''' 
-    # constant  
+    # constant
     dicc = {}
     i = 0
     # open the CSV file
@@ -34,10 +34,10 @@ def csvToDic(fileName):
                 dicc[row1[i]].append(column)
                 i += 1
             i = 0
-    # outputs dicc 
+    # outputs dicc
     return dicc
 
-def finderLittleThings(dicName, keyName, param):
+def diccFilter(dicName, keyName, param):
     '''
     Filtra un diccionario mediante una keyword y un parametro dado.
 
@@ -60,32 +60,77 @@ def finderLittleThings(dicName, keyName, param):
             for key in dicName:
                 filteredDic[key].append(dicName[key][i])
         i += 1 
-    # outputs dicc 
+    # outputs dicc
     return filteredDic
 
-          
-
-#fileName = str(input('Ingrese el nombre de la archivo bobo: '))
-fileName = 'file.csv'
-#dni = str(input('ingrese dni: '))
-dict_chesques = csvToDic(fileName)
-print(dict_chesques)
-#finderLittleThings(dict_chesques, "DNI", "23665789")
+def isoToTimestamp(value : str) -> int:
+    dt = datetime.strptime(value, "%d-%m-%Y")
+    return int(dt.timestamp())
 
 
-readable = datetime.datetime.fromtimestamp(3870633556).isoformat()
-print(readable)
+def time(dicc,keyName,rangeDate):
+    filteredDic = {}
+    i = 0
+    [dateIncial, dateFinal] = rangeDate.split(":")
+    dateTsInicial = isoToTimestamp(dateIncial)
+    dateTsFinal = isoToTimestamp(dateFinal)
 
-'''{
-    'NroCheque': ['0001', '0005', '0005', '0010', '0002'],
-    'CodigoBanco': ['1', '2', '55', '1', '55'],
-    'CodigoScurusal': ['12', '11', '22', '12', '44'], 
-    'NumeroCuentaOrigen': ['23123132', '2342342', '23423432432', '23123132', '2432432423'], 
-    'NumeroCuentaDestino': ['12312312', '33344343', '34343434', '12312312', '343434343'], 
-    'Valor': ['10000', '60000', '89000', '5000', '5559,76'], 
-    'FechaOrigen': ['1617591371', '1617591371', '1617591371', '1617591371', '1620183371'], 
-    'FechaPago': ['1620183371', '1620183371', '1620183371', '1617591371', '1620183371'], 
-    'DNI': ['11580999', '40998788', '23665789', '1617591371', '23665789'], 
-    'Tipo': ['EMITIDO', 'EMITIDO', 'EMITIDO', 'EMITIDO', 'EMITIDO'], 
-    'Estado': ['APROBADO', 'APROBADO', 'APROBADO', 'RECHAZADO', 'PENDIENTE']
-}'''
+    for key in dicc:
+        filteredDic[key] = []
+
+    for elem in dicc[keyName]:
+        if int(elem)>=dateTsInicial and int(elem)<=dateTsFinal:
+            for key in dicc:
+                filteredDic[key].append(dicc[key][i])
+        i += 1 
+
+    return filteredDic
+            
+# def error(dicc, keyName):
+
+#     for elem in dicc[keyName]:
+#         aux = diccFilter(dicc, keyName, elem)
+#         if len(aux[keyName]) != 1:
+            
+
+# def diccToCsv(dicc):
+    
+
+# #fileName = str(input('Ingrese el nombre de la archivo: '))
+# fileName = 'file2.csv'
+# #dni = str(input('ingrese dni: '))
+# dict_chesques = csvToDic(fileName)
+# # print(dict_chesques)
+# diccTime = time(dict_chesques,"FechaPago","01-01-2019:01-02-2019")
+# print(len(diccTime["DNI"]))
+
+#print(diccFilter(dict_chesques, "DNI", "236625789"))
+
+
+# readable = datetime.fromtimestamp(855543600)
+# print(readable)
+# print(datetime(2002, 3, 1))
+# t = ['1547596800', '1547683200', '1548374400', '1547769600', '1546646400', '1548979200', '1547942400', '1546387200']
+# for elem in t:
+#     print(datetime.fromtimestamp(int(elem)))
+
+dct = {'Name': ['Lucia','Nano','Pili','John'], 'Age': ['80','11','36','23'], 'Country': ['USA','MADAGASCAR','USA','USA']}
+print(len(dct.values()))
+
+with open('names.csv', 'w', newline='') as csvfile:
+    fieldnames = dct.keys()
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+    writer.writeheader()
+    for i in dct:
+        writer.writerow({'Name':"Lucia","Age":100})
+  
+
+# dct = { "Australia" : 456, "Germany" : 2678, "China" : 1890,"Japan":1667}
+# with open('TEST.csv', 'w') as csvfile:
+#     header_key = dct.keys()
+#     new_val = csv.DictWriter(csvfile, fieldnames=header_key)
+
+#     new_val.writeheader()
+#     for elem in dct:
+#         new_val.writerow({'Country': elem, 'Value': dct[elem]})
