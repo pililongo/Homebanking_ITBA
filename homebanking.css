@@ -170,7 +170,7 @@ footer {
 }
 
 .social-networks ul li i {
-  font-size: 3rem;
+  font-size: 2.2rem;
   margin: 1rem;
 }
 .social-networks ul li i:hover {
@@ -280,7 +280,9 @@ a:active{
 .big-card {
   display: flex;
   flex-direction: column;
-  border: 0.2rem solid var(--clr-small-box);
+  align-items: center;
+  /* border: 0.2rem solid var(--clr-small-box); */
+  border: 0.2rem;
   border-radius: 0.7rem;
 }
 
@@ -387,6 +389,7 @@ a:active{
     gap: 2rem;
     width: 100%;
     grid-template-columns: repeat(3, 1fr);
+    height: 95%;
   }
 
   /*section-grid cards*/
@@ -460,19 +463,6 @@ a:active{
       "small-card-pesos graphic"
       "small-card-usd graphic";
   }
-  /* .pesos {
-    grid-area: small-card-pesos;
-  }
-  .usd {
-    grid-area: small-card-usd;
-  }
-  .graphic {
-    grid-area: graphic;
-    width: 100%;
-  }
-  .graphic img {
-    max-width: 100%;
-  } */
 
   /*--cotizaciones--*/
 
@@ -495,7 +485,7 @@ a:active{
 
   .head-cotizaciones {
     grid-area: cotizaciones;
-    margin: 0;
+    margin: 0 0 2rem 0;
   }
 
   .div-0 {
