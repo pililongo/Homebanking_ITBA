@@ -3,8 +3,6 @@
 import csv
 from datetime import datetime
 from optparse import Values
-import os
-import numpy as np
 
 # path = os.getcwd()
 
@@ -88,12 +86,15 @@ def time(dicc,keyName,rangeDate):
 
     return filteredDic
             
-# def error(dicc, keyName):
+def error(dicc, keyName1, keyName2):
+    for elem1 in dicc[keyName1]:
+        aux = diccFilter(dicc, keyName1, elem1)
+        if len(aux[keyName1]) != 1:
+            for elem2 in aux[keyName2]:
+                aux_2 = diccFilter(aux,keyName2,elem2)
+                if len(aux_2[keyName2]) != 1:
+                    return print("ERRRRRROOOOOOR")
 
-#     for elem in dicc[keyName]:
-#         aux = diccFilter(dicc, keyName, elem)
-#         if len(aux[keyName]) != 1:
-            
 
 def diccToCsv(dicc):
     with open('testSalida.csv', 'w', newline='') as csvfile:
@@ -111,62 +112,11 @@ def diccToCsv(dicc):
             writer.writerow(csvDicc)
         
 
-fileName = 'file2.csv'
+fileName = 'file.csv'
 dict_chesques = csvToDicc(fileName)
-diccToCsv(dict_chesques)
+# diccToCsv(dict_chesques)
+error(dict_chesques,"NumeroCuentaOrigen","NroCheque")
+
+# print(diccFilter(dict_chesques,"DNI","40559871"))
 
 # diccTime = time(dict_chesques,"FechaPago","01-01-2019:01-02-2019")
-
-
-
-# readable = datetime.fromtimestamp(855543600)
-# print(readable)
-# print(datetime(2002, 3, 1))
-# t = ['1547596800', '1547683200', '1548374400', '1547769600', '1546646400', '1548979200', '1547942400', '1546387200']
-# for elem in t:
-# print(datetime.fromtimestamp(int(elem)))
-# with open('names.csv', 'w', newline='') as csvfile:
-#     dicNames = []
-#     dicValues = []
-#     csvDic = []
-#     i = 0
-#     j = 0
-#     k = 0
-#     # fieldnames = dct.keys()
-#     # dctValues = dct.values()
-    # # writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
-    # writer.writeheader()
-    # for arr in dctValues:
-        # for val in arr:
-                # print(val)
-   
-   
-    # for names in dct:
-    #     dicNames.append(names)
-    # # print(dicNames)
-
-    # for values in dctValues:
-    #     dicValues.append(values)
-    # # print(dicValues)
-
-    # writer = csv.DictWriter(csvfile, fieldnames=dicNames)
-    # writer.writeheader()
-
-    # while k < len(dicValues[0]):
-
-    #     for val in dicValues:
-    #         if len(csvDic) == 0 or i == 0:
-    #             csvDic.append({dicNames[i] : val[j]})
-    #         if len(csvDic) != 0:
-    #             csvDic[j][dicNames[i]] = val[j]
-    #         i += 1
-    #         if i == 3:
-    #             j += 1
-    #             i = 0
-    #             k += 1
-    # print(csvDic)
-
-
-
-
