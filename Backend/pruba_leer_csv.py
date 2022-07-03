@@ -1,10 +1,17 @@
 #!/usr/bin/env python3
 
 import csv
+import os
 from datetime import datetime
 from optparse import Values
 
 # path = os.getcwd()
+
+def clearConsole():
+    command = 'clear'
+    if os.name in ('nt', 'dos'):
+        command = 'cls'
+    os.system(command)
 
 
 def csvToDicc(fileName):
@@ -95,9 +102,18 @@ def error(dicc, keyName1, keyName2):
                 if len(aux_2[keyName2]) != 1:
                     return print("ERRRRRROOOOOOR")
 
+def trimDic(dicc, lst=[]):
+    for item in lst:
+        dicc.pop(item)
+    return dicc
 
-def diccToCsv(dicc):
-    with open('testSalida.csv', 'w', newline='') as csvfile:
+def getCsvName(dicc, value):
+    name = str(dicc[value][0]) 
+    date = str(datetime.now().timestamp())
+    return name + '_' + date + '.csv'
+
+def diccToCsv(dicc, name):
+    with open(name, 'w', newline='') as csvfile:
         fieldnames = dicc.keys()
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         keys=[]
@@ -110,12 +126,19 @@ def diccToCsv(dicc):
             for j in range(len(dicc)):
                 csvDicc.update({keys[j] : dicc[keys[j]][i]})
             writer.writerow(csvDicc)
-        
+    print(name)
 
-fileName = 'file.csv'
-dict_chesques = csvToDicc(fileName)
+# fileName = 'file.csv'
+# dicc = csvToDicc(fileName)
+# name = getCsvName(dicc, 'DNI')
+# print(dicc['DNI'][0])
+# diccToCsv(dicc, name)
+# print(trimDic(dicc, ['NroCheque', 'CodigoBanco', 'CodigoScurusal', 'DNI', 'Tipo', 'Estado']))
+
+
+# dict_chesques = csvToDicc(fileName)
 # diccToCsv(dict_chesques)
-error(dict_chesques,"NumeroCuentaOrigen","NroCheque")
+# error(dict_chesques,"NumeroCuentaOrigen","NroCheque")
 
 # print(diccFilter(dict_chesques,"DNI","40559871"))
 
