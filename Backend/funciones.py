@@ -1,11 +1,8 @@
-#!/usr/bin/env python3
-
 import csv
 import os
 from datetime import datetime
 from optparse import Values
 
-# path = os.getcwd()
 
 def clearConsole():
     command = 'clear'
@@ -71,11 +68,24 @@ def diccFilter(dicName, keyName, param):
     return filteredDic
 
 def isoToTimestamp(value : str) -> int:
+    '''
+    Transforma en timestamp el formato dia-mes-año.
+    '''
     dt = datetime.strptime(value, "%d-%m-%Y")
     return int(dt.timestamp())
 
 
 def time(dicc,keyName,rangeDate):
+    '''
+    Crea un diccionario filtrado con un rango de fechas determinado.
+
+    Argumentos:
+        dicc: dicc a filtrar.
+        keyName: keyword donde se filtra.
+        rangeDate: rango de fecha utilizado.
+    Salida:
+        filteredDic: dicc filtrado.
+    '''
     filteredDic = {}
     i = 0
     [dateIncial, dateFinal] = rangeDate.split(":")
@@ -94,6 +104,17 @@ def time(dicc,keyName,rangeDate):
     return filteredDic
             
 def error(dicc, keyName1, keyName2):
+    '''
+    Muestra un error en caso de que encuentre más de un elemento 
+    en uno de los parámetros dados, indicando que este se repite.
+
+    Argumentos:
+        dicc: dicc a recorrer.
+        keyName1: keyword a comparar.
+        keyName2: keyword a comparar.
+    Salida:
+        retorna un booleano. 
+    '''
     for elem1 in dicc[keyName1]:
         aux = diccFilter(dicc, keyName1, elem1)
         if len(aux[keyName1]) != 1:
@@ -103,16 +124,44 @@ def error(dicc, keyName1, keyName2):
                     return True
 
 def trimDic(dicc, lst=[]):
+    '''
+    Devuelve un diccionario sin los valores que forman parte de la lista.
+
+    Argumentos:
+        dicc: dicc a recorrer.
+        lst: lista de valores a eliminar. 
+    Salida:
+        retorna un diccionario.
+    '''
     for item in lst:
         dicc.pop(item)
     return dicc
 
 def getCsvName(dicc, value):
+    '''
+    Utiliza un valor y el timestamp actual como nombre del csv de salida.
+
+    Argumentos:
+        dicc: dicc a recorrer.
+        value: valor utilizado como parte del nombre.
+    Salida:
+        retorna el nombre del archivo.
+    '''
     name = str(dicc[value][0]) 
     date = str(datetime.now().timestamp())
     return name + '_' + date + '.csv'
 
 def diccToCsv(dicc, name):
+    '''
+    Convierte un dicc en un archivo .csv. Utiliza las keywords del dicc para establacer la primera fila   
+    del archivo .csv.
+
+    Argumento: 
+        dicc: dicc a transformar.
+        name: nombre del arcivo .csv.
+    Salida: 
+        archivo .csv.
+    '''
     with open(name, 'w', newline='') as csvfile:
         fieldnames = dicc.keys()
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)

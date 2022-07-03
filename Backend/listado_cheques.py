@@ -1,6 +1,4 @@
-#!/usr/bin/env python3
-
-from pruba_leer_csv import *
+from funciones import *
 
 clearConsole()
 print("\n       *******************         ")
@@ -21,11 +19,11 @@ while True:
 
 print("\n       *******************         ")
 while True:
-    elec = int(input("Tipos de cheque: \n1. Emitido\n2. Depositado\nSelecione el tipo de cheque: "))
-    if elec == 1:
+    choose = int(input("Tipos de cheque: \n1. Emitido\n2. Depositado\nSeleccione el tipo de cheque: "))
+    if choose == 1:
         check_type = "EMITIDO"
         break
-    elif elec == 2:
+    elif choose == 2:
         check_type = "DEPOSITADO"
         break
     else:
@@ -36,20 +34,20 @@ while True:
 
 clearConsole()
 print("\n       *******************         ")
-check_state_input = True if str(input("Desea selecionar un estado de cheque? S/N ")).upper() == "S" else False
+check_state_input = True if str(input("¿Desea selecionar un estado de cheque? S/N ")).upper() == "S" else False
 clearConsole()
 while True:
     if check_state_input:
-        elec = int(input("Estados de cheque: \n1. Pendiente\n2. Aprobado\n3. Rechazado\nSelecione un estado de cheque: "))
-        if elec == 1:
+        choose = int(input("Estados de cheque: \n1. Pendiente\n2. Aprobado\n3. Rechazado\nSeleccione un estado de cheque: "))
+        if choose == 1:
             check_state = 'PENDIENTE'
             clearConsole()
             break
-        elif elec == 2:
+        elif choose == 2:
             check_state = 'APROBADO'
             clearConsole()
             break
-        elif elec == 3: 
+        elif choose == 3: 
             check_state = 'RECHAZADO'
             clearConsole()
             break
@@ -63,11 +61,11 @@ while True:
         check_state = ''
 
 print("\n       *******************         ")
-check_date_input = True if str(input("Desea selecionar un rango de fecha? S/N ")).upper() == "S" else False
+check_date_input = True if str(input("¿Desea seleccionar un rango de fecha? S/N ")).upper() == "S" else False
 clearConsole()
 if check_date_input:
     print("\n       *******************         ")
-    check_date = str(input("Selecione un rango de fecha\n       *******************         \ndd-mm-aaaa:dd-mm-aaaa: "))
+    check_date = str(input("Seleccione un rango de fecha\n       *******************         \ndd-mm-aaaa:dd-mm-aaaa: "))
     clearConsole()
 else:
     check_date = ''
@@ -75,7 +73,7 @@ else:
 
 print("\n       *******************         ")
 while True:
-    output_type = int(input("Tipos de salida: \n1. Pantalla\n2. CSV\nSelecione un tipo de salida: "))
+    output_type = int(input("Tipos de salida: \n1. Pantalla\n2. CSV\nSeleccione un tipo de salida: "))
     if output_type >= 1 and output_type <= 2:
         break
         clearConsole()
@@ -88,7 +86,7 @@ while True:
 dicc = csvToDicc(file_name)
 dni_filter = diccFilter(dicc, 'DNI', dni)
 check_type_filter = diccFilter(dni_filter, 'Tipo', check_type)
-diccExist = check_type_filter
+diccExist = check_type_filter #variable actualizada con los dicc filtrados existentes.
 
 if check_state:
     check_state_filter = diccFilter(check_type_filter, 'Estado', check_state)
@@ -108,7 +106,7 @@ elif check_type == "DEPOSITADO":
 
 clearConsole()
 if error:
-    print('ERRRRRRRROR')
+    print('Error: cheque duplicado en la cuenta\nNo es posible visualizar datos.')
 else:
         print("\n       *******************         ")
         print("            Resultados               ")
@@ -121,4 +119,3 @@ else:
             name = getCsvName(diccExist, 'DNI')
             trimedDic = trimDic(diccExist, ['NroCheque', 'CodigoBanco', 'CodigoScurusal', 'DNI', 'Tipo', 'Estado'])
             diccToCsv(trimedDic, name)
-
