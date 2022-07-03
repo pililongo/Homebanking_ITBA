@@ -17,62 +17,108 @@ while True:
     else:
         clearConsole()
         print("\n       *******************         ")
-        print('ta mal, ingresa de nuevo')
+        print('Por favor, ingresa de nuevo \nEl dni debe tener entre 7 y 8 caracteres')
 
 print("\n       *******************         ")
-elec = int(input("Tipos de cheque: \n1. Emitido\n2. Depositado\nSelecione el tipo de cheque: "))
-if elec == 1:
-    check_type = "EMITIDO"
-else:
-    check_type = "DEPOSITADO"
+while True:
+    elec = int(input("Tipos de cheque: \n1. Emitido\n2. Depositado\nSelecione el tipo de cheque: "))
+    if elec == 1:
+        check_type = "EMITIDO"
+        break
+    elif elec == 2:
+        check_type = "DEPOSITADO"
+        break
+    else:
+        clearConsole()
+        print("\n       *******************         ")
+        print('Elija la opcion correspondiente')
+        print("\n       *******************         ")
 
 clearConsole()
-
 print("\n       *******************         ")
 check_state_input = True if str(input("Desea selecionar un estado de cheque? S/N ")).upper() == "S" else False
 clearConsole()
-if check_state_input:
-    elec = int(input("Estados de cheque: \n1. Pendiente\n2. Aprobado\n3. Rechazado\nSelecione un estado de cheque: "))
-    if elec == 1:
-        check_state = 'PENDIENTE'
-    elif elec == 2:
-        check_state = 'APROBADO'
-    elif elec == 3: 
-        check_state = 'RECHAZADO'
-    clearConsole()
+while True:
+    if check_state_input:
+        elec = int(input("Estados de cheque: \n1. Pendiente\n2. Aprobado\n3. Rechazado\nSelecione un estado de cheque: "))
+        if elec == 1:
+            check_state = 'PENDIENTE'
+            clearConsole()
+            break
+        elif elec == 2:
+            check_state = 'APROBADO'
+            clearConsole()
+            break
+        elif elec == 3: 
+            check_state = 'RECHAZADO'
+            clearConsole()
+            break
+        else:
+            clearConsole()
+            print("\n       *******************         ")
+            print('Elija la opcion correspondiente')
+            print("\n       *******************         ")
+
+    else:
+        check_state = ''
 
 print("\n       *******************         ")
 check_date_input = True if str(input("Desea selecionar un rango de fecha? S/N ")).upper() == "S" else False
 clearConsole()
 if check_date_input:
-    check_date = str(input("Selecione un rango de fecha: dd-mm-aaaa:dd-mm-aaaa "))
+    print("\n       *******************         ")
+    check_date = str(input("Selecione un rango de fecha\n       *******************         \ndd-mm-aaaa:dd-mm-aaaa: "))
     clearConsole()
+else:
+    check_date = ''
 
 
 print("\n       *******************         ")
-output_type = int(input("Tipos de salida: \n1. Pantalla\n2. CSV\nSelecione un tipo de salida: "))
-clearConsole()
+while True:
+    output_type = int(input("Tipos de salida: \n1. Pantalla\n2. CSV\nSelecione un tipo de salida: "))
+    if output_type >= 1 and output_type <= 2:
+        break
+        clearConsole()
+    else:
+        clearConsole()
+        print("\n       *******************         ")
+        print('Elija la opcion correspondiente')
+        print("\n       *******************         ")
 
 dicc = csvToDicc(file_name)
 dni_filter = diccFilter(dicc, 'DNI', dni)
 check_type_filter = diccFilter(dni_filter, 'Tipo', check_type)
-check_state_filter = diccFilter(check_type_filter, 'Estado', check_state)
+diccExist = check_type_filter
+
+if check_state:
+    check_state_filter = diccFilter(check_type_filter, 'Estado', check_state)
+    diccExist = check_state_filter
+
 
 if check_type == "EMITIDO":
-    date_filter = time(check_state_filter, 'FechaOrigen', check_date)
+    if check_date:
+        date_filter = time(diccExist, 'FechaOrigen', check_date)
+        diccExist = date_filter
+    error = error(dni_filter, 'NroCheque', 'NumeroCuentaOrigen')
 elif check_type == "DEPOSITADO":
-    date_filter =time(check_state_filter, 'FechaPago', check_date)
+    if check_date:
+        date_filter = time(diccExist, 'FechaPago', check_date)
+        diccExist = date_filter
+    error = error(dni_filter, 'NroCheque', 'NumeroCuentaDestino')
 
 clearConsole()
-print("\n       *******************         ")
-print("            Resultados               ")
-print("\n       *******************         ")
-if output_type == 1:
-    for item in date_filter:
-        print(item, ' = ', date_filter[item])
+if error:
+    print('ERRRRRRRROR')
+else:
+        print("\n       *******************         ")
+        print("            Resultados               ")
+        print("\n       *******************         ")
+        if output_type == 1:
+            for item in diccExist:
+                print(item, ' = ', diccExist[item])
 
-elif output_type == 2:
-    name = getCsvName(date_filter, 'DNI')
-    trimedDic = trimDic(date_filter, ['NroCheque', 'CodigoBanco', 'CodigoScurusal', 'DNI', 'Tipo', 'Estado'])
-    diccToCsv(trimedDic, name)
+        elif output_type == 2:
+            name = getCsvName(diccExist, 'DNI')
+            trimedDic = trimDic(diccExist, ['NroCheque', 'CodigoBanco', 'CodigoScurusal', 'DNI', 'Tipo', 'Estado'])
+            diccToCsv(trimedDic, name)
 

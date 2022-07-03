@@ -100,7 +100,7 @@ def error(dicc, keyName1, keyName2):
             for elem2 in aux[keyName2]:
                 aux_2 = diccFilter(aux,keyName2,elem2)
                 if len(aux_2[keyName2]) != 1:
-                    return print("ERRRRRROOOOOOR")
+                    return True
 
 def trimDic(dicc, lst=[]):
     for item in lst:
@@ -127,19 +127,3 @@ def diccToCsv(dicc, name):
                 csvDicc.update({keys[j] : dicc[keys[j]][i]})
             writer.writerow(csvDicc)
     print(name)
-
-# fileName = 'file.csv'
-# dicc = csvToDicc(fileName)
-# name = getCsvName(dicc, 'DNI')
-# print(dicc['DNI'][0])
-# diccToCsv(dicc, name)
-# print(trimDic(dicc, ['NroCheque', 'CodigoBanco', 'CodigoScurusal', 'DNI', 'Tipo', 'Estado']))
-
-
-# dict_chesques = csvToDicc(fileName)
-# diccToCsv(dict_chesques)
-# error(dict_chesques,"NumeroCuentaOrigen","NroCheque")
-
-# print(diccFilter(dict_chesques,"DNI","40559871"))
-
-# diccTime = time(dict_chesques,"FechaPago","01-01-2019:01-02-2019")
