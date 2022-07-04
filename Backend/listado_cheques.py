@@ -15,7 +15,7 @@ while True:
     else:
         clearConsole()
         print("\n       *******************         ")
-        print('Por favor, ingresa de nuevo \nEl dni debe tener entre 7 y 8 caracteres')
+        print('Por favor, ingresa de nuevo \nEl DNI debe tener entre 7 y 8 caracteres')
 
 print("\n       *******************         ")
 while True:
@@ -59,6 +59,7 @@ while True:
 
     else:
         check_state = ''
+        break
 
 print("\n       *******************         ")
 check_date_input = True if str(input("¿Desea seleccionar un rango de fecha? S/N ")).upper() == "S" else False
@@ -74,9 +75,9 @@ else:
 print("\n       *******************         ")
 while True:
     output_type = int(input("Tipos de salida: \n1. Pantalla\n2. CSV\nSeleccione un tipo de salida: "))
-    if output_type >= 1 and output_type <= 2:
-        break
+    if output_type == 1 or output_type == 2:
         clearConsole()
+        break
     else:
         clearConsole()
         print("\n       *******************         ")
@@ -84,25 +85,23 @@ while True:
         print("\n       *******************         ")
 
 dicc = csvToDicc(file_name)
-dni_filter = diccFilter(dicc, 'DNI', dni)
-check_type_filter = diccFilter(dni_filter, 'Tipo', check_type)
-diccExist = check_type_filter #variable actualizada con los dicc filtrados existentes.
+dicc_dni = diccFilter(dicc, 'DNI', dni)
+dicc_dni_type = diccFilter(dicc_dni, 'Tipo', check_type)
+diccExist = dicc_dni_type #variable actualizada con los dicc filtrados existentes.
 
 if check_state:
-    check_state_filter = diccFilter(check_type_filter, 'Estado', check_state)
-    diccExist = check_state_filter
+    diccExist = diccFilter(diccExist, 'Estado', check_state)
+    
 
 
 if check_type == "EMITIDO":
     if check_date:
-        date_filter = time(diccExist, 'FechaOrigen', check_date)
-        diccExist = date_filter
-    error = error(dni_filter, 'NroCheque', 'NumeroCuentaOrigen')
+        diccExist = time(diccExist, 'FechaOrigen', check_date)
+    error = error(dicc_dni, 'NroCheque', 'NumeroCuentaOrigen')
 elif check_type == "DEPOSITADO":
     if check_date:
-        date_filter = time(diccExist, 'FechaPago', check_date)
-        diccExist = date_filter
-    error = error(dni_filter, 'NroCheque', 'NumeroCuentaDestino')
+        diccExist = time(diccExist, 'FechaPago', check_date)
+    error = error(dicc_dni, 'NroCheque', 'NumeroCuentaDestino')
 
 clearConsole()
 if error:
@@ -112,8 +111,8 @@ else:
         print("            Resultados               ")
         print("\n       *******************         ")
         if output_type == 1:
-            for item in diccExist:
-                print(item, ' = ', diccExist[item])
+            for key in diccExist:
+                print(key, ' = ', diccExist[key])
 
         elif output_type == 2:
             name = getCsvName(diccExist, 'DNI')

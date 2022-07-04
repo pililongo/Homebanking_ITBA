@@ -148,7 +148,7 @@ def getCsvName(dicc, value):
         retorna el nombre del archivo.
     '''
     name = str(dicc[value][0]) 
-    date = str(datetime.now().timestamp())
+    date = str(int(datetime.now().timestamp()))
     return name + '_' + date + '.csv'
 
 def diccToCsv(dicc, name):
