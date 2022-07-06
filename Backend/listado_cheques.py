@@ -61,6 +61,7 @@ while True:
         check_state = ''
         break
 
+
 print("\n       *******************         ")
 check_date_input = True if str(input("¿Desea seleccionar un rango de fecha? S/N ")).upper() == "S" else False
 clearConsole()
@@ -107,14 +108,13 @@ clearConsole()
 if error:
     print('Error: cheque duplicado en la cuenta\nNo es posible visualizar datos.')
 else:
-        print("\n       *******************         ")
-        print("            Resultados               ")
-        print("\n       *******************         ")
-        if output_type == 1:
-            for key in diccExist:
-                print(key, ' = ', diccExist[key])
-
-        elif output_type == 2:
-            name = getCsvName(diccExist, 'DNI')
-            trimedDic = trimDic(diccExist, ['NroCheque', 'CodigoBanco', 'CodigoScurusal', 'DNI', 'Tipo', 'Estado'])
-            diccToCsv(trimedDic, name)
+    print("\n       *******************         ")
+    print("            Resultados               ")
+    print("\n       *******************         ")
+    if output_type == 1:
+        for key in diccExist:
+            print(key, ' = ', diccExist[key])
+    elif output_type == 2:
+        name = getCsvName(diccExist, 'DNI')
+        trimedDic = trimDic(diccExist, ['NroCheque', 'CodigoBanco', 'CodigoScurusal', 'DNI', 'Tipo', 'Estado'])
+        diccToCsv(trimedDic, name)

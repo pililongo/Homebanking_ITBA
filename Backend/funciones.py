@@ -171,7 +171,6 @@ def diccToCsv(dicc, name):
             keys.append(key)
         writer.writeheader()
         for i in range(len(dicc[keys[0]])):
-            csvDicc.clear()
             for j in range(len(dicc)):
                 csvDicc.update({keys[j] : dicc[keys[j]][i]})
             writer.writerow(csvDicc)
