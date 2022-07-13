@@ -126,7 +126,7 @@ ACCOUNTS_RESTRICTIONS = {
         "MaxWhithdrawls": 100000,
         "Checkbooks": 2,
         "TransferFee": 0,
-        "MaxTranferReceived": True
+        "MaxTranferReceived": False
     }
 }
 
@@ -275,11 +275,13 @@ class Transaction:
             return False
         
     def validateTransferReceived(self):
-        if self.amount > self.restrictions.MaxTranferReceived:
-            return 'Flaco no te pueden mandar tanta plata ¿Vendes droga?'
+        if self.restrictions.MaxTranferReceived:
+            if self.amount > self.restrictions.MaxTranferReceived:
+                return 'Flaco no te pueden mandar tanta plata ¿Vendes droga?'
+            else:
+                return False
         else:
             return False
-
 
 
 cliente_1= Client(A,ACCOUNTS_RESTRICTIONS)
