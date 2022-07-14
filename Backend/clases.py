@@ -99,7 +99,6 @@ SALIDA:
 
 # Uso de clases para procesar los datos
 
-
 ACCOUNTS_RESTRICTIONS = {
     "CLASSIC":{
         "CreditCardsMax": 0,
@@ -129,7 +128,6 @@ ACCOUNTS_RESTRICTIONS = {
         "MaxTranferReceived": False
     }
 }
-
 
 A= {
     "numero": 100001,
@@ -170,7 +168,6 @@ A= {
     ]
 }
 
-
 class Client:
     def __init__(self, dictJSON, dictRestrictions):
         self.number = dictJSON["numero"]
@@ -179,7 +176,6 @@ class Client:
         self.dni = dictJSON["DNI"]
         self.adress = Adress(dictJSON)
         self.transactions = []
-        self.reason = []
         for i in range(len(dictJSON["transacciones"])):
             self.transactions.append(Transaction(dictJSON,dictRestrictions,i))
           
@@ -201,12 +197,11 @@ class Client:
                     REASON = self.transactions[i].validateTransferSend()
                 elif self.transactions[i].type == "TRANSFERENCIA_RECIBIDA":
                     REASON = self.transactions[i].validateTransferReceived()
-            HTML += '\n\t\t<div class="transaction">\n\t\t\t<h4 class="transaction-nombre">#{}</h4>\n\t\t\t<ul class="data">\n\t\t\t\t<li class="date">{}</li>\n\t\t\t\t<li class="operation">{}</li>\n\t\t\t\t<li class="state">{}</li>\n\t\t\t\t<li class="amount">{}</li>\n\t\t\t\t<li class="rejectionReason">{}</li>\n\t\t\t</ul>\n\t\t</div>'.format(self.transactions[i].number,self.transactions[i].date,self.transactions[i].type,self.transactions[i].state,self.transactions[i].amount,REASON)
+            HTML += '\n\t\t<div class="transaction">\n\t\t\t<h4 class="transaction-number">#{}</h4>\n\t\t\t<ul class="data">\n\t\t\t\t<li class="date">{}</li>\n\t\t\t\t<li class="operation">{}</li>\n\t\t\t\t<li class="state">{}</li>\n\t\t\t\t<li class="amount">{}</li>\n\t\t\t\t<li class="rejectionReason">{}</li>\n\t\t\t</ul>\n\t\t</div>'.format(self.transactions[i].number,self.transactions[i].date,self.transactions[i].type,self.transactions[i].state,self.transactions[i].amount,REASON)
         
         HTML += '\n\t</div>\n</body>\n</html>'
         return HTML
     
-
 class Restrictions:
     def __init__(self, dictJSON, dictRestrictions):
         self.CreditCardsMax     = dictRestrictions[dictJSON["tipo"]]["CreditCardsMax"]
@@ -283,7 +278,5 @@ class Transaction:
         else:
             return 'Rechazado por error en el sistema Legacy'
 
-
 cliente_1= Client(A,ACCOUNTS_RESTRICTIONS)
 print(cliente_1.dataToHTML())
-

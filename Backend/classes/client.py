@@ -1,3 +1,6 @@
+from adress import Adress
+from transaction import Transaction
+from restrictions import Restrictions
 class Client:
     def __init__(self, dictJSON, dictRestrictions):
         self.number = dictJSON["numero"]

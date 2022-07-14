@@ -1,3 +1,5 @@
+from restrictions import Restrictions
+
 class Transaction:
     def __init__(self,dictJSON,dictRestrictions,i):
         self.state = dictJSON["transacciones"][i]["estado"]
