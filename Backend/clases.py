@@ -6,7 +6,7 @@ Clientes Classic
     No tienen acceso a tarjetas de crédito ni chequeras
     La comisión por transferencias hechas es de 1%. 
     No puede recibir transferencias mayores a $150.000 sin previo aviso.
- 
+
 Clientes Gold 
     Tiene una tarjeta de débito que se crea con el cliente.
     Tiene una cuenta corriente con un descubierto de $10.000. Hay que tener 
@@ -184,7 +184,7 @@ class Client:
             self.transactions.append(Transaction(dictJSON,dictRestrictions,i))
           
     def dataToHTML(self):
-        HTML = '<!DOCTYPE html>\n<html>\n<head>\n\t<meta charset="utf-8">\n\t<meta name="viewport" content="width=device-width, initial-scale=1">\n\t<title>Informe</title>\n</head>\n<body>'
+        HTML = '<!DOCTYPE html>\n<html>\n<head>\n\t<meta charset="utf-8">\n\t<meta name="viewport" content="width=device-width, initial-scale=1">\n\t<link rel="stylesheet" href="style.css">\n\t<title>Informe</title>\n</head>\n<body>'
         HTML += '\n\t<div class="container">\n\t\t<h1 class="fullname">{} {}</h1>\n\t\t<h4 class="number">{}</h4>\n\t\t<h4 class="direction">{}</h4>'.format(self.name,self.lastname,self.number,self.adress.__str__())
         for i in range(len(self.transactions)):
             REASON = ''
@@ -201,7 +201,7 @@ class Client:
                     REASON = self.transactions[i].validateTransferSend()
                 elif self.transactions[i].type == "TRANSFERENCIA_RECIBIDA":
                     REASON = self.transactions[i].validateTransferReceived()
-            HTML += '\n\t\t<div class="transaction">\n\t\t\t<h4 class="transaction-numbre">#{}</h4>\n\t\t\t<ul class="data">\n\t\t\t\t<li class="date">{}</li>\n\t\t\t\t<li class="operation">{}</li>\n\t\t\t\t<li class="state">{}</li>\n\t\t\t\t<li class="amount">{}</li>\n\t\t\t\t<li class="rejectionReason">{}</li>\n\t\t\t</ul>\n\t\t</div>'.format(self.transactions[i].number,self.transactions[i].date,self.transactions[i].type,self.transactions[i].state,self.transactions[i].amount,REASON)
+            HTML += '\n\t\t<div class="transaction">\n\t\t\t<h4 class="transaction-nombre">#{}</h4>\n\t\t\t<ul class="data">\n\t\t\t\t<li class="date">{}</li>\n\t\t\t\t<li class="operation">{}</li>\n\t\t\t\t<li class="state">{}</li>\n\t\t\t\t<li class="amount">{}</li>\n\t\t\t\t<li class="rejectionReason">{}</li>\n\t\t\t</ul>\n\t\t</div>'.format(self.transactions[i].number,self.transactions[i].date,self.transactions[i].type,self.transactions[i].state,self.transactions[i].amount,REASON)
         
         HTML += '\n\t</div>\n</body>\n</html>'
         return HTML
@@ -216,7 +216,7 @@ class Restrictions:
         self.Checkbooks         = dictRestrictions[dictJSON["tipo"]]["Checkbooks"]
         self.TransferFee        = dictRestrictions[dictJSON["tipo"]]["TransferFee"]
         self.MaxTranferReceived = dictRestrictions[dictJSON["tipo"]]["MaxTranferReceived"]
- 
+
 class Adress:
     def __init__(self, dictJSON):
         self.street = dictJSON["calle"]
@@ -244,44 +244,44 @@ class Transaction:
 
     def validateMaxWhithdrawls(self):
         if self.amount>self.dailyQuotaLeft:
-            return 'Amigo ya retiraste demasiaaaado culiaaaaaaaaa'
+            return 'Rechazado por cupo diario de extracción'
         elif self.accountBalance - self.amount < -self.restrictions.CheckingAccount:
-            return 'Amigo queres plata grati?'
+            return 'Rechazado por falta de dinero'
         else:
-            return False
+            return 'Rechazado por error en el sistema Legacy'
     
     def validateCreditCardsMax(self):
         if self.numberCreditCards == self.restrictions.CreditCardsMax:
-            return 'Flaco ya tenes una baaaanda de tarjetas'
+            return 'Rechazado por máximo de tarjetas de crédito alcanzado'
         else:
-            return False
+            return 'Rechazado por error en el sistema Legacy'
 
     def validateCheckbooks(self):
         if self.numberCheckbooks == self.restrictions.Checkbooks:
-            return 'Flaco ya tenes una baaaanda de chequeras'
+            return 'Rechazado por máximo de chequeras alcanzado'
         else:
-            return False
+            return 'Rechazado por error en el sistema Legacy'
 
     def validateAccountUSD(self):
         if self.restrictions.AccountUSD:
-            return False
+            return 'Rechazado por error en el sistema Legacy'
         else:
-            return 'Pobre no pode comprar USD pui pui'
+            return 'Rechazado por falta de caja de ahorro en dólares'
 
     def validateTransferSend(self):
         if self.accountBalance - self.amount - self.amount*self.restrictions.TransferFee < -self.restrictions.CheckingAccount:
-            return 'Flaco no podes mandar plata que no tenes'
+            return 'Rechazado por falta de fondos'
         else:
-            return False
+            return 'Rechazado por error en el sistema Legacy'
         
     def validateTransferReceived(self):
         if self.restrictions.MaxTranferReceived:
             if self.amount > self.restrictions.MaxTranferReceived:
-                return 'Flaco no te pueden mandar tanta plata ¿Vendes droga?'
+                return 'Rechazado por máximo de transferencia recibida sin previo aviso'
             else:
-                return False
+                return 'Rechazado por error en el sistema Legacy'
         else:
-            return False
+            return 'Rechazado por error en el sistema Legacy'
 
 
 cliente_1= Client(A,ACCOUNTS_RESTRICTIONS)
