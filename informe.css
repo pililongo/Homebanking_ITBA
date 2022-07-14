@@ -1,0 +1,22 @@
+header{
+	height: 5vw;
+	width: 100%;
+	background: linear-gradient(-10deg, rgb(48, 70, 151) 25%,rgb(142, 115, 178));
+	margin-top: 1vw;
+}
+
+.inform{
+	margin-left: 2vw;
+	line-height: 5vw;
+}
+
+.container{
+	margin: auto;
+	padding: 1vw;
+	width: 80%;
+	margin-top: 2vw;
+}
+
+ul{
+	list-style: none;
+}
