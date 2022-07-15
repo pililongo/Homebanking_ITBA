@@ -1,22 +1,77 @@
-header{
-	height: 5vw;
-	width: 100%;
-	background: linear-gradient(-10deg, rgb(48, 70, 151) 25%,rgb(142, 115, 178));
-	margin-top: 1vw;
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+
 }
 
-.inform{
-	margin-left: 2vw;
-	line-height: 5vw;
+html {
+    font-size: 62.5%;
 }
 
-.container{
-	margin: auto;
-	padding: 1vw;
-	width: 80%;
-	margin-top: 2vw;
+body {
+    font-size: 1.6rem;
 }
 
-ul{
-	list-style: none;
+body, ul {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+
+.container {
+    margin: 0 auto;
+    width: 50%;
+}
+
+.fullname {
+    text-align: center;
+    border-bottom: 0.2rem dotted black;
+}
+
+.dni::before {
+    content: 'DNI: ';
+}
+
+.number::before {
+    content: 'Nro de cuenta: ';
+}
+
+.direction::after {
+    content: '';
+    display: block;
+    border-bottom: 0.2rem dotted black;
+    margin-top: 2.6rem;
+}
+
+.date::before {
+    content: 'FECHA: ';
+}
+
+.amount::before {
+    content: 'MONTO: '
+}
+
+.transaction {
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.transaction-number {
+    margin-top: 0rem;
+}
+
+.aceptada {
+    border: 0.3rem solid #50ea50;
+    border-radius: 0.5rem;
+}
+
+.rechazada {
+    border: 0.3rem solid #f05f5f;
+    border-radius: 0.5rem;
 }
