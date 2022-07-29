@@ -1,0 +1,1959 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/lucia/Downloads/itbank (1).db" readonly="0" foreign_keys="0" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="3491"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,11:maindirecciones"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="auditoria_cuenta" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="60"/><column index="2" value="46"/><column index="3" value="54"/><column index="4" value="85"/><column index="5" value="93"/><column index="6" value="130"/><column index="7" value="130"/><column index="8" value="65"/><column index="9" value="73"/><column index="10" value="94"/><column index="11" value="129"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="cliente" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="1" mode="1"/></sort><column_widths><column index="1" value="138"/><column index="2" value="175"/><column index="3" value="207"/><column index="4" value="159"/><column index="5" value="109"/><column index="6" value="115"/><column index="7" value="110"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="cuenta" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="79"/><column index="2" value="88"/><column index="3" value="61"/><column index="4" value="233"/><column index="5" value="72"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="direcciones" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="1" mode="0"/></sort><column_widths><column index="1" value="110"/><column index="2" value="118"/><column index="3" value="91"/><column index="4" value="300"/><column index="5" value="293"/><column index="6" value="300"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="empleado" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="7" mode="0"/></sort><column_widths><column index="1" value="142"/><column index="2" value="179"/><column index="3" value="211"/><column index="4" value="221"/><column index="5" value="163"/><column index="6" value="115"/><column index="7" value="110"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="movimientos" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="102"/><column index="2" value="117"/><column index="3" value="57"/><column index="4" value="121"/><column index="5" value="129"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="sucursal" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="1" mode="1"/></sort><column_widths><column index="1" value="115"/><column index="2" value="175"/><column index="3" value="209"/><column index="4" value="207"/><column index="5" value="110"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="PROBLEMATICA UNO">/*PRIMERA PROBLEMATICA*/
+
+/*Creamos tabla por tipo de cliente*/
+	
+CREATE TABLE &quot;tipo_cliente&quot; (
+	&quot;client_id&quot;	INTEGER NOT NULL,
+	&quot;client_type&quot;	TEXT NOT NULL,
+	PRIMARY KEY(&quot;client_id&quot; AUTOINCREMENT)
+);
+
+INSERT INTO tipo_cliente(client_type)
+VALUES ('Classic'), ('Gold'), ('Black');
+
+
+/*Copiamos los datos de cliente en otra tabla con la foreign key incluída y eliminamos la tabla cliente original*/
+	
+PRAGMA foreign_keys=OFF;
+SELECT type, sql FROM sqlite_schema WHERE tbl_name='cliente';
+CREATE TABLE nuevo_cliente(
+        customer_id INTEGER NOT NULL PRIMARY KEY,
+        customer_name TEXT NOT NULL,
+        customer_surname TEXT NOT NULL,
+        customer_DNI TEXT NOT NULL,
+        dob TEXT NOT NULL,
+		branch_id INTEGER NOT NULL,
+		client_id INTEGER NOT NULL,
+        FOREIGN KEY (client_id)
+        REFERENCES tipo_cliente(client_id)
+        );
+
+ALTER TABLE cliente 
+ADD client_id INTEGER NOT NULL DEFAULT 1;
+
+INSERT INTO nuevo_cliente
+SELECT *
+FROM cliente;
+
+DROP TABLE cliente;
+
+ALTER TABLE nuevo_cliente RENAME TO cliente;
+
+SELECT *
+FROM cliente;
+
+
+/*Crear valores aleatorios en client_id de la tabla cliente*/
+
+UPDATE cliente
+SET client_id = abs(random()) % 3 + 1;
+
+
+/*Creamos tabla por tipo de cuenta*/
+	
+CREATE TABLE &quot;tipo_cuenta&quot; (
+	&quot;cuenta_id&quot;	INTEGER NOT NULL,
+	&quot;account_type&quot;	TEXT NOT NULL,
+	PRIMARY KEY(&quot;cuenta_id&quot; AUTOINCREMENT)
+);
+
+INSERT INTO tipo_cuenta (account_type)
+VALUES ('Caja ahorro pesos'), ('Caja ahorro dólares'), ('Cuenta corriente'); 
+
+
+/*Copiamos los datos de cuenta en otra tabla con la foreign key incluída y eliminamos la tabla cuenta original*/
+	
+PRAGMA foreign_keys=OFF;
+SELECT type, sql FROM sqlite_schema WHERE tbl_name='cuenta';
+CREATE TABLE nueva_cuenta(
+        account_id INTEGER NOT NULL PRIMARY KEY,
+        customer_id INTEGER NOT NULL,
+        balance INTEGER NOT NULL,
+        iban TEXT NOT NULL,
+        cuenta_id INTEGER NOT NULL,
+        FOREIGN KEY (cuenta_id)
+        REFERENCES tipo_cuenta(cuenta_id)
+        );
+		
+ALTER TABLE cuenta 
+ADD cuenta_id INTEGER NOT NULL DEFAULT 1;
+
+INSERT INTO nueva_cuenta
+SELECT *
+FROM cuenta;
+
+DROP TABLE cuenta;
+
+ALTER TABLE nueva_cuenta RENAME TO cuenta;
+
+SELECT *
+FROM cuenta;
+
+
+/*Crear valores aleatorios en cuenta_id de la tabla cuenta*/
+
+UPDATE cuenta 
+SET cuenta_id = abs(random()) % 3 + 1;
+
+
+/*Creamos tabla por marca de tarjeta*/
+	
+CREATE TABLE &quot;marca_tarjeta&quot; (
+	&quot;brand_id&quot;	INTEGER NOT NULL,
+	&quot;card_brand&quot;	TEXT NOT NULL,
+	PRIMARY KEY(&quot;brand_id&quot; AUTOINCREMENT)
+);
+
+INSERT INTO marca_tarjeta (card_brand)
+VALUES ('Visa'), ('Mastercard'), ('American Express');
+
+
+/*Creamos tabla tarjeta*/
+	
+DROP TABLE IF EXISTS tarjeta;
+
+CREATE TABLE tarjeta (
+&quot;card_id&quot; INTEGER NOT NULL PRIMARY KEY,
+&quot;card_number&quot; TEXT NOT NULL UNIQUE CHECK (length(card_number)&lt;= 20),
+&quot;card_cvv&quot; INTEGER NOT NULL,
+&quot;card_grant_date&quot; NUMERIC NOT NULL,
+&quot;card_expiration_date&quot; NUMERIC NOT NULL,
+&quot;card_type&quot; TEXT NOT NULL,
+&quot;brand_id&quot; INTEGER NOT NULL,
+&quot;customer_id&quot; INTEGER NOT NULL,
+FOREIGN KEY (&quot;brand_id&quot;)
+REFERENCES marca_tarjeta(&quot;brand_id&quot;)
+FOREIGN KEY (&quot;customer_id&quot;)
+REFERENCES cliente(&quot;customer_id&quot;));
+
+
+/*Creamos tabla direcciones*/
+
+CREATE TABLE direcciones(
+		adress_id INTEGER NOT NULL PRIMARY KEY,
+		street TEXT NOT NULL,
+		number NUMERIC NOT NULL,
+		city TEXT NOT NULL,
+		province TEXT NOT NULL,
+		country TEXT NOT NULL
+		); 
+
+UPDATE sucursal
+SET adress_id = branch_id;
+
+UPDATE cliente
+SET adress_id = customer_id + 100;
+
+UPDATE empleado
+SET adress_id = employee_id + 350;
+	
+/*Corrección formato del campo employee_hire_date de tabla empleado*/
+
+UPDATE empleado
+SET employee_hire_date = substr(employee_hire_date, 7, 4) || '-' || substr(employee_hire_date, 4,2) || '-' || substr(employee_hire_date, 1,2);</sql><sql name="GENERADOR DE TARJETAS">	/*Generamos 500 tarjetas de crédito y laas insertamos en la tabla tarjeta*/
+
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4716222181266&quot;,&quot;560&quot;,&quot;Nov 17, 2020&quot;,&quot;Jun 30, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,290),
+  (&quot;4716227751550&quot;,&quot;770&quot;,&quot;Feb 17, 2022&quot;,&quot;Apr 6, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,39),
+  (&quot;4539394252677&quot;,&quot;590&quot;,&quot;Oct 22, 2021&quot;,&quot;Dec 9, 2022&quot;,&quot;Crédito&quot;,&quot;2&quot;,1),
+  (&quot;4638 3124 9575 4847&quot;,&quot;768&quot;,&quot;Dec 20, 2021&quot;,&quot;Aug 13, 2022&quot;,&quot;Débito&quot;,&quot;2&quot;,134),
+  (&quot;4539 9642 5948 7541&quot;,&quot;371&quot;,&quot;Jun 4, 2020&quot;,&quot;Feb 1, 2025&quot;,&quot;Crédito&quot;,&quot;1&quot;,478),
+  (&quot;4716 2998 2716 4156&quot;,&quot;358&quot;,&quot;Jun 26, 2022&quot;,&quot;Oct 5, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,279),
+  (&quot;453 93592 62846 611&quot;,&quot;395&quot;,&quot;Jan 24, 2020&quot;,&quot;Aug 30, 2022&quot;,&quot;Crédito&quot;,&quot;1&quot;,232),
+  (&quot;4929 6856 6825 5199&quot;,&quot;574&quot;,&quot;Jun 2, 2022&quot;,&quot;Apr 25, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,34),
+  (&quot;4929 569 42 2462&quot;,&quot;723&quot;,&quot;Jul 22, 2020&quot;,&quot;Oct 9, 2022&quot;,&quot;Débito&quot;,&quot;3&quot;,107),
+  (&quot;4929534663455&quot;,&quot;622&quot;,&quot;Aug 23, 2021&quot;,&quot;Jun 16, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,359);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;491653 656534 7347&quot;,&quot;268&quot;,&quot;Jan 25, 2020&quot;,&quot;Aug 7, 2023&quot;,&quot;Crédito&quot;,&quot;2&quot;,120),
+  (&quot;402 40071 36728 166&quot;,&quot;183&quot;,&quot;Apr 16, 2020&quot;,&quot;Feb 18, 2024&quot;,&quot;Débito&quot;,&quot;3&quot;,55),
+  (&quot;492 99784 87547 387&quot;,&quot;199&quot;,&quot;Nov 25, 2021&quot;,&quot;Nov 28, 2022&quot;,&quot;Crédito&quot;,&quot;2&quot;,446),
+  (&quot;471 63514 36412 565&quot;,&quot;236&quot;,&quot;Mar 10, 2020&quot;,&quot;Sep 4, 2024&quot;,&quot;Crédito&quot;,&quot;1&quot;,6),
+  (&quot;4556 486 23 9396&quot;,&quot;859&quot;,&quot;Nov 4, 2021&quot;,&quot;Sep 8, 2025&quot;,&quot;Débito&quot;,&quot;1&quot;,87),
+  (&quot;4024007148471&quot;,&quot;496&quot;,&quot;May 17, 2020&quot;,&quot;Mar 11, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,335),
+  (&quot;453 28722 87493 430&quot;,&quot;585&quot;,&quot;Nov 4, 2020&quot;,&quot;Jan 1, 2024&quot;,&quot;Crédito&quot;,&quot;2&quot;,281),
+  (&quot;4522 319 25 2543&quot;,&quot;804&quot;,&quot;Jun 8, 2020&quot;,&quot;Sep 14, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,329),
+  (&quot;453279 999463 4578&quot;,&quot;220&quot;,&quot;Nov 4, 2021&quot;,&quot;Oct 10, 2024&quot;,&quot;Débito&quot;,&quot;1&quot;,138),
+  (&quot;4532 4486 1276 3415&quot;,&quot;409&quot;,&quot;Nov 26, 2021&quot;,&quot;Jan 10, 2025&quot;,&quot;Crédito&quot;,&quot;3&quot;,388);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4485 1356 7765 2982&quot;,&quot;946&quot;,&quot;Jul 11, 2020&quot;,&quot;Jul 13, 2025&quot;,&quot;Crédito&quot;,&quot;3&quot;,453),
+  (&quot;4556674266441&quot;,&quot;548&quot;,&quot;Dec 27, 2021&quot;,&quot;May 28, 2025&quot;,&quot;Crédito&quot;,&quot;3&quot;,151),
+  (&quot;491696 574427 2870&quot;,&quot;425&quot;,&quot;May 17, 2021&quot;,&quot;Feb 27, 2025&quot;,&quot;Crédito&quot;,&quot;1&quot;,31),
+  (&quot;448555 7111529767&quot;,&quot;257&quot;,&quot;Mar 30, 2022&quot;,&quot;May 23, 2024&quot;,&quot;Débito&quot;,&quot;2&quot;,182),
+  (&quot;4929849594244293&quot;,&quot;354&quot;,&quot;May 19, 2021&quot;,&quot;Jun 15, 2025&quot;,&quot;Crédito&quot;,&quot;1&quot;,433),
+  (&quot;4929 6136 7127 5392&quot;,&quot;226&quot;,&quot;Jun 26, 2021&quot;,&quot;May 18, 2025&quot;,&quot;Débito&quot;,&quot;3&quot;,291),
+  (&quot;491 63432 96628 784&quot;,&quot;675&quot;,&quot;Apr 21, 2022&quot;,&quot;Mar 6, 2025&quot;,&quot;Crédito&quot;,&quot;2&quot;,132),
+  (&quot;453 21833 76436 680&quot;,&quot;489&quot;,&quot;Jun 23, 2021&quot;,&quot;May 31, 2024&quot;,&quot;Crédito&quot;,&quot;2&quot;,497),
+  (&quot;455266 6574277463&quot;,&quot;346&quot;,&quot;Apr 3, 2021&quot;,&quot;Dec 25, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,263),
+  (&quot;4916145195415&quot;,&quot;574&quot;,&quot;Jun 17, 2020&quot;,&quot;Jul 24, 2025&quot;,&quot;Crédito&quot;,&quot;3&quot;,304);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4485558958917&quot;,&quot;943&quot;,&quot;Oct 14, 2021&quot;,&quot;Jul 17, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,378),
+  (&quot;453978 716153 6166&quot;,&quot;944&quot;,&quot;Dec 3, 2021&quot;,&quot;Jun 6, 2024&quot;,&quot;Débito&quot;,&quot;2&quot;,296),
+  (&quot;463514 277446 7438&quot;,&quot;350&quot;,&quot;Feb 9, 2022&quot;,&quot;Nov 11, 2025&quot;,&quot;Débito&quot;,&quot;2&quot;,126),
+  (&quot;453936 6786241997&quot;,&quot;393&quot;,&quot;Jul 2, 2020&quot;,&quot;Mar 13, 2025&quot;,&quot;Débito&quot;,&quot;1&quot;,75),
+  (&quot;4024007133473&quot;,&quot;196&quot;,&quot;May 19, 2020&quot;,&quot;Nov 2, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,4),
+  (&quot;471646 745383 6245&quot;,&quot;579&quot;,&quot;Feb 14, 2021&quot;,&quot;Oct 1, 2025&quot;,&quot;Débito&quot;,&quot;1&quot;,431),
+  (&quot;4342 5414 6315 3718&quot;,&quot;851&quot;,&quot;Jun 8, 2020&quot;,&quot;Nov 5, 2024&quot;,&quot;Débito&quot;,&quot;3&quot;,370),
+  (&quot;4485 2235 4873 4971&quot;,&quot;908&quot;,&quot;Nov 30, 2020&quot;,&quot;May 30, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,398),
+  (&quot;4532 9248 8232 5770&quot;,&quot;361&quot;,&quot;Jul 17, 2021&quot;,&quot;Nov 30, 2025&quot;,&quot;Crédito&quot;,&quot;3&quot;,306),
+  (&quot;4556934693247635&quot;,&quot;393&quot;,&quot;Jun 1, 2021&quot;,&quot;Nov 9, 2023&quot;,&quot;Crédito&quot;,&quot;3&quot;,345);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;491661 887665 4569&quot;,&quot;605&quot;,&quot;Apr 16, 2022&quot;,&quot;Jan 5, 2025&quot;,&quot;Crédito&quot;,&quot;2&quot;,369),
+  (&quot;453917 478347 5539&quot;,&quot;979&quot;,&quot;May 3, 2020&quot;,&quot;Aug 26, 2024&quot;,&quot;Crédito&quot;,&quot;1&quot;,158),
+  (&quot;4539 254 72 4369&quot;,&quot;395&quot;,&quot;May 2, 2022&quot;,&quot;Oct 25, 2024&quot;,&quot;Crédito&quot;,&quot;2&quot;,276),
+  (&quot;492949 325744 8725&quot;,&quot;195&quot;,&quot;Mar 24, 2021&quot;,&quot;Nov 15, 2025&quot;,&quot;Crédito&quot;,&quot;1&quot;,390),
+  (&quot;453238 2287752579&quot;,&quot;766&quot;,&quot;Jun 17, 2020&quot;,&quot;Feb 5, 2024&quot;,&quot;Débito&quot;,&quot;1&quot;,407),
+  (&quot;4539 278 22 3521&quot;,&quot;876&quot;,&quot;Dec 21, 2021&quot;,&quot;Jun 15, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,156),
+  (&quot;402400 713958 3675&quot;,&quot;307&quot;,&quot;Aug 28, 2020&quot;,&quot;May 23, 2024&quot;,&quot;Débito&quot;,&quot;1&quot;,426),
+  (&quot;453 93245 77734 696&quot;,&quot;139&quot;,&quot;Feb 19, 2020&quot;,&quot;Aug 31, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,477),
+  (&quot;4855 331 45 5532&quot;,&quot;860&quot;,&quot;Jan 14, 2021&quot;,&quot;May 26, 2025&quot;,&quot;Crédito&quot;,&quot;2&quot;,5),
+  (&quot;471635 8524848568&quot;,&quot;247&quot;,&quot;Feb 21, 2021&quot;,&quot;Apr 20, 2023&quot;,&quot;Crédito&quot;,&quot;3&quot;,238);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4024007169865&quot;,&quot;327&quot;,&quot;Jun 24, 2022&quot;,&quot;Apr 5, 2024&quot;,&quot;Crédito&quot;,&quot;3&quot;,447),
+  (&quot;448528 868519 6177&quot;,&quot;404&quot;,&quot;Nov 1, 2020&quot;,&quot;Dec 22, 2025&quot;,&quot;Crédito&quot;,&quot;1&quot;,34),
+  (&quot;4929125926352&quot;,&quot;380&quot;,&quot;Jun 27, 2020&quot;,&quot;Mar 28, 2023&quot;,&quot;Crédito&quot;,&quot;3&quot;,108),
+  (&quot;471674 987126 7255&quot;,&quot;863&quot;,&quot;Dec 31, 2020&quot;,&quot;Mar 16, 2025&quot;,&quot;Crédito&quot;,&quot;3&quot;,24),
+  (&quot;455 65487 82899 948&quot;,&quot;747&quot;,&quot;Jul 4, 2020&quot;,&quot;Oct 27, 2025&quot;,&quot;Crédito&quot;,&quot;2&quot;,488),
+  (&quot;4539333935611348&quot;,&quot;364&quot;,&quot;Jul 27, 2020&quot;,&quot;Apr 17, 2025&quot;,&quot;Débito&quot;,&quot;3&quot;,350),
+  (&quot;471621 8436616224&quot;,&quot;364&quot;,&quot;Apr 24, 2020&quot;,&quot;Jul 20, 2024&quot;,&quot;Débito&quot;,&quot;2&quot;,71),
+  (&quot;4556465635796&quot;,&quot;485&quot;,&quot;Jan 19, 2021&quot;,&quot;Apr 12, 2023&quot;,&quot;Crédito&quot;,&quot;3&quot;,54),
+  (&quot;4024 0071 6932 7431&quot;,&quot;264&quot;,&quot;Mar 13, 2020&quot;,&quot;Feb 7, 2024&quot;,&quot;Crédito&quot;,&quot;1&quot;,191),
+  (&quot;4716356682428&quot;,&quot;822&quot;,&quot;Oct 26, 2020&quot;,&quot;Aug 4, 2025&quot;,&quot;Crédito&quot;,&quot;3&quot;,343);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;455695 735751 8769&quot;,&quot;936&quot;,&quot;Mar 24, 2021&quot;,&quot;Dec 23, 2022&quot;,&quot;Débito&quot;,&quot;1&quot;,178),
+  (&quot;4716195634556438&quot;,&quot;953&quot;,&quot;Aug 25, 2020&quot;,&quot;Apr 14, 2023&quot;,&quot;Crédito&quot;,&quot;3&quot;,73),
+  (&quot;4532 5375 7653 4851&quot;,&quot;933&quot;,&quot;Mar 2, 2021&quot;,&quot;Dec 18, 2025&quot;,&quot;Crédito&quot;,&quot;1&quot;,496),
+  (&quot;402400 7165718237&quot;,&quot;450&quot;,&quot;Jul 9, 2020&quot;,&quot;Apr 25, 2025&quot;,&quot;Crédito&quot;,&quot;1&quot;,236),
+  (&quot;453975 485733 6137&quot;,&quot;425&quot;,&quot;Dec 28, 2020&quot;,&quot;Jul 27, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,99),
+  (&quot;471694 5255272362&quot;,&quot;937&quot;,&quot;Sep 1, 2020&quot;,&quot;May 30, 2024&quot;,&quot;Débito&quot;,&quot;2&quot;,187),
+  (&quot;4916 4484 5425 9528&quot;,&quot;945&quot;,&quot;Feb 28, 2020&quot;,&quot;Feb 17, 2024&quot;,&quot;Crédito&quot;,&quot;3&quot;,242),
+  (&quot;4232746812563789&quot;,&quot;470&quot;,&quot;May 31, 2022&quot;,&quot;Feb 15, 2023&quot;,&quot;Crédito&quot;,&quot;3&quot;,346),
+  (&quot;471672 3527435731&quot;,&quot;488&quot;,&quot;Jul 13, 2022&quot;,&quot;Aug 29, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,41),
+  (&quot;448569 4295219392&quot;,&quot;494&quot;,&quot;Nov 12, 2021&quot;,&quot;Jul 7, 2025&quot;,&quot;Débito&quot;,&quot;3&quot;,207);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;491683 4482521312&quot;,&quot;728&quot;,&quot;Mar 8, 2020&quot;,&quot;Feb 14, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,425),
+  (&quot;453982 6111566582&quot;,&quot;186&quot;,&quot;Jul 17, 2022&quot;,&quot;Mar 28, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,194),
+  (&quot;453245 5152238617&quot;,&quot;747&quot;,&quot;Jan 9, 2020&quot;,&quot;Dec 9, 2025&quot;,&quot;Débito&quot;,&quot;2&quot;,212),
+  (&quot;4578945883549&quot;,&quot;594&quot;,&quot;Sep 15, 2020&quot;,&quot;Nov 30, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,181),
+  (&quot;4532 438 78 2486&quot;,&quot;442&quot;,&quot;Feb 27, 2020&quot;,&quot;Feb 25, 2024&quot;,&quot;Crédito&quot;,&quot;2&quot;,235),
+  (&quot;491613 4451333249&quot;,&quot;668&quot;,&quot;Jan 23, 2020&quot;,&quot;Feb 27, 2025&quot;,&quot;Crédito&quot;,&quot;1&quot;,463),
+  (&quot;4532554152312495&quot;,&quot;627&quot;,&quot;Dec 15, 2020&quot;,&quot;Feb 3, 2025&quot;,&quot;Débito&quot;,&quot;3&quot;,213),
+  (&quot;492 97384 78475 422&quot;,&quot;501&quot;,&quot;Dec 6, 2020&quot;,&quot;Oct 31, 2023&quot;,&quot;Crédito&quot;,&quot;2&quot;,337),
+  (&quot;4532834378442&quot;,&quot;674&quot;,&quot;Apr 29, 2021&quot;,&quot;Jun 6, 2025&quot;,&quot;Crédito&quot;,&quot;2&quot;,453),
+  (&quot;4539736666790&quot;,&quot;200&quot;,&quot;Dec 14, 2021&quot;,&quot;Oct 7, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,322);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;455647 2148688434&quot;,&quot;493&quot;,&quot;May 8, 2022&quot;,&quot;Feb 6, 2023&quot;,&quot;Crédito&quot;,&quot;2&quot;,230),
+  (&quot;453 23333 88593 495&quot;,&quot;182&quot;,&quot;Nov 24, 2021&quot;,&quot;Aug 5, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,259),
+  (&quot;402400 7155238691&quot;,&quot;432&quot;,&quot;Apr 1, 2020&quot;,&quot;Jul 26, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,391),
+  (&quot;4532253294351&quot;,&quot;419&quot;,&quot;Mar 21, 2020&quot;,&quot;Dec 21, 2024&quot;,&quot;Débito&quot;,&quot;2&quot;,446),
+  (&quot;4556434386372&quot;,&quot;613&quot;,&quot;Sep 20, 2020&quot;,&quot;Sep 20, 2023&quot;,&quot;Crédito&quot;,&quot;3&quot;,125),
+  (&quot;4916 494 56 7438&quot;,&quot;253&quot;,&quot;Aug 20, 2021&quot;,&quot;Aug 19, 2024&quot;,&quot;Crédito&quot;,&quot;2&quot;,154),
+  (&quot;471675 2474425353&quot;,&quot;306&quot;,&quot;Feb 23, 2022&quot;,&quot;Nov 3, 2023&quot;,&quot;Crédito&quot;,&quot;3&quot;,11),
+  (&quot;492953 297856 5943&quot;,&quot;298&quot;,&quot;Apr 17, 2020&quot;,&quot;May 1, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,428),
+  (&quot;4532624433282&quot;,&quot;688&quot;,&quot;Jun 7, 2022&quot;,&quot;Mar 12, 2025&quot;,&quot;Débito&quot;,&quot;2&quot;,155),
+  (&quot;453267 1578156239&quot;,&quot;409&quot;,&quot;Mar 4, 2021&quot;,&quot;Jun 25, 2023&quot;,&quot;Crédito&quot;,&quot;3&quot;,198);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;455 68342 79179 477&quot;,&quot;454&quot;,&quot;Jan 29, 2020&quot;,&quot;Nov 24, 2025&quot;,&quot;Crédito&quot;,&quot;1&quot;,81),
+  (&quot;4929518595643544&quot;,&quot;252&quot;,&quot;Mar 17, 2021&quot;,&quot;Sep 26, 2024&quot;,&quot;Débito&quot;,&quot;3&quot;,373),
+  (&quot;448571 6531397854&quot;,&quot;266&quot;,&quot;Apr 16, 2020&quot;,&quot;Aug 23, 2024&quot;,&quot;Crédito&quot;,&quot;1&quot;,476),
+  (&quot;448 53823 62651 552&quot;,&quot;731&quot;,&quot;Nov 18, 2020&quot;,&quot;Dec 27, 2024&quot;,&quot;Crédito&quot;,&quot;3&quot;,313),
+  (&quot;4929133885277&quot;,&quot;387&quot;,&quot;Jan 22, 2022&quot;,&quot;Nov 28, 2022&quot;,&quot;Débito&quot;,&quot;1&quot;,139),
+  (&quot;4556 8534 2262 1672&quot;,&quot;683&quot;,&quot;Feb 2, 2020&quot;,&quot;Jan 24, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,373),
+  (&quot;4916483354822&quot;,&quot;237&quot;,&quot;Nov 6, 2020&quot;,&quot;Dec 20, 2022&quot;,&quot;Débito&quot;,&quot;1&quot;,229),
+  (&quot;4929473565852859&quot;,&quot;989&quot;,&quot;Jan 8, 2022&quot;,&quot;Jun 19, 2024&quot;,&quot;Débito&quot;,&quot;2&quot;,76),
+  (&quot;448594 777135 7536&quot;,&quot;362&quot;,&quot;Jan 12, 2021&quot;,&quot;Sep 25, 2024&quot;,&quot;Débito&quot;,&quot;2&quot;,240),
+  (&quot;429 85247 67287 550&quot;,&quot;487&quot;,&quot;Sep 14, 2020&quot;,&quot;Sep 20, 2023&quot;,&quot;Crédito&quot;,&quot;2&quot;,104);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;402400 7133146412&quot;,&quot;882&quot;,&quot;Jul 8, 2021&quot;,&quot;Feb 22, 2024&quot;,&quot;Débito&quot;,&quot;3&quot;,415),
+  (&quot;453 28346 54664 456&quot;,&quot;119&quot;,&quot;Dec 3, 2020&quot;,&quot;Dec 19, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,278),
+  (&quot;4532 5365 9395 4381&quot;,&quot;439&quot;,&quot;Apr 7, 2022&quot;,&quot;Oct 14, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,165),
+  (&quot;453 21425 83656 563&quot;,&quot;366&quot;,&quot;Jun 6, 2021&quot;,&quot;Jan 13, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,398),
+  (&quot;4532 5643 2923 2765&quot;,&quot;526&quot;,&quot;Sep 21, 2021&quot;,&quot;Oct 21, 2024&quot;,&quot;Crédito&quot;,&quot;2&quot;,287),
+  (&quot;463893 849281 2855&quot;,&quot;869&quot;,&quot;Nov 3, 2021&quot;,&quot;Jan 28, 2024&quot;,&quot;Crédito&quot;,&quot;1&quot;,274),
+  (&quot;491628 782188 2376&quot;,&quot;356&quot;,&quot;Feb 4, 2021&quot;,&quot;Aug 3, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,295),
+  (&quot;4916363768282951&quot;,&quot;789&quot;,&quot;Apr 30, 2022&quot;,&quot;Mar 5, 2024&quot;,&quot;Débito&quot;,&quot;1&quot;,193),
+  (&quot;4024 007 15 2952&quot;,&quot;790&quot;,&quot;Oct 10, 2020&quot;,&quot;Jun 27, 2025&quot;,&quot;Débito&quot;,&quot;1&quot;,412),
+  (&quot;4929677426946961&quot;,&quot;942&quot;,&quot;Nov 23, 2020&quot;,&quot;Apr 13, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,220);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4024007135783&quot;,&quot;954&quot;,&quot;Feb 20, 2022&quot;,&quot;Jan 22, 2023&quot;,&quot;Crédito&quot;,&quot;3&quot;,186),
+  (&quot;453 92532 96824 944&quot;,&quot;429&quot;,&quot;Jul 10, 2022&quot;,&quot;Jul 18, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,395),
+  (&quot;4532442743866627&quot;,&quot;149&quot;,&quot;Mar 14, 2020&quot;,&quot;Jun 21, 2024&quot;,&quot;Débito&quot;,&quot;3&quot;,40),
+  (&quot;453 24252 66355 367&quot;,&quot;909&quot;,&quot;Feb 15, 2021&quot;,&quot;Nov 29, 2025&quot;,&quot;Crédito&quot;,&quot;3&quot;,488),
+  (&quot;492955 8566356734&quot;,&quot;219&quot;,&quot;Nov 13, 2021&quot;,&quot;Oct 30, 2022&quot;,&quot;Débito&quot;,&quot;1&quot;,411),
+  (&quot;492438 874932 5181&quot;,&quot;127&quot;,&quot;Jun 25, 2022&quot;,&quot;Sep 11, 2024&quot;,&quot;Crédito&quot;,&quot;2&quot;,179),
+  (&quot;4539218828264&quot;,&quot;949&quot;,&quot;Mar 25, 2022&quot;,&quot;Sep 1, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,231),
+  (&quot;4024 0071 9277 5234&quot;,&quot;874&quot;,&quot;Feb 8, 2022&quot;,&quot;Aug 22, 2022&quot;,&quot;Crédito&quot;,&quot;3&quot;,303),
+  (&quot;4556 938 37 8164&quot;,&quot;676&quot;,&quot;Feb 27, 2021&quot;,&quot;May 21, 2024&quot;,&quot;Crédito&quot;,&quot;3&quot;,7),
+  (&quot;4539 6425 5879 7568&quot;,&quot;823&quot;,&quot;Jan 13, 2020&quot;,&quot;Apr 23, 2024&quot;,&quot;Crédito&quot;,&quot;3&quot;,132);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4916 8581 3523 2514&quot;,&quot;617&quot;,&quot;Apr 24, 2022&quot;,&quot;Oct 26, 2023&quot;,&quot;Crédito&quot;,&quot;3&quot;,25),
+  (&quot;4916 343 79 4282&quot;,&quot;139&quot;,&quot;Jun 4, 2020&quot;,&quot;Jan 20, 2025&quot;,&quot;Débito&quot;,&quot;3&quot;,270),
+  (&quot;4716293464563465&quot;,&quot;690&quot;,&quot;Feb 15, 2021&quot;,&quot;Feb 11, 2024&quot;,&quot;Débito&quot;,&quot;3&quot;,210),
+  (&quot;455687 1456547530&quot;,&quot;758&quot;,&quot;Oct 12, 2021&quot;,&quot;Feb 28, 2024&quot;,&quot;Crédito&quot;,&quot;3&quot;,430),
+  (&quot;4916785231389&quot;,&quot;492&quot;,&quot;Apr 19, 2020&quot;,&quot;Aug 21, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,48),
+  (&quot;491641 6346882930&quot;,&quot;150&quot;,&quot;Apr 7, 2020&quot;,&quot;Sep 17, 2023&quot;,&quot;Crédito&quot;,&quot;2&quot;,133),
+  (&quot;4716 6732 3552 5358&quot;,&quot;648&quot;,&quot;Jun 11, 2022&quot;,&quot;Sep 19, 2024&quot;,&quot;Débito&quot;,&quot;1&quot;,478),
+  (&quot;4532876828428334&quot;,&quot;568&quot;,&quot;Jul 31, 2021&quot;,&quot;Nov 11, 2022&quot;,&quot;Débito&quot;,&quot;1&quot;,275),
+  (&quot;4539835697340&quot;,&quot;216&quot;,&quot;Apr 30, 2020&quot;,&quot;Nov 11, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,186),
+  (&quot;4929199164286&quot;,&quot;184&quot;,&quot;Oct 18, 2021&quot;,&quot;May 23, 2024&quot;,&quot;Crédito&quot;,&quot;3&quot;,140);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;491688 9127877628&quot;,&quot;523&quot;,&quot;Dec 23, 2020&quot;,&quot;Jul 5, 2025&quot;,&quot;Crédito&quot;,&quot;2&quot;,404),
+  (&quot;4716 6378 5235 3527&quot;,&quot;980&quot;,&quot;Jun 16, 2021&quot;,&quot;Jun 18, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,467),
+  (&quot;4716595858438736&quot;,&quot;698&quot;,&quot;Mar 20, 2022&quot;,&quot;Mar 9, 2025&quot;,&quot;Débito&quot;,&quot;3&quot;,126),
+  (&quot;4539 3173 3812 8463&quot;,&quot;132&quot;,&quot;Oct 11, 2020&quot;,&quot;Jun 6, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,38),
+  (&quot;4539143345644262&quot;,&quot;279&quot;,&quot;Mar 25, 2021&quot;,&quot;Mar 8, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,481),
+  (&quot;4716 3551 8268 3626&quot;,&quot;392&quot;,&quot;Sep 18, 2020&quot;,&quot;Aug 31, 2022&quot;,&quot;Crédito&quot;,&quot;1&quot;,363),
+  (&quot;443818 1625369277&quot;,&quot;891&quot;,&quot;Dec 13, 2021&quot;,&quot;Nov 24, 2024&quot;,&quot;Crédito&quot;,&quot;2&quot;,101),
+  (&quot;4716395863894274&quot;,&quot;853&quot;,&quot;Nov 16, 2021&quot;,&quot;Jul 14, 2025&quot;,&quot;Débito&quot;,&quot;3&quot;,439),
+  (&quot;492947 7652423292&quot;,&quot;904&quot;,&quot;Aug 10, 2020&quot;,&quot;Aug 29, 2024&quot;,&quot;Crédito&quot;,&quot;2&quot;,484),
+  (&quot;402 40071 24175 578&quot;,&quot;275&quot;,&quot;Jun 3, 2021&quot;,&quot;May 1, 2025&quot;,&quot;Débito&quot;,&quot;2&quot;,351);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;453985 473438 4266&quot;,&quot;125&quot;,&quot;Jul 9, 2022&quot;,&quot;Mar 5, 2025&quot;,&quot;Débito&quot;,&quot;2&quot;,129),
+  (&quot;4539 4341 3465 7338&quot;,&quot;712&quot;,&quot;Mar 28, 2020&quot;,&quot;Aug 19, 2024&quot;,&quot;Crédito&quot;,&quot;2&quot;,496),
+  (&quot;491679 379984 9636&quot;,&quot;773&quot;,&quot;Apr 22, 2020&quot;,&quot;Mar 9, 2024&quot;,&quot;Crédito&quot;,&quot;1&quot;,485),
+  (&quot;453225 6186438771&quot;,&quot;202&quot;,&quot;Oct 25, 2020&quot;,&quot;Sep 17, 2022&quot;,&quot;Crédito&quot;,&quot;1&quot;,24),
+  (&quot;471 63263 83638 826&quot;,&quot;642&quot;,&quot;Feb 23, 2020&quot;,&quot;Aug 30, 2022&quot;,&quot;Crédito&quot;,&quot;2&quot;,107),
+  (&quot;4556 1345 3867 7829&quot;,&quot;283&quot;,&quot;Apr 24, 2021&quot;,&quot;Feb 24, 2024&quot;,&quot;Débito&quot;,&quot;1&quot;,103),
+  (&quot;492936 8922894216&quot;,&quot;785&quot;,&quot;Jun 12, 2021&quot;,&quot;Jan 24, 2025&quot;,&quot;Crédito&quot;,&quot;2&quot;,477),
+  (&quot;491 67284 87122 813&quot;,&quot;318&quot;,&quot;Mar 13, 2021&quot;,&quot;Dec 18, 2024&quot;,&quot;Crédito&quot;,&quot;2&quot;,13),
+  (&quot;4572 8692 3541 6472&quot;,&quot;990&quot;,&quot;Jul 22, 2020&quot;,&quot;Sep 27, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,184),
+  (&quot;4485516364737840&quot;,&quot;523&quot;,&quot;Jul 8, 2021&quot;,&quot;Jan 28, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,422);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;453244 8831224926&quot;,&quot;121&quot;,&quot;Jan 17, 2022&quot;,&quot;Aug 21, 2022&quot;,&quot;Crédito&quot;,&quot;3&quot;,29),
+  (&quot;4513324584251&quot;,&quot;533&quot;,&quot;Jun 17, 2022&quot;,&quot;Dec 1, 2025&quot;,&quot;Débito&quot;,&quot;3&quot;,128),
+  (&quot;455683 416767 9570&quot;,&quot;563&quot;,&quot;Jan 29, 2021&quot;,&quot;Jun 19, 2025&quot;,&quot;Débito&quot;,&quot;3&quot;,106),
+  (&quot;491627 3436686469&quot;,&quot;686&quot;,&quot;Mar 22, 2022&quot;,&quot;Oct 18, 2025&quot;,&quot;Crédito&quot;,&quot;2&quot;,160),
+  (&quot;4024 007 18 3833&quot;,&quot;605&quot;,&quot;May 17, 2020&quot;,&quot;Jul 28, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,320),
+  (&quot;4953 548 49 4566&quot;,&quot;549&quot;,&quot;Feb 2, 2021&quot;,&quot;Nov 26, 2024&quot;,&quot;Débito&quot;,&quot;1&quot;,159),
+  (&quot;4539 3292 2797 3875&quot;,&quot;962&quot;,&quot;Aug 6, 2021&quot;,&quot;Dec 26, 2024&quot;,&quot;Crédito&quot;,&quot;1&quot;,375),
+  (&quot;455 65572 56252 559&quot;,&quot;427&quot;,&quot;Aug 15, 2020&quot;,&quot;Sep 9, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,50),
+  (&quot;4717 464 48 8641&quot;,&quot;414&quot;,&quot;May 23, 2022&quot;,&quot;Aug 28, 2022&quot;,&quot;Crédito&quot;,&quot;2&quot;,148),
+  (&quot;471 64299 63332 651&quot;,&quot;210&quot;,&quot;Feb 28, 2022&quot;,&quot;Mar 16, 2025&quot;,&quot;Débito&quot;,&quot;1&quot;,302);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4024007133624467&quot;,&quot;996&quot;,&quot;Feb 25, 2020&quot;,&quot;Aug 9, 2022&quot;,&quot;Débito&quot;,&quot;3&quot;,490),
+  (&quot;471 62435 61882 342&quot;,&quot;885&quot;,&quot;Sep 27, 2021&quot;,&quot;Sep 28, 2022&quot;,&quot;Crédito&quot;,&quot;1&quot;,142),
+  (&quot;448549 8878875681&quot;,&quot;156&quot;,&quot;Jun 9, 2020&quot;,&quot;Sep 20, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,329),
+  (&quot;453 29217 63826 850&quot;,&quot;337&quot;,&quot;Jun 2, 2020&quot;,&quot;Sep 11, 2025&quot;,&quot;Crédito&quot;,&quot;3&quot;,252),
+  (&quot;491 66464 22571 821&quot;,&quot;521&quot;,&quot;Mar 20, 2021&quot;,&quot;Apr 10, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,449),
+  (&quot;448 57557 37437 536&quot;,&quot;400&quot;,&quot;Jul 12, 2020&quot;,&quot;Sep 10, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,138),
+  (&quot;4539257835824&quot;,&quot;744&quot;,&quot;Jan 19, 2022&quot;,&quot;Dec 31, 2022&quot;,&quot;Crédito&quot;,&quot;1&quot;,381),
+  (&quot;4916 2754 9915 6991&quot;,&quot;380&quot;,&quot;Oct 20, 2021&quot;,&quot;Feb 27, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,202),
+  (&quot;491 68954 23618 574&quot;,&quot;323&quot;,&quot;Apr 5, 2020&quot;,&quot;Oct 31, 2022&quot;,&quot;Crédito&quot;,&quot;3&quot;,16),
+  (&quot;4024 0071 4135 8850&quot;,&quot;225&quot;,&quot;Feb 9, 2020&quot;,&quot;Oct 22, 2025&quot;,&quot;Débito&quot;,&quot;3&quot;,399);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4532735661664&quot;,&quot;518&quot;,&quot;Feb 18, 2022&quot;,&quot;Aug 1, 2023&quot;,&quot;Crédito&quot;,&quot;2&quot;,469),
+  (&quot;4485458678453287&quot;,&quot;885&quot;,&quot;Nov 6, 2020&quot;,&quot;Nov 28, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,56),
+  (&quot;402 40071 23548 791&quot;,&quot;809&quot;,&quot;Dec 30, 2021&quot;,&quot;Oct 31, 2025&quot;,&quot;Crédito&quot;,&quot;1&quot;,290),
+  (&quot;492 92235 92729 442&quot;,&quot;905&quot;,&quot;Jul 7, 2022&quot;,&quot;Jun 19, 2025&quot;,&quot;Débito&quot;,&quot;2&quot;,276),
+  (&quot;4532232168569669&quot;,&quot;239&quot;,&quot;Nov 16, 2021&quot;,&quot;Oct 27, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,169),
+  (&quot;4532 4368 9435 5380&quot;,&quot;950&quot;,&quot;Mar 2, 2022&quot;,&quot;Oct 9, 2024&quot;,&quot;Crédito&quot;,&quot;1&quot;,215),
+  (&quot;491 63933 12474 580&quot;,&quot;124&quot;,&quot;Nov 13, 2021&quot;,&quot;Jul 12, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,403),
+  (&quot;4696871658782829&quot;,&quot;594&quot;,&quot;Jun 17, 2022&quot;,&quot;Mar 19, 2024&quot;,&quot;Crédito&quot;,&quot;2&quot;,182),
+  (&quot;4929 7936 7347 6154&quot;,&quot;785&quot;,&quot;Feb 28, 2022&quot;,&quot;Mar 21, 2023&quot;,&quot;Crédito&quot;,&quot;3&quot;,262),
+  (&quot;471633 266848 8960&quot;,&quot;256&quot;,&quot;Jun 4, 2021&quot;,&quot;Dec 30, 2022&quot;,&quot;Crédito&quot;,&quot;3&quot;,329);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;453953 821336 5876&quot;,&quot;168&quot;,&quot;Feb 26, 2020&quot;,&quot;Jun 19, 2025&quot;,&quot;Débito&quot;,&quot;1&quot;,153),
+  (&quot;4328 8146 2233 6583&quot;,&quot;682&quot;,&quot;Sep 14, 2021&quot;,&quot;Dec 2, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,139),
+  (&quot;4485244766237&quot;,&quot;783&quot;,&quot;Mar 31, 2022&quot;,&quot;Aug 17, 2022&quot;,&quot;Débito&quot;,&quot;2&quot;,499),
+  (&quot;4024007126253&quot;,&quot;210&quot;,&quot;Aug 12, 2021&quot;,&quot;Jan 25, 2025&quot;,&quot;Débito&quot;,&quot;3&quot;,378),
+  (&quot;453947 365747 5553&quot;,&quot;231&quot;,&quot;Feb 20, 2020&quot;,&quot;Dec 1, 2025&quot;,&quot;Débito&quot;,&quot;3&quot;,282),
+  (&quot;4485747813363322&quot;,&quot;857&quot;,&quot;Oct 1, 2020&quot;,&quot;Feb 16, 2025&quot;,&quot;Débito&quot;,&quot;1&quot;,322),
+  (&quot;4716 327 86 3578&quot;,&quot;457&quot;,&quot;May 2, 2021&quot;,&quot;Sep 16, 2024&quot;,&quot;Crédito&quot;,&quot;1&quot;,231),
+  (&quot;4916 2171 7575 6587&quot;,&quot;448&quot;,&quot;Jun 18, 2022&quot;,&quot;Aug 5, 2024&quot;,&quot;Débito&quot;,&quot;2&quot;,380),
+  (&quot;4024 007 17 1275&quot;,&quot;228&quot;,&quot;May 19, 2022&quot;,&quot;Nov 14, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,176),
+  (&quot;453284 8543878689&quot;,&quot;950&quot;,&quot;Oct 25, 2020&quot;,&quot;Sep 7, 2022&quot;,&quot;Débito&quot;,&quot;1&quot;,31);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4929 5557 2821 3159&quot;,&quot;248&quot;,&quot;Dec 14, 2020&quot;,&quot;Apr 11, 2025&quot;,&quot;Débito&quot;,&quot;1&quot;,116),
+  (&quot;4916 4754 1492 6177&quot;,&quot;701&quot;,&quot;Jan 27, 2020&quot;,&quot;Jan 21, 2025&quot;,&quot;Débito&quot;,&quot;1&quot;,161),
+  (&quot;4024 0071 3895 9439&quot;,&quot;220&quot;,&quot;Sep 16, 2020&quot;,&quot;Aug 27, 2024&quot;,&quot;Débito&quot;,&quot;3&quot;,122),
+  (&quot;4833 257 99 7951&quot;,&quot;344&quot;,&quot;Mar 23, 2022&quot;,&quot;Oct 21, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,206),
+  (&quot;455 67278 67455 632&quot;,&quot;593&quot;,&quot;Sep 5, 2020&quot;,&quot;Jun 11, 2025&quot;,&quot;Crédito&quot;,&quot;2&quot;,452),
+  (&quot;453242 7836472433&quot;,&quot;366&quot;,&quot;Jun 21, 2022&quot;,&quot;May 14, 2025&quot;,&quot;Crédito&quot;,&quot;1&quot;,121),
+  (&quot;4556 7711 4874 2442&quot;,&quot;383&quot;,&quot;Jul 17, 2021&quot;,&quot;Jan 2, 2025&quot;,&quot;Débito&quot;,&quot;3&quot;,408),
+  (&quot;4485565876771&quot;,&quot;755&quot;,&quot;Dec 13, 2020&quot;,&quot;Feb 18, 2024&quot;,&quot;Crédito&quot;,&quot;3&quot;,447),
+  (&quot;4539138678872&quot;,&quot;750&quot;,&quot;Jul 2, 2020&quot;,&quot;Apr 2, 2023&quot;,&quot;Crédito&quot;,&quot;2&quot;,495),
+  (&quot;4556 9945 5324 7778&quot;,&quot;482&quot;,&quot;Feb 16, 2022&quot;,&quot;Feb 26, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,14);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;434594 534443 4824&quot;,&quot;677&quot;,&quot;Aug 2, 2021&quot;,&quot;Oct 28, 2025&quot;,&quot;Débito&quot;,&quot;1&quot;,396),
+  (&quot;453896 3475757753&quot;,&quot;488&quot;,&quot;Jan 25, 2022&quot;,&quot;Jul 17, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,385),
+  (&quot;4716 7247 8516 4526&quot;,&quot;363&quot;,&quot;Aug 23, 2021&quot;,&quot;Sep 6, 2022&quot;,&quot;Débito&quot;,&quot;1&quot;,479),
+  (&quot;4916 9812 2687 6781&quot;,&quot;128&quot;,&quot;Aug 27, 2021&quot;,&quot;Feb 3, 2024&quot;,&quot;Crédito&quot;,&quot;2&quot;,158),
+  (&quot;4916939786361&quot;,&quot;309&quot;,&quot;Mar 25, 2021&quot;,&quot;Oct 28, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,382),
+  (&quot;453 25494 96876 361&quot;,&quot;829&quot;,&quot;Mar 19, 2022&quot;,&quot;Oct 29, 2025&quot;,&quot;Crédito&quot;,&quot;2&quot;,499),
+  (&quot;4485 9652 5875 7887&quot;,&quot;727&quot;,&quot;Dec 12, 2021&quot;,&quot;Jun 14, 2024&quot;,&quot;Crédito&quot;,&quot;1&quot;,367),
+  (&quot;453 24468 35794 423&quot;,&quot;216&quot;,&quot;Aug 24, 2021&quot;,&quot;Dec 22, 2024&quot;,&quot;Crédito&quot;,&quot;3&quot;,150),
+  (&quot;4024 0071 5557 3873&quot;,&quot;600&quot;,&quot;Nov 24, 2021&quot;,&quot;Oct 9, 2025&quot;,&quot;Crédito&quot;,&quot;2&quot;,495),
+  (&quot;4485 6572 5538 7137&quot;,&quot;156&quot;,&quot;Dec 3, 2021&quot;,&quot;Jan 8, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,385);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;491667 3317645395&quot;,&quot;914&quot;,&quot;May 9, 2022&quot;,&quot;Sep 25, 2023&quot;,&quot;Crédito&quot;,&quot;2&quot;,238),
+  (&quot;4024 007 15 2630&quot;,&quot;890&quot;,&quot;Jul 13, 2020&quot;,&quot;Feb 14, 2025&quot;,&quot;Crédito&quot;,&quot;3&quot;,389),
+  (&quot;4485 167 34 2826&quot;,&quot;697&quot;,&quot;Mar 16, 2021&quot;,&quot;Jun 17, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,480),
+  (&quot;428553 642263 8477&quot;,&quot;902&quot;,&quot;Dec 31, 2020&quot;,&quot;Dec 9, 2025&quot;,&quot;Crédito&quot;,&quot;1&quot;,491),
+  (&quot;453914 599312 5270&quot;,&quot;504&quot;,&quot;Jan 10, 2021&quot;,&quot;Oct 6, 2022&quot;,&quot;Débito&quot;,&quot;3&quot;,249),
+  (&quot;491656 388844 1672&quot;,&quot;776&quot;,&quot;Aug 19, 2021&quot;,&quot;Dec 17, 2025&quot;,&quot;Crédito&quot;,&quot;3&quot;,137),
+  (&quot;4532471536883481&quot;,&quot;887&quot;,&quot;Jun 26, 2020&quot;,&quot;Oct 20, 2024&quot;,&quot;Crédito&quot;,&quot;2&quot;,186),
+  (&quot;4916169296214&quot;,&quot;789&quot;,&quot;Oct 8, 2021&quot;,&quot;Jul 1, 2025&quot;,&quot;Débito&quot;,&quot;3&quot;,339),
+  (&quot;4929 6929 4979 4475&quot;,&quot;830&quot;,&quot;Dec 21, 2020&quot;,&quot;Sep 10, 2024&quot;,&quot;Débito&quot;,&quot;2&quot;,86),
+  (&quot;4916 364 42 3696&quot;,&quot;379&quot;,&quot;Feb 10, 2022&quot;,&quot;Dec 4, 2022&quot;,&quot;Débito&quot;,&quot;3&quot;,198);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4916 2334 3982 8773&quot;,&quot;551&quot;,&quot;Apr 30, 2020&quot;,&quot;Nov 8, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,432),
+  (&quot;4929413574922533&quot;,&quot;368&quot;,&quot;Jun 4, 2022&quot;,&quot;May 1, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,282),
+  (&quot;402400 7172372515&quot;,&quot;411&quot;,&quot;Dec 19, 2021&quot;,&quot;May 17, 2024&quot;,&quot;Crédito&quot;,&quot;3&quot;,451),
+  (&quot;453262 5738139550&quot;,&quot;766&quot;,&quot;Jan 29, 2020&quot;,&quot;Aug 1, 2024&quot;,&quot;Débito&quot;,&quot;1&quot;,100),
+  (&quot;4532 419 45 1143&quot;,&quot;245&quot;,&quot;Oct 26, 2020&quot;,&quot;Apr 10, 2023&quot;,&quot;Crédito&quot;,&quot;3&quot;,281),
+  (&quot;455659 723769 1665&quot;,&quot;988&quot;,&quot;Mar 29, 2020&quot;,&quot;Dec 31, 2023&quot;,&quot;Crédito&quot;,&quot;3&quot;,442),
+  (&quot;4314323582986&quot;,&quot;609&quot;,&quot;Sep 14, 2020&quot;,&quot;Jan 13, 2025&quot;,&quot;Débito&quot;,&quot;3&quot;,89),
+  (&quot;4024 0071 3335 3786&quot;,&quot;290&quot;,&quot;Jan 19, 2021&quot;,&quot;May 16, 2025&quot;,&quot;Crédito&quot;,&quot;3&quot;,67),
+  (&quot;453 25461 48864 860&quot;,&quot;875&quot;,&quot;Jan 7, 2021&quot;,&quot;Feb 8, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,223),
+  (&quot;4556 483 85 8354&quot;,&quot;346&quot;,&quot;May 7, 2022&quot;,&quot;May 31, 2025&quot;,&quot;Crédito&quot;,&quot;3&quot;,147);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;471672 7323224835&quot;,&quot;956&quot;,&quot;Dec 12, 2021&quot;,&quot;Sep 7, 2025&quot;,&quot;Crédito&quot;,&quot;2&quot;,119),
+  (&quot;4929544564686413&quot;,&quot;113&quot;,&quot;Nov 7, 2021&quot;,&quot;Nov 5, 2025&quot;,&quot;Crédito&quot;,&quot;1&quot;,323),
+  (&quot;4716824639950&quot;,&quot;970&quot;,&quot;Sep 22, 2021&quot;,&quot;Jul 12, 2024&quot;,&quot;Crédito&quot;,&quot;3&quot;,35),
+  (&quot;471 68225 44365 317&quot;,&quot;314&quot;,&quot;Mar 25, 2022&quot;,&quot;Nov 3, 2024&quot;,&quot;Débito&quot;,&quot;3&quot;,261),
+  (&quot;492956 4582442243&quot;,&quot;860&quot;,&quot;Mar 5, 2021&quot;,&quot;Oct 20, 2024&quot;,&quot;Débito&quot;,&quot;2&quot;,21),
+  (&quot;453 98448 35583 312&quot;,&quot;706&quot;,&quot;Jan 8, 2020&quot;,&quot;Apr 10, 2024&quot;,&quot;Débito&quot;,&quot;2&quot;,294),
+  (&quot;463267 5372464185&quot;,&quot;908&quot;,&quot;Apr 28, 2022&quot;,&quot;Aug 24, 2022&quot;,&quot;Débito&quot;,&quot;3&quot;,277),
+  (&quot;492938 939447 9534&quot;,&quot;277&quot;,&quot;Dec 18, 2020&quot;,&quot;Nov 19, 2025&quot;,&quot;Crédito&quot;,&quot;2&quot;,79),
+  (&quot;4024 007 17 2273&quot;,&quot;824&quot;,&quot;Jun 21, 2022&quot;,&quot;Apr 13, 2025&quot;,&quot;Crédito&quot;,&quot;2&quot;,38),
+  (&quot;4716873563374797&quot;,&quot;725&quot;,&quot;Jan 20, 2022&quot;,&quot;Dec 6, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,285);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4532 6493 4671 9884&quot;,&quot;184&quot;,&quot;May 19, 2022&quot;,&quot;Jul 27, 2025&quot;,&quot;Débito&quot;,&quot;2&quot;,43),
+  (&quot;4556788252898174&quot;,&quot;547&quot;,&quot;Aug 21, 2021&quot;,&quot;Jan 24, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,95),
+  (&quot;4716 626 22 8671&quot;,&quot;524&quot;,&quot;May 27, 2022&quot;,&quot;Apr 4, 2025&quot;,&quot;Crédito&quot;,&quot;3&quot;,160),
+  (&quot;492 95899 58129 637&quot;,&quot;431&quot;,&quot;Jul 13, 2021&quot;,&quot;Dec 7, 2022&quot;,&quot;Crédito&quot;,&quot;2&quot;,395),
+  (&quot;4916426487947780&quot;,&quot;700&quot;,&quot;Sep 28, 2020&quot;,&quot;Nov 13, 2022&quot;,&quot;Débito&quot;,&quot;1&quot;,362),
+  (&quot;4716643528755459&quot;,&quot;602&quot;,&quot;Jan 1, 2022&quot;,&quot;Apr 12, 2025&quot;,&quot;Crédito&quot;,&quot;2&quot;,470),
+  (&quot;4485 6691 8773 7743&quot;,&quot;735&quot;,&quot;Jul 17, 2021&quot;,&quot;Dec 25, 2022&quot;,&quot;Crédito&quot;,&quot;3&quot;,190),
+  (&quot;4716 225 62 4775&quot;,&quot;706&quot;,&quot;Jun 9, 2020&quot;,&quot;Sep 11, 2024&quot;,&quot;Crédito&quot;,&quot;2&quot;,234),
+  (&quot;4556728724148&quot;,&quot;179&quot;,&quot;Jul 24, 2022&quot;,&quot;Jun 28, 2025&quot;,&quot;Crédito&quot;,&quot;1&quot;,396),
+  (&quot;4556 6234 3547 2755&quot;,&quot;380&quot;,&quot;Jun 27, 2022&quot;,&quot;Nov 1, 2023&quot;,&quot;Crédito&quot;,&quot;2&quot;,454);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4284831682755512&quot;,&quot;509&quot;,&quot;Sep 26, 2020&quot;,&quot;Dec 21, 2025&quot;,&quot;Débito&quot;,&quot;2&quot;,203),
+  (&quot;453 25239 22371 636&quot;,&quot;162&quot;,&quot;Dec 30, 2020&quot;,&quot;Apr 30, 2023&quot;,&quot;Crédito&quot;,&quot;2&quot;,192),
+  (&quot;4532 944 38 3464&quot;,&quot;844&quot;,&quot;Jul 24, 2022&quot;,&quot;Oct 8, 2025&quot;,&quot;Crédito&quot;,&quot;3&quot;,78),
+  (&quot;492946 223283 3335&quot;,&quot;849&quot;,&quot;Jun 7, 2022&quot;,&quot;Apr 14, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,114),
+  (&quot;491644 7383721863&quot;,&quot;937&quot;,&quot;Oct 18, 2020&quot;,&quot;Apr 4, 2025&quot;,&quot;Crédito&quot;,&quot;2&quot;,338),
+  (&quot;4716464368415&quot;,&quot;599&quot;,&quot;Oct 30, 2020&quot;,&quot;Feb 26, 2025&quot;,&quot;Débito&quot;,&quot;3&quot;,461),
+  (&quot;4485 143 54 4123&quot;,&quot;680&quot;,&quot;Dec 7, 2021&quot;,&quot;Oct 30, 2025&quot;,&quot;Crédito&quot;,&quot;1&quot;,46),
+  (&quot;448562 1677695691&quot;,&quot;802&quot;,&quot;Feb 5, 2021&quot;,&quot;Mar 9, 2023&quot;,&quot;Crédito&quot;,&quot;3&quot;,109),
+  (&quot;4929766821721572&quot;,&quot;123&quot;,&quot;Jan 20, 2020&quot;,&quot;Apr 20, 2025&quot;,&quot;Crédito&quot;,&quot;3&quot;,441),
+  (&quot;471688 697327 2575&quot;,&quot;134&quot;,&quot;Apr 13, 2020&quot;,&quot;Sep 15, 2024&quot;,&quot;Débito&quot;,&quot;1&quot;,181);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4532233989637487&quot;,&quot;769&quot;,&quot;Aug 19, 2020&quot;,&quot;Dec 19, 2024&quot;,&quot;Débito&quot;,&quot;2&quot;,335),
+  (&quot;4716 7613 6789 7578&quot;,&quot;270&quot;,&quot;Nov 6, 2021&quot;,&quot;Aug 5, 2023&quot;,&quot;Crédito&quot;,&quot;3&quot;,244),
+  (&quot;453948 278131 4356&quot;,&quot;479&quot;,&quot;May 28, 2021&quot;,&quot;Jun 28, 2023&quot;,&quot;Crédito&quot;,&quot;2&quot;,336),
+  (&quot;4916257898267322&quot;,&quot;377&quot;,&quot;Dec 21, 2021&quot;,&quot;Jan 20, 2025&quot;,&quot;Crédito&quot;,&quot;1&quot;,359),
+  (&quot;491647 8616666740&quot;,&quot;314&quot;,&quot;Feb 15, 2020&quot;,&quot;Aug 13, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,468),
+  (&quot;4485 912 42 3921&quot;,&quot;236&quot;,&quot;Feb 15, 2022&quot;,&quot;Oct 16, 2022&quot;,&quot;Crédito&quot;,&quot;1&quot;,242),
+  (&quot;471676 6588763889&quot;,&quot;712&quot;,&quot;Jun 12, 2020&quot;,&quot;Oct 19, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,406),
+  (&quot;448526 8114728246&quot;,&quot;260&quot;,&quot;Jul 16, 2020&quot;,&quot;Mar 8, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,461),
+  (&quot;4024007154285222&quot;,&quot;998&quot;,&quot;Jun 11, 2020&quot;,&quot;Nov 24, 2024&quot;,&quot;Débito&quot;,&quot;1&quot;,491),
+  (&quot;4539 9466 8256 2479&quot;,&quot;316&quot;,&quot;Jul 4, 2021&quot;,&quot;Mar 28, 2024&quot;,&quot;Débito&quot;,&quot;2&quot;,419);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;491649 6578336581&quot;,&quot;974&quot;,&quot;Feb 26, 2020&quot;,&quot;Jun 4, 2024&quot;,&quot;Débito&quot;,&quot;1&quot;,274),
+  (&quot;448572 1742251445&quot;,&quot;384&quot;,&quot;Oct 2, 2020&quot;,&quot;Jan 25, 2024&quot;,&quot;Crédito&quot;,&quot;3&quot;,495),
+  (&quot;4485 466 86 3738&quot;,&quot;931&quot;,&quot;Jun 5, 2022&quot;,&quot;Apr 25, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,32),
+  (&quot;448 59679 46568 478&quot;,&quot;340&quot;,&quot;Jul 3, 2022&quot;,&quot;Sep 2, 2022&quot;,&quot;Débito&quot;,&quot;2&quot;,302),
+  (&quot;457532 4841244659&quot;,&quot;617&quot;,&quot;Jan 6, 2021&quot;,&quot;Oct 19, 2022&quot;,&quot;Débito&quot;,&quot;2&quot;,335),
+  (&quot;453276 5463968110&quot;,&quot;385&quot;,&quot;Feb 18, 2022&quot;,&quot;Oct 5, 2024&quot;,&quot;Débito&quot;,&quot;2&quot;,150),
+  (&quot;4916488253957682&quot;,&quot;381&quot;,&quot;Jun 13, 2022&quot;,&quot;Sep 25, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,224),
+  (&quot;4539443728815285&quot;,&quot;725&quot;,&quot;Oct 7, 2021&quot;,&quot;Feb 28, 2024&quot;,&quot;Débito&quot;,&quot;3&quot;,416),
+  (&quot;4485332786667&quot;,&quot;808&quot;,&quot;Jan 23, 2021&quot;,&quot;Feb 2, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,120),
+  (&quot;4916234648887758&quot;,&quot;610&quot;,&quot;Mar 20, 2020&quot;,&quot;Dec 27, 2022&quot;,&quot;Débito&quot;,&quot;1&quot;,44);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4716548884635&quot;,&quot;296&quot;,&quot;Dec 25, 2021&quot;,&quot;Jul 14, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,57),
+  (&quot;448578 4689232851&quot;,&quot;558&quot;,&quot;Dec 25, 2021&quot;,&quot;Apr 13, 2025&quot;,&quot;Crédito&quot;,&quot;2&quot;,182),
+  (&quot;4445976488344874&quot;,&quot;372&quot;,&quot;Jan 3, 2022&quot;,&quot;Nov 24, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,9),
+  (&quot;4916 6435 5177 8830&quot;,&quot;414&quot;,&quot;Aug 21, 2020&quot;,&quot;Jul 17, 2025&quot;,&quot;Débito&quot;,&quot;2&quot;,488),
+  (&quot;4916 569 77 3184&quot;,&quot;622&quot;,&quot;Aug 11, 2021&quot;,&quot;Apr 2, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,56),
+  (&quot;453921 6775666474&quot;,&quot;628&quot;,&quot;Aug 14, 2020&quot;,&quot;Aug 10, 2024&quot;,&quot;Crédito&quot;,&quot;1&quot;,40),
+  (&quot;471668 6634394788&quot;,&quot;938&quot;,&quot;Oct 15, 2021&quot;,&quot;Aug 28, 2024&quot;,&quot;Débito&quot;,&quot;3&quot;,84),
+  (&quot;4929748564229831&quot;,&quot;620&quot;,&quot;Apr 12, 2020&quot;,&quot;May 3, 2024&quot;,&quot;Crédito&quot;,&quot;3&quot;,487),
+  (&quot;471665 862483 3679&quot;,&quot;506&quot;,&quot;Apr 30, 2022&quot;,&quot;Apr 21, 2023&quot;,&quot;Crédito&quot;,&quot;3&quot;,322),
+  (&quot;4716739723154&quot;,&quot;323&quot;,&quot;Mar 16, 2022&quot;,&quot;Jun 17, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,307);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4024 007 11 7575&quot;,&quot;217&quot;,&quot;Apr 21, 2022&quot;,&quot;Jul 2, 2025&quot;,&quot;Débito&quot;,&quot;1&quot;,122),
+  (&quot;4539 7712 7966 6842&quot;,&quot;220&quot;,&quot;Apr 19, 2022&quot;,&quot;Nov 14, 2023&quot;,&quot;Crédito&quot;,&quot;2&quot;,470),
+  (&quot;4686469558924740&quot;,&quot;790&quot;,&quot;Feb 17, 2021&quot;,&quot;Jun 10, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,127),
+  (&quot;471 69357 53238 551&quot;,&quot;191&quot;,&quot;Apr 28, 2022&quot;,&quot;Apr 5, 2025&quot;,&quot;Débito&quot;,&quot;2&quot;,249),
+  (&quot;402400 7142397352&quot;,&quot;586&quot;,&quot;Aug 19, 2021&quot;,&quot;Jun 13, 2025&quot;,&quot;Crédito&quot;,&quot;3&quot;,249),
+  (&quot;4929762768475397&quot;,&quot;737&quot;,&quot;Aug 14, 2020&quot;,&quot;Apr 11, 2024&quot;,&quot;Débito&quot;,&quot;2&quot;,285),
+  (&quot;4556738831750&quot;,&quot;468&quot;,&quot;Sep 22, 2021&quot;,&quot;Oct 3, 2024&quot;,&quot;Débito&quot;,&quot;2&quot;,425),
+  (&quot;426637 558276 5512&quot;,&quot;875&quot;,&quot;Apr 12, 2022&quot;,&quot;Aug 7, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,119),
+  (&quot;4556346827828&quot;,&quot;346&quot;,&quot;Jun 1, 2022&quot;,&quot;Aug 6, 2022&quot;,&quot;Crédito&quot;,&quot;3&quot;,15),
+  (&quot;426512 984428 4866&quot;,&quot;258&quot;,&quot;Mar 4, 2020&quot;,&quot;May 8, 2025&quot;,&quot;Débito&quot;,&quot;3&quot;,349);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4532313585194&quot;,&quot;498&quot;,&quot;Mar 16, 2020&quot;,&quot;May 11, 2025&quot;,&quot;Crédito&quot;,&quot;3&quot;,386),
+  (&quot;4556559456568925&quot;,&quot;249&quot;,&quot;Nov 7, 2020&quot;,&quot;Aug 17, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,15),
+  (&quot;4539772811789&quot;,&quot;119&quot;,&quot;Jun 6, 2021&quot;,&quot;Jul 11, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,421),
+  (&quot;4539 9362 6527 8668&quot;,&quot;805&quot;,&quot;Oct 6, 2021&quot;,&quot;Jul 29, 2024&quot;,&quot;Crédito&quot;,&quot;3&quot;,364),
+  (&quot;491 65733 55385 922&quot;,&quot;937&quot;,&quot;May 14, 2021&quot;,&quot;Feb 14, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,99),
+  (&quot;4623 8238 8232 2524&quot;,&quot;584&quot;,&quot;Apr 22, 2020&quot;,&quot;Jan 31, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,422),
+  (&quot;4929 125 75 2873&quot;,&quot;212&quot;,&quot;Aug 14, 2021&quot;,&quot;Apr 26, 2024&quot;,&quot;Débito&quot;,&quot;1&quot;,226),
+  (&quot;402400 715624 4615&quot;,&quot;818&quot;,&quot;Jul 3, 2021&quot;,&quot;Jul 17, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,444),
+  (&quot;4532 523 63 8924&quot;,&quot;318&quot;,&quot;Mar 14, 2022&quot;,&quot;Mar 23, 2023&quot;,&quot;Crédito&quot;,&quot;2&quot;,133),
+  (&quot;402400 7165123719&quot;,&quot;458&quot;,&quot;Dec 21, 2021&quot;,&quot;Feb 28, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,487);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;472438 774632 7796&quot;,&quot;637&quot;,&quot;May 16, 2020&quot;,&quot;May 20, 2023&quot;,&quot;Crédito&quot;,&quot;2&quot;,122),
+  (&quot;4916626682142786&quot;,&quot;964&quot;,&quot;Jun 20, 2022&quot;,&quot;Apr 23, 2025&quot;,&quot;Débito&quot;,&quot;2&quot;,159),
+  (&quot;453 29696 87827 363&quot;,&quot;288&quot;,&quot;Aug 22, 2021&quot;,&quot;Dec 26, 2022&quot;,&quot;Crédito&quot;,&quot;1&quot;,123),
+  (&quot;471629 2821862479&quot;,&quot;860&quot;,&quot;Mar 26, 2020&quot;,&quot;Mar 9, 2025&quot;,&quot;Débito&quot;,&quot;2&quot;,8),
+  (&quot;4716627323588&quot;,&quot;492&quot;,&quot;Aug 30, 2021&quot;,&quot;Sep 7, 2023&quot;,&quot;Crédito&quot;,&quot;3&quot;,229),
+  (&quot;4916 1251 5953 4823&quot;,&quot;778&quot;,&quot;May 8, 2022&quot;,&quot;Jan 17, 2024&quot;,&quot;Débito&quot;,&quot;3&quot;,447),
+  (&quot;492 98726 78466 723&quot;,&quot;825&quot;,&quot;Jul 12, 2020&quot;,&quot;Dec 20, 2022&quot;,&quot;Débito&quot;,&quot;3&quot;,47),
+  (&quot;4532397252760&quot;,&quot;453&quot;,&quot;Nov 14, 2020&quot;,&quot;Nov 16, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,96),
+  (&quot;4783 7877 5332 2465&quot;,&quot;646&quot;,&quot;May 30, 2020&quot;,&quot;Aug 29, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,199),
+  (&quot;491625 264137 2594&quot;,&quot;900&quot;,&quot;Jul 16, 2022&quot;,&quot;Nov 16, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,285);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;455 62453 32276 558&quot;,&quot;509&quot;,&quot;Mar 18, 2020&quot;,&quot;May 13, 2024&quot;,&quot;Débito&quot;,&quot;2&quot;,65),
+  (&quot;402400 715544 3796&quot;,&quot;550&quot;,&quot;Apr 7, 2020&quot;,&quot;Sep 27, 2024&quot;,&quot;Débito&quot;,&quot;1&quot;,146),
+  (&quot;4929 241 14 4252&quot;,&quot;433&quot;,&quot;Feb 22, 2022&quot;,&quot;Nov 24, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,88),
+  (&quot;491696 4643252638&quot;,&quot;497&quot;,&quot;Aug 18, 2021&quot;,&quot;Sep 19, 2023&quot;,&quot;Crédito&quot;,&quot;3&quot;,70),
+  (&quot;4916 5252 9567 4146&quot;,&quot;870&quot;,&quot;Jul 4, 2022&quot;,&quot;Apr 12, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,446),
+  (&quot;492 95543 79244 381&quot;,&quot;155&quot;,&quot;Feb 16, 2021&quot;,&quot;Mar 31, 2024&quot;,&quot;Crédito&quot;,&quot;1&quot;,219),
+  (&quot;491678 7414578331&quot;,&quot;919&quot;,&quot;Dec 27, 2021&quot;,&quot;Sep 24, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,435),
+  (&quot;4916 4597 3782 8427&quot;,&quot;356&quot;,&quot;Jun 26, 2022&quot;,&quot;Aug 15, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,204),
+  (&quot;402400 7183331773&quot;,&quot;659&quot;,&quot;May 31, 2022&quot;,&quot;Aug 5, 2024&quot;,&quot;Débito&quot;,&quot;3&quot;,426),
+  (&quot;4916578287259&quot;,&quot;387&quot;,&quot;Mar 27, 2022&quot;,&quot;Jan 6, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,163);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4894 6633 9815 2136&quot;,&quot;193&quot;,&quot;Sep 5, 2020&quot;,&quot;Jun 25, 2025&quot;,&quot;Crédito&quot;,&quot;3&quot;,78),
+  (&quot;4716 854 31 1868&quot;,&quot;183&quot;,&quot;Mar 10, 2020&quot;,&quot;Dec 29, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,449),
+  (&quot;4539 293 49 1459&quot;,&quot;229&quot;,&quot;May 10, 2021&quot;,&quot;Nov 8, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,207),
+  (&quot;4539864298888487&quot;,&quot;765&quot;,&quot;Jul 29, 2021&quot;,&quot;Apr 19, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,57),
+  (&quot;491638 4336375721&quot;,&quot;793&quot;,&quot;Mar 23, 2021&quot;,&quot;Sep 15, 2024&quot;,&quot;Crédito&quot;,&quot;3&quot;,366),
+  (&quot;402400 7134138186&quot;,&quot;154&quot;,&quot;Apr 23, 2020&quot;,&quot;Feb 27, 2024&quot;,&quot;Crédito&quot;,&quot;3&quot;,281),
+  (&quot;455 66655 18247 588&quot;,&quot;546&quot;,&quot;May 17, 2022&quot;,&quot;Aug 6, 2022&quot;,&quot;Débito&quot;,&quot;3&quot;,474),
+  (&quot;492933 939626 5423&quot;,&quot;560&quot;,&quot;Oct 23, 2020&quot;,&quot;Dec 21, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,417),
+  (&quot;4716 531 15 4830&quot;,&quot;819&quot;,&quot;Oct 6, 2021&quot;,&quot;Jan 20, 2023&quot;,&quot;Crédito&quot;,&quot;3&quot;,111),
+  (&quot;4556 6478 7447 8270&quot;,&quot;653&quot;,&quot;Nov 30, 2020&quot;,&quot;Jun 5, 2024&quot;,&quot;Crédito&quot;,&quot;1&quot;,461);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;471 64877 64618 413&quot;,&quot;769&quot;,&quot;Jun 28, 2022&quot;,&quot;May 5, 2025&quot;,&quot;Crédito&quot;,&quot;1&quot;,358),
+  (&quot;453295 8428851139&quot;,&quot;370&quot;,&quot;May 17, 2022&quot;,&quot;Aug 26, 2022&quot;,&quot;Crédito&quot;,&quot;2&quot;,114),
+  (&quot;455 63767 95672 734&quot;,&quot;990&quot;,&quot;Jun 15, 2022&quot;,&quot;Jul 7, 2025&quot;,&quot;Crédito&quot;,&quot;3&quot;,157),
+  (&quot;4532 4415 7385 2244&quot;,&quot;909&quot;,&quot;Dec 26, 2020&quot;,&quot;Dec 21, 2022&quot;,&quot;Débito&quot;,&quot;1&quot;,493),
+  (&quot;4539 2167 8487 7476&quot;,&quot;945&quot;,&quot;Jan 22, 2022&quot;,&quot;Feb 3, 2024&quot;,&quot;Débito&quot;,&quot;3&quot;,24),
+  (&quot;4485712635179546&quot;,&quot;958&quot;,&quot;Feb 23, 2022&quot;,&quot;Jan 7, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,494),
+  (&quot;4024007198542&quot;,&quot;129&quot;,&quot;Oct 14, 2021&quot;,&quot;May 24, 2023&quot;,&quot;Crédito&quot;,&quot;3&quot;,53),
+  (&quot;4916769734554457&quot;,&quot;143&quot;,&quot;Mar 23, 2020&quot;,&quot;Dec 18, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,260),
+  (&quot;453227 358858 7899&quot;,&quot;726&quot;,&quot;Mar 3, 2022&quot;,&quot;Oct 12, 2022&quot;,&quot;Crédito&quot;,&quot;3&quot;,71),
+  (&quot;492991 7664533745&quot;,&quot;516&quot;,&quot;Sep 12, 2020&quot;,&quot;Feb 8, 2025&quot;,&quot;Débito&quot;,&quot;3&quot;,303);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4539 422 78 3966&quot;,&quot;421&quot;,&quot;Feb 23, 2020&quot;,&quot;Nov 4, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,443),
+  (&quot;471 63392 59555 255&quot;,&quot;806&quot;,&quot;Jul 17, 2020&quot;,&quot;Feb 14, 2024&quot;,&quot;Crédito&quot;,&quot;2&quot;,139),
+  (&quot;4539 285 66 4568&quot;,&quot;397&quot;,&quot;Apr 4, 2020&quot;,&quot;Feb 17, 2024&quot;,&quot;Débito&quot;,&quot;2&quot;,117),
+  (&quot;4716486143143&quot;,&quot;677&quot;,&quot;Jan 22, 2021&quot;,&quot;May 9, 2024&quot;,&quot;Crédito&quot;,&quot;2&quot;,417),
+  (&quot;4916 623 25 7349&quot;,&quot;737&quot;,&quot;May 22, 2020&quot;,&quot;Nov 16, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,16),
+  (&quot;4024 007 11 5728&quot;,&quot;463&quot;,&quot;Aug 29, 2020&quot;,&quot;Dec 19, 2024&quot;,&quot;Crédito&quot;,&quot;1&quot;,223),
+  (&quot;4916 3542 3879 7421&quot;,&quot;835&quot;,&quot;Jan 2, 2022&quot;,&quot;Mar 15, 2024&quot;,&quot;Débito&quot;,&quot;1&quot;,311),
+  (&quot;4929 3356 6464 7367&quot;,&quot;276&quot;,&quot;Apr 11, 2021&quot;,&quot;May 7, 2025&quot;,&quot;Crédito&quot;,&quot;1&quot;,411),
+  (&quot;471698 5388865625&quot;,&quot;720&quot;,&quot;Jan 25, 2020&quot;,&quot;Aug 26, 2024&quot;,&quot;Crédito&quot;,&quot;2&quot;,18),
+  (&quot;4532736112352&quot;,&quot;151&quot;,&quot;Oct 4, 2020&quot;,&quot;Oct 9, 2025&quot;,&quot;Débito&quot;,&quot;2&quot;,455);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4485 8593 8533 4944&quot;,&quot;532&quot;,&quot;Apr 23, 2020&quot;,&quot;Oct 22, 2022&quot;,&quot;Crédito&quot;,&quot;2&quot;,310),
+  (&quot;4024 0071 1742 8117&quot;,&quot;785&quot;,&quot;Jan 10, 2020&quot;,&quot;Nov 26, 2022&quot;,&quot;Crédito&quot;,&quot;3&quot;,264),
+  (&quot;448544 3474336571&quot;,&quot;698&quot;,&quot;Sep 12, 2021&quot;,&quot;Jan 30, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,451),
+  (&quot;4532843834358947&quot;,&quot;889&quot;,&quot;Nov 14, 2020&quot;,&quot;Oct 19, 2023&quot;,&quot;Crédito&quot;,&quot;2&quot;,314),
+  (&quot;4929168288338620&quot;,&quot;273&quot;,&quot;Sep 2, 2021&quot;,&quot;Mar 30, 2024&quot;,&quot;Crédito&quot;,&quot;3&quot;,318),
+  (&quot;471682 2475485951&quot;,&quot;775&quot;,&quot;May 6, 2020&quot;,&quot;Dec 9, 2024&quot;,&quot;Débito&quot;,&quot;3&quot;,310),
+  (&quot;4716 345 23 4281&quot;,&quot;637&quot;,&quot;Jan 27, 2021&quot;,&quot;Apr 2, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,266),
+  (&quot;465255 625688 3564&quot;,&quot;949&quot;,&quot;Nov 20, 2021&quot;,&quot;Nov 20, 2024&quot;,&quot;Crédito&quot;,&quot;3&quot;,217),
+  (&quot;471696 1247755810&quot;,&quot;677&quot;,&quot;Apr 23, 2021&quot;,&quot;Jan 7, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,469),
+  (&quot;402 40071 33891 397&quot;,&quot;236&quot;,&quot;May 31, 2020&quot;,&quot;Dec 18, 2024&quot;,&quot;Débito&quot;,&quot;2&quot;,493);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;471 64547 22753 286&quot;,&quot;500&quot;,&quot;Aug 29, 2020&quot;,&quot;Apr 9, 2025&quot;,&quot;Débito&quot;,&quot;2&quot;,384),
+  (&quot;4539 7154 4385 5310&quot;,&quot;405&quot;,&quot;Jun 23, 2020&quot;,&quot;Dec 20, 2024&quot;,&quot;Débito&quot;,&quot;2&quot;,251),
+  (&quot;4916857861667521&quot;,&quot;775&quot;,&quot;May 31, 2021&quot;,&quot;Nov 9, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,403),
+  (&quot;4539894831382532&quot;,&quot;470&quot;,&quot;Jan 7, 2020&quot;,&quot;Mar 17, 2023&quot;,&quot;Crédito&quot;,&quot;2&quot;,400),
+  (&quot;4233253784554&quot;,&quot;695&quot;,&quot;Feb 18, 2022&quot;,&quot;Mar 30, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,58),
+  (&quot;448 58288 89539 746&quot;,&quot;581&quot;,&quot;Dec 31, 2020&quot;,&quot;Aug 9, 2024&quot;,&quot;Débito&quot;,&quot;3&quot;,318),
+  (&quot;471 64846 26676 432&quot;,&quot;657&quot;,&quot;Apr 1, 2021&quot;,&quot;May 25, 2024&quot;,&quot;Débito&quot;,&quot;1&quot;,338),
+  (&quot;4916943712818578&quot;,&quot;453&quot;,&quot;May 3, 2021&quot;,&quot;Oct 31, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,489),
+  (&quot;4556 369 43 5988&quot;,&quot;197&quot;,&quot;Jan 31, 2022&quot;,&quot;Nov 14, 2024&quot;,&quot;Crédito&quot;,&quot;2&quot;,72),
+  (&quot;4716 796 98 2214&quot;,&quot;773&quot;,&quot;Oct 17, 2020&quot;,&quot;Sep 9, 2022&quot;,&quot;Débito&quot;,&quot;1&quot;,481);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;491 64538 86764 343&quot;,&quot;382&quot;,&quot;Jun 5, 2020&quot;,&quot;Oct 13, 2025&quot;,&quot;Crédito&quot;,&quot;3&quot;,422),
+  (&quot;455675 971827 7550&quot;,&quot;823&quot;,&quot;Feb 24, 2022&quot;,&quot;Apr 7, 2024&quot;,&quot;Crédito&quot;,&quot;3&quot;,169),
+  (&quot;4024007158443876&quot;,&quot;695&quot;,&quot;Aug 6, 2020&quot;,&quot;Aug 22, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,418),
+  (&quot;4532 657 41 4563&quot;,&quot;473&quot;,&quot;Dec 23, 2021&quot;,&quot;Sep 19, 2024&quot;,&quot;Crédito&quot;,&quot;1&quot;,88),
+  (&quot;402 40071 58622 644&quot;,&quot;466&quot;,&quot;Jan 28, 2021&quot;,&quot;Feb 16, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,77),
+  (&quot;491618 587552 6685&quot;,&quot;887&quot;,&quot;Aug 3, 2021&quot;,&quot;Nov 11, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,363),
+  (&quot;4889385836933326&quot;,&quot;835&quot;,&quot;Jan 25, 2021&quot;,&quot;Apr 24, 2025&quot;,&quot;Débito&quot;,&quot;2&quot;,443),
+  (&quot;4716126526663537&quot;,&quot;445&quot;,&quot;Mar 5, 2020&quot;,&quot;Dec 30, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,451),
+  (&quot;4916 9437 5933 4752&quot;,&quot;514&quot;,&quot;Dec 15, 2021&quot;,&quot;Jul 1, 2023&quot;,&quot;Crédito&quot;,&quot;3&quot;,11),
+  (&quot;455622 7934561686&quot;,&quot;869&quot;,&quot;Apr 6, 2022&quot;,&quot;Dec 10, 2022&quot;,&quot;Crédito&quot;,&quot;1&quot;,203);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4519446836734391&quot;,&quot;953&quot;,&quot;Mar 30, 2022&quot;,&quot;Jun 11, 2024&quot;,&quot;Crédito&quot;,&quot;1&quot;,266),
+  (&quot;4716 7687 2168 2323&quot;,&quot;725&quot;,&quot;Oct 17, 2020&quot;,&quot;Jul 9, 2024&quot;,&quot;Débito&quot;,&quot;2&quot;,497),
+  (&quot;4716277396314&quot;,&quot;943&quot;,&quot;Jun 1, 2020&quot;,&quot;Jan 23, 2024&quot;,&quot;Débito&quot;,&quot;3&quot;,134),
+  (&quot;4539 7396 2245 4976&quot;,&quot;554&quot;,&quot;May 1, 2020&quot;,&quot;Aug 24, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,39),
+  (&quot;4532883462681889&quot;,&quot;256&quot;,&quot;Dec 6, 2020&quot;,&quot;Mar 6, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,93),
+  (&quot;4539 636 77 4322&quot;,&quot;723&quot;,&quot;Jul 27, 2021&quot;,&quot;Mar 23, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,292),
+  (&quot;453 28969 24487 984&quot;,&quot;897&quot;,&quot;Nov 19, 2020&quot;,&quot;Jun 17, 2025&quot;,&quot;Débito&quot;,&quot;1&quot;,241),
+  (&quot;442795 242568 7263&quot;,&quot;455&quot;,&quot;Sep 13, 2021&quot;,&quot;Nov 14, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,311),
+  (&quot;4024007181759470&quot;,&quot;680&quot;,&quot;Mar 28, 2021&quot;,&quot;Jan 24, 2025&quot;,&quot;Crédito&quot;,&quot;1&quot;,90),
+  (&quot;4629628794592&quot;,&quot;171&quot;,&quot;Jun 9, 2021&quot;,&quot;Sep 19, 2022&quot;,&quot;Débito&quot;,&quot;1&quot;,263);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4556 3864 4939 6721&quot;,&quot;188&quot;,&quot;Dec 20, 2021&quot;,&quot;Aug 27, 2025&quot;,&quot;Crédito&quot;,&quot;1&quot;,105),
+  (&quot;4417 525 44 3228&quot;,&quot;775&quot;,&quot;Feb 19, 2021&quot;,&quot;Apr 25, 2025&quot;,&quot;Crédito&quot;,&quot;3&quot;,228),
+  (&quot;453912 876255 2353&quot;,&quot;241&quot;,&quot;Mar 21, 2022&quot;,&quot;Sep 24, 2025&quot;,&quot;Débito&quot;,&quot;1&quot;,141),
+  (&quot;4929 324 95 6762&quot;,&quot;366&quot;,&quot;Jun 21, 2020&quot;,&quot;Oct 19, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,362),
+  (&quot;453251 1545278585&quot;,&quot;287&quot;,&quot;Aug 20, 2021&quot;,&quot;Feb 15, 2023&quot;,&quot;Crédito&quot;,&quot;3&quot;,203),
+  (&quot;4532 5588 3561 7527&quot;,&quot;637&quot;,&quot;Apr 4, 2022&quot;,&quot;May 21, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,212),
+  (&quot;4556642585553354&quot;,&quot;298&quot;,&quot;Nov 20, 2021&quot;,&quot;Feb 15, 2024&quot;,&quot;Crédito&quot;,&quot;2&quot;,374),
+  (&quot;453 97493 43315 679&quot;,&quot;785&quot;,&quot;Jan 15, 2020&quot;,&quot;Jul 9, 2024&quot;,&quot;Débito&quot;,&quot;1&quot;,139),
+  (&quot;4532526182797&quot;,&quot;178&quot;,&quot;Nov 22, 2021&quot;,&quot;Dec 11, 2022&quot;,&quot;Débito&quot;,&quot;2&quot;,290),
+  (&quot;4024007132434389&quot;,&quot;794&quot;,&quot;Jul 21, 2021&quot;,&quot;Jul 5, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,13);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4556 2788 6384 1722&quot;,&quot;903&quot;,&quot;Oct 26, 2021&quot;,&quot;Apr 1, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,26),
+  (&quot;455673 4518826690&quot;,&quot;508&quot;,&quot;Oct 6, 2021&quot;,&quot;Nov 5, 2022&quot;,&quot;Crédito&quot;,&quot;3&quot;,469),
+  (&quot;4463 153 18 5665&quot;,&quot;778&quot;,&quot;Feb 21, 2022&quot;,&quot;Jul 20, 2024&quot;,&quot;Crédito&quot;,&quot;3&quot;,148),
+  (&quot;4024 0071 7366 4225&quot;,&quot;798&quot;,&quot;Nov 11, 2021&quot;,&quot;Jan 19, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,425),
+  (&quot;4929928716935&quot;,&quot;804&quot;,&quot;Sep 7, 2021&quot;,&quot;Feb 22, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,151),
+  (&quot;4839 8312 4873 8879&quot;,&quot;871&quot;,&quot;Feb 9, 2020&quot;,&quot;Jan 17, 2025&quot;,&quot;Débito&quot;,&quot;2&quot;,209),
+  (&quot;4532228734929&quot;,&quot;688&quot;,&quot;May 7, 2021&quot;,&quot;Mar 11, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,187),
+  (&quot;4929298422544&quot;,&quot;460&quot;,&quot;Jul 21, 2022&quot;,&quot;Jan 16, 2025&quot;,&quot;Débito&quot;,&quot;2&quot;,37),
+  (&quot;4532434554416469&quot;,&quot;908&quot;,&quot;Mar 19, 2020&quot;,&quot;May 2, 2024&quot;,&quot;Débito&quot;,&quot;2&quot;,22),
+  (&quot;4539 484 62 4272&quot;,&quot;654&quot;,&quot;Jan 6, 2022&quot;,&quot;Aug 31, 2025&quot;,&quot;Crédito&quot;,&quot;2&quot;,216);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4893 3576 8774 2357&quot;,&quot;717&quot;,&quot;Feb 2, 2022&quot;,&quot;Feb 13, 2025&quot;,&quot;Crédito&quot;,&quot;3&quot;,178),
+  (&quot;491652 326688 2459&quot;,&quot;267&quot;,&quot;Apr 8, 2021&quot;,&quot;Mar 25, 2025&quot;,&quot;Débito&quot;,&quot;3&quot;,449),
+  (&quot;4916678541647&quot;,&quot;903&quot;,&quot;Nov 8, 2021&quot;,&quot;May 28, 2024&quot;,&quot;Crédito&quot;,&quot;2&quot;,16),
+  (&quot;4539 378 82 5456&quot;,&quot;441&quot;,&quot;Feb 3, 2021&quot;,&quot;Oct 2, 2024&quot;,&quot;Débito&quot;,&quot;3&quot;,365),
+  (&quot;448 65572 26254 565&quot;,&quot;580&quot;,&quot;Jun 15, 2021&quot;,&quot;May 17, 2024&quot;,&quot;Débito&quot;,&quot;3&quot;,196),
+  (&quot;492932 564424 5994&quot;,&quot;389&quot;,&quot;Jan 13, 2021&quot;,&quot;Feb 22, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,180),
+  (&quot;455625 324769 3487&quot;,&quot;800&quot;,&quot;Oct 8, 2020&quot;,&quot;Nov 24, 2022&quot;,&quot;Débito&quot;,&quot;1&quot;,380),
+  (&quot;4363 3842 9397 7228&quot;,&quot;113&quot;,&quot;Jun 8, 2022&quot;,&quot;Aug 14, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,186),
+  (&quot;453288 7476227928&quot;,&quot;934&quot;,&quot;Jul 2, 2021&quot;,&quot;Jul 30, 2023&quot;,&quot;Crédito&quot;,&quot;3&quot;,412),
+  (&quot;455662 2492522684&quot;,&quot;625&quot;,&quot;Jun 21, 2020&quot;,&quot;Apr 29, 2024&quot;,&quot;Crédito&quot;,&quot;1&quot;,11);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4024007196223&quot;,&quot;860&quot;,&quot;Mar 5, 2022&quot;,&quot;Jun 11, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,260),
+  (&quot;4485362422157188&quot;,&quot;292&quot;,&quot;Apr 4, 2022&quot;,&quot;Dec 1, 2025&quot;,&quot;Débito&quot;,&quot;1&quot;,28),
+  (&quot;4485475689280&quot;,&quot;553&quot;,&quot;Apr 10, 2020&quot;,&quot;Mar 13, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,20),
+  (&quot;4485 6718 3477 6231&quot;,&quot;697&quot;,&quot;Feb 14, 2020&quot;,&quot;Mar 13, 2024&quot;,&quot;Crédito&quot;,&quot;3&quot;,145),
+  (&quot;402 40071 45924 574&quot;,&quot;770&quot;,&quot;Aug 26, 2021&quot;,&quot;Jun 2, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,360),
+  (&quot;492924 5392345566&quot;,&quot;338&quot;,&quot;Nov 11, 2021&quot;,&quot;Dec 4, 2023&quot;,&quot;Crédito&quot;,&quot;3&quot;,306),
+  (&quot;471646 452447 9527&quot;,&quot;271&quot;,&quot;Sep 8, 2021&quot;,&quot;Jul 28, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,303),
+  (&quot;4916 597 39 5455&quot;,&quot;532&quot;,&quot;Jan 11, 2020&quot;,&quot;Apr 25, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,256),
+  (&quot;4929 2329 1435 1389&quot;,&quot;658&quot;,&quot;Jan 19, 2021&quot;,&quot;Mar 31, 2025&quot;,&quot;Crédito&quot;,&quot;1&quot;,84),
+  (&quot;4487 2345 3745 7688&quot;,&quot;736&quot;,&quot;Jan 22, 2022&quot;,&quot;Nov 11, 2025&quot;,&quot;Débito&quot;,&quot;2&quot;,251);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;402400 7176878335&quot;,&quot;466&quot;,&quot;May 14, 2020&quot;,&quot;Aug 3, 2024&quot;,&quot;Débito&quot;,&quot;1&quot;,152),
+  (&quot;4716223328867752&quot;,&quot;513&quot;,&quot;May 6, 2022&quot;,&quot;Mar 20, 2024&quot;,&quot;Débito&quot;,&quot;3&quot;,179),
+  (&quot;491665 6548778838&quot;,&quot;261&quot;,&quot;Apr 24, 2021&quot;,&quot;Oct 21, 2025&quot;,&quot;Débito&quot;,&quot;3&quot;,50),
+  (&quot;4024007117343225&quot;,&quot;488&quot;,&quot;Jan 8, 2021&quot;,&quot;May 6, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,105),
+  (&quot;4485 8481 5841 8885&quot;,&quot;325&quot;,&quot;Sep 8, 2020&quot;,&quot;Jan 29, 2024&quot;,&quot;Débito&quot;,&quot;2&quot;,224),
+  (&quot;4556 3555 6327 6373&quot;,&quot;469&quot;,&quot;Dec 15, 2020&quot;,&quot;Nov 4, 2025&quot;,&quot;Débito&quot;,&quot;3&quot;,471),
+  (&quot;453 96527 46666 328&quot;,&quot;768&quot;,&quot;Apr 25, 2022&quot;,&quot;Jan 11, 2025&quot;,&quot;Crédito&quot;,&quot;2&quot;,90),
+  (&quot;4532 382 34 4143&quot;,&quot;261&quot;,&quot;Mar 28, 2022&quot;,&quot;Aug 4, 2023&quot;,&quot;Crédito&quot;,&quot;2&quot;,166),
+  (&quot;4485285884426314&quot;,&quot;112&quot;,&quot;Sep 4, 2021&quot;,&quot;Jun 10, 2024&quot;,&quot;Crédito&quot;,&quot;1&quot;,473),
+  (&quot;4539 726 33 4243&quot;,&quot;322&quot;,&quot;Feb 16, 2021&quot;,&quot;Oct 20, 2022&quot;,&quot;Débito&quot;,&quot;1&quot;,138);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4024007174895646&quot;,&quot;588&quot;,&quot;Oct 6, 2021&quot;,&quot;Oct 8, 2024&quot;,&quot;Débito&quot;,&quot;1&quot;,80),
+  (&quot;4365 185 37 7352&quot;,&quot;540&quot;,&quot;Jan 8, 2022&quot;,&quot;Mar 17, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,451),
+  (&quot;4485 782 26 4595&quot;,&quot;163&quot;,&quot;Sep 9, 2021&quot;,&quot;Feb 16, 2025&quot;,&quot;Débito&quot;,&quot;3&quot;,271),
+  (&quot;4485843273658242&quot;,&quot;510&quot;,&quot;Dec 3, 2021&quot;,&quot;Sep 22, 2025&quot;,&quot;Crédito&quot;,&quot;1&quot;,499),
+  (&quot;491645 583263 7580&quot;,&quot;193&quot;,&quot;Dec 14, 2020&quot;,&quot;Mar 3, 2024&quot;,&quot;Crédito&quot;,&quot;3&quot;,238),
+  (&quot;4916487796754&quot;,&quot;943&quot;,&quot;Sep 9, 2021&quot;,&quot;Jul 4, 2024&quot;,&quot;Débito&quot;,&quot;2&quot;,480),
+  (&quot;455674 612157 7213&quot;,&quot;925&quot;,&quot;Mar 4, 2020&quot;,&quot;Jan 30, 2023&quot;,&quot;Crédito&quot;,&quot;3&quot;,248),
+  (&quot;471 68643 46688 892&quot;,&quot;903&quot;,&quot;Dec 1, 2020&quot;,&quot;Jan 17, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,70),
+  (&quot;402400 7156468768&quot;,&quot;572&quot;,&quot;Dec 21, 2021&quot;,&quot;Dec 27, 2024&quot;,&quot;Crédito&quot;,&quot;2&quot;,209),
+  (&quot;4716179398566&quot;,&quot;183&quot;,&quot;Jul 9, 2020&quot;,&quot;Nov 5, 2025&quot;,&quot;Débito&quot;,&quot;1&quot;,43);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4716 5247 8524 3886&quot;,&quot;233&quot;,&quot;Aug 23, 2020&quot;,&quot;Sep 20, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,52),
+  (&quot;453239 298842 7785&quot;,&quot;227&quot;,&quot;Apr 17, 2020&quot;,&quot;Dec 8, 2022&quot;,&quot;Débito&quot;,&quot;1&quot;,450),
+  (&quot;448554 3228568542&quot;,&quot;359&quot;,&quot;Jun 24, 2020&quot;,&quot;Aug 10, 2022&quot;,&quot;Débito&quot;,&quot;2&quot;,173),
+  (&quot;447598 496846 4397&quot;,&quot;177&quot;,&quot;Dec 16, 2020&quot;,&quot;Jan 5, 2024&quot;,&quot;Débito&quot;,&quot;2&quot;,64),
+  (&quot;402400 7126348199&quot;,&quot;449&quot;,&quot;Jan 30, 2021&quot;,&quot;Feb 6, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,75),
+  (&quot;455683 954281 6763&quot;,&quot;231&quot;,&quot;Oct 27, 2021&quot;,&quot;Jan 1, 2025&quot;,&quot;Débito&quot;,&quot;1&quot;,96),
+  (&quot;453 95197 88771 748&quot;,&quot;687&quot;,&quot;Oct 5, 2020&quot;,&quot;Dec 27, 2022&quot;,&quot;Crédito&quot;,&quot;2&quot;,29),
+  (&quot;4556 7816 5822 6199&quot;,&quot;734&quot;,&quot;May 13, 2021&quot;,&quot;Oct 6, 2024&quot;,&quot;Crédito&quot;,&quot;3&quot;,455),
+  (&quot;491 68669 86371 240&quot;,&quot;581&quot;,&quot;Jun 24, 2022&quot;,&quot;Aug 20, 2024&quot;,&quot;Crédito&quot;,&quot;2&quot;,212),
+  (&quot;4716526462453&quot;,&quot;440&quot;,&quot;Dec 31, 2020&quot;,&quot;May 20, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,408);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4441365935352249&quot;,&quot;967&quot;,&quot;Apr 28, 2020&quot;,&quot;Feb 1, 2024&quot;,&quot;Crédito&quot;,&quot;3&quot;,240),
+  (&quot;4556 6645 3195 3389&quot;,&quot;667&quot;,&quot;Jan 12, 2021&quot;,&quot;Jul 3, 2025&quot;,&quot;Crédito&quot;,&quot;2&quot;,17),
+  (&quot;448528 7672515159&quot;,&quot;736&quot;,&quot;Dec 31, 2020&quot;,&quot;Nov 22, 2022&quot;,&quot;Crédito&quot;,&quot;2&quot;,472),
+  (&quot;455632 6534766347&quot;,&quot;975&quot;,&quot;Apr 26, 2020&quot;,&quot;Jan 4, 2024&quot;,&quot;Débito&quot;,&quot;1&quot;,132),
+  (&quot;4532878825183&quot;,&quot;997&quot;,&quot;May 15, 2020&quot;,&quot;Nov 23, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,485),
+  (&quot;492977 136247 2445&quot;,&quot;764&quot;,&quot;Nov 10, 2021&quot;,&quot;Jul 17, 2024&quot;,&quot;Débito&quot;,&quot;3&quot;,260),
+  (&quot;4985 7659 7379 4446&quot;,&quot;590&quot;,&quot;Jul 22, 2021&quot;,&quot;Jan 26, 2024&quot;,&quot;Crédito&quot;,&quot;1&quot;,289),
+  (&quot;4716 416 55 7867&quot;,&quot;426&quot;,&quot;Mar 8, 2021&quot;,&quot;Sep 9, 2025&quot;,&quot;Débito&quot;,&quot;1&quot;,47),
+  (&quot;4916632631966952&quot;,&quot;655&quot;,&quot;Aug 14, 2021&quot;,&quot;Feb 6, 2024&quot;,&quot;Débito&quot;,&quot;1&quot;,273),
+  (&quot;4929162745764&quot;,&quot;929&quot;,&quot;May 16, 2020&quot;,&quot;Apr 27, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,37);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4556 8696 2719 6195&quot;,&quot;856&quot;,&quot;May 14, 2022&quot;,&quot;May 23, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,59),
+  (&quot;402400 7143835780&quot;,&quot;548&quot;,&quot;Nov 15, 2020&quot;,&quot;Sep 23, 2024&quot;,&quot;Crédito&quot;,&quot;3&quot;,294),
+  (&quot;4532 3343 6716 1825&quot;,&quot;676&quot;,&quot;Sep 4, 2020&quot;,&quot;May 25, 2024&quot;,&quot;Crédito&quot;,&quot;3&quot;,351),
+  (&quot;4929778778573575&quot;,&quot;946&quot;,&quot;Dec 21, 2021&quot;,&quot;Jan 10, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,225),
+  (&quot;448545 5281525444&quot;,&quot;270&quot;,&quot;Jul 23, 2021&quot;,&quot;Nov 6, 2022&quot;,&quot;Crédito&quot;,&quot;3&quot;,95),
+  (&quot;455628 1819213558&quot;,&quot;593&quot;,&quot;Apr 8, 2021&quot;,&quot;Aug 17, 2022&quot;,&quot;Débito&quot;,&quot;2&quot;,17),
+  (&quot;453 23811 41261 421&quot;,&quot;235&quot;,&quot;Nov 6, 2021&quot;,&quot;Oct 8, 2024&quot;,&quot;Crédito&quot;,&quot;3&quot;,172),
+  (&quot;4532647388760&quot;,&quot;929&quot;,&quot;Nov 5, 2020&quot;,&quot;May 24, 2023&quot;,&quot;Crédito&quot;,&quot;2&quot;,103),
+  (&quot;402400 713374 6435&quot;,&quot;418&quot;,&quot;May 6, 2021&quot;,&quot;Sep 9, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,44),
+  (&quot;474483 5441871241&quot;,&quot;386&quot;,&quot;Aug 19, 2020&quot;,&quot;Apr 12, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,197);
+INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
+VALUES
+  (&quot;4024 007 13 3218&quot;,&quot;261&quot;,&quot;Jan 4, 2022&quot;,&quot;May 31, 2024&quot;,&quot;Crédito&quot;,&quot;3&quot;,72),
+  (&quot;4532 2423 2125 8688&quot;,&quot;159&quot;,&quot;Apr 23, 2020&quot;,&quot;Aug 23, 2024&quot;,&quot;Débito&quot;,&quot;2&quot;,87),
+  (&quot;4024007124324&quot;,&quot;688&quot;,&quot;Dec 16, 2020&quot;,&quot;Dec 23, 2022&quot;,&quot;Débito&quot;,&quot;2&quot;,392),
+  (&quot;453 28657 48733 378&quot;,&quot;541&quot;,&quot;Jan 30, 2022&quot;,&quot;Apr 11, 2023&quot;,&quot;Débito&quot;,&quot;1&quot;,438),
+  (&quot;448528 146552 7760&quot;,&quot;392&quot;,&quot;Feb 1, 2022&quot;,&quot;May 25, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,15),
+  (&quot;448 54795 47436 287&quot;,&quot;214&quot;,&quot;Oct 15, 2021&quot;,&quot;Apr 2, 2024&quot;,&quot;Débito&quot;,&quot;3&quot;,110),
+  (&quot;453276 2785456189&quot;,&quot;428&quot;,&quot;Oct 28, 2021&quot;,&quot;Aug 26, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,498),
+  (&quot;4539264474431584&quot;,&quot;387&quot;,&quot;Feb 15, 2022&quot;,&quot;Jun 9, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,341),
+  (&quot;453993 4583343520&quot;,&quot;322&quot;,&quot;Jan 27, 2020&quot;,&quot;Aug 9, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,388),
+  (&quot;4929 8483 5467 4731&quot;,&quot;897&quot;,&quot;Mar 16, 2020&quot;,&quot;Oct 2, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,303);</sql><sql name="GENERADOR DE DIRECCIONES">/*Generamos 850 direcciones aleatorias*/
+
+INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
+VALUES
+  (&quot;Blake&quot;,4268,&quot;Tehuacán&quot;,&quot;Tyrol&quot;,&quot;Cayman Islands&quot;),
+  (&quot;Ross&quot;,7451,&quot;Southern Islands&quot;,&quot;Liguria&quot;,&quot;Albania&quot;),
+  (&quot;Emerson&quot;,9584,&quot;Rouen&quot;,&quot;Utrecht&quot;,&quot;Venezuela&quot;),
+  (&quot;Mcbride&quot;,6579,&quot;Avennes&quot;,&quot;Arizona&quot;,&quot;Macedonia&quot;),
+  (&quot;Spence&quot;,8069,&quot;Welshpool&quot;,&quot;South Island&quot;,&quot;United Arab Emirates&quot;),
+  (&quot;Melton&quot;,1396,&quot;Huesca&quot;,&quot;Lviv oblast&quot;,&quot;Aruba&quot;),
+  (&quot;Watson&quot;,6472,&quot;Rotterdam&quot;,&quot;Los Lagos&quot;,&quot;Fiji&quot;),
+  (&quot;Farley&quot;,7483,&quot;Canberra&quot;,&quot;North Island&quot;,&quot;Saudi Arabia&quot;),
+  (&quot;Vaughn&quot;,3011,&quot;Alajuela&quot;,&quot;Overijssel&quot;,&quot;Niue&quot;),
+  (&quot;Boyer&quot;,5196,&quot;Wedel&quot;,&quot;Rio de Janeiro&quot;,&quot;Tuvalu&quot;),
+  (&quot;Donovan&quot;,1645,&quot;Bauchi&quot;,&quot;Aydın&quot;,&quot;Denmark&quot;),
+  (&quot;Lloyd&quot;,9577,&quot;Lebowakgomo&quot;,&quot;North Jeolla&quot;,&quot;Vanuatu&quot;),
+  (&quot;Sullivan&quot;,3228,&quot;Orkanger&quot;,&quot;Bremen&quot;,&quot;France&quot;),
+  (&quot;Dickerson&quot;,1242,&quot;Valparaíso de Goiás&quot;,&quot;Eastern Cape&quot;,&quot;Greenland&quot;),
+  (&quot;Delaney&quot;,3482,&quot;Zamboanga City&quot;,&quot;North-East Region&quot;,&quot;South Sudan&quot;),
+  (&quot;Russo&quot;,4628,&quot;Sankt Johann im Pongau&quot;,&quot;łódzkie&quot;,&quot;Sudan&quot;),
+  (&quot;Mathews&quot;,2447,&quot;Jaboatão dos Guararapes&quot;,&quot;Lviv oblast&quot;,&quot;Saint Barthélemy&quot;),
+  (&quot;Wade&quot;,2102,&quot;Belfast&quot;,&quot;Cartago&quot;,&quot;Antarctica&quot;),
+  (&quot;Hyde&quot;,5141,&quot;Cockburn&quot;,&quot;Puglia&quot;,&quot;Isle of Man&quot;),
+  (&quot;Camacho&quot;,2645,&quot;Tumba&quot;,&quot;Ankara&quot;,&quot;Romania&quot;),
+  (&quot;Trevino&quot;,7335,&quot;Bucheon&quot;,&quot;Minas Gerais&quot;,&quot;Saint Vincent and The Grenadines&quot;),
+  (&quot;Henry&quot;,4374,&quot;Bunbury&quot;,&quot;Swiętokrzyskie&quot;,&quot;Niue&quot;),
+  (&quot;Holder&quot;,8787,&quot;Jelenia Góra&quot;,&quot;Rogaland&quot;,&quot;Timor-Leste&quot;),
+  (&quot;Harris&quot;,1695,&quot;Ang Mo Kio&quot;,&quot;Antofagasta&quot;,&quot;New Caledonia&quot;),
+  (&quot;Gamble&quot;,8082,&quot;San Nicolás&quot;,&quot;Brandenburg&quot;,&quot;Pitcairn Islands&quot;),
+  (&quot;Blackwell&quot;,1232,&quot;Bothey&quot;,&quot;Wigtownshire&quot;,&quot;Somalia&quot;),
+  (&quot;Pittman&quot;,9779,&quot;Puerto Colombia&quot;,&quot;Balochistan&quot;,&quot;Dominican Republic&quot;),
+  (&quot;Richards&quot;,3020,&quot;Nice&quot;,&quot;Zamboanga Peninsula&quot;,&quot;Yemen&quot;),
+  (&quot;Houston&quot;,8548,&quot;New Plymouth&quot;,&quot;North Kalimantan&quot;,&quot;Sao Tome and Principe&quot;),
+  (&quot;Hurst&quot;,6395,&quot;Arequipa&quot;,&quot;Kujawsko-pomorskie&quot;,&quot;Uzbekistan&quot;),
+  (&quot;Hendrix&quot;,7049,&quot;Niort&quot;,&quot;Kentucky&quot;,&quot;Gibraltar&quot;),
+  (&quot;Lott&quot;,7405,&quot;Washington&quot;,&quot;Yaroslavl Oblast&quot;,&quot;Madagascar&quot;),
+  (&quot;Nichols&quot;,3989,&quot;Castelló&quot;,&quot;Arkansas&quot;,&quot;Suriname&quot;),
+  (&quot;Savage&quot;,7709,&quot;Winterswijk&quot;,&quot;West-Vlaanderen&quot;,&quot;Vanuatu&quot;),
+  (&quot;Barton&quot;,9472,&quot;Buôn Ma Thuột&quot;,&quot;Chihuahua&quot;,&quot;Curaçao&quot;),
+  (&quot;Barker&quot;,4209,&quot;La Plata&quot;,&quot;Baden Württemberg&quot;,&quot;Bermuda&quot;),
+  (&quot;Burch&quot;,4822,&quot;Pamplona&quot;,&quot;Tasmania&quot;,&quot;Bahrain&quot;),
+  (&quot;Sanders&quot;,7453,&quot;Bontang&quot;,&quot;Cajamarca&quot;,&quot;Gabon&quot;),
+  (&quot;Coffey&quot;,8878,&quot;Arnhem&quot;,&quot;Leinster&quot;,&quot;Libya&quot;),
+  (&quot;Weiss&quot;,5039,&quot;Calapan&quot;,&quot;South Island&quot;,&quot;French Southern Territories&quot;),
+  (&quot;Maxwell&quot;,3061,&quot;Fresno&quot;,&quot;Schleswig-Holstein&quot;,&quot;Mexico&quot;),
+  (&quot;Brock&quot;,2339,&quot;Mahikeng&quot;,&quot;Limpopo&quot;,&quot;Haiti&quot;),
+  (&quot;Holman&quot;,3612,&quot;Halkirk&quot;,&quot;Valle d'Aosta&quot;,&quot;Taiwan&quot;),
+  (&quot;Navarro&quot;,6445,&quot;Hagen&quot;,&quot;Melilla&quot;,&quot;Liechtenstein&quot;),
+  (&quot;Welch&quot;,9594,&quot;Whangarei&quot;,&quot;Maranhão&quot;,&quot;Congo, the Democratic Republic of the&quot;),
+  (&quot;Alford&quot;,6838,&quot;Sembawang&quot;,&quot;North West&quot;,&quot;Tuvalu&quot;),
+  (&quot;Gonzalez&quot;,5862,&quot;Tharparkar&quot;,&quot;Henegouwen&quot;,&quot;Togo&quot;),
+  (&quot;Hughes&quot;,2959,&quot;Cumaribo&quot;,&quot;Vestland&quot;,&quot;Egypt&quot;),
+  (&quot;Baker&quot;,3264,&quot;Ryazan&quot;,&quot;Bahia&quot;,&quot;Philippines&quot;),
+  (&quot;Joseph&quot;,7420,&quot;Kaluga&quot;,&quot;Durham&quot;,&quot;Japan&quot;);
+INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
+VALUES
+  (&quot;Lamb&quot;,9820,&quot;María Elena&quot;,&quot;Xīnán&quot;,&quot;Georgia&quot;),
+  (&quot;Brady&quot;,6276,&quot;Ulsan&quot;,&quot;Jönköpings län&quot;,&quot;Aruba&quot;),
+  (&quot;Butler&quot;,1390,&quot;Port Harcourt&quot;,&quot;Gauteng&quot;,&quot;Ethiopia&quot;),
+  (&quot;Gonzalez&quot;,2714,&quot;Arrone&quot;,&quot;Aceh&quot;,&quot;Denmark&quot;),
+  (&quot;Gardner&quot;,1873,&quot;Querétaro&quot;,&quot;Zachodniopomorskie&quot;,&quot;Israel&quot;),
+  (&quot;Oneal&quot;,9148,&quot;Pondicherry&quot;,&quot;Opolskie&quot;,&quot;Kyrgyzstan&quot;),
+  (&quot;Atkinson&quot;,8994,&quot;Gladstone&quot;,&quot;Cartago&quot;,&quot;Samoa&quot;),
+  (&quot;Sweeney&quot;,3495,&quot;Korosten&quot;,&quot;Östergötlands län&quot;,&quot;Burundi&quot;),
+  (&quot;Armstrong&quot;,3592,&quot;Akhtubinsk&quot;,&quot;Los Lagos&quot;,&quot;Bulgaria&quot;),
+  (&quot;Bryant&quot;,6946,&quot;Trujillo&quot;,&quot;Victoria&quot;,&quot;Montserrat&quot;),
+  (&quot;Carlson&quot;,9840,&quot;Bierk Bierghes&quot;,&quot;Akwa Ibom&quot;,&quot;Switzerland&quot;),
+  (&quot;Gilbert&quot;,1898,&quot;Hammerfest&quot;,&quot;Gaziantep&quot;,&quot;Papua New Guinea&quot;),
+  (&quot;Salazar&quot;,6389,&quot;Avesta&quot;,&quot;Huáběi&quot;,&quot;Bahamas&quot;),
+  (&quot;Douglas&quot;,6276,&quot;Paju&quot;,&quot;Vinnytsia oblast&quot;,&quot;Belarus&quot;),
+  (&quot;Stokes&quot;,4876,&quot;Kohlu&quot;,&quot;Mersin&quot;,&quot;Guernsey&quot;),
+  (&quot;Petersen&quot;,2801,&quot;Açailândia&quot;,&quot;Ontario&quot;,&quot;Maldives&quot;),
+  (&quot;Stout&quot;,8080,&quot;Iksan&quot;,&quot;Gia Lai&quot;,&quot;Chad&quot;),
+  (&quot;Burris&quot;,2728,&quot;Dublin&quot;,&quot;West Sulawesi&quot;,&quot;Tokelau&quot;),
+  (&quot;Charles&quot;,1152,&quot;İslahiye&quot;,&quot;Viken&quot;,&quot;Mexico&quot;),
+  (&quot;Winters&quot;,4987,&quot;Tandag&quot;,&quot;Sumy oblast&quot;,&quot;Eritrea&quot;),
+  (&quot;Albert&quot;,5799,&quot;Nocciano&quot;,&quot;Lower Austria&quot;,&quot;Aruba&quot;),
+  (&quot;Stein&quot;,7839,&quot;Brevik&quot;,&quot;Tabasco&quot;,&quot;Madagascar&quot;),
+  (&quot;Juarez&quot;,3464,&quot;Bowden&quot;,&quot;Ternopil oblast&quot;,&quot;Laos&quot;),
+  (&quot;Stephenson&quot;,2108,&quot;Kohat&quot;,&quot;Saratov Oblast&quot;,&quot;Peru&quot;),
+  (&quot;Bowen&quot;,6336,&quot;Zwelitsha&quot;,&quot;Hamburg&quot;,&quot;Mongolia&quot;),
+  (&quot;Chaney&quot;,8992,&quot;Ceuta&quot;,&quot;Free State&quot;,&quot;Virgin Islands, British&quot;),
+  (&quot;Pace&quot;,7756,&quot;Candela&quot;,&quot;North Island&quot;,&quot;American Samoa&quot;),
+  (&quot;Page&quot;,5581,&quot;Barranca&quot;,&quot;Rio de Janeiro&quot;,&quot;Cyprus&quot;),
+  (&quot;Tyler&quot;,2239,&quot;Wortel&quot;,&quot;Cumberland&quot;,&quot;Saint Helena, Ascension and Tristan da Cunha&quot;),
+  (&quot;Villarreal&quot;,7744,&quot;Boca del Río&quot;,&quot;Paraíba&quot;,&quot;Albania&quot;),
+  (&quot;Le&quot;,9751,&quot;Speyer&quot;,&quot;Delaware&quot;,&quot;Comoros&quot;),
+  (&quot;Ochoa&quot;,9784,&quot;Gorontalo&quot;,&quot;Guanacaste&quot;,&quot;British Indian Ocean Territory&quot;),
+  (&quot;Shepherd&quot;,9223,&quot;Timaru&quot;,&quot;Oyo&quot;,&quot;Czech Republic&quot;),
+  (&quot;Rodgers&quot;,5392,&quot;Patiala&quot;,&quot;Bourgogne&quot;,&quot;Saudi Arabia&quot;),
+  (&quot;Duncan&quot;,2828,&quot;Sauda&quot;,&quot;North Jeolla&quot;,&quot;Moldova&quot;),
+  (&quot;Robles&quot;,9719,&quot;Värnamo&quot;,&quot;Imo&quot;,&quot;Tonga&quot;),
+  (&quot;Vaughan&quot;,3445,&quot;Uddevalla&quot;,&quot;Santa Catarina&quot;,&quot;Switzerland&quot;),
+  (&quot;Duffy&quot;,8117,&quot;Leers-et-Fosteau&quot;,&quot;Overijssel&quot;,&quot;Western Sahara&quot;),
+  (&quot;Franklin&quot;,7738,&quot;Yurimaguas&quot;,&quot;Noord Brabant&quot;,&quot;Germany&quot;),
+  (&quot;Peterson&quot;,6893,&quot;Shandong&quot;,&quot;Central Region&quot;,&quot;Central African Republic&quot;),
+  (&quot;Ratliff&quot;,3399,&quot;Vannes&quot;,&quot;Kahramanmaraş&quot;,&quot;Antigua and Barbuda&quot;),
+  (&quot;Gallagher&quot;,6955,&quot;San Fernando&quot;,&quot;Marche&quot;,&quot;United Kingdom (Great Britain)&quot;),
+  (&quot;Graves&quot;,8478,&quot;Virginia Beach&quot;,&quot;Västra Götalands län&quot;,&quot;Slovakia&quot;),
+  (&quot;Hinton&quot;,9712,&quot;Bayeux&quot;,&quot;Zuid Holland&quot;,&quot;Libya&quot;),
+  (&quot;Evans&quot;,4063,&quot;Port Nolloth&quot;,&quot;Michigan&quot;,&quot;Afghanistan&quot;),
+  (&quot;Benjamin&quot;,1199,&quot;Barrackpur&quot;,&quot;Ilocos Region&quot;,&quot;Chile&quot;),
+  (&quot;Alston&quot;,5487,&quot;Juliaca&quot;,&quot;Bahia&quot;,&quot;Chad&quot;),
+  (&quot;Goff&quot;,6338,&quot;Contulmo&quot;,&quot;Noord Brabant&quot;,&quot;Latvia&quot;),
+  (&quot;Mcdowell&quot;,9972,&quot;Istanbul&quot;,&quot;Hamburg&quot;,&quot;Netherlands&quot;),
+  (&quot;Wyatt&quot;,8379,&quot;Arendal&quot;,&quot;O'Higgins&quot;,&quot;French Southern Territories&quot;);
+INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
+VALUES
+  (&quot;Hull&quot;,2211,&quot;Gaya&quot;,&quot;Kursk Oblast&quot;,&quot;Libya&quot;),
+  (&quot;Mcneil&quot;,6466,&quot;Yeosu&quot;,&quot;Bình Dương&quot;,&quot;Equatorial Guinea&quot;),
+  (&quot;Kent&quot;,5249,&quot;Nuragus&quot;,&quot;West Bengal&quot;,&quot;Croatia&quot;),
+  (&quot;Mercado&quot;,8322,&quot;Valenzuela&quot;,&quot;Central Region&quot;,&quot;Bangladesh&quot;),
+  (&quot;Morrison&quot;,6468,&quot;St. John's&quot;,&quot;Atacama&quot;,&quot;French Guiana&quot;),
+  (&quot;Brennan&quot;,9757,&quot;Hinckley&quot;,&quot;Utrecht&quot;,&quot;Paraguay&quot;),
+  (&quot;Beasley&quot;,3478,&quot;Hạ Long&quot;,&quot;Lombardia&quot;,&quot;Uzbekistan&quot;),
+  (&quot;Downs&quot;,1555,&quot;Baden-Baden&quot;,&quot;Northern Cape&quot;,&quot;Romania&quot;),
+  (&quot;Roy&quot;,9181,&quot;Skardu&quot;,&quot;South Gyeongsang&quot;,&quot;Algeria&quot;),
+  (&quot;Hampton&quot;,4684,&quot;Bedok&quot;,&quot;Moscow City&quot;,&quot;Virgin Islands, United States&quot;),
+  (&quot;Daugherty&quot;,2598,&quot;Batac&quot;,&quot;Central Visayas&quot;,&quot;Egypt&quot;),
+  (&quot;Church&quot;,3088,&quot;Rangiora&quot;,&quot;Azad Kashmir&quot;,&quot;Madagascar&quot;),
+  (&quot;Stafford&quot;,6618,&quot;Suwałki&quot;,&quot;Papua&quot;,&quot;Fiji&quot;),
+  (&quot;Ashley&quot;,2884,&quot;Bila Tserkva&quot;,&quot;Benue&quot;,&quot;Yemen&quot;),
+  (&quot;Barber&quot;,8787,&quot;Onitsha&quot;,&quot;Biobío&quot;,&quot;Sri Lanka&quot;),
+  (&quot;Moody&quot;,4859,&quot;Kalisz&quot;,&quot;North West&quot;,&quot;Jordan&quot;),
+  (&quot;Clay&quot;,3166,&quot;Verdalsøra&quot;,&quot;Arequipa&quot;,&quot;Wallis and Futuna&quot;),
+  (&quot;Huffman&quot;,2357,&quot;Kropyvnytskyi&quot;,&quot;Henegouwen&quot;,&quot;Philippines&quot;),
+  (&quot;Weber&quot;,7835,&quot;Wood Buffalo&quot;,&quot;Schleswig-Holstein&quot;,&quot;Belize&quot;),
+  (&quot;Walton&quot;,4909,&quot;Waren&quot;,&quot;North Sumatra&quot;,&quot;Montenegro&quot;),
+  (&quot;Wiley&quot;,6092,&quot;San Luis Potosí&quot;,&quot;Cartago&quot;,&quot;Brazil&quot;),
+  (&quot;Hicks&quot;,6748,&quot;Tauranga&quot;,&quot;West-Vlaanderen&quot;,&quot;Indonesia&quot;),
+  (&quot;Dickson&quot;,7504,&quot;Leersum&quot;,&quot;Delta&quot;,&quot;United States Minor Outlying Islands&quot;),
+  (&quot;Manning&quot;,3467,&quot;Hengelo&quot;,&quot;Kursk Oblast&quot;,&quot;Romania&quot;),
+  (&quot;Johnson&quot;,5898,&quot;Muzaffarnagar&quot;,&quot;Riau&quot;,&quot;Reunion&quot;),
+  (&quot;Sullivan&quot;,2390,&quot;Lillehammer&quot;,&quot;Pomorskie&quot;,&quot;Thailand&quot;),
+  (&quot;Delaney&quot;,3088,&quot;Randfontein&quot;,&quot;Haryana&quot;,&quot;Guyana&quot;),
+  (&quot;Woodward&quot;,7384,&quot;Stockholm&quot;,&quot;Mersin&quot;,&quot;Somalia&quot;),
+  (&quot;Lang&quot;,1929,&quot;Mjölby&quot;,&quot;Leinster&quot;,&quot;Zambia&quot;),
+  (&quot;Richmond&quot;,4698,&quot;Kufstein&quot;,&quot;Kharkiv oblast&quot;,&quot;Cuba&quot;),
+  (&quot;Hodge&quot;,1990,&quot;Canberra&quot;,&quot;Pará&quot;,&quot;Germany&quot;),
+  (&quot;Mckay&quot;,6824,&quot;Westport&quot;,&quot;Nottinghamshire&quot;,&quot;Namibia&quot;),
+  (&quot;Mathews&quot;,9076,&quot;Kon Tum&quot;,&quot;Hậu Giang&quot;,&quot;Bosnia and Herzegovina&quot;),
+  (&quot;Morris&quot;,1826,&quot;Temuka&quot;,&quot;Ontario&quot;,&quot;Mauritius&quot;),
+  (&quot;Maldonado&quot;,4812,&quot;Vidisha&quot;,&quot;Mazowieckie&quot;,&quot;Ethiopia&quot;),
+  (&quot;Henson&quot;,6909,&quot;Isabela City&quot;,&quot;Risaralda&quot;,&quot;Belarus&quot;),
+  (&quot;Whitaker&quot;,4793,&quot;Tromsø&quot;,&quot;Balıkesir&quot;,&quot;Germany&quot;),
+  (&quot;Randolph&quot;,6605,&quot;Padang Panjang&quot;,&quot;Melilla&quot;,&quot;British Indian Ocean Territory&quot;),
+  (&quot;Pena&quot;,4531,&quot;Kremenchuk&quot;,&quot;Morelos&quot;,&quot;Uzbekistan&quot;),
+  (&quot;Mckee&quot;,5503,&quot;Lelystad&quot;,&quot;Moscow City&quot;,&quot;Reunion&quot;),
+  (&quot;Riley&quot;,3224,&quot;Astore&quot;,&quot;Mecklenburg-Vorpommern&quot;,&quot;Tonga&quot;),
+  (&quot;Hansen&quot;,6636,&quot;Gangtok&quot;,&quot;Cheshire&quot;,&quot;Algeria&quot;),
+  (&quot;Robles&quot;,8977,&quot;Antofagasta&quot;,&quot;Leinster&quot;,&quot;Chad&quot;),
+  (&quot;Weber&quot;,5162,&quot;Timaukel&quot;,&quot;Catalunya&quot;,&quot;Iceland&quot;),
+  (&quot;George&quot;,3879,&quot;Delhi&quot;,&quot;Stockholms län&quot;,&quot;Maldives&quot;),
+  (&quot;Wright&quot;,2788,&quot;Andalo&quot;,&quot;Punjab&quot;,&quot;Iceland&quot;),
+  (&quot;Singleton&quot;,4500,&quot;Puno&quot;,&quot;Ulster&quot;,&quot;Oman&quot;),
+  (&quot;Marquez&quot;,8420,&quot;Jeju&quot;,&quot;Cherkasy oblast&quot;,&quot;Norway&quot;),
+  (&quot;Mueller&quot;,3219,&quot;Mattersburg&quot;,&quot;Baja California&quot;,&quot;Dominican Republic&quot;),
+  (&quot;Mcpherson&quot;,7100,&quot;Gongju&quot;,&quot;Basse-Normandie&quot;,&quot;Ireland&quot;);
+INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
+VALUES
+  (&quot;Short&quot;,8976,&quot;Limón (Puerto Limón]&quot;,&quot;Louisiana&quot;,&quot;Nicaragua&quot;),
+  (&quot;Berger&quot;,4781,&quot;Kropyvnytskyi&quot;,&quot;Viken&quot;,&quot;Palestine, State of&quot;),
+  (&quot;Daniels&quot;,5755,&quot;Falun&quot;,&quot;Oryol Oblast&quot;,&quot;Jersey&quot;),
+  (&quot;Mejia&quot;,3524,&quot;Sakhalin&quot;,&quot;Champagne-Ardenne&quot;,&quot;Zimbabwe&quot;),
+  (&quot;Daniel&quot;,5268,&quot;Hattiesburg&quot;,&quot;Cusco&quot;,&quot;Senegal&quot;),
+  (&quot;Diaz&quot;,6382,&quot;Chuncheon&quot;,&quot;Cusco&quot;,&quot;Central African Republic&quot;),
+  (&quot;Vaughn&quot;,6145,&quot;Huesca&quot;,&quot;Ulster&quot;,&quot;Gambia&quot;),
+  (&quot;Schroeder&quot;,8360,&quot;Ramsdonk&quot;,&quot;Aragón&quot;,&quot;Vanuatu&quot;),
+  (&quot;Mack&quot;,9706,&quot;Arequipa&quot;,&quot;Delta&quot;,&quot;Vanuatu&quot;),
+  (&quot;Guy&quot;,7402,&quot;Bajaur Agency&quot;,&quot;Tabasco&quot;,&quot;Saint Pierre and Miquelon&quot;),
+  (&quot;Rollins&quot;,4300,&quot;Mexico City&quot;,&quot;Calabarzon&quot;,&quot;Equatorial Guinea&quot;),
+  (&quot;Navarro&quot;,7275,&quot;Sangju&quot;,&quot;Massachusetts&quot;,&quot;Portugal&quot;),
+  (&quot;Parsons&quot;,6323,&quot;Plauen&quot;,&quot;Gelderland&quot;,&quot;India&quot;),
+  (&quot;Alston&quot;,5378,&quot;Bansberia&quot;,&quot;Gauteng&quot;,&quot;Cuba&quot;),
+  (&quot;Martin&quot;,6502,&quot;Izium&quot;,&quot;Dnipropetrovsk oblast&quot;,&quot;Malaysia&quot;),
+  (&quot;Downs&quot;,8367,&quot;Tabaco&quot;,&quot;Jigawa&quot;,&quot;Nigeria&quot;),
+  (&quot;Shaw&quot;,9622,&quot;Lautaro&quot;,&quot;South Jeolla&quot;,&quot;Svalbard and Jan Mayen Islands&quot;),
+  (&quot;Nixon&quot;,4899,&quot;Mahikeng&quot;,&quot;Gauteng&quot;,&quot;New Zealand&quot;),
+  (&quot;Dyer&quot;,5368,&quot;Kediri&quot;,&quot;Queensland&quot;,&quot;Austria&quot;),
+  (&quot;Clemons&quot;,7657,&quot;Melilla&quot;,&quot;North Sulawesi&quot;,&quot;Guadeloupe&quot;),
+  (&quot;Campos&quot;,4977,&quot;Kharkiv&quot;,&quot;Punjab&quot;,&quot;Brazil&quot;),
+  (&quot;Atkinson&quot;,8831,&quot;Konya&quot;,&quot;Zachodniopomorskie&quot;,&quot;Spain&quot;),
+  (&quot;Charles&quot;,1277,&quot;Ulyanovsk&quot;,&quot;Östergötlands län&quot;,&quot;Palestine, State of&quot;),
+  (&quot;Nelson&quot;,3417,&quot;Motala&quot;,&quot;Limousin&quot;,&quot;Honduras&quot;),
+  (&quot;Wilson&quot;,5757,&quot;Hubei&quot;,&quot;Ilocos Region&quot;,&quot;Kiribati&quot;),
+  (&quot;Huff&quot;,9424,&quot;Bauchi&quot;,&quot;Newfoundland and Labrador&quot;,&quot;Thailand&quot;),
+  (&quot;Wolfe&quot;,2698,&quot;Murcia&quot;,&quot;Eastern Cape&quot;,&quot;Virgin Islands, United States&quot;),
+  (&quot;Good&quot;,5713,&quot;Santa Inês&quot;,&quot;Biobío&quot;,&quot;French Guiana&quot;),
+  (&quot;Russell&quot;,7263,&quot;Asan&quot;,&quot;North Island&quot;,&quot;Guinea&quot;),
+  (&quot;Langley&quot;,3954,&quot;Lerum&quot;,&quot;Soccsksargen&quot;,&quot;Nepal&quot;),
+  (&quot;Matthews&quot;,4332,&quot;Magangué&quot;,&quot;Melilla&quot;,&quot;Somalia&quot;),
+  (&quot;Stein&quot;,9015,&quot;Tuscaloosa&quot;,&quot;Bengkulu&quot;,&quot;Romania&quot;),
+  (&quot;Forbes&quot;,6504,&quot;Pohang&quot;,&quot;Bayern&quot;,&quot;Korea, North&quot;),
+  (&quot;Spencer&quot;,4454,&quot;Juliaca&quot;,&quot;Santa Catarina&quot;,&quot;Finland&quot;),
+  (&quot;Emerson&quot;,9838,&quot;Fortaleza&quot;,&quot;Namen&quot;,&quot;Mozambique&quot;),
+  (&quot;Compton&quot;,4849,&quot;Nodebais&quot;,&quot;Wyoming&quot;,&quot;Mongolia&quot;),
+  (&quot;Mcconnell&quot;,6478,&quot;Manila&quot;,&quot;Dolnośląskie&quot;,&quot;Tunisia&quot;),
+  (&quot;Barton&quot;,2240,&quot;Mexico City&quot;,&quot;Borno&quot;,&quot;French Guiana&quot;),
+  (&quot;Gomez&quot;,7513,&quot;Sagrada Familia&quot;,&quot;Nuevo León&quot;,&quot;Jamaica&quot;),
+  (&quot;Murray&quot;,7995,&quot;Bontang&quot;,&quot;Novgorod Oblast&quot;,&quot;Colombia&quot;),
+  (&quot;Blankenship&quot;,7022,&quot;Astore&quot;,&quot;Northern Cape&quot;,&quot;Saint Kitts and Nevis&quot;),
+  (&quot;Lowe&quot;,6729,&quot;Dunedin&quot;,&quot;Banten&quot;,&quot;Bermuda&quot;),
+  (&quot;Clarke&quot;,8865,&quot;Cannock&quot;,&quot;Magdalena&quot;,&quot;Haiti&quot;),
+  (&quot;Conner&quot;,6751,&quot;Pabianice&quot;,&quot;Languedoc-Roussillon&quot;,&quot;Mozambique&quot;),
+  (&quot;Drake&quot;,7876,&quot;Silay&quot;,&quot;Namen&quot;,&quot;Djibouti&quot;),
+  (&quot;Carroll&quot;,8820,&quot;Pangkalpinang&quot;,&quot;łódzkie&quot;,&quot;United States Minor Outlying Islands&quot;),
+  (&quot;Lowe&quot;,9536,&quot;Boksburg&quot;,&quot;Dnipropetrovsk oblast&quot;,&quot;Ethiopia&quot;),
+  (&quot;Hanson&quot;,8358,&quot;Santander&quot;,&quot;Colorado&quot;,&quot;Antarctica&quot;),
+  (&quot;Salazar&quot;,2144,&quot;Albano di Lucania&quot;,&quot;Brussels Hoofdstedelijk Gewest&quot;,&quot;Australia&quot;),
+  (&quot;Stanton&quot;,2737,&quot;İslahiye&quot;,&quot;Vienna&quot;,&quot;Botswana&quot;);
+INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
+VALUES
+  (&quot;Mejia&quot;,8068,&quot;General Escobedo&quot;,&quot;Khyber Pakhtoonkhwa&quot;,&quot;Romania&quot;),
+  (&quot;Ford&quot;,1587,&quot;San Diego&quot;,&quot;Eastern Visayas&quot;,&quot;Montserrat&quot;),
+  (&quot;Henson&quot;,5429,&quot;Rivne&quot;,&quot;East Region&quot;,&quot;Saint Barthélemy&quot;),
+  (&quot;Rodriguez&quot;,9124,&quot;Bucheon&quot;,&quot;Alajuela&quot;,&quot;Georgia&quot;),
+  (&quot;Dominguez&quot;,5316,&quot;Okpoko&quot;,&quot;Chihuahua&quot;,&quot;Saint Lucia&quot;),
+  (&quot;Moon&quot;,5288,&quot;Ch‰tillon&quot;,&quot;Pernambuco&quot;,&quot;Australia&quot;),
+  (&quot;Pennington&quot;,2694,&quot;Bandar Lampung&quot;,&quot;Huádōng&quot;,&quot;Lebanon&quot;),
+  (&quot;Montgomery&quot;,6921,&quot;Nghĩa Lộ&quot;,&quot;Cornwall&quot;,&quot;Nauru&quot;),
+  (&quot;Burke&quot;,6607,&quot;Alice&quot;,&quot;Zeeland&quot;,&quot;Western Sahara&quot;),
+  (&quot;Farrell&quot;,6420,&quot;Neunkirchen&quot;,&quot;Central Kalimantan&quot;,&quot;Taiwan&quot;),
+  (&quot;Vargas&quot;,4554,&quot;San Juan de Pasto&quot;,&quot;Hidalgo&quot;,&quot;Holy See (Vatican City State)&quot;),
+  (&quot;Hudson&quot;,6569,&quot;Seogwipo&quot;,&quot;Västra Götalands län&quot;,&quot;Belgium&quot;),
+  (&quot;Poole&quot;,7200,&quot;Đồng Xoài&quot;,&quot;Nord-Pas-de-Calais&quot;,&quot;Romania&quot;),
+  (&quot;Maddox&quot;,4855,&quot;Alingsås&quot;,&quot;Midi-Pyrénées&quot;,&quot;Qatar&quot;),
+  (&quot;Dudley&quot;,2237,&quot;Dutse&quot;,&quot;Pará&quot;,&quot;Norfolk Island&quot;),
+  (&quot;Pope&quot;,7935,&quot;Cork&quot;,&quot;Voronezh Oblast&quot;,&quot;Isle of Man&quot;),
+  (&quot;Cross&quot;,9591,&quot;Khanewal&quot;,&quot;Western Australia&quot;,&quot;Brazil&quot;),
+  (&quot;Hogan&quot;,7086,&quot;Siverek&quot;,&quot;Umbria&quot;,&quot;Gambia&quot;),
+  (&quot;Nunez&quot;,1078,&quot;Shandong&quot;,&quot;Bắc Kạn&quot;,&quot;Martinique&quot;),
+  (&quot;Mcleod&quot;,3936,&quot;Bonn&quot;,&quot;Cartago&quot;,&quot;Palestine, State of&quot;),
+  (&quot;Mclaughlin&quot;,6746,&quot;Gansu&quot;,&quot;Valle del Cauca&quot;,&quot;Ethiopia&quot;),
+  (&quot;Griffith&quot;,9750,&quot;Chiclayo&quot;,&quot;İzmir&quot;,&quot;Cape Verde&quot;),
+  (&quot;Acosta&quot;,6986,&quot;Móstoles&quot;,&quot;Zuid Holland&quot;,&quot;Libya&quot;),
+  (&quot;Best&quot;,7209,&quot;Kozan&quot;,&quot;Saskatchewan&quot;,&quot;Zimbabwe&quot;),
+  (&quot;Curry&quot;,2204,&quot;Ravenstein&quot;,&quot;Champagne-Ardenne&quot;,&quot;Nigeria&quot;),
+  (&quot;Mccarty&quot;,5637,&quot;Motta Sant'Anastasia&quot;,&quot;İzmir&quot;,&quot;Samoa&quot;),
+  (&quot;Serrano&quot;,3402,&quot;Mukachevo&quot;,&quot;Central Visayas&quot;,&quot;American Samoa&quot;),
+  (&quot;Ochoa&quot;,3644,&quot;Adelaide&quot;,&quot;South Gyeongsang&quot;,&quot;Andorra&quot;),
+  (&quot;Porter&quot;,7351,&quot;Cork&quot;,&quot;Nordland&quot;,&quot;Nigeria&quot;),
+  (&quot;Manning&quot;,9311,&quot;Baden&quot;,&quot;Lampung&quot;,&quot;Yemen&quot;),
+  (&quot;Snider&quot;,6422,&quot;Buenaventura&quot;,&quot;East Region&quot;,&quot;United States&quot;),
+  (&quot;Cooley&quot;,2192,&quot;Barranca&quot;,&quot;Munster&quot;,&quot;French Southern Territories&quot;),
+  (&quot;Bauer&quot;,4102,&quot;Paal&quot;,&quot;Quebec&quot;,&quot;South Georgia and The South Sandwich Islands&quot;),
+  (&quot;Jennings&quot;,5791,&quot;Alto Baudó&quot;,&quot;Bryansk Oblast&quot;,&quot;Cayman Islands&quot;),
+  (&quot;Brady&quot;,6004,&quot;Saint-Vincent&quot;,&quot;Leinster&quot;,&quot;Antarctica&quot;),
+  (&quot;Boone&quot;,4918,&quot;Campinas&quot;,&quot;Maranhão&quot;,&quot;Svalbard and Jan Mayen Islands&quot;),
+  (&quot;Marks&quot;,9046,&quot;Gujranwala&quot;,&quot;Piemonte&quot;,&quot;Gibraltar&quot;),
+  (&quot;Landry&quot;,4243,&quot;Betim&quot;,&quot;North Island&quot;,&quot;Burundi&quot;),
+  (&quot;Chapman&quot;,2671,&quot;San Rafael&quot;,&quot;Limousin&quot;,&quot;Saint Kitts and Nevis&quot;),
+  (&quot;Bowen&quot;,3423,&quot;Queenstown&quot;,&quot;British Columbia&quot;,&quot;Norway&quot;),
+  (&quot;Hahn&quot;,4740,&quot;Henstedt-Ulzburg&quot;,&quot;West Nusa Tenggara&quot;,&quot;Israel&quot;),
+  (&quot;Newton&quot;,5428,&quot;Piła&quot;,&quot;Alabama&quot;,&quot;Tunisia&quot;),
+  (&quot;Wiggins&quot;,8941,&quot;Mannheim&quot;,&quot;Pskov Oblast&quot;,&quot;United States&quot;),
+  (&quot;Hunter&quot;,4512,&quot;Ludvika&quot;,&quot;Georgia&quot;,&quot;Oman&quot;),
+  (&quot;Wade&quot;,5470,&quot;Zaporizhzhia&quot;,&quot;Utrecht&quot;,&quot;Antigua and Barbuda&quot;),
+  (&quot;Wyatt&quot;,7432,&quot;Penrith&quot;,&quot;Lâm Đồng&quot;,&quot;Botswana&quot;),
+  (&quot;Michael&quot;,5329,&quot;Huaral&quot;,&quot;Nordrhein-Westphalen&quot;,&quot;Azerbaijan&quot;),
+  (&quot;Henson&quot;,3671,&quot;New Galloway&quot;,&quot;Loreto&quot;,&quot;Macao&quot;),
+  (&quot;Jacobs&quot;,3581,&quot;Pioneer&quot;,&quot;Diyarbakır&quot;,&quot;Serbia&quot;),
+  (&quot;Harper&quot;,2457,&quot;Ełk&quot;,&quot;New South Wales&quot;,&quot;El Salvador&quot;);
+INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
+VALUES
+  (&quot;Holmes&quot;,4198,&quot;Bislig&quot;,&quot;South Island&quot;,&quot;Cyprus&quot;),
+  (&quot;Woodard&quot;,9032,&quot;Okpoko&quot;,&quot;Saarland&quot;,&quot;Guyana&quot;),
+  (&quot;Green&quot;,5234,&quot;Ludwigsburg&quot;,&quot;Irkutsk Oblast&quot;,&quot;Grenada&quot;),
+  (&quot;Armstrong&quot;,8291,&quot;Imphal&quot;,&quot;Virginia&quot;,&quot;Kiribati&quot;),
+  (&quot;Bailey&quot;,5904,&quot;Montpellier&quot;,&quot;Gilgit Baltistan&quot;,&quot;Burkina Faso&quot;),
+  (&quot;Mcleod&quot;,5408,&quot;Otukpo&quot;,&quot;Putumayo&quot;,&quot;Virgin Islands, United States&quot;),
+  (&quot;Clayton&quot;,4272,&quot;Tomsk&quot;,&quot;Bình Phước&quot;,&quot;Belize&quot;),
+  (&quot;Howell&quot;,5571,&quot;Jurong West&quot;,&quot;Bursa&quot;,&quot;Ireland&quot;),
+  (&quot;Blackwell&quot;,1072,&quot;Wolfurt&quot;,&quot;Hessen&quot;,&quot;Guyana&quot;),
+  (&quot;Hicks&quot;,3138,&quot;Queenstown&quot;,&quot;Ulster&quot;,&quot;Uzbekistan&quot;),
+  (&quot;Walsh&quot;,8040,&quot;Gore&quot;,&quot;South Sumatra&quot;,&quot;Namibia&quot;),
+  (&quot;Kemp&quot;,5621,&quot;Santander&quot;,&quot;KwaZulu-Natal&quot;,&quot;Mozambique&quot;),
+  (&quot;Moran&quot;,6374,&quot;Icheon&quot;,&quot;Zeeland&quot;,&quot;Haiti&quot;),
+  (&quot;Carpenter&quot;,5416,&quot;Galway&quot;,&quot;Metropolitana de Santiago&quot;,&quot;Croatia&quot;),
+  (&quot;Hanson&quot;,3047,&quot;Warri&quot;,&quot;East Java&quot;,&quot;Benin&quot;),
+  (&quot;Robertson&quot;,8799,&quot;Irkutsk&quot;,&quot;Zachodniopomorskie&quot;,&quot;Norway&quot;),
+  (&quot;Franklin&quot;,9214,&quot;San Luis Potosí&quot;,&quot;Sonora&quot;,&quot;Brazil&quot;),
+  (&quot;Woods&quot;,4339,&quot;Canberra&quot;,&quot;Sindh&quot;,&quot;Argentina&quot;),
+  (&quot;Bryant&quot;,4911,&quot;Daman&quot;,&quot;Bà Rịa–Vũng Tàu&quot;,&quot;Panama&quot;),
+  (&quot;Rios&quot;,1743,&quot;Anamur&quot;,&quot;Burgenland&quot;,&quot;Belize&quot;),
+  (&quot;Lyons&quot;,1940,&quot;Hougang&quot;,&quot;Warmińsko-mazurskie&quot;,&quot;Trinidad and Tobago&quot;),
+  (&quot;England&quot;,6402,&quot;Moradabad&quot;,&quot;North Island&quot;,&quot;San Marino&quot;),
+  (&quot;Clark&quot;,2538,&quot;Schifferstadt&quot;,&quot;Nuevo León&quot;,&quot;Vanuatu&quot;),
+  (&quot;Norton&quot;,6049,&quot;Nelson&quot;,&quot;Kocaeli&quot;,&quot;Slovakia&quot;),
+  (&quot;Pate&quot;,6397,&quot;Cusco&quot;,&quot;Azad Kashmir&quot;,&quot;Nicaragua&quot;),
+  (&quot;Walls&quot;,1333,&quot;Mexico City&quot;,&quot;Kocaeli&quot;,&quot;Albania&quot;),
+  (&quot;Hansen&quot;,7665,&quot;Flint&quot;,&quot;Gävleborgs län&quot;,&quot;Nicaragua&quot;),
+  (&quot;Howell&quot;,8044,&quot;Siquirres&quot;,&quot;Madrid&quot;,&quot;Nigeria&quot;),
+  (&quot;Lott&quot;,6252,&quot;Koszalin&quot;,&quot;Maryland&quot;,&quot;Antarctica&quot;),
+  (&quot;Thornton&quot;,7484,&quot;Straits View&quot;,&quot;KwaZulu-Natal&quot;,&quot;Peru&quot;),
+  (&quot;Ward&quot;,6124,&quot;Aiseau-Presles&quot;,&quot;Leinster&quot;,&quot;Puerto Rico&quot;),
+  (&quot;Charles&quot;,6534,&quot;Ibadan&quot;,&quot;Sachsen&quot;,&quot;Guatemala&quot;),
+  (&quot;Rice&quot;,9349,&quot;Altavilla Irpina&quot;,&quot;Zhōngnán&quot;,&quot;Denmark&quot;),
+  (&quot;Roy&quot;,7715,&quot;Pioneer&quot;,&quot;KwaZulu-Natal&quot;,&quot;Gibraltar&quot;),
+  (&quot;Blanchard&quot;,1384,&quot;Berdychiv&quot;,&quot;South Island&quot;,&quot;Uruguay&quot;),
+  (&quot;Chan&quot;,3420,&quot;Shandong&quot;,&quot;Gelderland&quot;,&quot;Chile&quot;),
+  (&quot;Gill&quot;,3797,&quot;Calama&quot;,&quot;Atacama&quot;,&quot;Singapore&quot;),
+  (&quot;Sherman&quot;,4659,&quot;Cork&quot;,&quot;East Region&quot;,&quot;Cameroon&quot;),
+  (&quot;Jacobs&quot;,1355,&quot;Van&quot;,&quot;Sumy oblast&quot;,&quot;Bahamas&quot;),
+  (&quot;Forbes&quot;,9899,&quot;Balanga&quot;,&quot;Alajuela&quot;,&quot;Saint Kitts and Nevis&quot;),
+  (&quot;Juarez&quot;,7215,&quot;Waiheke Island&quot;,&quot;Manitoba&quot;,&quot;Cuba&quot;),
+  (&quot;Adkins&quot;,2980,&quot;Thanh Hóa&quot;,&quot;Ceuta&quot;,&quot;Uzbekistan&quot;),
+  (&quot;Weiss&quot;,1864,&quot;Kendari&quot;,&quot;West Bengal&quot;,&quot;Bolivia&quot;),
+  (&quot;Glass&quot;,4564,&quot;Tongyeong&quot;,&quot;Lubuskie&quot;,&quot;Bahamas&quot;),
+  (&quot;Kane&quot;,5595,&quot;Aizwal&quot;,&quot;Namen&quot;,&quot;Syria&quot;),
+  (&quot;Chang&quot;,8739,&quot;Collines-de-l'Outaouais&quot;,&quot;Xīběi&quot;,&quot;Cuba&quot;),
+  (&quot;Hurley&quot;,7939,&quot;Sint-Agatha-Berchem&quot;,&quot;Eastern Visayas&quot;,&quot;Austria&quot;),
+  (&quot;Mercer&quot;,7014,&quot;Sankt Johann im Pongau&quot;,&quot;Cantabria&quot;,&quot;Bhutan&quot;),
+  (&quot;Medina&quot;,8221,&quot;Sullana&quot;,&quot;Brussels Hoofdstedelijk Gewest&quot;,&quot;Congo (Brazzaville)&quot;),
+  (&quot;Mitchell&quot;,7628,&quot;Fossato di Vico&quot;,&quot;Salzburg&quot;,&quot;Brazil&quot;);
+INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
+VALUES
+  (&quot;Bartlett&quot;,3631,&quot;Peshawar&quot;,&quot;West-Vlaanderen&quot;,&quot;Uzbekistan&quot;),
+  (&quot;Mcknight&quot;,4962,&quot;Teruel&quot;,&quot;Aquitaine&quot;,&quot;Hungary&quot;),
+  (&quot;Cash&quot;,1776,&quot;Sibasa&quot;,&quot;Sindh&quot;,&quot;Serbia&quot;),
+  (&quot;Griffith&quot;,1678,&quot;Helmond&quot;,&quot;West Region&quot;,&quot;Belgium&quot;),
+  (&quot;Kidd&quot;,2925,&quot;Ghanche&quot;,&quot;Paraná&quot;,&quot;Nauru&quot;),
+  (&quot;Wells&quot;,8761,&quot;Kharagpur&quot;,&quot;Rogaland&quot;,&quot;Colombia&quot;),
+  (&quot;Saunders&quot;,9718,&quot;West Vancouver&quot;,&quot;Bihar&quot;,&quot;Greenland&quot;),
+  (&quot;Singleton&quot;,6909,&quot;Beypazarı&quot;,&quot;Central Region&quot;,&quot;Colombia&quot;),
+  (&quot;Dunn&quot;,6498,&quot;Córdoba&quot;,&quot;Hessen&quot;,&quot;Antarctica&quot;),
+  (&quot;Padilla&quot;,9124,&quot;IJlst&quot;,&quot;Herefordshire&quot;,&quot;Mayotte&quot;),
+  (&quot;Lang&quot;,7234,&quot;Profondeville&quot;,&quot;Bayern&quot;,&quot;Mauritius&quot;),
+  (&quot;West&quot;,7293,&quot;Mataram&quot;,&quot;Luhansk oblast&quot;,&quot;Senegal&quot;),
+  (&quot;Robinson&quot;,2436,&quot;Knittelfeld&quot;,&quot;Limpopo&quot;,&quot;Serbia&quot;),
+  (&quot;Sweeney&quot;,6186,&quot;Hoogeveen&quot;,&quot;Connacht&quot;,&quot;Australia&quot;),
+  (&quot;Wiley&quot;,7251,&quot;Suncheon&quot;,&quot;Corse&quot;,&quot;French Polynesia&quot;),
+  (&quot;Fox&quot;,7804,&quot;Banjarmasin&quot;,&quot;Luxemburg&quot;,&quot;Mali&quot;),
+  (&quot;Vaughn&quot;,8103,&quot;Cannes&quot;,&quot;Ulster&quot;,&quot;Belarus&quot;),
+  (&quot;Hicks&quot;,7715,&quot;Khrustalnyi&quot;,&quot;Madrid&quot;,&quot;Ireland&quot;),
+  (&quot;Skinner&quot;,3911,&quot;Virginia Beach&quot;,&quot;Nuevo León&quot;,&quot;Sudan&quot;),
+  (&quot;Pratt&quot;,8663,&quot;Naushahro Firoze&quot;,&quot;Jönköpings län&quot;,&quot;Austria&quot;),
+  (&quot;Norton&quot;,6962,&quot;Oostkerk&quot;,&quot;Bremen&quot;,&quot;Rwanda&quot;),
+  (&quot;Luna&quot;,2837,&quot;Kallang&quot;,&quot;Møre og Romsdal&quot;,&quot;Poland&quot;),
+  (&quot;Emerson&quot;,7540,&quot;Idaho Falls&quot;,&quot;Yucatán&quot;,&quot;Norway&quot;),
+  (&quot;Allison&quot;,7576,&quot;Cabadbaran&quot;,&quot;Ogun&quot;,&quot;Comoros&quot;),
+  (&quot;Garrison&quot;,6843,&quot;Jeonju&quot;,&quot;Languedoc-Roussillon&quot;,&quot;Yemen&quot;),
+  (&quot;Acevedo&quot;,4652,&quot;Heilongjiang&quot;,&quot;Santa Catarina&quot;,&quot;Sweden&quot;),
+  (&quot;Henderson&quot;,1468,&quot;Canberra&quot;,&quot;Sindh&quot;,&quot;Singapore&quot;),
+  (&quot;Delaney&quot;,1835,&quot;Camaçari&quot;,&quot;Maluku&quot;,&quot;Central African Republic&quot;),
+  (&quot;Cain&quot;,3899,&quot;Narowal&quot;,&quot;Carinthia&quot;,&quot;Lithuania&quot;),
+  (&quot;Thomas&quot;,9377,&quot;Tebing Tinggi&quot;,&quot;Riau Islands&quot;,&quot;Virgin Islands, United States&quot;),
+  (&quot;Bruce&quot;,9062,&quot;Brecon&quot;,&quot;Lubuskie&quot;,&quot;Bahrain&quot;),
+  (&quot;Mcdonald&quot;,8451,&quot;Avesta&quot;,&quot;Uttar Pradesh&quot;,&quot;Solomon Islands&quot;),
+  (&quot;Carey&quot;,7440,&quot;Guadalajara&quot;,&quot;Dolnośląskie&quot;,&quot;Comoros&quot;),
+  (&quot;Campos&quot;,5040,&quot;Bursa&quot;,&quot;Cordillera Administrative Region&quot;,&quot;Kenya&quot;),
+  (&quot;Duncan&quot;,6199,&quot;Hofheim am Taunus&quot;,&quot;Azad Kashmir&quot;,&quot;Iran&quot;),
+  (&quot;Everett&quot;,9215,&quot;Ulsan&quot;,&quot;Newfoundland and Labrador&quot;,&quot;Norfolk Island&quot;),
+  (&quot;Anthony&quot;,2565,&quot;Phalaborwa&quot;,&quot;Innlandet&quot;,&quot;Cameroon&quot;),
+  (&quot;Wise&quot;,6736,&quot;Guihulngan&quot;,&quot;North Region&quot;,&quot;Brazil&quot;),
+  (&quot;Garcia&quot;,9282,&quot;Eisenstadt&quot;,&quot;Karnataka&quot;,&quot;Falkland Islands&quot;),
+  (&quot;Petty&quot;,7993,&quot;Tehuacán&quot;,&quot;Innlandet&quot;,&quot;French Polynesia&quot;),
+  (&quot;Mclean&quot;,1354,&quot;Boryspil&quot;,&quot;South Island&quot;,&quot;Christmas Island&quot;),
+  (&quot;Pacheco&quot;,8643,&quot;St. Neots&quot;,&quot;Ceará&quot;,&quot;Paraguay&quot;),
+  (&quot;Phillips&quot;,1625,&quot;Wakefield&quot;,&quot;Tripura&quot;,&quot;Germany&quot;),
+  (&quot;Mcpherson&quot;,1151,&quot;Jaén&quot;,&quot;Gangwon&quot;,&quot;Nauru&quot;),
+  (&quot;Thomas&quot;,7515,&quot;Cork&quot;,&quot;Namen&quot;,&quot;Tonga&quot;),
+  (&quot;Henry&quot;,1706,&quot;Yahyalı&quot;,&quot;Antioquia&quot;,&quot;France&quot;),
+  (&quot;Hopkins&quot;,6463,&quot;Jeonju&quot;,&quot;Queensland&quot;,&quot;Rwanda&quot;),
+  (&quot;Gonzales&quot;,6699,&quot;Tuas&quot;,&quot;West Region&quot;,&quot;Palestine, State of&quot;),
+  (&quot;Roman&quot;,8835,&quot;Egersund&quot;,&quot;Magallanes y Antártica Chilena&quot;,&quot;Nigeria&quot;),
+  (&quot;Snow&quot;,1159,&quot;Panjim&quot;,&quot;Cà Mau&quot;,&quot;Malaysia&quot;);
+
+INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
+VALUES
+  (&quot;Castro&quot;,4480,&quot;Åkrehamn&quot;,&quot;Kujawsko-pomorskie&quot;,&quot;Singapore&quot;),
+  (&quot;Francis&quot;,6558,&quot;Dunoon&quot;,&quot;Piemonte&quot;,&quot;United Kingdom (Great Britain)&quot;),
+  (&quot;Michael&quot;,2546,&quot;Dublin&quot;,&quot;Navarra&quot;,&quot;Swaziland&quot;),
+  (&quot;Keller&quot;,5093,&quot;Kỳ Sơn&quot;,&quot;Overijssel&quot;,&quot;Burundi&quot;),
+  (&quot;Lloyd&quot;,4377,&quot;Ipiales&quot;,&quot;North Island&quot;,&quot;Namibia&quot;),
+  (&quot;Mccoy&quot;,5497,&quot;San Felipe&quot;,&quot;Azad Kashmir&quot;,&quot;Bangladesh&quot;),
+  (&quot;Orr&quot;,7515,&quot;Bida&quot;,&quot;Derbyshire&quot;,&quot;Cook Islands&quot;),
+  (&quot;Everett&quot;,1846,&quot;Sakhalin&quot;,&quot;Vorarlberg&quot;,&quot;Tunisia&quot;),
+  (&quot;Bishop&quot;,7418,&quot;Straubing&quot;,&quot;Đà Nẵng&quot;,&quot;Cape Verde&quot;),
+  (&quot;Delgado&quot;,6014,&quot;Courcelles&quot;,&quot;Magdalena&quot;,&quot;Estonia&quot;),
+  (&quot;Tate&quot;,6491,&quot;Bayonne&quot;,&quot;Namen&quot;,&quot;Denmark&quot;),
+  (&quot;Barton&quot;,9184,&quot;Fort St. John&quot;,&quot;Punjab&quot;,&quot;Taiwan&quot;),
+  (&quot;Joyner&quot;,4555,&quot;Anhui&quot;,&quot;North Island&quot;,&quot;Egypt&quot;),
+  (&quot;Castillo&quot;,9140,&quot;Jeonju&quot;,&quot;Poltava oblast&quot;,&quot;Chad&quot;),
+  (&quot;Reyes&quot;,9030,&quot;Odessa&quot;,&quot;Bauchi&quot;,&quot;Micronesia&quot;),
+  (&quot;Wilkerson&quot;,1963,&quot;Maiduguri&quot;,&quot;Arauca&quot;,&quot;Slovakia&quot;),
+  (&quot;Castro&quot;,5066,&quot;Molde&quot;,&quot;North West&quot;,&quot;Solomon Islands&quot;),
+  (&quot;Maddox&quot;,8991,&quot;Dunedin&quot;,&quot;North Gyeongsang&quot;,&quot;Azerbaijan&quot;),
+  (&quot;Summers&quot;,1550,&quot;Tulsa&quot;,&quot;Limón&quot;,&quot;Papua New Guinea&quot;),
+  (&quot;Buckner&quot;,2577,&quot;Mokpo&quot;,&quot;Vestland&quot;,&quot;Mauritius&quot;),
+  (&quot;Garrison&quot;,1803,&quot;St. Thomas&quot;,&quot;Swiętokrzyskie&quot;,&quot;France&quot;),
+  (&quot;Hancock&quot;,1549,&quot;Rothesay&quot;,&quot;Friuli-Venezia Giulia&quot;,&quot;Cocos (Keeling) Islands&quot;),
+  (&quot;Trevino&quot;,5183,&quot;Kharmang&quot;,&quot;Balıkesir&quot;,&quot;China&quot;),
+  (&quot;Knox&quot;,8208,&quot;Dublin&quot;,&quot;Tyrol&quot;,&quot;Japan&quot;),
+  (&quot;Le&quot;,2198,&quot;Uyo&quot;,&quot;Vestland&quot;,&quot;Papua New Guinea&quot;),
+  (&quot;Clayton&quot;,9646,&quot;Częstochowa&quot;,&quot;Mizoram&quot;,&quot;Turkey&quot;),
+  (&quot;Burton&quot;,1814,&quot;Legnica&quot;,&quot;Arkhangelsk Oblast&quot;,&quot;Martinique&quot;),
+  (&quot;Robinson&quot;,1485,&quot;Renlies&quot;,&quot;Gaziantep&quot;,&quot;Kuwait&quot;),
+  (&quot;Goodwin&quot;,7255,&quot;Motherwell&quot;,&quot;Lambayeque&quot;,&quot;Antigua and Barbuda&quot;),
+  (&quot;Hubbard&quot;,2107,&quot;Los Patios&quot;,&quot;Southwestern Tagalog Region&quot;,&quot;Congo (Brazzaville)&quot;),
+  (&quot;Flynn&quot;,4455,&quot;Belmont&quot;,&quot;North Region&quot;,&quot;Turkmenistan&quot;),
+  (&quot;Delacruz&quot;,1603,&quot;Narvik&quot;,&quot;Wielkopolskie&quot;,&quot;Oman&quot;),
+  (&quot;Young&quot;,6282,&quot;Dublin&quot;,&quot;Konya&quot;,&quot;India&quot;),
+  (&quot;Gamble&quot;,6586,&quot;Braunau am Inn&quot;,&quot;O'Higgins&quot;,&quot;Guam&quot;),
+  (&quot;Smith&quot;,6461,&quot;Hualaihué&quot;,&quot;Emilia-Romagna&quot;,&quot;Lesotho&quot;),
+  (&quot;Cotton&quot;,7240,&quot;Santarém&quot;,&quot;Tabasco&quot;,&quot;Guinea&quot;),
+  (&quot;Davenport&quot;,2309,&quot;Sainte-Ode&quot;,&quot;West Region&quot;,&quot;Costa Rica&quot;),
+  (&quot;Weiss&quot;,8171,&quot;St. Petersburg&quot;,&quot;Central Region&quot;,&quot;Egypt&quot;),
+  (&quot;Sampson&quot;,9317,&quot;Tacurong&quot;,&quot;Mazowieckie&quot;,&quot;Iran&quot;),
+  (&quot;Guzman&quot;,4435,&quot;Hougang&quot;,&quot;Vorarlberg&quot;,&quot;Netherlands&quot;),
+  (&quot;Wilkinson&quot;,1899,&quot;Tyumen&quot;,&quot;Veracruz&quot;,&quot;Costa Rica&quot;),
+  (&quot;Beasley&quot;,6339,&quot;Altmünster&quot;,&quot;Veracruz&quot;,&quot;Poland&quot;),
+  (&quot;Williams&quot;,5518,&quot;Orito&quot;,&quot;Auvergne&quot;,&quot;Algeria&quot;),
+  (&quot;Mullen&quot;,9967,&quot;Wodonga&quot;,&quot;Leinster&quot;,&quot;Sweden&quot;),
+  (&quot;Gillespie&quot;,1124,&quot;Los Mochis&quot;,&quot;Western Australia&quot;,&quot;Cuba&quot;),
+  (&quot;Burns&quot;,8550,&quot;Nîmes&quot;,&quot;Kujawsko-pomorskie&quot;,&quot;Fiji&quot;),
+  (&quot;Watkins&quot;,5676,&quot;Dublin&quot;,&quot;Sindh&quot;,&quot;Ethiopia&quot;),
+  (&quot;Fuentes&quot;,2892,&quot;Makati&quot;,&quot;Cantabria&quot;,&quot;Sao Tome and Principe&quot;),
+  (&quot;Nichols&quot;,6498,&quot;Baden&quot;,&quot;Phú Thọ&quot;,&quot;Finland&quot;),
+  (&quot;Foreman&quot;,5667,&quot;Piedras Negras&quot;,&quot;North Gyeongsang&quot;,&quot;Ireland&quot;);
+  
+INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
+VALUES
+  (&quot;Buchanan&quot;,6962,&quot;Puerto Vallarta&quot;,&quot;Nordland&quot;,&quot;Pitcairn Islands&quot;),
+  (&quot;Malone&quot;,4835,&quot;Galashiels&quot;,&quot;Ogun&quot;,&quot;Wallis and Futuna&quot;),
+  (&quot;Schultz&quot;,2974,&quot;Metairie&quot;,&quot;Puebla&quot;,&quot;Nigeria&quot;),
+  (&quot;Conrad&quot;,1725,&quot;Hebei&quot;,&quot;Paraná&quot;,&quot;Grenada&quot;),
+  (&quot;Peterson&quot;,6043,&quot;Asha&quot;,&quot;Marche&quot;,&quot;Brazil&quot;),
+  (&quot;Griffith&quot;,3068,&quot;Ceuta&quot;,&quot;East Region&quot;,&quot;Canada&quot;),
+  (&quot;Cooper&quot;,5708,&quot;Uyo&quot;,&quot;Azad Kashmir&quot;,&quot;Qatar&quot;),
+  (&quot;Avery&quot;,2349,&quot;Canberra&quot;,&quot;North Region&quot;,&quot;Liberia&quot;),
+  (&quot;Hampton&quot;,7884,&quot;Elmshorn&quot;,&quot;Los Ríos&quot;,&quot;Tokelau&quot;),
+  (&quot;Brady&quot;,2615,&quot;Lagos&quot;,&quot;Eastern Visayas&quot;,&quot;Azerbaijan&quot;),
+  (&quot;Slater&quot;,7553,&quot;Heredia&quot;,&quot;Huádōng&quot;,&quot;Malta&quot;),
+  (&quot;Schwartz&quot;,3881,&quot;Ife&quot;,&quot;South Island&quot;,&quot;Wallis and Futuna&quot;),
+  (&quot;Finley&quot;,9618,&quot;Mahikeng&quot;,&quot;Xīběi&quot;,&quot;Bolivia&quot;),
+  (&quot;Freeman&quot;,2093,&quot;Schwerin&quot;,&quot;Huádōng&quot;,&quot;Slovakia&quot;),
+  (&quot;Kirk&quot;,4986,&quot;Penza&quot;,&quot;Jönköpings län&quot;,&quot;Canada&quot;),
+  (&quot;Dalton&quot;,9236,&quot;Chandigarh&quot;,&quot;Trøndelag&quot;,&quot;French Guiana&quot;),
+  (&quot;Walter&quot;,2459,&quot;Ghislarengo&quot;,&quot;Connacht&quot;,&quot;Aruba&quot;),
+  (&quot;Best&quot;,4690,&quot;Southwell&quot;,&quot;North West&quot;,&quot;Guatemala&quot;),
+  (&quot;Rose&quot;,4254,&quot;Nässjö&quot;,&quot;Berkshire&quot;,&quot;Australia&quot;),
+  (&quot;Payne&quot;,8085,&quot;Shillong&quot;,&quot;Borno&quot;,&quot;Cambodia&quot;),
+  (&quot;Merritt&quot;,8659,&quot;Oaxaca&quot;,&quot;Balıkesir&quot;,&quot;Liberia&quot;),
+  (&quot;Sykes&quot;,3364,&quot;Hubei&quot;,&quot;Trentino-Alto Adige&quot;,&quot;Brazil&quot;),
+  (&quot;Knox&quot;,9191,&quot;Durban&quot;,&quot;Drenthe&quot;,&quot;Curaçao&quot;),
+  (&quot;England&quot;,8780,&quot;Pasig&quot;,&quot;Poitou-Charentes&quot;,&quot;Malawi&quot;),
+  (&quot;Hodges&quot;,8621,&quot;Schaarbeek&quot;,&quot;Mpumalanga&quot;,&quot;United States&quot;),
+  (&quot;Pena&quot;,7403,&quot;Saint-Marc&quot;,&quot;Manisa&quot;,&quot;Australia&quot;),
+  (&quot;Sargent&quot;,2918,&quot;Tarakan&quot;,&quot;Los Ríos&quot;,&quot;Papua New Guinea&quot;),
+  (&quot;Cantrell&quot;,5283,&quot;Siena&quot;,&quot;Yukon&quot;,&quot;Brazil&quot;),
+  (&quot;Hurst&quot;,9690,&quot;Saravena&quot;,&quot;Stockholms län&quot;,&quot;Kenya&quot;),
+  (&quot;Gay&quot;,8979,&quot;Khanpur&quot;,&quot;Auvergne&quot;,&quot;Gibraltar&quot;),
+  (&quot;Bond&quot;,1822,&quot;Istanbul&quot;,&quot;Adana&quot;,&quot;Timor-Leste&quot;),
+  (&quot;Marquez&quot;,9398,&quot;Gyeongsan&quot;,&quot;Hamburg&quot;,&quot;Costa Rica&quot;),
+  (&quot;Meyer&quot;,1563,&quot;Monclova&quot;,&quot;Podkarpackie&quot;,&quot;Ecuador&quot;),
+  (&quot;Crosby&quot;,3789,&quot;Pekanbaru&quot;,&quot;Vienna&quot;,&quot;Trinidad and Tobago&quot;),
+  (&quot;Parker&quot;,1845,&quot;Manfredonia&quot;,&quot;Zakarpattia oblast&quot;,&quot;Vanuatu&quot;),
+  (&quot;Mcfarland&quot;,5266,&quot;Geelong&quot;,&quot;Kyiv oblast&quot;,&quot;Cayman Islands&quot;),
+  (&quot;Barr&quot;,2588,&quot;Ulloa (Barrial]&quot;,&quot;New Brunswick&quot;,&quot;Turkey&quot;),
+  (&quot;Blanchard&quot;,9796,&quot;Jambi&quot;,&quot;Carinthia&quot;,&quot;Iceland&quot;),
+  (&quot;Golden&quot;,3149,&quot;Macchia Valfortore&quot;,&quot;Punjab&quot;,&quot;Cuba&quot;),
+  (&quot;Shepherd&quot;,9462,&quot;Moe&quot;,&quot;South Australia&quot;,&quot;Bangladesh&quot;),
+  (&quot;Marks&quot;,3483,&quot;Smolensk&quot;,&quot;Munster&quot;,&quot;Maldives&quot;),
+  (&quot;Brewer&quot;,4849,&quot;Simpang&quot;,&quot;South Island&quot;,&quot;Sao Tome and Principe&quot;),
+  (&quot;Hoover&quot;,7265,&quot;Bergen&quot;,&quot;Central Region&quot;,&quot;Aruba&quot;),
+  (&quot;Carroll&quot;,7125,&quot;Nijmegen&quot;,&quot;Junín&quot;,&quot;Costa Rica&quot;),
+  (&quot;Thornton&quot;,6908,&quot;A Coruña&quot;,&quot;North-East Region&quot;,&quot;Cyprus&quot;),
+  (&quot;Prince&quot;,1347,&quot;Aparecida de Goiânia&quot;,&quot;Galicia&quot;,&quot;Heard Island and Mcdonald Islands&quot;),
+  (&quot;Robertson&quot;,7101,&quot;Mokpo&quot;,&quot;Osun&quot;,&quot;Serbia&quot;),
+  (&quot;Branch&quot;,7260,&quot;Fundación&quot;,&quot;Oryol Oblast&quot;,&quot;Ireland&quot;),
+  (&quot;Joyce&quot;,8370,&quot;Jayapura&quot;,&quot;Ankara&quot;,&quot;Dominican Republic&quot;),
+  (&quot;Cunningham&quot;,8586,&quot;Maryborough&quot;,&quot;West-Vlaanderen&quot;,&quot;Guyana&quot;);
+INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
+VALUES
+  (&quot;Castro&quot;,4469,&quot;San Isidro&quot;,&quot;Östergötlands län&quot;,&quot;Malawi&quot;),
+  (&quot;Kirkland&quot;,1625,&quot;Lienz&quot;,&quot;West-Vlaanderen&quot;,&quot;Christmas Island&quot;),
+  (&quot;Jordan&quot;,4470,&quot;Great Falls&quot;,&quot;Hampshire&quot;,&quot;Lithuania&quot;),
+  (&quot;Key&quot;,6586,&quot;Isabela City&quot;,&quot;South Island&quot;,&quot;Brunei&quot;),
+  (&quot;Randall&quot;,2362,&quot;Dublin&quot;,&quot;Connacht&quot;,&quot;Mali&quot;),
+  (&quot;Best&quot;,3713,&quot;Cunco&quot;,&quot;Northern Cape&quot;,&quot;Turkey&quot;),
+  (&quot;Moss&quot;,7266,&quot;Lüneburg&quot;,&quot;North Sulawesi&quot;,&quot;Malawi&quot;),
+  (&quot;Salazar&quot;,1897,&quot;Quesada&quot;,&quot;Bahia&quot;,&quot;Cambodia&quot;),
+  (&quot;Adkins&quot;,1501,&quot;Irkutsk&quot;,&quot;Chandigarh&quot;,&quot;Norway&quot;),
+  (&quot;Cohen&quot;,7520,&quot;Jecheon&quot;,&quot;Ivano-Frankivsk oblast&quot;,&quot;French Guiana&quot;),
+  (&quot;Cook&quot;,9289,&quot;Halifax&quot;,&quot;Worcestershire&quot;,&quot;Virgin Islands, British&quot;),
+  (&quot;Cox&quot;,7991,&quot;Yaroslavl&quot;,&quot;Munster&quot;,&quot;Mauritania&quot;),
+  (&quot;Espinoza&quot;,5137,&quot;Zhytomyr&quot;,&quot;Huáběi&quot;,&quot;Estonia&quot;),
+  (&quot;Vasquez&quot;,9839,&quot;Tuy Hòa&quot;,&quot;Emilia-Romagna&quot;,&quot;Benin&quot;),
+  (&quot;Clemons&quot;,9821,&quot;Saint-Remy&quot;,&quot;Carmarthenshire&quot;,&quot;Timor-Leste&quot;),
+  (&quot;Lamb&quot;,5449,&quot;Juneau&quot;,&quot;Tamil Nadu&quot;,&quot;Wallis and Futuna&quot;),
+  (&quot;Byers&quot;,9635,&quot;Dindigul&quot;,&quot;Dōngběi&quot;,&quot;Serbia&quot;),
+  (&quot;Craft&quot;,2036,&quot;Okpoko&quot;,&quot;Junín&quot;,&quot;Turkey&quot;),
+  (&quot;Wyatt&quot;,8902,&quot;Schiltigheim&quot;,&quot;Salzburg&quot;,&quot;Andorra&quot;),
+  (&quot;Craft&quot;,1927,&quot;Sichuan&quot;,&quot;Southwestern Tagalog Region&quot;,&quot;Bermuda&quot;),
+  (&quot;O'donnell&quot;,5675,&quot;Whitehorse&quot;,&quot;Puglia&quot;,&quot;Macao&quot;),
+  (&quot;Carlson&quot;,6890,&quot;Pskov&quot;,&quot;Basilicata&quot;,&quot;New Caledonia&quot;),
+  (&quot;Bird&quot;,3811,&quot;Barry&quot;,&quot;Alsace&quot;,&quot;Kyrgyzstan&quot;),
+  (&quot;Holmes&quot;,8370,&quot;Liberia&quot;,&quot;British Columbia&quot;,&quot;Montserrat&quot;),
+  (&quot;Foreman&quot;,9322,&quot;Åkrehamn&quot;,&quot;Loreto&quot;,&quot;Norfolk Island&quot;),
+  (&quot;Sosa&quot;,3113,&quot;San Pedro Garza García&quot;,&quot;Ogun&quot;,&quot;Ethiopia&quot;),
+  (&quot;Moore&quot;,6093,&quot;Emalahleni&quot;,&quot;Cajamarca&quot;,&quot;Suriname&quot;),
+  (&quot;Evans&quot;,8050,&quot;Liberia&quot;,&quot;Saarland&quot;,&quot;Åland Islands&quot;),
+  (&quot;Mercer&quot;,8748,&quot;Geoje&quot;,&quot;Phú Thọ&quot;,&quot;Holy See (Vatican City State)&quot;),
+  (&quot;Rios&quot;,9632,&quot;Cajamarca&quot;,&quot;Navarra&quot;,&quot;Trinidad and Tobago&quot;),
+  (&quot;Branch&quot;,1747,&quot;Mataram&quot;,&quot;Cauca&quot;,&quot;Malta&quot;),
+  (&quot;Wise&quot;,2271,&quot;Port Augusta&quot;,&quot;South Island&quot;,&quot;Zimbabwe&quot;),
+  (&quot;Dixon&quot;,6220,&quot;Itabuna&quot;,&quot;Gävleborgs län&quot;,&quot;Peru&quot;),
+  (&quot;Holder&quot;,1569,&quot;Alajuela&quot;,&quot;Molise&quot;,&quot;Bhutan&quot;),
+  (&quot;Meadows&quot;,5268,&quot;Skardu&quot;,&quot;Balochistan&quot;,&quot;Guam&quot;),
+  (&quot;Daugherty&quot;,7262,&quot;Sapele&quot;,&quot;Piemonte&quot;,&quot;Portugal&quot;),
+  (&quot;Dawson&quot;,8688,&quot;Kano&quot;,&quot;Volyn oblast&quot;,&quot;Somalia&quot;),
+  (&quot;Johnson&quot;,5962,&quot;Völkermarkt&quot;,&quot;North Island&quot;,&quot;Syria&quot;),
+  (&quot;Tran&quot;,3866,&quot;Iquitos&quot;,&quot;Vestfold og Telemark&quot;,&quot;Australia&quot;),
+  (&quot;Gilbert&quot;,9345,&quot;Nagar&quot;,&quot;Puno&quot;,&quot;Montenegro&quot;),
+  (&quot;Johnson&quot;,4522,&quot;Épernay&quot;,&quot;Manitoba&quot;,&quot;Saint Helena, Ascension and Tristan da Cunha&quot;),
+  (&quot;Stein&quot;,7511,&quot;Pinetown&quot;,&quot;Aceh&quot;,&quot;Albania&quot;),
+  (&quot;Lott&quot;,8729,&quot;Cheongju&quot;,&quot;Gelderland&quot;,&quot;Ghana&quot;),
+  (&quot;Mcgee&quot;,4710,&quot;Red Deer&quot;,&quot;Aisén&quot;,&quot;Tunisia&quot;),
+  (&quot;Conley&quot;,3894,&quot;Blackwood&quot;,&quot;Limousin&quot;,&quot;French Southern Territories&quot;),
+  (&quot;Shannon&quot;,6047,&quot;Galway&quot;,&quot;Central Visayas&quot;,&quot;Marshall Islands&quot;),
+  (&quot;Chavez&quot;,6670,&quot;Norrköping&quot;,&quot;Cambridgeshire&quot;,&quot;Malaysia&quot;),
+  (&quot;Baker&quot;,9466,&quot;Semarang&quot;,&quot;Trentino-Alto Adige&quot;,&quot;Romania&quot;),
+  (&quot;Rojas&quot;,2757,&quot;Torreón&quot;,&quot;Aisén&quot;,&quot;Marshall Islands&quot;),
+  (&quot;Herman&quot;,9064,&quot;Dublin&quot;,&quot;Ulster&quot;,&quot;Saint Kitts and Nevis&quot;);
+INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
+VALUES
+  (&quot;Gibson&quot;,1282,&quot;St. Veit an der Glan&quot;,&quot;Bauchi&quot;,&quot;Liberia&quot;),
+  (&quot;Nichols&quot;,5771,&quot;Tarma&quot;,&quot;Bihar&quot;,&quot;Qatar&quot;),
+  (&quot;White&quot;,6709,&quot;North Waziristan&quot;,&quot;Atacama&quot;,&quot;Hungary&quot;),
+  (&quot;Marshall&quot;,9910,&quot;Palma de Mallorca&quot;,&quot;Volgograd Oblast&quot;,&quot;Sao Tome and Principe&quot;),
+  (&quot;Vasquez&quot;,2339,&quot;Siquirres&quot;,&quot;Tarapacá&quot;,&quot;Jamaica&quot;),
+  (&quot;Mayer&quot;,8489,&quot;Chuncheon&quot;,&quot;Magadan Oblast&quot;,&quot;Barbados&quot;),
+  (&quot;Richmond&quot;,6797,&quot;Jeonju&quot;,&quot;Akwa Ibom&quot;,&quot;Montserrat&quot;),
+  (&quot;Mooney&quot;,8044,&quot;Logan City&quot;,&quot;Kerala&quot;,&quot;Dominica&quot;),
+  (&quot;Arnold&quot;,9264,&quot;Orange&quot;,&quot;FATA&quot;,&quot;British Indian Ocean Territory&quot;),
+  (&quot;King&quot;,4354,&quot;Brest&quot;,&quot;Podkarpackie&quot;,&quot;Guinea-Bissau&quot;),
+  (&quot;Wells&quot;,6299,&quot;Nova Kakhovka&quot;,&quot;Lipetsk Oblast&quot;,&quot;French Southern Territories&quot;),
+  (&quot;Walker&quot;,3999,&quot;Carson City&quot;,&quot;British Columbia&quot;,&quot;Lithuania&quot;),
+  (&quot;Browning&quot;,5133,&quot;Salvador&quot;,&quot;Central Java&quot;,&quot;Saint Kitts and Nevis&quot;),
+  (&quot;Daniel&quot;,9930,&quot;North Waziristan&quot;,&quot;Florida&quot;,&quot;Costa Rica&quot;),
+  (&quot;Phillips&quot;,1031,&quot;Soledad&quot;,&quot;Emilia-Romagna&quot;,&quot;Germany&quot;),
+  (&quot;Manning&quot;,5165,&quot;Juliaca&quot;,&quot;Kurgan Oblast&quot;,&quot;Isle of Man&quot;),
+  (&quot;Briggs&quot;,1167,&quot;San Francisco&quot;,&quot;South Gyeongsang&quot;,&quot;United Arab Emirates&quot;),
+  (&quot;Walters&quot;,3386,&quot;Nizhny&quot;,&quot;Belgorod Oblast&quot;,&quot;Sao Tome and Principe&quot;),
+  (&quot;Cooke&quot;,7878,&quot;Đồng Xoài&quot;,&quot;Phú Thọ&quot;,&quot;Montenegro&quot;),
+  (&quot;Joyce&quot;,3501,&quot;Samara&quot;,&quot;British Columbia&quot;,&quot;South Africa&quot;),
+  (&quot;Clements&quot;,4597,&quot;Oklahoma City&quot;,&quot;Hidalgo&quot;,&quot;Mauritania&quot;),
+  (&quot;Buck&quot;,4995,&quot;Austin&quot;,&quot;Friesland&quot;,&quot;Zambia&quot;),
+  (&quot;Castro&quot;,5811,&quot;Izmir&quot;,&quot;Caquetá&quot;,&quot;Monaco&quot;),
+  (&quot;Hart&quot;,8416,&quot;Queilén&quot;,&quot;South Gyeongsang&quot;,&quot;India&quot;),
+  (&quot;Houston&quot;,9332,&quot;Heilongjiang&quot;,&quot;Gelderland&quot;,&quot;Bouvet Island&quot;),
+  (&quot;Porter&quot;,9866,&quot;Söderhamn&quot;,&quot;Sindh&quot;,&quot;Netherlands&quot;),
+  (&quot;Mitchell&quot;,1934,&quot;Moulins&quot;,&quot;Henegouwen&quot;,&quot;Isle of Man&quot;),
+  (&quot;Navarro&quot;,6513,&quot;Zaragoza&quot;,&quot;Gauteng&quot;,&quot;Swaziland&quot;),
+  (&quot;Holcomb&quot;,9258,&quot;Katowice&quot;,&quot;Flevoland&quot;,&quot;Fiji&quot;),
+  (&quot;Castillo&quot;,8759,&quot;Daegu&quot;,&quot;Munster&quot;,&quot;South Africa&quot;),
+  (&quot;Dalton&quot;,9346,&quot;Borlänge&quot;,&quot;South Island&quot;,&quot;Viet Nam&quot;),
+  (&quot;Albert&quot;,3758,&quot;Norrköping&quot;,&quot;Manitoba&quot;,&quot;Ukraine&quot;),
+  (&quot;Mayo&quot;,5612,&quot;Invercargill&quot;,&quot;Ayrshire&quot;,&quot;Guernsey&quot;),
+  (&quot;Coffey&quot;,1174,&quot;St. Andrä&quot;,&quot;Flevoland&quot;,&quot;Sao Tome and Principe&quot;),
+  (&quot;Pollard&quot;,3477,&quot;Requínoa&quot;,&quot;Samara Oblast&quot;,&quot;Oman&quot;),
+  (&quot;Ramirez&quot;,3988,&quot;La Higuera&quot;,&quot;Vorarlberg&quot;,&quot;Viet Nam&quot;),
+  (&quot;Middleton&quot;,4888,&quot;East London&quot;,&quot;Gelderland&quot;,&quot;Czech Republic&quot;),
+  (&quot;Hester&quot;,6447,&quot;Velden am Wörther See&quot;,&quot;North Chungcheong&quot;,&quot;Dominica&quot;),
+  (&quot;Mcclure&quot;,6670,&quot;Stekene&quot;,&quot;Konya&quot;,&quot;Nigeria&quot;),
+  (&quot;Valencia&quot;,8057,&quot;Birmingham&quot;,&quot;Hà Nam&quot;,&quot;Antarctica&quot;),
+  (&quot;Bryan&quot;,9573,&quot;Sortland&quot;,&quot;Northern Territory&quot;,&quot;Virgin Islands, United States&quot;),
+  (&quot;Richard&quot;,7913,&quot;Dublin&quot;,&quot;Clackmannanshire&quot;,&quot;Central African Republic&quot;),
+  (&quot;Neal&quot;,7526,&quot;Karachi&quot;,&quot;Morelos&quot;,&quot;Hong Kong&quot;),
+  (&quot;Willis&quot;,1553,&quot;Yunnan&quot;,&quot;Lambayeque&quot;,&quot;Portugal&quot;),
+  (&quot;Fitzgerald&quot;,9328,&quot;Polesella&quot;,&quot;Balochistan&quot;,&quot;Sweden&quot;),
+  (&quot;Williams&quot;,1228,&quot;Sart-Dames-Avelines&quot;,&quot;Dalarnas län&quot;,&quot;Samoa&quot;),
+  (&quot;Steele&quot;,5344,&quot;Landeck&quot;,&quot;Riau Islands&quot;,&quot;Congo (Brazzaville)&quot;),
+  (&quot;Atkins&quot;,7477,&quot;Mersin&quot;,&quot;Manitoba&quot;,&quot;Tanzania&quot;),
+  (&quot;Velasquez&quot;,8107,&quot;Thủ Dầu Một&quot;,&quot;Orkney&quot;,&quot;Palestine, State of&quot;),
+  (&quot;Lynn&quot;,8223,&quot;Hisar&quot;,&quot;Piemonte&quot;,&quot;Haiti&quot;);
+INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
+VALUES
+  (&quot;Aguirre&quot;,2815,&quot;Vetlanda&quot;,&quot;East Region&quot;,&quot;Togo&quot;),
+  (&quot;Ellison&quot;,5429,&quot;Maranello&quot;,&quot;Huila&quot;,&quot;Anguilla&quot;),
+  (&quot;Young&quot;,7913,&quot;Kristiansund&quot;,&quot;North Chungcheong&quot;,&quot;Honduras&quot;),
+  (&quot;Russell&quot;,8787,&quot;Aylesbury&quot;,&quot;Tolima&quot;,&quot;Indonesia&quot;),
+  (&quot;Marks&quot;,9014,&quot;Bojano&quot;,&quot;Limón&quot;,&quot;Micronesia&quot;),
+  (&quot;Elliott&quot;,1319,&quot;Exeter&quot;,&quot;Ternopil oblast&quot;,&quot;Italy&quot;),
+  (&quot;Foley&quot;,5367,&quot;Belém&quot;,&quot;Bangsamoro&quot;,&quot;Sint Maarten&quot;),
+  (&quot;Peterson&quot;,3761,&quot;Vinnytsia&quot;,&quot;Azad Kashmir&quot;,&quot;Chile&quot;),
+  (&quot;Lyons&quot;,5670,&quot;Zaria&quot;,&quot;Sevastopol City&quot;,&quot;Norway&quot;),
+  (&quot;Hahn&quot;,2972,&quot;Central Jakarta&quot;,&quot;Eastern Visayas&quot;,&quot;Bouvet Island&quot;),
+  (&quot;Glenn&quot;,8066,&quot;Suncheon&quot;,&quot;West Lothian&quot;,&quot;Antarctica&quot;),
+  (&quot;Foley&quot;,7209,&quot;Niort&quot;,&quot;Bursa&quot;,&quot;Bermuda&quot;),
+  (&quot;Cervantes&quot;,1725,&quot;Ryazan&quot;,&quot;Lipetsk Oblast&quot;,&quot;Taiwan&quot;),
+  (&quot;Knox&quot;,6477,&quot;Mérida&quot;,&quot;Arequipa&quot;,&quot;Romania&quot;),
+  (&quot;Prince&quot;,6328,&quot;Volda&quot;,&quot;Lima&quot;,&quot;China&quot;),
+  (&quot;Sparks&quot;,9787,&quot;San Rafael&quot;,&quot;An Giang&quot;,&quot;Syria&quot;),
+  (&quot;Santos&quot;,9217,&quot;Chungju&quot;,&quot;Aragón&quot;,&quot;Montenegro&quot;),
+  (&quot;Townsend&quot;,7536,&quot;Jaén&quot;,&quot;Leinster&quot;,&quot;Cambodia&quot;),
+  (&quot;Shaffer&quot;,3075,&quot;Bhakkar&quot;,&quot;Rogaland&quot;,&quot;Micronesia&quot;),
+  (&quot;Avery&quot;,3247,&quot;Grimstad&quot;,&quot;Lorraine&quot;,&quot;Djibouti&quot;),
+  (&quot;Pena&quot;,9949,&quot;Roubaix&quot;,&quot;Castilla y León&quot;,&quot;Tajikistan&quot;),
+  (&quot;Poole&quot;,6147,&quot;Pachuca&quot;,&quot;Azad Kashmir&quot;,&quot;Turkey&quot;),
+  (&quot;Alvarado&quot;,8198,&quot;Cheongju&quot;,&quot;łódzkie&quot;,&quot;Afghanistan&quot;),
+  (&quot;Kirk&quot;,3219,&quot;Manokwari&quot;,&quot;Guanacaste&quot;,&quot;Faroe Islands&quot;),
+  (&quot;Warner&quot;,8719,&quot;Jeju&quot;,&quot;Quebec&quot;,&quot;Iraq&quot;),
+  (&quot;Williams&quot;,2129,&quot;Port Nolloth&quot;,&quot;Illes Balears&quot;,&quot;Israel&quot;),
+  (&quot;Cherry&quot;,9264,&quot;San Francisco&quot;,&quot;Xīběi&quot;,&quot;Albania&quot;),
+  (&quot;Owens&quot;,5620,&quot;Agartala&quot;,&quot;Leinster&quot;,&quot;Benin&quot;),
+  (&quot;Singleton&quot;,6824,&quot;Cork&quot;,&quot;Luxemburg&quot;,&quot;Slovenia&quot;),
+  (&quot;Lang&quot;,3504,&quot;Casper&quot;,&quot;Luik&quot;,&quot;Angola&quot;),
+  (&quot;Mclean&quot;,1517,&quot;Rocca d'Arazzo&quot;,&quot;Maranhão&quot;,&quot;Dominica&quot;),
+  (&quot;Hendricks&quot;,7215,&quot;Mérida&quot;,&quot;West Sulawesi&quot;,&quot;Morocco&quot;),
+  (&quot;Hatfield&quot;,8878,&quot;Clementi&quot;,&quot;Zakarpattia oblast&quot;,&quot;Puerto Rico&quot;),
+  (&quot;Dunn&quot;,4675,&quot;Mahikeng&quot;,&quot;Indiana&quot;,&quot;Israel&quot;),
+  (&quot;Foreman&quot;,4239,&quot;Randburg&quot;,&quot;Odisha&quot;,&quot;Iraq&quot;),
+  (&quot;Spears&quot;,6641,&quot;Timaru&quot;,&quot;Rio de Janeiro&quot;,&quot;Jordan&quot;),
+  (&quot;Franco&quot;,8830,&quot;Rauco&quot;,&quot;Saskatchewan&quot;,&quot;Cayman Islands&quot;),
+  (&quot;Patterson&quot;,5473,&quot;Seletar&quot;,&quot;Loreto&quot;,&quot;Korea, North&quot;),
+  (&quot;Campos&quot;,4374,&quot;San Luis Potosí&quot;,&quot;Soccsksargen&quot;,&quot;Virgin Islands, British&quot;),
+  (&quot;Merrill&quot;,1337,&quot;Puerto Princesa&quot;,&quot;Pernambuco&quot;,&quot;Samoa&quot;),
+  (&quot;Mullen&quot;,1522,&quot;Shanghai&quot;,&quot;Punjab&quot;,&quot;British Indian Ocean Territory&quot;),
+  (&quot;Trevino&quot;,6090,&quot;Catbalogan&quot;,&quot;Thừa Thiên–Huế&quot;,&quot;French Guiana&quot;),
+  (&quot;Pugh&quot;,5069,&quot;Anzi&quot;,&quot;Aydın&quot;,&quot;Zimbabwe&quot;),
+  (&quot;Hull&quot;,3285,&quot;Silvassa&quot;,&quot;Azad Kashmir&quot;,&quot;South Sudan&quot;),
+  (&quot;Bowen&quot;,9920,&quot;Wals-Siezenheim&quot;,&quot;Iowa&quot;,&quot;Palestine, State of&quot;),
+  (&quot;Blackburn&quot;,3700,&quot;Bogotá&quot;,&quot;Bangka Belitung Islands&quot;,&quot;United Kingdom (Great Britain)&quot;),
+  (&quot;Roth&quot;,7500,&quot;Ulloa (Barrial]&quot;,&quot;Friesland&quot;,&quot;Portugal&quot;),
+  (&quot;Fleming&quot;,1613,&quot;Torgnon&quot;,&quot;West-Vlaanderen&quot;,&quot;Montenegro&quot;),
+  (&quot;Dejesus&quot;,6658,&quot;Kryvyi Rih&quot;,&quot;Östergötlands län&quot;,&quot;Paraguay&quot;),
+  (&quot;Marks&quot;,1599,&quot;Lublin&quot;,&quot;Leinster&quot;,&quot;Niger&quot;);
+INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
+VALUES
+  (&quot;Crawford&quot;,9271,&quot;Kamianets-Podilskyi&quot;,&quot;Champagne-Ardenne&quot;,&quot;Serbia&quot;),
+  (&quot;Flowers&quot;,9613,&quot;Murcia&quot;,&quot;Smolensk Oblast&quot;,&quot;Kenya&quot;),
+  (&quot;Barton&quot;,3931,&quot;Piła&quot;,&quot;Guanacaste&quot;,&quot;Poland&quot;),
+  (&quot;Rice&quot;,6680,&quot;Oslo&quot;,&quot;Brecknockshire&quot;,&quot;Chad&quot;),
+  (&quot;Kerr&quot;,5424,&quot;Leonding&quot;,&quot;Gilgit Baltistan&quot;,&quot;Uruguay&quot;),
+  (&quot;Banks&quot;,7172,&quot;San Pablo&quot;,&quot;Khyber Pakhtoonkhwa&quot;,&quot;Sudan&quot;),
+  (&quot;Cotton&quot;,4847,&quot;Cork&quot;,&quot;Zakarpattia oblast&quot;,&quot;Laos&quot;),
+  (&quot;Humphrey&quot;,7245,&quot;Brunn am Gebirge&quot;,&quot;Connacht&quot;,&quot;Korea, South&quot;),
+  (&quot;Mason&quot;,7555,&quot;Dublin&quot;,&quot;Meghalaya&quot;,&quot;Sri Lanka&quot;),
+  (&quot;Hancock&quot;,4350,&quot;Chervonohrad&quot;,&quot;Rutland&quot;,&quot;Isle of Man&quot;),
+  (&quot;Foster&quot;,5807,&quot;Maracanaú&quot;,&quot;Piura&quot;,&quot;South Sudan&quot;),
+  (&quot;Compton&quot;,3219,&quot;Oamaru&quot;,&quot;Northern Cape&quot;,&quot;Saint Pierre and Miquelon&quot;),
+  (&quot;Clemons&quot;,2186,&quot;Oss&quot;,&quot;Biobío&quot;,&quot;Saint Vincent and The Grenadines&quot;),
+  (&quot;Preston&quot;,8321,&quot;Ciudad Valles&quot;,&quot;Franche-Comté&quot;,&quot;Latvia&quot;),
+  (&quot;Hyde&quot;,1060,&quot;Elektrostal&quot;,&quot;South Island&quot;,&quot;Viet Nam&quot;),
+  (&quot;George&quot;,5161,&quot;Clovenfords&quot;,&quot;Limpopo&quot;,&quot;Holy See (Vatican City State)&quot;),
+  (&quot;Sandoval&quot;,2934,&quot;Hallein&quot;,&quot;Provence-Alpes-Côte d'Azur&quot;,&quot;Togo&quot;),
+  (&quot;Massey&quot;,7810,&quot;Queenstown&quot;,&quot;Central Sulawesi&quot;,&quot;American Samoa&quot;),
+  (&quot;Schroeder&quot;,8549,&quot;Cajamarca&quot;,&quot;Hawaii&quot;,&quot;Russian Federation&quot;),
+  (&quot;Hammond&quot;,3520,&quot;Castelluccio Valmaggiore&quot;,&quot;Antofagasta&quot;,&quot;Dominica&quot;),
+  (&quot;Richardson&quot;,2911,&quot;Muzaffarpur&quot;,&quot;Queensland&quot;,&quot;Samoa&quot;),
+  (&quot;Forbes&quot;,1721,&quot;Yogyakarta&quot;,&quot;Punjab&quot;,&quot;Mozambique&quot;),
+  (&quot;Ewing&quot;,8207,&quot;Hattiesburg&quot;,&quot;Drenthe&quot;,&quot;Sao Tome and Principe&quot;),
+  (&quot;Burke&quot;,1344,&quot;Olathe&quot;,&quot;Atlántico&quot;,&quot;Lithuania&quot;),
+  (&quot;Brady&quot;,9298,&quot;Maranguape&quot;,&quot;Euskadi&quot;,&quot;Kuwait&quot;),
+  (&quot;Perry&quot;,9397,&quot;Denpasar&quot;,&quot;North Region&quot;,&quot;El Salvador&quot;),
+  (&quot;Schultz&quot;,9253,&quot;Choa Chu Kang&quot;,&quot;Flevoland&quot;,&quot;Namibia&quot;),
+  (&quot;Rich&quot;,7566,&quot;Beijing&quot;,&quot;Quebec&quot;,&quot;Saint Vincent and The Grenadines&quot;),
+  (&quot;Swanson&quot;,3940,&quot;Gold Coast&quot;,&quot;Limpopo&quot;,&quot;Monaco&quot;),
+  (&quot;Goodman&quot;,9522,&quot;Mataró&quot;,&quot;Leinster&quot;,&quot;Morocco&quot;),
+  (&quot;Horne&quot;,5607,&quot;Biggleswade&quot;,&quot;Trentino-Alto Adige&quot;,&quot;Ireland&quot;),
+  (&quot;Knapp&quot;,3043,&quot;Cartagena&quot;,&quot;North Island&quot;,&quot;Slovakia&quot;),
+  (&quot;Roy&quot;,6852,&quot;Gingoog&quot;,&quot;Veneto&quot;,&quot;Andorra&quot;),
+  (&quot;Buckley&quot;,9570,&quot;Juliaca&quot;,&quot;Opolskie&quot;,&quot;Saint Vincent and The Grenadines&quot;),
+  (&quot;Caldwell&quot;,8999,&quot;Mosquera&quot;,&quot;Ross-shire&quot;,&quot;Zimbabwe&quot;),
+  (&quot;Barry&quot;,3256,&quot;Dunedin&quot;,&quot;Limburg&quot;,&quot;Libya&quot;),
+  (&quot;Michael&quot;,4831,&quot;Guri&quot;,&quot;Munster&quot;,&quot;Puerto Rico&quot;),
+  (&quot;George&quot;,7847,&quot;Zeist&quot;,&quot;Oslo&quot;,&quot;Israel&quot;),
+  (&quot;Higgins&quot;,8519,&quot;Colomiers&quot;,&quot;Luxemburg&quot;,&quot;Pakistan&quot;),
+  (&quot;Wolf&quot;,4743,&quot;Chungju&quot;,&quot;Andalucía&quot;,&quot;Ireland&quot;),
+  (&quot;Walter&quot;,4861,&quot;Monguelfo-Tesido/Welsberg-Taisten&quot;,&quot;Uttarakhand&quot;,&quot;Malawi&quot;),
+  (&quot;Workman&quot;,2901,&quot;Linz&quot;,&quot;Puebla&quot;,&quot;Cuba&quot;),
+  (&quot;Donaldson&quot;,5950,&quot;Abolens&quot;,&quot;Galicia&quot;,&quot;Chile&quot;),
+  (&quot;Roberts&quot;,4685,&quot;Shanghai&quot;,&quot;Sucre&quot;,&quot;Belize&quot;),
+  (&quot;Savage&quot;,3456,&quot;Samsun&quot;,&quot;Central Luzon&quot;,&quot;Dominica&quot;),
+  (&quot;Spencer&quot;,5240,&quot;Dutse&quot;,&quot;Bangka Belitung Islands&quot;,&quot;Saint Helena, Ascension and Tristan da Cunha&quot;),
+  (&quot;Cooke&quot;,4307,&quot;Cao Phong&quot;,&quot;Vorarlberg&quot;,&quot;Maldives&quot;),
+  (&quot;Hardin&quot;,6898,&quot;Bandırma&quot;,&quot;South Island&quot;,&quot;Namibia&quot;),
+  (&quot;Myers&quot;,2349,&quot;Ningxia&quot;,&quot;South Island&quot;,&quot;Belgium&quot;),
+  (&quot;Tucker&quot;,9421,&quot;Anhui&quot;,&quot;Balochistan&quot;,&quot;Czech Republic&quot;);
+INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
+VALUES
+  (&quot;Hurley&quot;,1667,&quot;San José de Alajuela&quot;,&quot;Hatay&quot;,&quot;Azerbaijan&quot;),
+  (&quot;Strickland&quot;,3509,&quot;Wałbrzych&quot;,&quot;Yukon&quot;,&quot;Morocco&quot;),
+  (&quot;Calhoun&quot;,5381,&quot;Porirua&quot;,&quot;Kocaeli&quot;,&quot;Sierra Leone&quot;),
+  (&quot;Stewart&quot;,2431,&quot;Durban&quot;,&quot;North Gyeongsang&quot;,&quot;Cayman Islands&quot;),
+  (&quot;Figueroa&quot;,9161,&quot;Barranca&quot;,&quot;Andhra Pradesh&quot;,&quot;Denmark&quot;),
+  (&quot;Farrell&quot;,9949,&quot;Manoppello&quot;,&quot;Kostroma Oblast&quot;,&quot;New Zealand&quot;),
+  (&quot;Bush&quot;,2595,&quot;Hà Nội&quot;,&quot;Waals-Brabant&quot;,&quot;Macedonia&quot;),
+  (&quot;Hines&quot;,6891,&quot;Zamość&quot;,&quot;North Island&quot;,&quot;Anguilla&quot;),
+  (&quot;Rush&quot;,8547,&quot;Kharkiv&quot;,&quot;Stockholms län&quot;,&quot;France&quot;),
+  (&quot;Pena&quot;,2236,&quot;Outram&quot;,&quot;Maryland&quot;,&quot;Kiribati&quot;),
+  (&quot;Ortiz&quot;,9683,&quot;Camarones&quot;,&quot;South Island&quot;,&quot;Bouvet Island&quot;),
+  (&quot;Mcdonald&quot;,2159,&quot;Springdale&quot;,&quot;Bình Định&quot;,&quot;Austria&quot;),
+  (&quot;Drake&quot;,1796,&quot;Limón (Puerto Limón]&quot;,&quot;Maluku&quot;,&quot;Samoa&quot;),
+  (&quot;Williamson&quot;,3913,&quot;Sint-Joost-ten-Node&quot;,&quot;Rivne oblast&quot;,&quot;Djibouti&quot;),
+  (&quot;Fleming&quot;,4730,&quot;Alençon&quot;,&quot;Puebla&quot;,&quot;Kyrgyzstan&quot;),
+  (&quot;Cochran&quot;,7193,&quot;Newquay&quot;,&quot;Burgenland&quot;,&quot;India&quot;),
+  (&quot;Cochran&quot;,4536,&quot;Limón (Puerto Limón]&quot;,&quot;Vienna&quot;,&quot;Myanmar&quot;),
+  (&quot;Rocha&quot;,9936,&quot;San Lazzaro di Savena&quot;,&quot;Eastern Visayas&quot;,&quot;Eritrea&quot;),
+  (&quot;Quinn&quot;,2860,&quot;Gävle&quot;,&quot;South Gyeongsang&quot;,&quot;Ghana&quot;),
+  (&quot;Browning&quot;,6111,&quot;Gunsan&quot;,&quot;Sardegna&quot;,&quot;Cape Verde&quot;),
+  (&quot;Dillard&quot;,9096,&quot;Passi&quot;,&quot;North Region&quot;,&quot;Cayman Islands&quot;),
+  (&quot;Leonard&quot;,4303,&quot;Lelystad&quot;,&quot;O'Higgins&quot;,&quot;Honduras&quot;),
+  (&quot;Davis&quot;,8837,&quot;Arauca&quot;,&quot;Victoria&quot;,&quot;Bahrain&quot;),
+  (&quot;Weeks&quot;,6353,&quot;Trollhättan&quot;,&quot;Imo&quot;,&quot;Cape Verde&quot;),
+  (&quot;Villarreal&quot;,1898,&quot;Guadalupe&quot;,&quot;Chelyabinsk Oblast&quot;,&quot;Bosnia and Herzegovina&quot;),
+  (&quot;Joyce&quot;,9522,&quot;Huaraz&quot;,&quot;North Island&quot;,&quot;Guatemala&quot;),
+  (&quot;Cote&quot;,5339,&quot;Mexico City&quot;,&quot;Metropolitana de Santiago&quot;,&quot;Latvia&quot;),
+  (&quot;Irwin&quot;,4607,&quot;Riohacha&quot;,&quot;Cantabria&quot;,&quot;Dominican Republic&quot;),
+  (&quot;Ball&quot;,4337,&quot;Novosibirsk&quot;,&quot;Konya&quot;,&quot;Hong Kong&quot;),
+  (&quot;Booth&quot;,6636,&quot;Buguma&quot;,&quot;Punjab&quot;,&quot;Antarctica&quot;),
+  (&quot;Chase&quot;,5338,&quot;Kurgan&quot;,&quot;Cordillera Administrative Region&quot;,&quot;Montenegro&quot;),
+  (&quot;Durham&quot;,5800,&quot;Ibadan&quot;,&quot;Prince Edward Island&quot;,&quot;Solomon Islands&quot;),
+  (&quot;Evans&quot;,4852,&quot;Cajazeiras&quot;,&quot;Mississippi&quot;,&quot;Syria&quot;),
+  (&quot;Salinas&quot;,7771,&quot;Jinju&quot;,&quot;Soccsksargen&quot;,&quot;Tonga&quot;),
+  (&quot;Cox&quot;,8554,&quot;Seogwipo&quot;,&quot;Ulster&quot;,&quot;Egypt&quot;),
+  (&quot;Reilly&quot;,4200,&quot;Épernay&quot;,&quot;Melilla&quot;,&quot;Bolivia&quot;),
+  (&quot;Robinson&quot;,1767,&quot;Cauquenes&quot;,&quot;Vestland&quot;,&quot;Niger&quot;),
+  (&quot;Hill&quot;,5782,&quot;Santa Flavia&quot;,&quot;Ontario&quot;,&quot;Poland&quot;),
+  (&quot;Hoover&quot;,3976,&quot;Joinville&quot;,&quot;Assam&quot;,&quot;Tanzania&quot;),
+  (&quot;Clarke&quot;,7523,&quot;Chimbote&quot;,&quot;Northern Territory&quot;,&quot;India&quot;),
+  (&quot;Crane&quot;,7308,&quot;Nova Kakhovka&quot;,&quot;Arica y Parinacota&quot;,&quot;Gabon&quot;),
+  (&quot;Marks&quot;,3747,&quot;Silvan&quot;,&quot;Aisén&quot;,&quot;Benin&quot;),
+  (&quot;Hoffman&quot;,6728,&quot;Campina Grande&quot;,&quot;Huáběi&quot;,&quot;Armenia&quot;),
+  (&quot;Murray&quot;,6486,&quot;Stavoren&quot;,&quot;Guerrero&quot;,&quot;Brazil&quot;),
+  (&quot;Warren&quot;,5074,&quot;Shanxi&quot;,&quot;Central Visayas&quot;,&quot;Guinea&quot;),
+  (&quot;Sampson&quot;,3793,&quot;Otukpo&quot;,&quot;Västra Götalands län&quot;,&quot;Isle of Man&quot;),
+  (&quot;Fisher&quot;,7221,&quot;Hengelo&quot;,&quot;Salzburg&quot;,&quot;Estonia&quot;),
+  (&quot;Leach&quot;,3142,&quot;Secunda&quot;,&quot;FATA&quot;,&quot;Monaco&quot;),
+  (&quot;Hewitt&quot;,9128,&quot;Zirl&quot;,&quot;North Region&quot;,&quot;Bangladesh&quot;),
+  (&quot;Ryan&quot;,2482,&quot;Kamianske&quot;,&quot;Chocó&quot;,&quot;Equatorial Guinea&quot;);
+INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
+VALUES
+  (&quot;Lloyd&quot;,7564,&quot;Zeist&quot;,&quot;Yaroslavl Oblast&quot;,&quot;Switzerland&quot;),
+  (&quot;Mcclure&quot;,5242,&quot;Eckernförde&quot;,&quot;Rheinland-Pfalz&quot;,&quot;Namibia&quot;),
+  (&quot;Benjamin&quot;,2741,&quot;Bonnyville Municipal District&quot;,&quot;Waals-Brabant&quot;,&quot;Mayotte&quot;),
+  (&quot;Roberson&quot;,6626,&quot;Sankt Johann im Pongau&quot;,&quot;Central Visayas&quot;,&quot;Saint Lucia&quot;),
+  (&quot;Jenkins&quot;,3384,&quot;Yeosu&quot;,&quot;Kaduna&quot;,&quot;Sierra Leone&quot;),
+  (&quot;Gibbs&quot;,2883,&quot;Murmansk&quot;,&quot;Dalarnas län&quot;,&quot;Albania&quot;),
+  (&quot;Hobbs&quot;,1106,&quot;Kalisz&quot;,&quot;Ivano-Frankivsk oblast&quot;,&quot;United Kingdom (Great Britain)&quot;),
+  (&quot;Noble&quot;,5648,&quot;Lamitan&quot;,&quot;South Jeolla&quot;,&quot;Myanmar&quot;),
+  (&quot;Hampton&quot;,9004,&quot;Gyeongsan&quot;,&quot;Oslo&quot;,&quot;Turkmenistan&quot;),
+  (&quot;Gould&quot;,5518,&quot;Bắc Kạn&quot;,&quot;Queensland&quot;,&quot;Timor-Leste&quot;),
+  (&quot;Hickman&quot;,9119,&quot;Petrópolis&quot;,&quot;Illes Balears&quot;,&quot;San Marino&quot;),
+  (&quot;Gallagher&quot;,6553,&quot;Zoetermeer&quot;,&quot;Extremadura&quot;,&quot;Australia&quot;),
+  (&quot;Mcclure&quot;,5025,&quot;Shaanxi&quot;,&quot;Putumayo&quot;,&quot;Anguilla&quot;),
+  (&quot;Quinn&quot;,2181,&quot;Yangju&quot;,&quot;Vestland&quot;,&quot;Portugal&quot;),
+  (&quot;Owen&quot;,8125,&quot;Astore&quot;,&quot;Navarra&quot;,&quot;United States Minor Outlying Islands&quot;),
+  (&quot;Boyd&quot;,2834,&quot;Kızılcahamam&quot;,&quot;North West&quot;,&quot;Jamaica&quot;),
+  (&quot;Snyder&quot;,6784,&quot;Sibasa&quot;,&quot;North Gyeongsang&quot;,&quot;Sri Lanka&quot;),
+  (&quot;Kelly&quot;,6870,&quot;Mexico City&quot;,&quot;Central Sulawesi&quot;,&quot;Brazil&quot;),
+  (&quot;Jones&quot;,7511,&quot;Puntarenas&quot;,&quot;Dōngběi&quot;,&quot;Qatar&quot;),
+  (&quot;Barrett&quot;,2152,&quot;Molina&quot;,&quot;Minas Gerais&quot;,&quot;Niue&quot;),
+  (&quot;Whitfield&quot;,5262,&quot;Zamość&quot;,&quot;Hatay&quot;,&quot;Sri Lanka&quot;),
+  (&quot;Calhoun&quot;,1953,&quot;Trowbridge&quot;,&quot;Central Sulawesi&quot;,&quot;Laos&quot;),
+  (&quot;Graham&quot;,4028,&quot;Neubrandenburg&quot;,&quot;Jharkhand&quot;,&quot;Burkina Faso&quot;),
+  (&quot;Stewart&quot;,3291,&quot;Paredones&quot;,&quot;Biobío&quot;,&quot;Bolivia&quot;),
+  (&quot;Cain&quot;,4489,&quot;Tidore&quot;,&quot;Emilia-Romagna&quot;,&quot;Spain&quot;),
+  (&quot;Santos&quot;,9328,&quot;Zaria&quot;,&quot;West Region&quot;,&quot;Uganda&quot;),
+  (&quot;Knapp&quot;,9734,&quot;Vienna&quot;,&quot;Morelos&quot;,&quot;Sweden&quot;),
+  (&quot;Curry&quot;,2171,&quot;Gangtok&quot;,&quot;Zamboanga Peninsula&quot;,&quot;Kyrgyzstan&quot;),
+  (&quot;Warren&quot;,6874,&quot;Gravelbourg&quot;,&quot;Xīnán&quot;,&quot;Zimbabwe&quot;),
+  (&quot;Hicks&quot;,4911,&quot;Shaanxi&quot;,&quot;Lazio&quot;,&quot;Iran&quot;),
+  (&quot;Leon&quot;,5491,&quot;Waiuku&quot;,&quot;Yên Bái&quot;,&quot;Niger&quot;),
+  (&quot;Gregory&quot;,3691,&quot;Dublin&quot;,&quot;Northwest Territories&quot;,&quot;Bermuda&quot;),
+  (&quot;Mcneil&quot;,5159,&quot;Gimhae&quot;,&quot;Swiętokrzyskie&quot;,&quot;Belgium&quot;),
+  (&quot;Cooley&quot;,8693,&quot;Kharabali&quot;,&quot;Antofagasta&quot;,&quot;Chile&quot;),
+  (&quot;Cash&quot;,5372,&quot;Samarinda&quot;,&quot;Stirlingshire&quot;,&quot;Burkina Faso&quot;),
+  (&quot;Rodriquez&quot;,4706,&quot;Tokoroa&quot;,&quot;Luik&quot;,&quot;San Marino&quot;),
+  (&quot;Ballard&quot;,9076,&quot;Anderlecht&quot;,&quot;Riau Islands&quot;,&quot;Egypt&quot;),
+  (&quot;Woodward&quot;,4179,&quot;Constitución&quot;,&quot;Central Visayas&quot;,&quot;Bermuda&quot;),
+  (&quot;Frost&quot;,6258,&quot;Ödemiş&quot;,&quot;İzmir&quot;,&quot;Tunisia&quot;),
+  (&quot;Wilkins&quot;,6565,&quot;Kropyvnytskyi&quot;,&quot;Puno&quot;,&quot;Lebanon&quot;),
+  (&quot;Kim&quot;,8590,&quot;Lerum&quot;,&quot;Volyn oblast&quot;,&quot;Jamaica&quot;),
+  (&quot;English&quot;,2577,&quot;Chuncheon&quot;,&quot;Tomsk Oblast&quot;,&quot;Benin&quot;),
+  (&quot;Terry&quot;,5220,&quot;Medemblik&quot;,&quot;Biobío&quot;,&quot;Christmas Island&quot;),
+  (&quot;Moody&quot;,8342,&quot;Bayonne&quot;,&quot;Zeeland&quot;,&quot;Rwanda&quot;),
+  (&quot;Dotson&quot;,2448,&quot;Kumluca&quot;,&quot;Casanare&quot;,&quot;Nauru&quot;),
+  (&quot;Edwards&quot;,7910,&quot;Arequipa&quot;,&quot;Jigawa&quot;,&quot;Mali&quot;),
+  (&quot;Cortez&quot;,8513,&quot;Covington&quot;,&quot;Biobío&quot;,&quot;Libya&quot;),
+  (&quot;Terrell&quot;,9368,&quot;Nelspruit&quot;,&quot;Chihuahua&quot;,&quot;British Indian Ocean Territory&quot;),
+  (&quot;Mccormick&quot;,8845,&quot;Bostaniçi&quot;,&quot;Aydın&quot;,&quot;Slovakia&quot;),
+  (&quot;Tate&quot;,9381,&quot;Port Nolloth&quot;,&quot;Gävleborgs län&quot;,&quot;Slovakia&quot;);
+INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
+VALUES
+  (&quot;Tate&quot;,9985,&quot;Soledad de Graciano Sánchez&quot;,&quot;Paraná&quot;,&quot;Congo, the Democratic Republic of the&quot;),
+  (&quot;Lawson&quot;,9570,&quot;Drammen&quot;,&quot;New South Wales&quot;,&quot;Georgia&quot;),
+  (&quot;Hewitt&quot;,3772,&quot;Inírida&quot;,&quot;Nagaland&quot;,&quot;Turkey&quot;),
+  (&quot;Kane&quot;,2306,&quot;Sangli&quot;,&quot;Nord-Pas-de-Calais&quot;,&quot;Jersey&quot;),
+  (&quot;Hebert&quot;,8282,&quot;Museum&quot;,&quot;Wyoming&quot;,&quot;Montserrat&quot;),
+  (&quot;O'donnell&quot;,4362,&quot;Almelo&quot;,&quot;Munster&quot;,&quot;Mayotte&quot;),
+  (&quot;Carr&quot;,9655,&quot;Quemchi&quot;,&quot;Extremadura&quot;,&quot;Zimbabwe&quot;),
+  (&quot;Brady&quot;,2192,&quot;Kozan&quot;,&quot;Jönköpings län&quot;,&quot;Denmark&quot;),
+  (&quot;Harris&quot;,7857,&quot;Genappe&quot;,&quot;Limón&quot;,&quot;Equatorial Guinea&quot;),
+  (&quot;Spencer&quot;,9854,&quot;Shanxi&quot;,&quot;Guainía&quot;,&quot;Curaçao&quot;),
+  (&quot;Kidd&quot;,1646,&quot;Dnipro&quot;,&quot;Odessa oblast&quot;,&quot;Nauru&quot;),
+  (&quot;Simpson&quot;,9086,&quot;Carmen de Bolivar&quot;,&quot;Nova Scotia&quot;,&quot;Antarctica&quot;),
+  (&quot;Brooks&quot;,6992,&quot;Devonport&quot;,&quot;Caithness&quot;,&quot;Mayotte&quot;),
+  (&quot;Gillespie&quot;,2528,&quot;Paulista&quot;,&quot;Campania&quot;,&quot;Egypt&quot;),
+  (&quot;Floyd&quot;,2337,&quot;Hainan&quot;,&quot;Møre og Romsdal&quot;,&quot;Tuvalu&quot;),
+  (&quot;Horne&quot;,4543,&quot;Belfast&quot;,&quot;Kano&quot;,&quot;Laos&quot;),
+  (&quot;Gates&quot;,9818,&quot;Waidhofen an der Ybbs&quot;,&quot;Los Lagos&quot;,&quot;Malawi&quot;),
+  (&quot;Gilbert&quot;,6079,&quot;Guangdong&quot;,&quot;Balıkesir&quot;,&quot;Estonia&quot;),
+  (&quot;Bass&quot;,1958,&quot;Galway&quot;,&quot;Västra Götalands län&quot;,&quot;Germany&quot;),
+  (&quot;Everett&quot;,1055,&quot;Hervey Bay&quot;,&quot;Moscow Oblast&quot;,&quot;Aruba&quot;),
+  (&quot;Jacobs&quot;,7807,&quot;Chiclayo&quot;,&quot;Valle d'Aosta&quot;,&quot;Chad&quot;),
+  (&quot;Morris&quot;,6838,&quot;Melbourne&quot;,&quot;Brussels Hoofdstedelijk Gewest&quot;,&quot;Micronesia&quot;),
+  (&quot;Lambert&quot;,9788,&quot;Schoonaarde&quot;,&quot;Samsun&quot;,&quot;Algeria&quot;),
+  (&quot;Brady&quot;,4772,&quot;Bossuit&quot;,&quot;Heredia&quot;,&quot;Iraq&quot;),
+  (&quot;Case&quot;,4417,&quot;Amersfoort&quot;,&quot;Katsina&quot;,&quot;New Zealand&quot;),
+  (&quot;Leach&quot;,2304,&quot;Yeosu&quot;,&quot;Xīnán&quot;,&quot;Slovenia&quot;),
+  (&quot;Day&quot;,5606,&quot;Tidore&quot;,&quot;East Region&quot;,&quot;Monaco&quot;),
+  (&quot;Greene&quot;,2867,&quot;Vitry-sur-Seine&quot;,&quot;La Rioja&quot;,&quot;Sudan&quot;),
+  (&quot;Meyers&quot;,1360,&quot;Tonalá&quot;,&quot;Querétaro&quot;,&quot;South Africa&quot;),
+  (&quot;Winters&quot;,7285,&quot;Bauchi&quot;,&quot;Connacht&quot;,&quot;Romania&quot;),
+  (&quot;Sherman&quot;,2280,&quot;Nova Kakhovka&quot;,&quot;Central Sulawesi&quot;,&quot;Namibia&quot;),
+  (&quot;Gould&quot;,7521,&quot;Tuguegarao&quot;,&quot;Cantabria&quot;,&quot;Slovakia&quot;),
+  (&quot;Bird&quot;,4001,&quot;Bhimber&quot;,&quot;South Jeolla&quot;,&quot;Maldives&quot;),
+  (&quot;Johns&quot;,4029,&quot;Pamplona&quot;,&quot;Sokoto&quot;,&quot;Netherlands&quot;),
+  (&quot;O'donnell&quot;,1103,&quot;San Carlos&quot;,&quot;Limpopo&quot;,&quot;Svalbard and Jan Mayen Islands&quot;),
+  (&quot;Cantrell&quot;,6636,&quot;Oldenzaal&quot;,&quot;Sinaloa&quot;,&quot;Mayotte&quot;),
+  (&quot;Todd&quot;,3872,&quot;Zamboanga City&quot;,&quot;Zhōngnán&quot;,&quot;Viet Nam&quot;),
+  (&quot;Velasquez&quot;,2815,&quot;Nasino&quot;,&quot;Akwa Ibom&quot;,&quot;Brunei&quot;),
+  (&quot;Mccray&quot;,6811,&quot;Vienna&quot;,&quot;Friuli-Venezia Giulia&quot;,&quot;Botswana&quot;),
+  (&quot;Hahn&quot;,7562,&quot;Shostka&quot;,&quot;Western Australia&quot;,&quot;India&quot;),
+  (&quot;Cline&quot;,7035,&quot;North Berwick&quot;,&quot;Missouri&quot;,&quot;China&quot;),
+  (&quot;Donaldson&quot;,9445,&quot;Traralgon&quot;,&quot;Western Australia&quot;,&quot;Cook Islands&quot;),
+  (&quot;Coleman&quot;,1509,&quot;Dörtyol&quot;,&quot;Los Ríos&quot;,&quot;Bahrain&quot;),
+  (&quot;Burks&quot;,4529,&quot;Moss&quot;,&quot;Huáběi&quot;,&quot;Norway&quot;),
+  (&quot;Walter&quot;,3690,&quot;Gijón&quot;,&quot;Fife&quot;,&quot;Bahamas&quot;),
+  (&quot;Potter&quot;,4654,&quot;Coelemu&quot;,&quot;Gangwon&quot;,&quot;Georgia&quot;),
+  (&quot;Maddox&quot;,9271,&quot;Vöcklabruck&quot;,&quot;łódzkie&quot;,&quot;Marshall Islands&quot;),
+  (&quot;Stafford&quot;,7438,&quot;Hastings&quot;,&quot;Atlántico&quot;,&quot;Togo&quot;),
+  (&quot;Stokes&quot;,1132,&quot;Overland Park&quot;,&quot;Cartago&quot;,&quot;Aruba&quot;),
+  (&quot;Crawford&quot;,8430,&quot;Villers-la-Bonne-Eau&quot;,&quot;Berlin&quot;,&quot;Mexico&quot;);
+INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
+VALUES
+  (&quot;Avila&quot;,6092,&quot;Izmail&quot;,&quot;Lower Austria&quot;,&quot;Latvia&quot;),
+  (&quot;O'brien&quot;,1948,&quot;Nalinnes&quot;,&quot;Bryansk Oblast&quot;,&quot;Zambia&quot;),
+  (&quot;Daniels&quot;,6673,&quot;Dutse&quot;,&quot;Southeast Sulawesi&quot;,&quot;Côte D'Ivoire (Ivory Coast)&quot;),
+  (&quot;Joyce&quot;,1951,&quot;Warri&quot;,&quot;Central Kalimantan&quot;,&quot;Tajikistan&quot;),
+  (&quot;Bryan&quot;,5430,&quot;Norfolk&quot;,&quot;Bahia&quot;,&quot;Guyana&quot;),
+  (&quot;Guzman&quot;,8596,&quot;Itanagar&quot;,&quot;Maryland&quot;,&quot;Senegal&quot;),
+  (&quot;Mckinney&quot;,3028,&quot;Pamplona&quot;,&quot;Chernihiv oblast&quot;,&quot;Greece&quot;),
+  (&quot;Lara&quot;,7136,&quot;Napier&quot;,&quot;Cajamarca&quot;,&quot;Swaziland&quot;),
+  (&quot;Pope&quot;,3496,&quot;Daejeon&quot;,&quot;Piura&quot;,&quot;Tunisia&quot;),
+  (&quot;Reeves&quot;,6553,&quot;Ipiales&quot;,&quot;Noord Brabant&quot;,&quot;Laos&quot;),
+  (&quot;Carey&quot;,3970,&quot;Vallenar&quot;,&quot;North Island&quot;,&quot;Ethiopia&quot;),
+  (&quot;Baker&quot;,2064,&quot;Cametá&quot;,&quot;South Island&quot;,&quot;Trinidad and Tobago&quot;),
+  (&quot;Jacobson&quot;,9050,&quot;Beypazarı&quot;,&quot;North-East Region&quot;,&quot;Brazil&quot;),
+  (&quot;Knight&quot;,4228,&quot;Oslo&quot;,&quot;Västra Götalands län&quot;,&quot;Croatia&quot;),
+  (&quot;Stephenson&quot;,4353,&quot;Incheon&quot;,&quot;Central Kalimantan&quot;,&quot;Nauru&quot;),
+  (&quot;Garcia&quot;,4336,&quot;Sóc Trăng&quot;,&quot;Huádōng&quot;,&quot;Sint Maarten&quot;),
+  (&quot;Lawson&quot;,8042,&quot;Berg&quot;,&quot;Herefordshire&quot;,&quot;San Marino&quot;),
+  (&quot;Farley&quot;,9190,&quot;Saint John&quot;,&quot;Australian Capital Territory&quot;,&quot;Bermuda&quot;),
+  (&quot;Blair&quot;,4631,&quot;Belfast&quot;,&quot;Jalisco&quot;,&quot;Bhutan&quot;),
+  (&quot;Holman&quot;,7352,&quot;Cumaribo&quot;,&quot;Centre&quot;,&quot;Sudan&quot;),
+  (&quot;O'connor&quot;,1758,&quot;Ashburton&quot;,&quot;Sindh&quot;,&quot;Swaziland&quot;),
+  (&quot;Roy&quot;,9711,&quot;Tual&quot;,&quot;Trøndelag&quot;,&quot;Montserrat&quot;),
+  (&quot;Haley&quot;,9400,&quot;Overland Park&quot;,&quot;Munster&quot;,&quot;Czech Republic&quot;),
+  (&quot;Floyd&quot;,9177,&quot;Kupang&quot;,&quot;Drenthe&quot;,&quot;Mozambique&quot;),
+  (&quot;Whitehead&quot;,6095,&quot;Kongsvinger&quot;,&quot;Azad Kashmir&quot;,&quot;Portugal&quot;),
+  (&quot;Stuart&quot;,7887,&quot;Sirsa&quot;,&quot;New South Wales&quot;,&quot;Mauritius&quot;),
+  (&quot;Gilliam&quot;,9275,&quot;Charlottetown&quot;,&quot;Imo&quot;,&quot;Israel&quot;),
+  (&quot;Livingston&quot;,6729,&quot;Buner&quot;,&quot;South Jeolla&quot;,&quot;New Caledonia&quot;),
+  (&quot;Santos&quot;,8792,&quot;Marzabotto&quot;,&quot;Western Cape&quot;,&quot;Falkland Islands&quot;),
+  (&quot;Alexander&quot;,8935,&quot;Attock&quot;,&quot;Himachal Pradesh&quot;,&quot;Croatia&quot;),
+  (&quot;Tillman&quot;,3295,&quot;Hyères&quot;,&quot;Shetland&quot;,&quot;Paraguay&quot;),
+  (&quot;Patel&quot;,1201,&quot;Crowsnest Pass&quot;,&quot;Limón&quot;,&quot;South Sudan&quot;),
+  (&quot;Cash&quot;,9811,&quot;Xinjiang&quot;,&quot;Azad Kashmir&quot;,&quot;Ukraine&quot;),
+  (&quot;Chang&quot;,9242,&quot;Ipiales&quot;,&quot;East Region&quot;,&quot;Tunisia&quot;),
+  (&quot;Carter&quot;,2891,&quot;Chile Chico&quot;,&quot;Oslo&quot;,&quot;Tuvalu&quot;),
+  (&quot;Carrillo&quot;,9034,&quot;Asan&quot;,&quot;İzmir&quot;,&quot;Montserrat&quot;),
+  (&quot;Gentry&quot;,5611,&quot;Feira de Santana&quot;,&quot;Östergötlands län&quot;,&quot;Afghanistan&quot;),
+  (&quot;Slater&quot;,5227,&quot;Borlänge&quot;,&quot;North Chungcheong&quot;,&quot;Saudi Arabia&quot;),
+  (&quot;Morton&quot;,5082,&quot;Anhui&quot;,&quot;East Region&quot;,&quot;Turkmenistan&quot;),
+  (&quot;Cain&quot;,2816,&quot;Spaniard's Bay&quot;,&quot;Sumy oblast&quot;,&quot;Italy&quot;),
+  (&quot;Browning&quot;,1189,&quot;Belfast&quot;,&quot;Île-de-France&quot;,&quot;Greenland&quot;),
+  (&quot;Thornton&quot;,6864,&quot;Chimbote&quot;,&quot;New Brunswick&quot;,&quot;Chad&quot;),
+  (&quot;Ferrell&quot;,2077,&quot;Sokoto&quot;,&quot;Maharastra&quot;,&quot;Colombia&quot;),
+  (&quot;Dawson&quot;,3595,&quot;Jambi&quot;,&quot;South Gyeongsang&quot;,&quot;Northern Mariana Islands&quot;),
+  (&quot;Acosta&quot;,1065,&quot;Greymouth&quot;,&quot;Tasmania&quot;,&quot;Dominica&quot;),
+  (&quot;Dunn&quot;,6472,&quot;Iqaluit&quot;,&quot;Namen&quot;,&quot;Kuwait&quot;),
+  (&quot;Harrell&quot;,9543,&quot;Motueka&quot;,&quot;British Columbia&quot;,&quot;French Polynesia&quot;),
+  (&quot;Preston&quot;,5033,&quot;Gore&quot;,&quot;Östergötlands län&quot;,&quot;Cameroon&quot;),
+  (&quot;Farrell&quot;,1428,&quot;Tumba&quot;,&quot;Noord Brabant&quot;,&quot;United States Minor Outlying Islands&quot;),
+  (&quot;Downs&quot;,4047,&quot;Cherbourg-Octeville&quot;,&quot;Limpopo&quot;,&quot;Botswana&quot;);
+</sql><sql name="PROBLEMATICA DOS">/*SEGUNDA PROBLEMATICA*/
+
+/*
+ Crear una vista con las columnas id, numero sucursal, nombre, apellido, DNI
+  y edad de la tabla cliente calculada a partir de la fecha de nacimiento
+*/
+CREATE VIEW v_cliente AS
+SELECT customer_id, branch_id, customer_name, customer_surname, customer_DNI,
+(strftime('%Y', 'now') - strftime('%Y', dob)) 
+     - (strftime('%m-%d', 'now') &lt; strftime('%m-%d', dob) ) AS edad
+FROM cliente;
+
+/*
+  Mostrar las columnas de los clientes, ordenadas por el DNI de menor
+  a mayor y cuya edad sea superior a 40 años
+*/
+SELECT *
+FROM v_cliente
+WHERE edad &gt; 40
+ORDER BY customer_DNI;
+
+/*
+  Mostrar todos los clientes que se llaman “Anne” o “Tyler” ordenados
+  por edad de menor a mayor
+*/
+SELECT *
+FROM v_cliente
+WHERE customer_name = &quot;Anne&quot; OR customer_name = &quot;Tyler&quot;
+ORDER BY edad;
+
+/*
+#  Insertar 5 nuevos clientes en la base de datos y
+   verificar que se haya realizado con éxito la inserción
+*/
+INSERT INTO cliente (customer_name, customer_surname, customer_DNI, dob, branch_id)
+VALUES (&quot;Lois&quot;, &quot;Stout&quot;, 47730534, &quot;1984-07-07&quot;, 80),
+	   (&quot;Hall&quot;, &quot;Mconnell&quot;, 52055464, &quot;1968-04-30&quot;, 45),
+	   (&quot;Hilel&quot;, &quot;Mclean&quot;, 43625213, &quot;1993-03-28&quot;, 77),
+	   (&quot;Jin&quot;, &quot;Cooley&quot;, 21207908, &quot;1959-08-24&quot;, 96),
+	   (&quot;Gabriel&quot;, &quot;Harmon&quot;, 57063950, &quot;1976-04-01&quot;, 27);
+	   
+/*
+  Actualizar 5 clientes recientemente agregados en la base de datos dado que
+   hubo un error en el JSON que traía la información, la sucursal de todos es
+   la 10
+*/
+UPDATE cliente
+SET branch_id = 10
+WHERE customer_id &gt;= 501 AND customer_id &lt;= 505
+
+/*
+  Eliminar el registro correspondiente a “Noel David” realizando la selección
+   por el nombre y apellido
+*/
+DELETE FROM cliente
+WHERE customer_name = &quot;Noel&quot; AND customer_surname = &quot;David&quot;
+
+/*
+  Consultar sobre cuál es el tipo de préstamo de mayor importe
+*/
+SELECT loan_type
+FROM prestamo
+ORDER BY loan_total DESC
+LIMIT 1</sql><sql name="PROBLEMATICA TRES">/* TERCERA PROBLEMÁTICA*/
+
+/*&gt;&gt;&gt;Seleccionar las cuentas con saldo negativo&lt;&lt;&lt; */
+/*OPCIÓN 1*/
+SELECT customer_id, account_id, balance
+FROM cuenta
+WHERE balance LIKE '-%'
+ORDER BY customer_id;
+/*OPCIÓN 2*/
+SELECT customer_id, account_id, balance
+FROM cuenta
+WHERE balance&lt;0
+ORDER BY customer_id;
+
+
+/*&gt;&gt;&gt;Seleccionar el nombre, apellido y edad de los clientes que tengan en el apellido la letra Z&lt;&lt;&lt; */
+SELECT customer_name, customer_surname, (strftime('%Y', 'now') - strftime('%Y', dob)) 
+     - (strftime('%m-%d', 'now') &lt; strftime('%m-%d', dob)) as edad
+FROM cliente
+WHERE customer_surname LIKE '%z%';
+
+
+/*&gt;&gt;&gt;Seleccionar el nombre, apellido, edad y nombre de sucursal de las personas cuyo nombre sea “Brendan”
+ y el resultado ordenarlo por nombre de sucursal&lt;&lt;&lt;*/
+SELECT customer_name, customer_surname, (strftime('%Y', 'now') - strftime('%Y', dob)) 
+     - (strftime('%m-%d', 'now') &lt; strftime('%m-%d', dob)) as edad, sucursal.branch_name
+FROM cliente, sucursal
+WHERE customer_name LIKE 'Brendan'
+ORDER BY branch_name;
+
+
+/*&gt;&gt;&gt; Seleccionar de la tabla de préstamos, los préstamos con un importe mayor a $80.000 y los préstamos prendarios 
+utilizando la unión de tablas/consultas (recordar que en las bases de datos la moneda se guarda como integer, en este caso con 2 centavos)&lt;&lt;&lt;*/
+SELECT loan_type, loan_total, loan_total/100 as totalPesos
+/* totalPesos: hace referencia al total sin centavos */
+FROM prestamo 
+WHERE loan_total&gt;8000000 
+UNION
+SELECT loan_type, loan_total, loan_total/100
+FROM prestamo as prestamo_prendario
+WHERE loan_type LIKE 'PRENDARIO'
+ORDER BY totalPesos
+/*La consulta devuelve tipos de prestamos mayores a 80.000 pesos y
+todos los prestamos PRENDARIOS (incluídos los que son menores a 80.000 pesos)*/
+
+
+/* Seleccionar los prestamos cuyo importe sea mayor que el importe medio de todos los prestamos*/
+SELECT loan_id, loan_total
+FROM	prestamo,
+				(
+				SELECT AVG(loan_total) as promedio_prestamos
+				FROM prestamo
+				) as tabla_promedio
+WHERE loan_total &gt; tabla_promedio.promedio_prestamos
+ORDER BY loan_total
+/*EXPLICACIÓN: 
+	Se calcula el promedio en la subconsulta (devuelve un solo valor).
+	La consulta global toma la tabla &quot;prestamos&quot; completa y el resultado de la subconsulta.
+	La condición, que se encuentra dentro del WHERE, muestra las filas de loan_toal mayores que el promedio.
+*/
+
+
+/* Contar la cantidad de clientes menores a 50 años */
+SELECT COUNT(tablaSub50.edadSub50) as cantidad_sub50
+FROM (SELECT ( ((strftime('%Y', 'now') - strftime('%Y', dob)) 
+		- (strftime('%m-%d', 'now') &lt; strftime('%m-%d', dob)))&lt;50 ) as edadSub50
+		FROM cliente
+		WHERE edadSub50!=0) as tablaSub50
+/* EXPLICACIÓN:
+	La consulta general tiene una subconsulta en el FROM, 
+	que devuelve la columna: edadSub50. La cual contiene los verdaderos(1) de la comparación &lt;50. 
+	Como la subconsulta se encuentra en el FROM de la consulta general, su alias será correspondiente a: tablaSub50.
+	En la consulta general se cuenta la cantidad de valores que devuelve la columna edadSub50 de la tablaSub50. */
+
+	
+/*&gt;&gt;&gt;Seleccionar las primeras 5 cuentas con saldo mayor a 8.000$&lt;&lt;&lt;*/
+SELECT account_id, balance
+FROM cuenta
+WHERE balance&gt;800000
+ORDER BY balance 
+LIMIT 5;
+
+
+/*&gt;&gt;&gt;Seleccionar los préstamos que tengan fecha en abril, junio y agosto, ordenándolos por importe&lt;&lt;&lt;*/
+SELECT loan_id, loan_date, loan_total as importe
+FROM prestamo
+WHERE strftime('%m', loan_date) IN ('04','06','08')
+ORDER BY loan_total
+
+
+/*&gt;&gt;&gt;Obtener el importe total de los prestamos agrupados por tipo de préstamos. 
+Por cada tipo de préstamo de la tabla préstamo, calcular la suma de sus importes. 
+Renombrar la columna como loan_total_accu&lt;&lt;&lt;*/
+SELECT loan_type, sum(loan_total) as loan_total_accu
+FROM prestamo
+GROUP BY loan_type;</sql><sql name="PROBLEMATICA CUATRO">/*CUARTA PROBLEMATICA*/
+
+/*	Listar la cantidad de clientes por nombre de sucursal ordenando de mayor a menor	*/
+
+SELECT s.branch_name AS &quot;Sucursal&quot;,count(s.branch_id) AS &quot;Cantidad de clientes&quot;
+FROM cliente AS c 
+LEFT JOIN sucursal AS s ON s.branch_id = c.branch_id 
+GROUP BY s.branch_id 
+ORDER BY count(s.branch_id) DESC;
+
+
+/*	Obtener la cantidad de empleados por cliente por sucursal en un número real	*/
+
+SELECT &quot;Sucursal&quot;, round((qEmpleados*1.0/qClientes*1.0), 2) as &quot;Empleados por clientes&quot;
+FROM (
+	   SELECT sucursal.branch_name AS &quot;Sucursal&quot;, count(cliente.customer_id) AS qClientes, qEmpleados
+	   FROM sucursal
+	   LEFT JOIN cliente
+	   ON sucursal.branch_id = cliente.branch_id
+	   LEFT JOIN (
+				  SELECT sucursal.branch_id AS ID, count(empleado.employee_id) AS qEmpleados
+				  FROM sucursal
+				  LEFT JOIN empleado
+				  ON sucursal.branch_id = empleado.branch_id
+				  GROUP BY sucursal.branch_id) AS sucursal_empleados
+	   ON sucursal.branch_id = sucursal_empleados.ID
+	   GROUP BY sucursal.branch_id)
+ORDER BY &quot;Sucursal&quot;;
+
+
+/*	Obtener la cantidad de tarjetas de crédito por tipo por sucursal	*/
+
+SELECT sucursal.branch_name AS &quot;Sucursal&quot;, &quot;Cantidad Visa&quot;, &quot;Cantidad Mastercard&quot;, &quot;Cantidad American Express&quot;
+FROM sucursal
+LEFT JOIN (	SELECT count(tarjeta.brand_id) AS &quot;Cantidad Visa&quot;, cliente.branch_id
+			FROM tarjeta
+			LEFT JOIN cliente
+			ON tarjeta.customer_id = cliente.customer_id
+			WHERE tarjeta.card_type = &quot;Crédito&quot; AND brand_id = 1
+			GROUP BY branch_id) AS Visa ON sucursal.branch_id = Visa.branch_id
+LEFT JOIN (	SELECT count(tarjeta.brand_id) AS &quot;Cantidad Mastercard&quot;, cliente.branch_id
+			FROM tarjeta
+			LEFT JOIN cliente
+			ON tarjeta.customer_id = cliente.customer_id
+			WHERE tarjeta.card_type = &quot;Crédito&quot; AND brand_id = 2
+			GROUP BY branch_id) AS Mastercard ON sucursal.branch_id = Mastercard.branch_id
+LEFT JOIN ( SELECT count(tarjeta.brand_id) AS &quot;Cantidad American Express&quot;, cliente.branch_id
+			FROM tarjeta
+			LEFT JOIN cliente
+			ON tarjeta.customer_id = cliente.customer_id
+			WHERE tarjeta.card_type = &quot;Crédito&quot; AND brand_id = 3
+			GROUP BY branch_id) AS American ON sucursal.branch_id = American.branch_id
+ORDER BY sucursal.branch_name;
+
+
+/*	Obtener el promedio de créditos otorgado por sucursal	*/
+
+SELECT sucursal.branch_name, &quot;Promedio de prestamos&quot;
+FROM sucursal
+LEFT JOIN(
+			SELECT avg(prestamo.loan_total) AS &quot;Promedio de prestamos&quot;, cliente.branch_id
+			FROM prestamo
+			LEFT JOIN cliente
+			ON prestamo.customer_id = cliente.customer_id
+			GROUP BY branch_id) AS Promedio ON sucursal.branch_id = Promedio.branch_id
+ORDER BY sucursal.branch_name;
+
+
+/*	Crear un trigger que después de actualizar en la tabla cuentas los campos balance, IBAN o tipo de cuenta registre en la tabla auditoria	*/
+/*	Restar $100 a las cuentas 10,11,12,13,14	*/
+
+CREATE TABLE auditoria_cuenta(
+	audit_id INTEGER NOT NULL PRIMARY KEY,
+	old_id INTEGER,
+	new_id INTEGER,
+	old_balance INTEGER,
+	new_balance INTEGER,
+	old_iban TEXT,
+	new_iban TEXT,
+	old_type TEXT,
+	new_type TEXT,
+	user_action TEXT,
+	created_at TEXT);
+
+DELETE FROM auditoria_cuenta;
+	
+CREATE TRIGGER audit AFTER UPDATE OF balance, iban, cuenta_id
+ON cuenta
+BEGIN
+	INSERT INTO auditoria_cuenta (old_id,new_id,old_balance,new_balance,old_iban,new_iban,old_type,new_type,user_action,created_at) 
+	VALUES (OLD.account_id,NEW.account_id,OLD.balance,NEW.balance,OLD.iban,NEW.iban,OLD.cuenta_id,NEW.cuenta_id,
+			CASE WHEN OLD.balance != NEW.balance THEN &quot;Balance update&quot;
+				 WHEN OLD.iban != NEW.iban THEN &quot;IBAN update&quot;
+				 WHEN OLD.cuenta_id != NEW.cuenta_id THEN &quot;Account type update&quot;
+				 ELSE &quot;No changes&quot;
+				 END,
+				 datetime(&quot;now&quot;));
+END;
+
+
+UPDATE cuenta
+SET balance = balance - 10000
+WHERE account_id = 10;
+
+UPDATE cuenta
+SET balance = balance - 10000
+WHERE account_id = 11;
+
+UPDATE cuenta
+SET balance = balance - 10000
+WHERE account_id = 12;
+
+UPDATE cuenta
+SET balance = balance - 10000
+WHERE account_id = 13;
+
+UPDATE cuenta
+SET balance = balance - 10000
+WHERE account_id = 14;
+
+
+/*	Mediante índices mejorar la performance la búsqueda de clientes por DNI	*/
+
+CREATE INDEX cliente_DNI 
+ON cliente	(customer_DNI);
+
+
+/*	Mediante el uso de transacciones, hacer una transferencia de 1000$ desde la cuenta 200 a la cuenta 400	*/
+/*	Registrar el movimiento en la tabla movimientos	*/
+/*	En caso de no poder realizar la operación de forma completa, realizar un ROLLBACK	*/
+
+CREATE TABLE movimientos (
+	transaction_id INTEGER PRIMARY KEY,
+	account_number INTEGER NOT NULL,
+	amount INTEGER NOT NULL,
+	transaction_type TEXT NOT NULL,
+	transaction_time TEXT NOT NULL);
+	
+	
+COMMIT;
+
+BEGIN TRANSACTION;
+	UPDATE cuenta
+	SET balance = balance - 100000
+	WHERE account_id = 200;
+	
+	UPDATE cuenta
+	SET balance = balance + 100000
+	WHERE account_id = 400;
+	
+	INSERT INTO movimientos (account_number,amount,transaction_type,transaction_time)
+	VALUES (200,100000,&quot;Enviado&quot;,datetime(&quot;now&quot;));
+	
+	INSERT INTO movimientos (account_number,amount,transaction_type,transaction_time)
+	VALUES (400,100000,&quot;Recivido&quot;,datetime(&quot;now&quot;));
+	
+COMMIT;
+
+ROLLBACK;
+</sql><current_tab id="1"/></tab_sql></sqlb_project>
