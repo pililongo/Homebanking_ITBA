@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/lucia/Downloads/itbank (1).db" readonly="0" foreign_keys="0" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="3491"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,11:maindirecciones"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="auditoria_cuenta" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="60"/><column index="2" value="46"/><column index="3" value="54"/><column index="4" value="85"/><column index="5" value="93"/><column index="6" value="130"/><column index="7" value="130"/><column index="8" value="65"/><column index="9" value="73"/><column index="10" value="94"/><column index="11" value="129"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="cliente" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="1" mode="1"/></sort><column_widths><column index="1" value="138"/><column index="2" value="175"/><column index="3" value="207"/><column index="4" value="159"/><column index="5" value="109"/><column index="6" value="115"/><column index="7" value="110"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="cuenta" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="79"/><column index="2" value="88"/><column index="3" value="61"/><column index="4" value="233"/><column index="5" value="72"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="direcciones" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="1" mode="0"/></sort><column_widths><column index="1" value="110"/><column index="2" value="118"/><column index="3" value="91"/><column index="4" value="300"/><column index="5" value="293"/><column index="6" value="300"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="empleado" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="7" mode="0"/></sort><column_widths><column index="1" value="142"/><column index="2" value="179"/><column index="3" value="211"/><column index="4" value="221"/><column index="5" value="163"/><column index="6" value="115"/><column index="7" value="110"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="movimientos" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="102"/><column index="2" value="117"/><column index="3" value="57"/><column index="4" value="121"/><column index="5" value="129"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="sucursal" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="1" mode="1"/></sort><column_widths><column index="1" value="115"/><column index="2" value="175"/><column index="3" value="209"/><column index="4" value="207"/><column index="5" value="110"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="PROBLEMATICA UNO">/*PRIMERA PROBLEMATICA*/
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/larap/Desktop/Homebanking_ITBA/Backend/Sprint_6/itbank(final).db" readonly="0" foreign_keys="0" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="3310"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,11:mainmovimientos"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="auditoria_cuenta" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="60"/><column index="2" value="46"/><column index="3" value="54"/><column index="4" value="85"/><column index="5" value="93"/><column index="6" value="200"/><column index="7" value="200"/><column index="8" value="65"/><column index="9" value="73"/><column index="10" value="94"/><column index="11" value="129"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="cliente" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="88"/><column index="2" value="112"/><column index="3" value="133"/><column index="4" value="99"/><column index="5" value="73"/><column index="6" value="72"/><column index="7" value="100"/><column index="8" value="123"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="direcciones" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="79"/><column index="2" value="78"/><column index="3" value="57"/><column index="4" value="215"/><column index="5" value="190"/><column index="6" value="279"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="empleado" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="89"/><column index="2" value="113"/><column index="3" value="134"/><column index="4" value="141"/><column index="6" value="72"/><column index="7" value="79"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="movimientos" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="102"/><column index="2" value="117"/><column index="3" value="57"/><column index="4" value="121"/><column index="5" value="129"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="prueba" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="102"/><column index="2" value="117"/><column index="3" value="57"/><column index="4" value="121"/><column index="5" value="129"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="sucursal" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="1" mode="0"/></sort><column_widths><column index="1" value="72"/><column index="2" value="110"/><column index="3" value="138"/><column index="4" value="132"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="PROBLEMATICA UNO">/*PRIMERA PROBLEMATICA*/
 
 /*Creamos tabla por tipo de cliente*/
 	
@@ -12,8 +12,10 @@ INSERT INTO tipo_cliente(client_type)
 VALUES ('Classic'), ('Gold'), ('Black');
 
 
-/*Copiamos los datos de cliente en otra tabla con la foreign key incluída y eliminamos la tabla cliente original*/
-	
+/* ACLARACIÓN: ya que en SQLite no se pueden agregar foreing keys en tablas previamente existentes, haremos copias de las originales */
+
+/*Copiamos los datos de la tabla cliente en otra tabla con las foreign key que necesitaremos incluídas, y eliminamos la tabla cliente original*/
+
 PRAGMA foreign_keys=OFF;
 SELECT type, sql FROM sqlite_schema WHERE tbl_name='cliente';
 CREATE TABLE nuevo_cliente(
@@ -24,12 +26,18 @@ CREATE TABLE nuevo_cliente(
         dob TEXT NOT NULL,
 		branch_id INTEGER NOT NULL,
 		client_id INTEGER NOT NULL,
-        FOREIGN KEY (client_id)
+		address_id INTEGER NOT NULL,
+        FOREIGN KEY (client_id) /*creamos la foreign key client_id*/
         REFERENCES tipo_cliente(client_id)
+		FOREIGN KEY (address_id) /* creamos la foreign key address_id */
+		REFERENCES direcciones(address_id)
         );
 
 ALTER TABLE cliente 
 ADD client_id INTEGER NOT NULL DEFAULT 1;
+
+ALTER TABLE cliente 
+ADD address_id INTEGER NOT NULL DEFAULT 1;
 
 INSERT INTO nuevo_cliente
 SELECT *
@@ -41,7 +49,6 @@ ALTER TABLE nuevo_cliente RENAME TO cliente;
 
 SELECT *
 FROM cliente;
-
 
 /*Crear valores aleatorios en client_id de la tabla cliente*/
 
@@ -61,7 +68,7 @@ INSERT INTO tipo_cuenta (account_type)
 VALUES ('Caja ahorro pesos'), ('Caja ahorro dólares'), ('Cuenta corriente'); 
 
 
-/*Copiamos los datos de cuenta en otra tabla con la foreign key incluída y eliminamos la tabla cuenta original*/
+/*Copiamos los datos de la tabla cuenta en otra tabla con la foreign key que necesitaremos incluída, y eliminamos la tabla cuenta original*/
 	
 PRAGMA foreign_keys=OFF;
 SELECT type, sql FROM sqlite_schema WHERE tbl_name='cuenta';
@@ -71,7 +78,7 @@ CREATE TABLE nueva_cuenta(
         balance INTEGER NOT NULL,
         iban TEXT NOT NULL,
         cuenta_id INTEGER NOT NULL,
-        FOREIGN KEY (cuenta_id)
+        FOREIGN KEY (cuenta_id) /*creamos la foreign key cuenta_id*/
         REFERENCES tipo_cuenta(cuenta_id)
         );
 		
@@ -121,36 +128,97 @@ CREATE TABLE tarjeta (
 &quot;card_type&quot; TEXT NOT NULL,
 &quot;brand_id&quot; INTEGER NOT NULL,
 &quot;customer_id&quot; INTEGER NOT NULL,
-FOREIGN KEY (&quot;brand_id&quot;)
+FOREIGN KEY (&quot;brand_id&quot;) /*creamos la foreign key brand_id*/
 REFERENCES marca_tarjeta(&quot;brand_id&quot;)
-FOREIGN KEY (&quot;customer_id&quot;)
+FOREIGN KEY (&quot;customer_id&quot;) /*creamos la foreign key customer_id*/
 REFERENCES cliente(&quot;customer_id&quot;));
-
 
-/*Creamos tabla direcciones*/
-
-CREATE TABLE direcciones(
-		adress_id INTEGER NOT NULL PRIMARY KEY,
-		street TEXT NOT NULL,
-		number NUMERIC NOT NULL,
-		city TEXT NOT NULL,
-		province TEXT NOT NULL,
-		country TEXT NOT NULL
+/*Insertamos las tarjetas creadas en el GENERADOR DE TARJETAS*/
+
+
+/*Copiamos los datos de la tabla sucursal en otra tabla con la foreign key que necesitaremos incluída, y eliminamos la tabla sucursal original*/
+
+PRAGMA foreign_keys=OFF;
+CREATE TABLE nueva_sucursal(
+		branch_id INTEGER NOT NULL PRIMARY KEY,
+		branch_number BLOB NOT NULL,
+		branch_name TEXT NOT NULL,
+		branch_address_id INTEGER NOT NULL,
+		address_id INTEGER NOT NULL,
+        FOREIGN KEY (address_id)/*creamos la foreign key address_id*/
+		REFERENCES direcciones(address_id)
+        );
+
+ALTER TABLE sucursal 
+ADD address_id INTEGER NOT NULL DEFAULT 1;
+
+INSERT INTO nueva_sucursal
+SELECT *
+FROM sucursal;
+
+DROP TABLE sucursal;
+
+ALTER TABLE nueva_sucursal RENAME TO sucursal;
+
+
+/*Copiamos los datos de la tabla empleado en otra tabla con la foreign key que necesitaremos incluída, y eliminamos la tabla empleado original*/
+
+PRAGMA foreign_keys=OFF;
+CREATE TABLE nuevo_empleado(
+		employee_id INTEGER NOT NULL PRIMARY KEY,
+		employee_name TEXT NOT NULL,
+		employee_surname TEXT NOT NULL,
+		employee_hire_date TEXT NOT NULL,
+		employee_DNI TEXT NOT NULL,
+		branch_id INTEGER NOT NULL,
+		address_id INTEGER NOT NULL,
+        FOREIGN KEY (address_id)/*creamos la foreign key address_id*/
+		REFERENCES direcciones(address_id)
+        );
+
+ALTER TABLE empleado 
+ADD address_id INTEGER NOT NULL DEFAULT 1;
+
+INSERT INTO nuevo_empleado
+SELECT *
+FROM empleado;
+
+DROP TABLE empleado;
+
+ALTER TABLE nuevo_empleado RENAME TO empleado;
+
+/*Creamos tabla direcciones */
+
+CREATE TABLE direcciones(
+		address_id INTEGER NOT NULL PRIMARY KEY,
+		street TEXT NOT NULL,
+		number NUMERIC NOT NULL,
+		city TEXT NOT NULL,
+		province TEXT NOT NULL,
+		country TEXT NOT NULL
 		); 
 
-UPDATE sucursal
-SET adress_id = branch_id;
-
-UPDATE cliente
-SET adress_id = customer_id + 100;
-
-UPDATE empleado
-SET adress_id = employee_id + 350;
-	
+/*Insertamos las direcciones creadas en el GENERADOR DE DIRECCIONES*/
+
+/*Del total de las 850 direcciones, las primeras 100 direcciones pertenecen a las sucursales, las siguientes 250 son exclusivas para los clientes,
+otras 250 exclusivas para empleados, y el resto compartidas entre estos dos ultimos*/
+
+/*Modificamos la foreign key address_id en las tablas sucursal, cliente y empleado*/
+
+UPDATE sucursal
+SET address_id = branch_id;
+
+UPDATE cliente
+SET address_id = customer_id + 100;
+
+UPDATE empleado
+SET address_id = employee_id + 350;
+
+
 /*Corrección formato del campo employee_hire_date de tabla empleado*/
 
 UPDATE empleado
-SET employee_hire_date = substr(employee_hire_date, 7, 4) || '-' || substr(employee_hire_date, 4,2) || '-' || substr(employee_hire_date, 1,2);</sql><sql name="GENERADOR DE TARJETAS">	/*Generamos 500 tarjetas de crédito y laas insertamos en la tabla tarjeta*/
+SET employee_hire_date = substr(employee_hire_date, 7, 4) || '-' || substr(employee_hire_date, 4,2) || '-' || substr(employee_hire_date, 1,2);</sql><sql name="GENERADOR DE TARJETAS">/*Generamos 500 tarjetas de crédito y las insertamos en la tabla tarjeta*/
 
 INSERT INTO `tarjeta` (`card_number`,`card_cvv`,`card_grant_date`,`card_expiration_date`,`card_type`,`brand_id`,`customer_id`)
 VALUES
@@ -751,372 +819,372 @@ VALUES
   (&quot;453276 2785456189&quot;,&quot;428&quot;,&quot;Oct 28, 2021&quot;,&quot;Aug 26, 2023&quot;,&quot;Débito&quot;,&quot;2&quot;,498),
   (&quot;4539264474431584&quot;,&quot;387&quot;,&quot;Feb 15, 2022&quot;,&quot;Jun 9, 2023&quot;,&quot;Crédito&quot;,&quot;1&quot;,341),
   (&quot;453993 4583343520&quot;,&quot;322&quot;,&quot;Jan 27, 2020&quot;,&quot;Aug 9, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,388),
-  (&quot;4929 8483 5467 4731&quot;,&quot;897&quot;,&quot;Mar 16, 2020&quot;,&quot;Oct 2, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,303);</sql><sql name="GENERADOR DE DIRECCIONES">/*Generamos 850 direcciones aleatorias*/
-
-INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
-VALUES
-  (&quot;Blake&quot;,4268,&quot;Tehuacán&quot;,&quot;Tyrol&quot;,&quot;Cayman Islands&quot;),
-  (&quot;Ross&quot;,7451,&quot;Southern Islands&quot;,&quot;Liguria&quot;,&quot;Albania&quot;),
-  (&quot;Emerson&quot;,9584,&quot;Rouen&quot;,&quot;Utrecht&quot;,&quot;Venezuela&quot;),
-  (&quot;Mcbride&quot;,6579,&quot;Avennes&quot;,&quot;Arizona&quot;,&quot;Macedonia&quot;),
-  (&quot;Spence&quot;,8069,&quot;Welshpool&quot;,&quot;South Island&quot;,&quot;United Arab Emirates&quot;),
-  (&quot;Melton&quot;,1396,&quot;Huesca&quot;,&quot;Lviv oblast&quot;,&quot;Aruba&quot;),
-  (&quot;Watson&quot;,6472,&quot;Rotterdam&quot;,&quot;Los Lagos&quot;,&quot;Fiji&quot;),
-  (&quot;Farley&quot;,7483,&quot;Canberra&quot;,&quot;North Island&quot;,&quot;Saudi Arabia&quot;),
-  (&quot;Vaughn&quot;,3011,&quot;Alajuela&quot;,&quot;Overijssel&quot;,&quot;Niue&quot;),
-  (&quot;Boyer&quot;,5196,&quot;Wedel&quot;,&quot;Rio de Janeiro&quot;,&quot;Tuvalu&quot;),
-  (&quot;Donovan&quot;,1645,&quot;Bauchi&quot;,&quot;Aydın&quot;,&quot;Denmark&quot;),
-  (&quot;Lloyd&quot;,9577,&quot;Lebowakgomo&quot;,&quot;North Jeolla&quot;,&quot;Vanuatu&quot;),
-  (&quot;Sullivan&quot;,3228,&quot;Orkanger&quot;,&quot;Bremen&quot;,&quot;France&quot;),
-  (&quot;Dickerson&quot;,1242,&quot;Valparaíso de Goiás&quot;,&quot;Eastern Cape&quot;,&quot;Greenland&quot;),
-  (&quot;Delaney&quot;,3482,&quot;Zamboanga City&quot;,&quot;North-East Region&quot;,&quot;South Sudan&quot;),
-  (&quot;Russo&quot;,4628,&quot;Sankt Johann im Pongau&quot;,&quot;łódzkie&quot;,&quot;Sudan&quot;),
-  (&quot;Mathews&quot;,2447,&quot;Jaboatão dos Guararapes&quot;,&quot;Lviv oblast&quot;,&quot;Saint Barthélemy&quot;),
-  (&quot;Wade&quot;,2102,&quot;Belfast&quot;,&quot;Cartago&quot;,&quot;Antarctica&quot;),
-  (&quot;Hyde&quot;,5141,&quot;Cockburn&quot;,&quot;Puglia&quot;,&quot;Isle of Man&quot;),
-  (&quot;Camacho&quot;,2645,&quot;Tumba&quot;,&quot;Ankara&quot;,&quot;Romania&quot;),
-  (&quot;Trevino&quot;,7335,&quot;Bucheon&quot;,&quot;Minas Gerais&quot;,&quot;Saint Vincent and The Grenadines&quot;),
-  (&quot;Henry&quot;,4374,&quot;Bunbury&quot;,&quot;Swiętokrzyskie&quot;,&quot;Niue&quot;),
-  (&quot;Holder&quot;,8787,&quot;Jelenia Góra&quot;,&quot;Rogaland&quot;,&quot;Timor-Leste&quot;),
-  (&quot;Harris&quot;,1695,&quot;Ang Mo Kio&quot;,&quot;Antofagasta&quot;,&quot;New Caledonia&quot;),
-  (&quot;Gamble&quot;,8082,&quot;San Nicolás&quot;,&quot;Brandenburg&quot;,&quot;Pitcairn Islands&quot;),
-  (&quot;Blackwell&quot;,1232,&quot;Bothey&quot;,&quot;Wigtownshire&quot;,&quot;Somalia&quot;),
-  (&quot;Pittman&quot;,9779,&quot;Puerto Colombia&quot;,&quot;Balochistan&quot;,&quot;Dominican Republic&quot;),
-  (&quot;Richards&quot;,3020,&quot;Nice&quot;,&quot;Zamboanga Peninsula&quot;,&quot;Yemen&quot;),
-  (&quot;Houston&quot;,8548,&quot;New Plymouth&quot;,&quot;North Kalimantan&quot;,&quot;Sao Tome and Principe&quot;),
-  (&quot;Hurst&quot;,6395,&quot;Arequipa&quot;,&quot;Kujawsko-pomorskie&quot;,&quot;Uzbekistan&quot;),
-  (&quot;Hendrix&quot;,7049,&quot;Niort&quot;,&quot;Kentucky&quot;,&quot;Gibraltar&quot;),
-  (&quot;Lott&quot;,7405,&quot;Washington&quot;,&quot;Yaroslavl Oblast&quot;,&quot;Madagascar&quot;),
-  (&quot;Nichols&quot;,3989,&quot;Castelló&quot;,&quot;Arkansas&quot;,&quot;Suriname&quot;),
-  (&quot;Savage&quot;,7709,&quot;Winterswijk&quot;,&quot;West-Vlaanderen&quot;,&quot;Vanuatu&quot;),
-  (&quot;Barton&quot;,9472,&quot;Buôn Ma Thuột&quot;,&quot;Chihuahua&quot;,&quot;Curaçao&quot;),
-  (&quot;Barker&quot;,4209,&quot;La Plata&quot;,&quot;Baden Württemberg&quot;,&quot;Bermuda&quot;),
-  (&quot;Burch&quot;,4822,&quot;Pamplona&quot;,&quot;Tasmania&quot;,&quot;Bahrain&quot;),
-  (&quot;Sanders&quot;,7453,&quot;Bontang&quot;,&quot;Cajamarca&quot;,&quot;Gabon&quot;),
-  (&quot;Coffey&quot;,8878,&quot;Arnhem&quot;,&quot;Leinster&quot;,&quot;Libya&quot;),
-  (&quot;Weiss&quot;,5039,&quot;Calapan&quot;,&quot;South Island&quot;,&quot;French Southern Territories&quot;),
-  (&quot;Maxwell&quot;,3061,&quot;Fresno&quot;,&quot;Schleswig-Holstein&quot;,&quot;Mexico&quot;),
-  (&quot;Brock&quot;,2339,&quot;Mahikeng&quot;,&quot;Limpopo&quot;,&quot;Haiti&quot;),
-  (&quot;Holman&quot;,3612,&quot;Halkirk&quot;,&quot;Valle d'Aosta&quot;,&quot;Taiwan&quot;),
-  (&quot;Navarro&quot;,6445,&quot;Hagen&quot;,&quot;Melilla&quot;,&quot;Liechtenstein&quot;),
-  (&quot;Welch&quot;,9594,&quot;Whangarei&quot;,&quot;Maranhão&quot;,&quot;Congo, the Democratic Republic of the&quot;),
-  (&quot;Alford&quot;,6838,&quot;Sembawang&quot;,&quot;North West&quot;,&quot;Tuvalu&quot;),
-  (&quot;Gonzalez&quot;,5862,&quot;Tharparkar&quot;,&quot;Henegouwen&quot;,&quot;Togo&quot;),
-  (&quot;Hughes&quot;,2959,&quot;Cumaribo&quot;,&quot;Vestland&quot;,&quot;Egypt&quot;),
-  (&quot;Baker&quot;,3264,&quot;Ryazan&quot;,&quot;Bahia&quot;,&quot;Philippines&quot;),
-  (&quot;Joseph&quot;,7420,&quot;Kaluga&quot;,&quot;Durham&quot;,&quot;Japan&quot;);
-INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
-VALUES
-  (&quot;Lamb&quot;,9820,&quot;María Elena&quot;,&quot;Xīnán&quot;,&quot;Georgia&quot;),
-  (&quot;Brady&quot;,6276,&quot;Ulsan&quot;,&quot;Jönköpings län&quot;,&quot;Aruba&quot;),
-  (&quot;Butler&quot;,1390,&quot;Port Harcourt&quot;,&quot;Gauteng&quot;,&quot;Ethiopia&quot;),
-  (&quot;Gonzalez&quot;,2714,&quot;Arrone&quot;,&quot;Aceh&quot;,&quot;Denmark&quot;),
-  (&quot;Gardner&quot;,1873,&quot;Querétaro&quot;,&quot;Zachodniopomorskie&quot;,&quot;Israel&quot;),
-  (&quot;Oneal&quot;,9148,&quot;Pondicherry&quot;,&quot;Opolskie&quot;,&quot;Kyrgyzstan&quot;),
-  (&quot;Atkinson&quot;,8994,&quot;Gladstone&quot;,&quot;Cartago&quot;,&quot;Samoa&quot;),
-  (&quot;Sweeney&quot;,3495,&quot;Korosten&quot;,&quot;Östergötlands län&quot;,&quot;Burundi&quot;),
-  (&quot;Armstrong&quot;,3592,&quot;Akhtubinsk&quot;,&quot;Los Lagos&quot;,&quot;Bulgaria&quot;),
-  (&quot;Bryant&quot;,6946,&quot;Trujillo&quot;,&quot;Victoria&quot;,&quot;Montserrat&quot;),
-  (&quot;Carlson&quot;,9840,&quot;Bierk Bierghes&quot;,&quot;Akwa Ibom&quot;,&quot;Switzerland&quot;),
-  (&quot;Gilbert&quot;,1898,&quot;Hammerfest&quot;,&quot;Gaziantep&quot;,&quot;Papua New Guinea&quot;),
-  (&quot;Salazar&quot;,6389,&quot;Avesta&quot;,&quot;Huáběi&quot;,&quot;Bahamas&quot;),
-  (&quot;Douglas&quot;,6276,&quot;Paju&quot;,&quot;Vinnytsia oblast&quot;,&quot;Belarus&quot;),
-  (&quot;Stokes&quot;,4876,&quot;Kohlu&quot;,&quot;Mersin&quot;,&quot;Guernsey&quot;),
-  (&quot;Petersen&quot;,2801,&quot;Açailândia&quot;,&quot;Ontario&quot;,&quot;Maldives&quot;),
-  (&quot;Stout&quot;,8080,&quot;Iksan&quot;,&quot;Gia Lai&quot;,&quot;Chad&quot;),
-  (&quot;Burris&quot;,2728,&quot;Dublin&quot;,&quot;West Sulawesi&quot;,&quot;Tokelau&quot;),
-  (&quot;Charles&quot;,1152,&quot;İslahiye&quot;,&quot;Viken&quot;,&quot;Mexico&quot;),
-  (&quot;Winters&quot;,4987,&quot;Tandag&quot;,&quot;Sumy oblast&quot;,&quot;Eritrea&quot;),
-  (&quot;Albert&quot;,5799,&quot;Nocciano&quot;,&quot;Lower Austria&quot;,&quot;Aruba&quot;),
-  (&quot;Stein&quot;,7839,&quot;Brevik&quot;,&quot;Tabasco&quot;,&quot;Madagascar&quot;),
-  (&quot;Juarez&quot;,3464,&quot;Bowden&quot;,&quot;Ternopil oblast&quot;,&quot;Laos&quot;),
-  (&quot;Stephenson&quot;,2108,&quot;Kohat&quot;,&quot;Saratov Oblast&quot;,&quot;Peru&quot;),
-  (&quot;Bowen&quot;,6336,&quot;Zwelitsha&quot;,&quot;Hamburg&quot;,&quot;Mongolia&quot;),
-  (&quot;Chaney&quot;,8992,&quot;Ceuta&quot;,&quot;Free State&quot;,&quot;Virgin Islands, British&quot;),
-  (&quot;Pace&quot;,7756,&quot;Candela&quot;,&quot;North Island&quot;,&quot;American Samoa&quot;),
-  (&quot;Page&quot;,5581,&quot;Barranca&quot;,&quot;Rio de Janeiro&quot;,&quot;Cyprus&quot;),
-  (&quot;Tyler&quot;,2239,&quot;Wortel&quot;,&quot;Cumberland&quot;,&quot;Saint Helena, Ascension and Tristan da Cunha&quot;),
-  (&quot;Villarreal&quot;,7744,&quot;Boca del Río&quot;,&quot;Paraíba&quot;,&quot;Albania&quot;),
-  (&quot;Le&quot;,9751,&quot;Speyer&quot;,&quot;Delaware&quot;,&quot;Comoros&quot;),
-  (&quot;Ochoa&quot;,9784,&quot;Gorontalo&quot;,&quot;Guanacaste&quot;,&quot;British Indian Ocean Territory&quot;),
-  (&quot;Shepherd&quot;,9223,&quot;Timaru&quot;,&quot;Oyo&quot;,&quot;Czech Republic&quot;),
-  (&quot;Rodgers&quot;,5392,&quot;Patiala&quot;,&quot;Bourgogne&quot;,&quot;Saudi Arabia&quot;),
-  (&quot;Duncan&quot;,2828,&quot;Sauda&quot;,&quot;North Jeolla&quot;,&quot;Moldova&quot;),
-  (&quot;Robles&quot;,9719,&quot;Värnamo&quot;,&quot;Imo&quot;,&quot;Tonga&quot;),
-  (&quot;Vaughan&quot;,3445,&quot;Uddevalla&quot;,&quot;Santa Catarina&quot;,&quot;Switzerland&quot;),
-  (&quot;Duffy&quot;,8117,&quot;Leers-et-Fosteau&quot;,&quot;Overijssel&quot;,&quot;Western Sahara&quot;),
-  (&quot;Franklin&quot;,7738,&quot;Yurimaguas&quot;,&quot;Noord Brabant&quot;,&quot;Germany&quot;),
-  (&quot;Peterson&quot;,6893,&quot;Shandong&quot;,&quot;Central Region&quot;,&quot;Central African Republic&quot;),
-  (&quot;Ratliff&quot;,3399,&quot;Vannes&quot;,&quot;Kahramanmaraş&quot;,&quot;Antigua and Barbuda&quot;),
-  (&quot;Gallagher&quot;,6955,&quot;San Fernando&quot;,&quot;Marche&quot;,&quot;United Kingdom (Great Britain)&quot;),
-  (&quot;Graves&quot;,8478,&quot;Virginia Beach&quot;,&quot;Västra Götalands län&quot;,&quot;Slovakia&quot;),
-  (&quot;Hinton&quot;,9712,&quot;Bayeux&quot;,&quot;Zuid Holland&quot;,&quot;Libya&quot;),
-  (&quot;Evans&quot;,4063,&quot;Port Nolloth&quot;,&quot;Michigan&quot;,&quot;Afghanistan&quot;),
-  (&quot;Benjamin&quot;,1199,&quot;Barrackpur&quot;,&quot;Ilocos Region&quot;,&quot;Chile&quot;),
-  (&quot;Alston&quot;,5487,&quot;Juliaca&quot;,&quot;Bahia&quot;,&quot;Chad&quot;),
-  (&quot;Goff&quot;,6338,&quot;Contulmo&quot;,&quot;Noord Brabant&quot;,&quot;Latvia&quot;),
-  (&quot;Mcdowell&quot;,9972,&quot;Istanbul&quot;,&quot;Hamburg&quot;,&quot;Netherlands&quot;),
-  (&quot;Wyatt&quot;,8379,&quot;Arendal&quot;,&quot;O'Higgins&quot;,&quot;French Southern Territories&quot;);
-INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
-VALUES
-  (&quot;Hull&quot;,2211,&quot;Gaya&quot;,&quot;Kursk Oblast&quot;,&quot;Libya&quot;),
-  (&quot;Mcneil&quot;,6466,&quot;Yeosu&quot;,&quot;Bình Dương&quot;,&quot;Equatorial Guinea&quot;),
-  (&quot;Kent&quot;,5249,&quot;Nuragus&quot;,&quot;West Bengal&quot;,&quot;Croatia&quot;),
-  (&quot;Mercado&quot;,8322,&quot;Valenzuela&quot;,&quot;Central Region&quot;,&quot;Bangladesh&quot;),
-  (&quot;Morrison&quot;,6468,&quot;St. John's&quot;,&quot;Atacama&quot;,&quot;French Guiana&quot;),
-  (&quot;Brennan&quot;,9757,&quot;Hinckley&quot;,&quot;Utrecht&quot;,&quot;Paraguay&quot;),
-  (&quot;Beasley&quot;,3478,&quot;Hạ Long&quot;,&quot;Lombardia&quot;,&quot;Uzbekistan&quot;),
-  (&quot;Downs&quot;,1555,&quot;Baden-Baden&quot;,&quot;Northern Cape&quot;,&quot;Romania&quot;),
-  (&quot;Roy&quot;,9181,&quot;Skardu&quot;,&quot;South Gyeongsang&quot;,&quot;Algeria&quot;),
-  (&quot;Hampton&quot;,4684,&quot;Bedok&quot;,&quot;Moscow City&quot;,&quot;Virgin Islands, United States&quot;),
-  (&quot;Daugherty&quot;,2598,&quot;Batac&quot;,&quot;Central Visayas&quot;,&quot;Egypt&quot;),
-  (&quot;Church&quot;,3088,&quot;Rangiora&quot;,&quot;Azad Kashmir&quot;,&quot;Madagascar&quot;),
-  (&quot;Stafford&quot;,6618,&quot;Suwałki&quot;,&quot;Papua&quot;,&quot;Fiji&quot;),
-  (&quot;Ashley&quot;,2884,&quot;Bila Tserkva&quot;,&quot;Benue&quot;,&quot;Yemen&quot;),
-  (&quot;Barber&quot;,8787,&quot;Onitsha&quot;,&quot;Biobío&quot;,&quot;Sri Lanka&quot;),
-  (&quot;Moody&quot;,4859,&quot;Kalisz&quot;,&quot;North West&quot;,&quot;Jordan&quot;),
-  (&quot;Clay&quot;,3166,&quot;Verdalsøra&quot;,&quot;Arequipa&quot;,&quot;Wallis and Futuna&quot;),
-  (&quot;Huffman&quot;,2357,&quot;Kropyvnytskyi&quot;,&quot;Henegouwen&quot;,&quot;Philippines&quot;),
-  (&quot;Weber&quot;,7835,&quot;Wood Buffalo&quot;,&quot;Schleswig-Holstein&quot;,&quot;Belize&quot;),
-  (&quot;Walton&quot;,4909,&quot;Waren&quot;,&quot;North Sumatra&quot;,&quot;Montenegro&quot;),
-  (&quot;Wiley&quot;,6092,&quot;San Luis Potosí&quot;,&quot;Cartago&quot;,&quot;Brazil&quot;),
-  (&quot;Hicks&quot;,6748,&quot;Tauranga&quot;,&quot;West-Vlaanderen&quot;,&quot;Indonesia&quot;),
-  (&quot;Dickson&quot;,7504,&quot;Leersum&quot;,&quot;Delta&quot;,&quot;United States Minor Outlying Islands&quot;),
-  (&quot;Manning&quot;,3467,&quot;Hengelo&quot;,&quot;Kursk Oblast&quot;,&quot;Romania&quot;),
-  (&quot;Johnson&quot;,5898,&quot;Muzaffarnagar&quot;,&quot;Riau&quot;,&quot;Reunion&quot;),
-  (&quot;Sullivan&quot;,2390,&quot;Lillehammer&quot;,&quot;Pomorskie&quot;,&quot;Thailand&quot;),
-  (&quot;Delaney&quot;,3088,&quot;Randfontein&quot;,&quot;Haryana&quot;,&quot;Guyana&quot;),
-  (&quot;Woodward&quot;,7384,&quot;Stockholm&quot;,&quot;Mersin&quot;,&quot;Somalia&quot;),
-  (&quot;Lang&quot;,1929,&quot;Mjölby&quot;,&quot;Leinster&quot;,&quot;Zambia&quot;),
-  (&quot;Richmond&quot;,4698,&quot;Kufstein&quot;,&quot;Kharkiv oblast&quot;,&quot;Cuba&quot;),
-  (&quot;Hodge&quot;,1990,&quot;Canberra&quot;,&quot;Pará&quot;,&quot;Germany&quot;),
-  (&quot;Mckay&quot;,6824,&quot;Westport&quot;,&quot;Nottinghamshire&quot;,&quot;Namibia&quot;),
-  (&quot;Mathews&quot;,9076,&quot;Kon Tum&quot;,&quot;Hậu Giang&quot;,&quot;Bosnia and Herzegovina&quot;),
-  (&quot;Morris&quot;,1826,&quot;Temuka&quot;,&quot;Ontario&quot;,&quot;Mauritius&quot;),
-  (&quot;Maldonado&quot;,4812,&quot;Vidisha&quot;,&quot;Mazowieckie&quot;,&quot;Ethiopia&quot;),
-  (&quot;Henson&quot;,6909,&quot;Isabela City&quot;,&quot;Risaralda&quot;,&quot;Belarus&quot;),
-  (&quot;Whitaker&quot;,4793,&quot;Tromsø&quot;,&quot;Balıkesir&quot;,&quot;Germany&quot;),
-  (&quot;Randolph&quot;,6605,&quot;Padang Panjang&quot;,&quot;Melilla&quot;,&quot;British Indian Ocean Territory&quot;),
-  (&quot;Pena&quot;,4531,&quot;Kremenchuk&quot;,&quot;Morelos&quot;,&quot;Uzbekistan&quot;),
-  (&quot;Mckee&quot;,5503,&quot;Lelystad&quot;,&quot;Moscow City&quot;,&quot;Reunion&quot;),
-  (&quot;Riley&quot;,3224,&quot;Astore&quot;,&quot;Mecklenburg-Vorpommern&quot;,&quot;Tonga&quot;),
-  (&quot;Hansen&quot;,6636,&quot;Gangtok&quot;,&quot;Cheshire&quot;,&quot;Algeria&quot;),
-  (&quot;Robles&quot;,8977,&quot;Antofagasta&quot;,&quot;Leinster&quot;,&quot;Chad&quot;),
-  (&quot;Weber&quot;,5162,&quot;Timaukel&quot;,&quot;Catalunya&quot;,&quot;Iceland&quot;),
-  (&quot;George&quot;,3879,&quot;Delhi&quot;,&quot;Stockholms län&quot;,&quot;Maldives&quot;),
-  (&quot;Wright&quot;,2788,&quot;Andalo&quot;,&quot;Punjab&quot;,&quot;Iceland&quot;),
-  (&quot;Singleton&quot;,4500,&quot;Puno&quot;,&quot;Ulster&quot;,&quot;Oman&quot;),
-  (&quot;Marquez&quot;,8420,&quot;Jeju&quot;,&quot;Cherkasy oblast&quot;,&quot;Norway&quot;),
-  (&quot;Mueller&quot;,3219,&quot;Mattersburg&quot;,&quot;Baja California&quot;,&quot;Dominican Republic&quot;),
-  (&quot;Mcpherson&quot;,7100,&quot;Gongju&quot;,&quot;Basse-Normandie&quot;,&quot;Ireland&quot;);
-INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
-VALUES
-  (&quot;Short&quot;,8976,&quot;Limón (Puerto Limón]&quot;,&quot;Louisiana&quot;,&quot;Nicaragua&quot;),
-  (&quot;Berger&quot;,4781,&quot;Kropyvnytskyi&quot;,&quot;Viken&quot;,&quot;Palestine, State of&quot;),
-  (&quot;Daniels&quot;,5755,&quot;Falun&quot;,&quot;Oryol Oblast&quot;,&quot;Jersey&quot;),
-  (&quot;Mejia&quot;,3524,&quot;Sakhalin&quot;,&quot;Champagne-Ardenne&quot;,&quot;Zimbabwe&quot;),
-  (&quot;Daniel&quot;,5268,&quot;Hattiesburg&quot;,&quot;Cusco&quot;,&quot;Senegal&quot;),
-  (&quot;Diaz&quot;,6382,&quot;Chuncheon&quot;,&quot;Cusco&quot;,&quot;Central African Republic&quot;),
-  (&quot;Vaughn&quot;,6145,&quot;Huesca&quot;,&quot;Ulster&quot;,&quot;Gambia&quot;),
-  (&quot;Schroeder&quot;,8360,&quot;Ramsdonk&quot;,&quot;Aragón&quot;,&quot;Vanuatu&quot;),
-  (&quot;Mack&quot;,9706,&quot;Arequipa&quot;,&quot;Delta&quot;,&quot;Vanuatu&quot;),
-  (&quot;Guy&quot;,7402,&quot;Bajaur Agency&quot;,&quot;Tabasco&quot;,&quot;Saint Pierre and Miquelon&quot;),
-  (&quot;Rollins&quot;,4300,&quot;Mexico City&quot;,&quot;Calabarzon&quot;,&quot;Equatorial Guinea&quot;),
-  (&quot;Navarro&quot;,7275,&quot;Sangju&quot;,&quot;Massachusetts&quot;,&quot;Portugal&quot;),
-  (&quot;Parsons&quot;,6323,&quot;Plauen&quot;,&quot;Gelderland&quot;,&quot;India&quot;),
-  (&quot;Alston&quot;,5378,&quot;Bansberia&quot;,&quot;Gauteng&quot;,&quot;Cuba&quot;),
-  (&quot;Martin&quot;,6502,&quot;Izium&quot;,&quot;Dnipropetrovsk oblast&quot;,&quot;Malaysia&quot;),
-  (&quot;Downs&quot;,8367,&quot;Tabaco&quot;,&quot;Jigawa&quot;,&quot;Nigeria&quot;),
-  (&quot;Shaw&quot;,9622,&quot;Lautaro&quot;,&quot;South Jeolla&quot;,&quot;Svalbard and Jan Mayen Islands&quot;),
-  (&quot;Nixon&quot;,4899,&quot;Mahikeng&quot;,&quot;Gauteng&quot;,&quot;New Zealand&quot;),
-  (&quot;Dyer&quot;,5368,&quot;Kediri&quot;,&quot;Queensland&quot;,&quot;Austria&quot;),
-  (&quot;Clemons&quot;,7657,&quot;Melilla&quot;,&quot;North Sulawesi&quot;,&quot;Guadeloupe&quot;),
-  (&quot;Campos&quot;,4977,&quot;Kharkiv&quot;,&quot;Punjab&quot;,&quot;Brazil&quot;),
-  (&quot;Atkinson&quot;,8831,&quot;Konya&quot;,&quot;Zachodniopomorskie&quot;,&quot;Spain&quot;),
-  (&quot;Charles&quot;,1277,&quot;Ulyanovsk&quot;,&quot;Östergötlands län&quot;,&quot;Palestine, State of&quot;),
-  (&quot;Nelson&quot;,3417,&quot;Motala&quot;,&quot;Limousin&quot;,&quot;Honduras&quot;),
-  (&quot;Wilson&quot;,5757,&quot;Hubei&quot;,&quot;Ilocos Region&quot;,&quot;Kiribati&quot;),
-  (&quot;Huff&quot;,9424,&quot;Bauchi&quot;,&quot;Newfoundland and Labrador&quot;,&quot;Thailand&quot;),
-  (&quot;Wolfe&quot;,2698,&quot;Murcia&quot;,&quot;Eastern Cape&quot;,&quot;Virgin Islands, United States&quot;),
-  (&quot;Good&quot;,5713,&quot;Santa Inês&quot;,&quot;Biobío&quot;,&quot;French Guiana&quot;),
-  (&quot;Russell&quot;,7263,&quot;Asan&quot;,&quot;North Island&quot;,&quot;Guinea&quot;),
-  (&quot;Langley&quot;,3954,&quot;Lerum&quot;,&quot;Soccsksargen&quot;,&quot;Nepal&quot;),
-  (&quot;Matthews&quot;,4332,&quot;Magangué&quot;,&quot;Melilla&quot;,&quot;Somalia&quot;),
-  (&quot;Stein&quot;,9015,&quot;Tuscaloosa&quot;,&quot;Bengkulu&quot;,&quot;Romania&quot;),
-  (&quot;Forbes&quot;,6504,&quot;Pohang&quot;,&quot;Bayern&quot;,&quot;Korea, North&quot;),
-  (&quot;Spencer&quot;,4454,&quot;Juliaca&quot;,&quot;Santa Catarina&quot;,&quot;Finland&quot;),
-  (&quot;Emerson&quot;,9838,&quot;Fortaleza&quot;,&quot;Namen&quot;,&quot;Mozambique&quot;),
-  (&quot;Compton&quot;,4849,&quot;Nodebais&quot;,&quot;Wyoming&quot;,&quot;Mongolia&quot;),
-  (&quot;Mcconnell&quot;,6478,&quot;Manila&quot;,&quot;Dolnośląskie&quot;,&quot;Tunisia&quot;),
-  (&quot;Barton&quot;,2240,&quot;Mexico City&quot;,&quot;Borno&quot;,&quot;French Guiana&quot;),
-  (&quot;Gomez&quot;,7513,&quot;Sagrada Familia&quot;,&quot;Nuevo León&quot;,&quot;Jamaica&quot;),
-  (&quot;Murray&quot;,7995,&quot;Bontang&quot;,&quot;Novgorod Oblast&quot;,&quot;Colombia&quot;),
-  (&quot;Blankenship&quot;,7022,&quot;Astore&quot;,&quot;Northern Cape&quot;,&quot;Saint Kitts and Nevis&quot;),
-  (&quot;Lowe&quot;,6729,&quot;Dunedin&quot;,&quot;Banten&quot;,&quot;Bermuda&quot;),
-  (&quot;Clarke&quot;,8865,&quot;Cannock&quot;,&quot;Magdalena&quot;,&quot;Haiti&quot;),
-  (&quot;Conner&quot;,6751,&quot;Pabianice&quot;,&quot;Languedoc-Roussillon&quot;,&quot;Mozambique&quot;),
-  (&quot;Drake&quot;,7876,&quot;Silay&quot;,&quot;Namen&quot;,&quot;Djibouti&quot;),
-  (&quot;Carroll&quot;,8820,&quot;Pangkalpinang&quot;,&quot;łódzkie&quot;,&quot;United States Minor Outlying Islands&quot;),
-  (&quot;Lowe&quot;,9536,&quot;Boksburg&quot;,&quot;Dnipropetrovsk oblast&quot;,&quot;Ethiopia&quot;),
-  (&quot;Hanson&quot;,8358,&quot;Santander&quot;,&quot;Colorado&quot;,&quot;Antarctica&quot;),
-  (&quot;Salazar&quot;,2144,&quot;Albano di Lucania&quot;,&quot;Brussels Hoofdstedelijk Gewest&quot;,&quot;Australia&quot;),
-  (&quot;Stanton&quot;,2737,&quot;İslahiye&quot;,&quot;Vienna&quot;,&quot;Botswana&quot;);
-INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
-VALUES
-  (&quot;Mejia&quot;,8068,&quot;General Escobedo&quot;,&quot;Khyber Pakhtoonkhwa&quot;,&quot;Romania&quot;),
-  (&quot;Ford&quot;,1587,&quot;San Diego&quot;,&quot;Eastern Visayas&quot;,&quot;Montserrat&quot;),
-  (&quot;Henson&quot;,5429,&quot;Rivne&quot;,&quot;East Region&quot;,&quot;Saint Barthélemy&quot;),
-  (&quot;Rodriguez&quot;,9124,&quot;Bucheon&quot;,&quot;Alajuela&quot;,&quot;Georgia&quot;),
-  (&quot;Dominguez&quot;,5316,&quot;Okpoko&quot;,&quot;Chihuahua&quot;,&quot;Saint Lucia&quot;),
-  (&quot;Moon&quot;,5288,&quot;Ch‰tillon&quot;,&quot;Pernambuco&quot;,&quot;Australia&quot;),
-  (&quot;Pennington&quot;,2694,&quot;Bandar Lampung&quot;,&quot;Huádōng&quot;,&quot;Lebanon&quot;),
-  (&quot;Montgomery&quot;,6921,&quot;Nghĩa Lộ&quot;,&quot;Cornwall&quot;,&quot;Nauru&quot;),
-  (&quot;Burke&quot;,6607,&quot;Alice&quot;,&quot;Zeeland&quot;,&quot;Western Sahara&quot;),
-  (&quot;Farrell&quot;,6420,&quot;Neunkirchen&quot;,&quot;Central Kalimantan&quot;,&quot;Taiwan&quot;),
-  (&quot;Vargas&quot;,4554,&quot;San Juan de Pasto&quot;,&quot;Hidalgo&quot;,&quot;Holy See (Vatican City State)&quot;),
-  (&quot;Hudson&quot;,6569,&quot;Seogwipo&quot;,&quot;Västra Götalands län&quot;,&quot;Belgium&quot;),
-  (&quot;Poole&quot;,7200,&quot;Đồng Xoài&quot;,&quot;Nord-Pas-de-Calais&quot;,&quot;Romania&quot;),
-  (&quot;Maddox&quot;,4855,&quot;Alingsås&quot;,&quot;Midi-Pyrénées&quot;,&quot;Qatar&quot;),
-  (&quot;Dudley&quot;,2237,&quot;Dutse&quot;,&quot;Pará&quot;,&quot;Norfolk Island&quot;),
-  (&quot;Pope&quot;,7935,&quot;Cork&quot;,&quot;Voronezh Oblast&quot;,&quot;Isle of Man&quot;),
-  (&quot;Cross&quot;,9591,&quot;Khanewal&quot;,&quot;Western Australia&quot;,&quot;Brazil&quot;),
-  (&quot;Hogan&quot;,7086,&quot;Siverek&quot;,&quot;Umbria&quot;,&quot;Gambia&quot;),
-  (&quot;Nunez&quot;,1078,&quot;Shandong&quot;,&quot;Bắc Kạn&quot;,&quot;Martinique&quot;),
-  (&quot;Mcleod&quot;,3936,&quot;Bonn&quot;,&quot;Cartago&quot;,&quot;Palestine, State of&quot;),
-  (&quot;Mclaughlin&quot;,6746,&quot;Gansu&quot;,&quot;Valle del Cauca&quot;,&quot;Ethiopia&quot;),
-  (&quot;Griffith&quot;,9750,&quot;Chiclayo&quot;,&quot;İzmir&quot;,&quot;Cape Verde&quot;),
-  (&quot;Acosta&quot;,6986,&quot;Móstoles&quot;,&quot;Zuid Holland&quot;,&quot;Libya&quot;),
-  (&quot;Best&quot;,7209,&quot;Kozan&quot;,&quot;Saskatchewan&quot;,&quot;Zimbabwe&quot;),
-  (&quot;Curry&quot;,2204,&quot;Ravenstein&quot;,&quot;Champagne-Ardenne&quot;,&quot;Nigeria&quot;),
-  (&quot;Mccarty&quot;,5637,&quot;Motta Sant'Anastasia&quot;,&quot;İzmir&quot;,&quot;Samoa&quot;),
-  (&quot;Serrano&quot;,3402,&quot;Mukachevo&quot;,&quot;Central Visayas&quot;,&quot;American Samoa&quot;),
-  (&quot;Ochoa&quot;,3644,&quot;Adelaide&quot;,&quot;South Gyeongsang&quot;,&quot;Andorra&quot;),
-  (&quot;Porter&quot;,7351,&quot;Cork&quot;,&quot;Nordland&quot;,&quot;Nigeria&quot;),
-  (&quot;Manning&quot;,9311,&quot;Baden&quot;,&quot;Lampung&quot;,&quot;Yemen&quot;),
-  (&quot;Snider&quot;,6422,&quot;Buenaventura&quot;,&quot;East Region&quot;,&quot;United States&quot;),
-  (&quot;Cooley&quot;,2192,&quot;Barranca&quot;,&quot;Munster&quot;,&quot;French Southern Territories&quot;),
-  (&quot;Bauer&quot;,4102,&quot;Paal&quot;,&quot;Quebec&quot;,&quot;South Georgia and The South Sandwich Islands&quot;),
-  (&quot;Jennings&quot;,5791,&quot;Alto Baudó&quot;,&quot;Bryansk Oblast&quot;,&quot;Cayman Islands&quot;),
-  (&quot;Brady&quot;,6004,&quot;Saint-Vincent&quot;,&quot;Leinster&quot;,&quot;Antarctica&quot;),
-  (&quot;Boone&quot;,4918,&quot;Campinas&quot;,&quot;Maranhão&quot;,&quot;Svalbard and Jan Mayen Islands&quot;),
-  (&quot;Marks&quot;,9046,&quot;Gujranwala&quot;,&quot;Piemonte&quot;,&quot;Gibraltar&quot;),
-  (&quot;Landry&quot;,4243,&quot;Betim&quot;,&quot;North Island&quot;,&quot;Burundi&quot;),
-  (&quot;Chapman&quot;,2671,&quot;San Rafael&quot;,&quot;Limousin&quot;,&quot;Saint Kitts and Nevis&quot;),
-  (&quot;Bowen&quot;,3423,&quot;Queenstown&quot;,&quot;British Columbia&quot;,&quot;Norway&quot;),
-  (&quot;Hahn&quot;,4740,&quot;Henstedt-Ulzburg&quot;,&quot;West Nusa Tenggara&quot;,&quot;Israel&quot;),
-  (&quot;Newton&quot;,5428,&quot;Piła&quot;,&quot;Alabama&quot;,&quot;Tunisia&quot;),
-  (&quot;Wiggins&quot;,8941,&quot;Mannheim&quot;,&quot;Pskov Oblast&quot;,&quot;United States&quot;),
-  (&quot;Hunter&quot;,4512,&quot;Ludvika&quot;,&quot;Georgia&quot;,&quot;Oman&quot;),
-  (&quot;Wade&quot;,5470,&quot;Zaporizhzhia&quot;,&quot;Utrecht&quot;,&quot;Antigua and Barbuda&quot;),
-  (&quot;Wyatt&quot;,7432,&quot;Penrith&quot;,&quot;Lâm Đồng&quot;,&quot;Botswana&quot;),
-  (&quot;Michael&quot;,5329,&quot;Huaral&quot;,&quot;Nordrhein-Westphalen&quot;,&quot;Azerbaijan&quot;),
-  (&quot;Henson&quot;,3671,&quot;New Galloway&quot;,&quot;Loreto&quot;,&quot;Macao&quot;),
-  (&quot;Jacobs&quot;,3581,&quot;Pioneer&quot;,&quot;Diyarbakır&quot;,&quot;Serbia&quot;),
-  (&quot;Harper&quot;,2457,&quot;Ełk&quot;,&quot;New South Wales&quot;,&quot;El Salvador&quot;);
-INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
-VALUES
-  (&quot;Holmes&quot;,4198,&quot;Bislig&quot;,&quot;South Island&quot;,&quot;Cyprus&quot;),
-  (&quot;Woodard&quot;,9032,&quot;Okpoko&quot;,&quot;Saarland&quot;,&quot;Guyana&quot;),
-  (&quot;Green&quot;,5234,&quot;Ludwigsburg&quot;,&quot;Irkutsk Oblast&quot;,&quot;Grenada&quot;),
-  (&quot;Armstrong&quot;,8291,&quot;Imphal&quot;,&quot;Virginia&quot;,&quot;Kiribati&quot;),
-  (&quot;Bailey&quot;,5904,&quot;Montpellier&quot;,&quot;Gilgit Baltistan&quot;,&quot;Burkina Faso&quot;),
-  (&quot;Mcleod&quot;,5408,&quot;Otukpo&quot;,&quot;Putumayo&quot;,&quot;Virgin Islands, United States&quot;),
-  (&quot;Clayton&quot;,4272,&quot;Tomsk&quot;,&quot;Bình Phước&quot;,&quot;Belize&quot;),
-  (&quot;Howell&quot;,5571,&quot;Jurong West&quot;,&quot;Bursa&quot;,&quot;Ireland&quot;),
-  (&quot;Blackwell&quot;,1072,&quot;Wolfurt&quot;,&quot;Hessen&quot;,&quot;Guyana&quot;),
-  (&quot;Hicks&quot;,3138,&quot;Queenstown&quot;,&quot;Ulster&quot;,&quot;Uzbekistan&quot;),
-  (&quot;Walsh&quot;,8040,&quot;Gore&quot;,&quot;South Sumatra&quot;,&quot;Namibia&quot;),
-  (&quot;Kemp&quot;,5621,&quot;Santander&quot;,&quot;KwaZulu-Natal&quot;,&quot;Mozambique&quot;),
-  (&quot;Moran&quot;,6374,&quot;Icheon&quot;,&quot;Zeeland&quot;,&quot;Haiti&quot;),
-  (&quot;Carpenter&quot;,5416,&quot;Galway&quot;,&quot;Metropolitana de Santiago&quot;,&quot;Croatia&quot;),
-  (&quot;Hanson&quot;,3047,&quot;Warri&quot;,&quot;East Java&quot;,&quot;Benin&quot;),
-  (&quot;Robertson&quot;,8799,&quot;Irkutsk&quot;,&quot;Zachodniopomorskie&quot;,&quot;Norway&quot;),
-  (&quot;Franklin&quot;,9214,&quot;San Luis Potosí&quot;,&quot;Sonora&quot;,&quot;Brazil&quot;),
-  (&quot;Woods&quot;,4339,&quot;Canberra&quot;,&quot;Sindh&quot;,&quot;Argentina&quot;),
-  (&quot;Bryant&quot;,4911,&quot;Daman&quot;,&quot;Bà Rịa–Vũng Tàu&quot;,&quot;Panama&quot;),
-  (&quot;Rios&quot;,1743,&quot;Anamur&quot;,&quot;Burgenland&quot;,&quot;Belize&quot;),
-  (&quot;Lyons&quot;,1940,&quot;Hougang&quot;,&quot;Warmińsko-mazurskie&quot;,&quot;Trinidad and Tobago&quot;),
-  (&quot;England&quot;,6402,&quot;Moradabad&quot;,&quot;North Island&quot;,&quot;San Marino&quot;),
-  (&quot;Clark&quot;,2538,&quot;Schifferstadt&quot;,&quot;Nuevo León&quot;,&quot;Vanuatu&quot;),
-  (&quot;Norton&quot;,6049,&quot;Nelson&quot;,&quot;Kocaeli&quot;,&quot;Slovakia&quot;),
-  (&quot;Pate&quot;,6397,&quot;Cusco&quot;,&quot;Azad Kashmir&quot;,&quot;Nicaragua&quot;),
-  (&quot;Walls&quot;,1333,&quot;Mexico City&quot;,&quot;Kocaeli&quot;,&quot;Albania&quot;),
-  (&quot;Hansen&quot;,7665,&quot;Flint&quot;,&quot;Gävleborgs län&quot;,&quot;Nicaragua&quot;),
-  (&quot;Howell&quot;,8044,&quot;Siquirres&quot;,&quot;Madrid&quot;,&quot;Nigeria&quot;),
-  (&quot;Lott&quot;,6252,&quot;Koszalin&quot;,&quot;Maryland&quot;,&quot;Antarctica&quot;),
-  (&quot;Thornton&quot;,7484,&quot;Straits View&quot;,&quot;KwaZulu-Natal&quot;,&quot;Peru&quot;),
-  (&quot;Ward&quot;,6124,&quot;Aiseau-Presles&quot;,&quot;Leinster&quot;,&quot;Puerto Rico&quot;),
-  (&quot;Charles&quot;,6534,&quot;Ibadan&quot;,&quot;Sachsen&quot;,&quot;Guatemala&quot;),
-  (&quot;Rice&quot;,9349,&quot;Altavilla Irpina&quot;,&quot;Zhōngnán&quot;,&quot;Denmark&quot;),
-  (&quot;Roy&quot;,7715,&quot;Pioneer&quot;,&quot;KwaZulu-Natal&quot;,&quot;Gibraltar&quot;),
-  (&quot;Blanchard&quot;,1384,&quot;Berdychiv&quot;,&quot;South Island&quot;,&quot;Uruguay&quot;),
-  (&quot;Chan&quot;,3420,&quot;Shandong&quot;,&quot;Gelderland&quot;,&quot;Chile&quot;),
-  (&quot;Gill&quot;,3797,&quot;Calama&quot;,&quot;Atacama&quot;,&quot;Singapore&quot;),
-  (&quot;Sherman&quot;,4659,&quot;Cork&quot;,&quot;East Region&quot;,&quot;Cameroon&quot;),
-  (&quot;Jacobs&quot;,1355,&quot;Van&quot;,&quot;Sumy oblast&quot;,&quot;Bahamas&quot;),
-  (&quot;Forbes&quot;,9899,&quot;Balanga&quot;,&quot;Alajuela&quot;,&quot;Saint Kitts and Nevis&quot;),
-  (&quot;Juarez&quot;,7215,&quot;Waiheke Island&quot;,&quot;Manitoba&quot;,&quot;Cuba&quot;),
-  (&quot;Adkins&quot;,2980,&quot;Thanh Hóa&quot;,&quot;Ceuta&quot;,&quot;Uzbekistan&quot;),
-  (&quot;Weiss&quot;,1864,&quot;Kendari&quot;,&quot;West Bengal&quot;,&quot;Bolivia&quot;),
-  (&quot;Glass&quot;,4564,&quot;Tongyeong&quot;,&quot;Lubuskie&quot;,&quot;Bahamas&quot;),
-  (&quot;Kane&quot;,5595,&quot;Aizwal&quot;,&quot;Namen&quot;,&quot;Syria&quot;),
-  (&quot;Chang&quot;,8739,&quot;Collines-de-l'Outaouais&quot;,&quot;Xīběi&quot;,&quot;Cuba&quot;),
-  (&quot;Hurley&quot;,7939,&quot;Sint-Agatha-Berchem&quot;,&quot;Eastern Visayas&quot;,&quot;Austria&quot;),
-  (&quot;Mercer&quot;,7014,&quot;Sankt Johann im Pongau&quot;,&quot;Cantabria&quot;,&quot;Bhutan&quot;),
-  (&quot;Medina&quot;,8221,&quot;Sullana&quot;,&quot;Brussels Hoofdstedelijk Gewest&quot;,&quot;Congo (Brazzaville)&quot;),
-  (&quot;Mitchell&quot;,7628,&quot;Fossato di Vico&quot;,&quot;Salzburg&quot;,&quot;Brazil&quot;);
-INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
-VALUES
-  (&quot;Bartlett&quot;,3631,&quot;Peshawar&quot;,&quot;West-Vlaanderen&quot;,&quot;Uzbekistan&quot;),
-  (&quot;Mcknight&quot;,4962,&quot;Teruel&quot;,&quot;Aquitaine&quot;,&quot;Hungary&quot;),
-  (&quot;Cash&quot;,1776,&quot;Sibasa&quot;,&quot;Sindh&quot;,&quot;Serbia&quot;),
-  (&quot;Griffith&quot;,1678,&quot;Helmond&quot;,&quot;West Region&quot;,&quot;Belgium&quot;),
-  (&quot;Kidd&quot;,2925,&quot;Ghanche&quot;,&quot;Paraná&quot;,&quot;Nauru&quot;),
-  (&quot;Wells&quot;,8761,&quot;Kharagpur&quot;,&quot;Rogaland&quot;,&quot;Colombia&quot;),
-  (&quot;Saunders&quot;,9718,&quot;West Vancouver&quot;,&quot;Bihar&quot;,&quot;Greenland&quot;),
-  (&quot;Singleton&quot;,6909,&quot;Beypazarı&quot;,&quot;Central Region&quot;,&quot;Colombia&quot;),
-  (&quot;Dunn&quot;,6498,&quot;Córdoba&quot;,&quot;Hessen&quot;,&quot;Antarctica&quot;),
-  (&quot;Padilla&quot;,9124,&quot;IJlst&quot;,&quot;Herefordshire&quot;,&quot;Mayotte&quot;),
-  (&quot;Lang&quot;,7234,&quot;Profondeville&quot;,&quot;Bayern&quot;,&quot;Mauritius&quot;),
-  (&quot;West&quot;,7293,&quot;Mataram&quot;,&quot;Luhansk oblast&quot;,&quot;Senegal&quot;),
-  (&quot;Robinson&quot;,2436,&quot;Knittelfeld&quot;,&quot;Limpopo&quot;,&quot;Serbia&quot;),
-  (&quot;Sweeney&quot;,6186,&quot;Hoogeveen&quot;,&quot;Connacht&quot;,&quot;Australia&quot;),
-  (&quot;Wiley&quot;,7251,&quot;Suncheon&quot;,&quot;Corse&quot;,&quot;French Polynesia&quot;),
-  (&quot;Fox&quot;,7804,&quot;Banjarmasin&quot;,&quot;Luxemburg&quot;,&quot;Mali&quot;),
-  (&quot;Vaughn&quot;,8103,&quot;Cannes&quot;,&quot;Ulster&quot;,&quot;Belarus&quot;),
-  (&quot;Hicks&quot;,7715,&quot;Khrustalnyi&quot;,&quot;Madrid&quot;,&quot;Ireland&quot;),
-  (&quot;Skinner&quot;,3911,&quot;Virginia Beach&quot;,&quot;Nuevo León&quot;,&quot;Sudan&quot;),
-  (&quot;Pratt&quot;,8663,&quot;Naushahro Firoze&quot;,&quot;Jönköpings län&quot;,&quot;Austria&quot;),
-  (&quot;Norton&quot;,6962,&quot;Oostkerk&quot;,&quot;Bremen&quot;,&quot;Rwanda&quot;),
-  (&quot;Luna&quot;,2837,&quot;Kallang&quot;,&quot;Møre og Romsdal&quot;,&quot;Poland&quot;),
-  (&quot;Emerson&quot;,7540,&quot;Idaho Falls&quot;,&quot;Yucatán&quot;,&quot;Norway&quot;),
-  (&quot;Allison&quot;,7576,&quot;Cabadbaran&quot;,&quot;Ogun&quot;,&quot;Comoros&quot;),
-  (&quot;Garrison&quot;,6843,&quot;Jeonju&quot;,&quot;Languedoc-Roussillon&quot;,&quot;Yemen&quot;),
-  (&quot;Acevedo&quot;,4652,&quot;Heilongjiang&quot;,&quot;Santa Catarina&quot;,&quot;Sweden&quot;),
-  (&quot;Henderson&quot;,1468,&quot;Canberra&quot;,&quot;Sindh&quot;,&quot;Singapore&quot;),
-  (&quot;Delaney&quot;,1835,&quot;Camaçari&quot;,&quot;Maluku&quot;,&quot;Central African Republic&quot;),
-  (&quot;Cain&quot;,3899,&quot;Narowal&quot;,&quot;Carinthia&quot;,&quot;Lithuania&quot;),
-  (&quot;Thomas&quot;,9377,&quot;Tebing Tinggi&quot;,&quot;Riau Islands&quot;,&quot;Virgin Islands, United States&quot;),
-  (&quot;Bruce&quot;,9062,&quot;Brecon&quot;,&quot;Lubuskie&quot;,&quot;Bahrain&quot;),
-  (&quot;Mcdonald&quot;,8451,&quot;Avesta&quot;,&quot;Uttar Pradesh&quot;,&quot;Solomon Islands&quot;),
-  (&quot;Carey&quot;,7440,&quot;Guadalajara&quot;,&quot;Dolnośląskie&quot;,&quot;Comoros&quot;),
-  (&quot;Campos&quot;,5040,&quot;Bursa&quot;,&quot;Cordillera Administrative Region&quot;,&quot;Kenya&quot;),
-  (&quot;Duncan&quot;,6199,&quot;Hofheim am Taunus&quot;,&quot;Azad Kashmir&quot;,&quot;Iran&quot;),
-  (&quot;Everett&quot;,9215,&quot;Ulsan&quot;,&quot;Newfoundland and Labrador&quot;,&quot;Norfolk Island&quot;),
-  (&quot;Anthony&quot;,2565,&quot;Phalaborwa&quot;,&quot;Innlandet&quot;,&quot;Cameroon&quot;),
-  (&quot;Wise&quot;,6736,&quot;Guihulngan&quot;,&quot;North Region&quot;,&quot;Brazil&quot;),
-  (&quot;Garcia&quot;,9282,&quot;Eisenstadt&quot;,&quot;Karnataka&quot;,&quot;Falkland Islands&quot;),
-  (&quot;Petty&quot;,7993,&quot;Tehuacán&quot;,&quot;Innlandet&quot;,&quot;French Polynesia&quot;),
-  (&quot;Mclean&quot;,1354,&quot;Boryspil&quot;,&quot;South Island&quot;,&quot;Christmas Island&quot;),
-  (&quot;Pacheco&quot;,8643,&quot;St. Neots&quot;,&quot;Ceará&quot;,&quot;Paraguay&quot;),
-  (&quot;Phillips&quot;,1625,&quot;Wakefield&quot;,&quot;Tripura&quot;,&quot;Germany&quot;),
-  (&quot;Mcpherson&quot;,1151,&quot;Jaén&quot;,&quot;Gangwon&quot;,&quot;Nauru&quot;),
-  (&quot;Thomas&quot;,7515,&quot;Cork&quot;,&quot;Namen&quot;,&quot;Tonga&quot;),
-  (&quot;Henry&quot;,1706,&quot;Yahyalı&quot;,&quot;Antioquia&quot;,&quot;France&quot;),
-  (&quot;Hopkins&quot;,6463,&quot;Jeonju&quot;,&quot;Queensland&quot;,&quot;Rwanda&quot;),
-  (&quot;Gonzales&quot;,6699,&quot;Tuas&quot;,&quot;West Region&quot;,&quot;Palestine, State of&quot;),
-  (&quot;Roman&quot;,8835,&quot;Egersund&quot;,&quot;Magallanes y Antártica Chilena&quot;,&quot;Nigeria&quot;),
-  (&quot;Snow&quot;,1159,&quot;Panjim&quot;,&quot;Cà Mau&quot;,&quot;Malaysia&quot;);
+  (&quot;4929 8483 5467 4731&quot;,&quot;897&quot;,&quot;Mar 16, 2020&quot;,&quot;Oct 2, 2023&quot;,&quot;Débito&quot;,&quot;3&quot;,303);</sql><sql name="GENERADOR DE DIRECCIONES">/*Generamos direcciones aleatorias*/
+
+INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
+VALUES
+  (&quot;Blake&quot;,4268,&quot;Tehuacán&quot;,&quot;Tyrol&quot;,&quot;Cayman Islands&quot;),
+  (&quot;Ross&quot;,7451,&quot;Southern Islands&quot;,&quot;Liguria&quot;,&quot;Albania&quot;),
+  (&quot;Emerson&quot;,9584,&quot;Rouen&quot;,&quot;Utrecht&quot;,&quot;Venezuela&quot;),
+  (&quot;Mcbride&quot;,6579,&quot;Avennes&quot;,&quot;Arizona&quot;,&quot;Macedonia&quot;),
+  (&quot;Spence&quot;,8069,&quot;Welshpool&quot;,&quot;South Island&quot;,&quot;United Arab Emirates&quot;),
+  (&quot;Melton&quot;,1396,&quot;Huesca&quot;,&quot;Lviv oblast&quot;,&quot;Aruba&quot;),
+  (&quot;Watson&quot;,6472,&quot;Rotterdam&quot;,&quot;Los Lagos&quot;,&quot;Fiji&quot;),
+  (&quot;Farley&quot;,7483,&quot;Canberra&quot;,&quot;North Island&quot;,&quot;Saudi Arabia&quot;),
+  (&quot;Vaughn&quot;,3011,&quot;Alajuela&quot;,&quot;Overijssel&quot;,&quot;Niue&quot;),
+  (&quot;Boyer&quot;,5196,&quot;Wedel&quot;,&quot;Rio de Janeiro&quot;,&quot;Tuvalu&quot;),
+  (&quot;Donovan&quot;,1645,&quot;Bauchi&quot;,&quot;Aydın&quot;,&quot;Denmark&quot;),
+  (&quot;Lloyd&quot;,9577,&quot;Lebowakgomo&quot;,&quot;North Jeolla&quot;,&quot;Vanuatu&quot;),
+  (&quot;Sullivan&quot;,3228,&quot;Orkanger&quot;,&quot;Bremen&quot;,&quot;France&quot;),
+  (&quot;Dickerson&quot;,1242,&quot;Valparaíso de Goiás&quot;,&quot;Eastern Cape&quot;,&quot;Greenland&quot;),
+  (&quot;Delaney&quot;,3482,&quot;Zamboanga City&quot;,&quot;North-East Region&quot;,&quot;South Sudan&quot;),
+  (&quot;Russo&quot;,4628,&quot;Sankt Johann im Pongau&quot;,&quot;łódzkie&quot;,&quot;Sudan&quot;),
+  (&quot;Mathews&quot;,2447,&quot;Jaboatão dos Guararapes&quot;,&quot;Lviv oblast&quot;,&quot;Saint Barthélemy&quot;),
+  (&quot;Wade&quot;,2102,&quot;Belfast&quot;,&quot;Cartago&quot;,&quot;Antarctica&quot;),
+  (&quot;Hyde&quot;,5141,&quot;Cockburn&quot;,&quot;Puglia&quot;,&quot;Isle of Man&quot;),
+  (&quot;Camacho&quot;,2645,&quot;Tumba&quot;,&quot;Ankara&quot;,&quot;Romania&quot;),
+  (&quot;Trevino&quot;,7335,&quot;Bucheon&quot;,&quot;Minas Gerais&quot;,&quot;Saint Vincent and The Grenadines&quot;),
+  (&quot;Henry&quot;,4374,&quot;Bunbury&quot;,&quot;Swiętokrzyskie&quot;,&quot;Niue&quot;),
+  (&quot;Holder&quot;,8787,&quot;Jelenia Góra&quot;,&quot;Rogaland&quot;,&quot;Timor-Leste&quot;),
+  (&quot;Harris&quot;,1695,&quot;Ang Mo Kio&quot;,&quot;Antofagasta&quot;,&quot;New Caledonia&quot;),
+  (&quot;Gamble&quot;,8082,&quot;San Nicolás&quot;,&quot;Brandenburg&quot;,&quot;Pitcairn Islands&quot;),
+  (&quot;Blackwell&quot;,1232,&quot;Bothey&quot;,&quot;Wigtownshire&quot;,&quot;Somalia&quot;),
+  (&quot;Pittman&quot;,9779,&quot;Puerto Colombia&quot;,&quot;Balochistan&quot;,&quot;Dominican Republic&quot;),
+  (&quot;Richards&quot;,3020,&quot;Nice&quot;,&quot;Zamboanga Peninsula&quot;,&quot;Yemen&quot;),
+  (&quot;Houston&quot;,8548,&quot;New Plymouth&quot;,&quot;North Kalimantan&quot;,&quot;Sao Tome and Principe&quot;),
+  (&quot;Hurst&quot;,6395,&quot;Arequipa&quot;,&quot;Kujawsko-pomorskie&quot;,&quot;Uzbekistan&quot;),
+  (&quot;Hendrix&quot;,7049,&quot;Niort&quot;,&quot;Kentucky&quot;,&quot;Gibraltar&quot;),
+  (&quot;Lott&quot;,7405,&quot;Washington&quot;,&quot;Yaroslavl Oblast&quot;,&quot;Madagascar&quot;),
+  (&quot;Nichols&quot;,3989,&quot;Castelló&quot;,&quot;Arkansas&quot;,&quot;Suriname&quot;),
+  (&quot;Savage&quot;,7709,&quot;Winterswijk&quot;,&quot;West-Vlaanderen&quot;,&quot;Vanuatu&quot;),
+  (&quot;Barton&quot;,9472,&quot;Buôn Ma Thuột&quot;,&quot;Chihuahua&quot;,&quot;Curaçao&quot;),
+  (&quot;Barker&quot;,4209,&quot;La Plata&quot;,&quot;Baden Württemberg&quot;,&quot;Bermuda&quot;),
+  (&quot;Burch&quot;,4822,&quot;Pamplona&quot;,&quot;Tasmania&quot;,&quot;Bahrain&quot;),
+  (&quot;Sanders&quot;,7453,&quot;Bontang&quot;,&quot;Cajamarca&quot;,&quot;Gabon&quot;),
+  (&quot;Coffey&quot;,8878,&quot;Arnhem&quot;,&quot;Leinster&quot;,&quot;Libya&quot;),
+  (&quot;Weiss&quot;,5039,&quot;Calapan&quot;,&quot;South Island&quot;,&quot;French Southern Territories&quot;),
+  (&quot;Maxwell&quot;,3061,&quot;Fresno&quot;,&quot;Schleswig-Holstein&quot;,&quot;Mexico&quot;),
+  (&quot;Brock&quot;,2339,&quot;Mahikeng&quot;,&quot;Limpopo&quot;,&quot;Haiti&quot;),
+  (&quot;Holman&quot;,3612,&quot;Halkirk&quot;,&quot;Valle d'Aosta&quot;,&quot;Taiwan&quot;),
+  (&quot;Navarro&quot;,6445,&quot;Hagen&quot;,&quot;Melilla&quot;,&quot;Liechtenstein&quot;),
+  (&quot;Welch&quot;,9594,&quot;Whangarei&quot;,&quot;Maranhão&quot;,&quot;Congo, the Democratic Republic of the&quot;),
+  (&quot;Alford&quot;,6838,&quot;Sembawang&quot;,&quot;North West&quot;,&quot;Tuvalu&quot;),
+  (&quot;Gonzalez&quot;,5862,&quot;Tharparkar&quot;,&quot;Henegouwen&quot;,&quot;Togo&quot;),
+  (&quot;Hughes&quot;,2959,&quot;Cumaribo&quot;,&quot;Vestland&quot;,&quot;Egypt&quot;),
+  (&quot;Baker&quot;,3264,&quot;Ryazan&quot;,&quot;Bahia&quot;,&quot;Philippines&quot;),
+  (&quot;Joseph&quot;,7420,&quot;Kaluga&quot;,&quot;Durham&quot;,&quot;Japan&quot;);
+INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
+VALUES
+  (&quot;Lamb&quot;,9820,&quot;María Elena&quot;,&quot;Xīnán&quot;,&quot;Georgia&quot;),
+  (&quot;Brady&quot;,6276,&quot;Ulsan&quot;,&quot;Jönköpings län&quot;,&quot;Aruba&quot;),
+  (&quot;Butler&quot;,1390,&quot;Port Harcourt&quot;,&quot;Gauteng&quot;,&quot;Ethiopia&quot;),
+  (&quot;Gonzalez&quot;,2714,&quot;Arrone&quot;,&quot;Aceh&quot;,&quot;Denmark&quot;),
+  (&quot;Gardner&quot;,1873,&quot;Querétaro&quot;,&quot;Zachodniopomorskie&quot;,&quot;Israel&quot;),
+  (&quot;Oneal&quot;,9148,&quot;Pondicherry&quot;,&quot;Opolskie&quot;,&quot;Kyrgyzstan&quot;),
+  (&quot;Atkinson&quot;,8994,&quot;Gladstone&quot;,&quot;Cartago&quot;,&quot;Samoa&quot;),
+  (&quot;Sweeney&quot;,3495,&quot;Korosten&quot;,&quot;Östergötlands län&quot;,&quot;Burundi&quot;),
+  (&quot;Armstrong&quot;,3592,&quot;Akhtubinsk&quot;,&quot;Los Lagos&quot;,&quot;Bulgaria&quot;),
+  (&quot;Bryant&quot;,6946,&quot;Trujillo&quot;,&quot;Victoria&quot;,&quot;Montserrat&quot;),
+  (&quot;Carlson&quot;,9840,&quot;Bierk Bierghes&quot;,&quot;Akwa Ibom&quot;,&quot;Switzerland&quot;),
+  (&quot;Gilbert&quot;,1898,&quot;Hammerfest&quot;,&quot;Gaziantep&quot;,&quot;Papua New Guinea&quot;),
+  (&quot;Salazar&quot;,6389,&quot;Avesta&quot;,&quot;Huáběi&quot;,&quot;Bahamas&quot;),
+  (&quot;Douglas&quot;,6276,&quot;Paju&quot;,&quot;Vinnytsia oblast&quot;,&quot;Belarus&quot;),
+  (&quot;Stokes&quot;,4876,&quot;Kohlu&quot;,&quot;Mersin&quot;,&quot;Guernsey&quot;),
+  (&quot;Petersen&quot;,2801,&quot;Açailândia&quot;,&quot;Ontario&quot;,&quot;Maldives&quot;),
+  (&quot;Stout&quot;,8080,&quot;Iksan&quot;,&quot;Gia Lai&quot;,&quot;Chad&quot;),
+  (&quot;Burris&quot;,2728,&quot;Dublin&quot;,&quot;West Sulawesi&quot;,&quot;Tokelau&quot;),
+  (&quot;Charles&quot;,1152,&quot;İslahiye&quot;,&quot;Viken&quot;,&quot;Mexico&quot;),
+  (&quot;Winters&quot;,4987,&quot;Tandag&quot;,&quot;Sumy oblast&quot;,&quot;Eritrea&quot;),
+  (&quot;Albert&quot;,5799,&quot;Nocciano&quot;,&quot;Lower Austria&quot;,&quot;Aruba&quot;),
+  (&quot;Stein&quot;,7839,&quot;Brevik&quot;,&quot;Tabasco&quot;,&quot;Madagascar&quot;),
+  (&quot;Juarez&quot;,3464,&quot;Bowden&quot;,&quot;Ternopil oblast&quot;,&quot;Laos&quot;),
+  (&quot;Stephenson&quot;,2108,&quot;Kohat&quot;,&quot;Saratov Oblast&quot;,&quot;Peru&quot;),
+  (&quot;Bowen&quot;,6336,&quot;Zwelitsha&quot;,&quot;Hamburg&quot;,&quot;Mongolia&quot;),
+  (&quot;Chaney&quot;,8992,&quot;Ceuta&quot;,&quot;Free State&quot;,&quot;Virgin Islands, British&quot;),
+  (&quot;Pace&quot;,7756,&quot;Candela&quot;,&quot;North Island&quot;,&quot;American Samoa&quot;),
+  (&quot;Page&quot;,5581,&quot;Barranca&quot;,&quot;Rio de Janeiro&quot;,&quot;Cyprus&quot;),
+  (&quot;Tyler&quot;,2239,&quot;Wortel&quot;,&quot;Cumberland&quot;,&quot;Saint Helena, Ascension and Tristan da Cunha&quot;),
+  (&quot;Villarreal&quot;,7744,&quot;Boca del Río&quot;,&quot;Paraíba&quot;,&quot;Albania&quot;),
+  (&quot;Le&quot;,9751,&quot;Speyer&quot;,&quot;Delaware&quot;,&quot;Comoros&quot;),
+  (&quot;Ochoa&quot;,9784,&quot;Gorontalo&quot;,&quot;Guanacaste&quot;,&quot;British Indian Ocean Territory&quot;),
+  (&quot;Shepherd&quot;,9223,&quot;Timaru&quot;,&quot;Oyo&quot;,&quot;Czech Republic&quot;),
+  (&quot;Rodgers&quot;,5392,&quot;Patiala&quot;,&quot;Bourgogne&quot;,&quot;Saudi Arabia&quot;),
+  (&quot;Duncan&quot;,2828,&quot;Sauda&quot;,&quot;North Jeolla&quot;,&quot;Moldova&quot;),
+  (&quot;Robles&quot;,9719,&quot;Värnamo&quot;,&quot;Imo&quot;,&quot;Tonga&quot;),
+  (&quot;Vaughan&quot;,3445,&quot;Uddevalla&quot;,&quot;Santa Catarina&quot;,&quot;Switzerland&quot;),
+  (&quot;Duffy&quot;,8117,&quot;Leers-et-Fosteau&quot;,&quot;Overijssel&quot;,&quot;Western Sahara&quot;),
+  (&quot;Franklin&quot;,7738,&quot;Yurimaguas&quot;,&quot;Noord Brabant&quot;,&quot;Germany&quot;),
+  (&quot;Peterson&quot;,6893,&quot;Shandong&quot;,&quot;Central Region&quot;,&quot;Central African Republic&quot;),
+  (&quot;Ratliff&quot;,3399,&quot;Vannes&quot;,&quot;Kahramanmaraş&quot;,&quot;Antigua and Barbuda&quot;),
+  (&quot;Gallagher&quot;,6955,&quot;San Fernando&quot;,&quot;Marche&quot;,&quot;United Kingdom (Great Britain)&quot;),
+  (&quot;Graves&quot;,8478,&quot;Virginia Beach&quot;,&quot;Västra Götalands län&quot;,&quot;Slovakia&quot;),
+  (&quot;Hinton&quot;,9712,&quot;Bayeux&quot;,&quot;Zuid Holland&quot;,&quot;Libya&quot;),
+  (&quot;Evans&quot;,4063,&quot;Port Nolloth&quot;,&quot;Michigan&quot;,&quot;Afghanistan&quot;),
+  (&quot;Benjamin&quot;,1199,&quot;Barrackpur&quot;,&quot;Ilocos Region&quot;,&quot;Chile&quot;),
+  (&quot;Alston&quot;,5487,&quot;Juliaca&quot;,&quot;Bahia&quot;,&quot;Chad&quot;),
+  (&quot;Goff&quot;,6338,&quot;Contulmo&quot;,&quot;Noord Brabant&quot;,&quot;Latvia&quot;),
+  (&quot;Mcdowell&quot;,9972,&quot;Istanbul&quot;,&quot;Hamburg&quot;,&quot;Netherlands&quot;),
+  (&quot;Wyatt&quot;,8379,&quot;Arendal&quot;,&quot;O'Higgins&quot;,&quot;French Southern Territories&quot;);
+INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
+VALUES
+  (&quot;Hull&quot;,2211,&quot;Gaya&quot;,&quot;Kursk Oblast&quot;,&quot;Libya&quot;),
+  (&quot;Mcneil&quot;,6466,&quot;Yeosu&quot;,&quot;Bình Dương&quot;,&quot;Equatorial Guinea&quot;),
+  (&quot;Kent&quot;,5249,&quot;Nuragus&quot;,&quot;West Bengal&quot;,&quot;Croatia&quot;),
+  (&quot;Mercado&quot;,8322,&quot;Valenzuela&quot;,&quot;Central Region&quot;,&quot;Bangladesh&quot;),
+  (&quot;Morrison&quot;,6468,&quot;St. John's&quot;,&quot;Atacama&quot;,&quot;French Guiana&quot;),
+  (&quot;Brennan&quot;,9757,&quot;Hinckley&quot;,&quot;Utrecht&quot;,&quot;Paraguay&quot;),
+  (&quot;Beasley&quot;,3478,&quot;Hạ Long&quot;,&quot;Lombardia&quot;,&quot;Uzbekistan&quot;),
+  (&quot;Downs&quot;,1555,&quot;Baden-Baden&quot;,&quot;Northern Cape&quot;,&quot;Romania&quot;),
+  (&quot;Roy&quot;,9181,&quot;Skardu&quot;,&quot;South Gyeongsang&quot;,&quot;Algeria&quot;),
+  (&quot;Hampton&quot;,4684,&quot;Bedok&quot;,&quot;Moscow City&quot;,&quot;Virgin Islands, United States&quot;),
+  (&quot;Daugherty&quot;,2598,&quot;Batac&quot;,&quot;Central Visayas&quot;,&quot;Egypt&quot;),
+  (&quot;Church&quot;,3088,&quot;Rangiora&quot;,&quot;Azad Kashmir&quot;,&quot;Madagascar&quot;),
+  (&quot;Stafford&quot;,6618,&quot;Suwałki&quot;,&quot;Papua&quot;,&quot;Fiji&quot;),
+  (&quot;Ashley&quot;,2884,&quot;Bila Tserkva&quot;,&quot;Benue&quot;,&quot;Yemen&quot;),
+  (&quot;Barber&quot;,8787,&quot;Onitsha&quot;,&quot;Biobío&quot;,&quot;Sri Lanka&quot;),
+  (&quot;Moody&quot;,4859,&quot;Kalisz&quot;,&quot;North West&quot;,&quot;Jordan&quot;),
+  (&quot;Clay&quot;,3166,&quot;Verdalsøra&quot;,&quot;Arequipa&quot;,&quot;Wallis and Futuna&quot;),
+  (&quot;Huffman&quot;,2357,&quot;Kropyvnytskyi&quot;,&quot;Henegouwen&quot;,&quot;Philippines&quot;),
+  (&quot;Weber&quot;,7835,&quot;Wood Buffalo&quot;,&quot;Schleswig-Holstein&quot;,&quot;Belize&quot;),
+  (&quot;Walton&quot;,4909,&quot;Waren&quot;,&quot;North Sumatra&quot;,&quot;Montenegro&quot;),
+  (&quot;Wiley&quot;,6092,&quot;San Luis Potosí&quot;,&quot;Cartago&quot;,&quot;Brazil&quot;),
+  (&quot;Hicks&quot;,6748,&quot;Tauranga&quot;,&quot;West-Vlaanderen&quot;,&quot;Indonesia&quot;),
+  (&quot;Dickson&quot;,7504,&quot;Leersum&quot;,&quot;Delta&quot;,&quot;United States Minor Outlying Islands&quot;),
+  (&quot;Manning&quot;,3467,&quot;Hengelo&quot;,&quot;Kursk Oblast&quot;,&quot;Romania&quot;),
+  (&quot;Johnson&quot;,5898,&quot;Muzaffarnagar&quot;,&quot;Riau&quot;,&quot;Reunion&quot;),
+  (&quot;Sullivan&quot;,2390,&quot;Lillehammer&quot;,&quot;Pomorskie&quot;,&quot;Thailand&quot;),
+  (&quot;Delaney&quot;,3088,&quot;Randfontein&quot;,&quot;Haryana&quot;,&quot;Guyana&quot;),
+  (&quot;Woodward&quot;,7384,&quot;Stockholm&quot;,&quot;Mersin&quot;,&quot;Somalia&quot;),
+  (&quot;Lang&quot;,1929,&quot;Mjölby&quot;,&quot;Leinster&quot;,&quot;Zambia&quot;),
+  (&quot;Richmond&quot;,4698,&quot;Kufstein&quot;,&quot;Kharkiv oblast&quot;,&quot;Cuba&quot;),
+  (&quot;Hodge&quot;,1990,&quot;Canberra&quot;,&quot;Pará&quot;,&quot;Germany&quot;),
+  (&quot;Mckay&quot;,6824,&quot;Westport&quot;,&quot;Nottinghamshire&quot;,&quot;Namibia&quot;),
+  (&quot;Mathews&quot;,9076,&quot;Kon Tum&quot;,&quot;Hậu Giang&quot;,&quot;Bosnia and Herzegovina&quot;),
+  (&quot;Morris&quot;,1826,&quot;Temuka&quot;,&quot;Ontario&quot;,&quot;Mauritius&quot;),
+  (&quot;Maldonado&quot;,4812,&quot;Vidisha&quot;,&quot;Mazowieckie&quot;,&quot;Ethiopia&quot;),
+  (&quot;Henson&quot;,6909,&quot;Isabela City&quot;,&quot;Risaralda&quot;,&quot;Belarus&quot;),
+  (&quot;Whitaker&quot;,4793,&quot;Tromsø&quot;,&quot;Balıkesir&quot;,&quot;Germany&quot;),
+  (&quot;Randolph&quot;,6605,&quot;Padang Panjang&quot;,&quot;Melilla&quot;,&quot;British Indian Ocean Territory&quot;),
+  (&quot;Pena&quot;,4531,&quot;Kremenchuk&quot;,&quot;Morelos&quot;,&quot;Uzbekistan&quot;),
+  (&quot;Mckee&quot;,5503,&quot;Lelystad&quot;,&quot;Moscow City&quot;,&quot;Reunion&quot;),
+  (&quot;Riley&quot;,3224,&quot;Astore&quot;,&quot;Mecklenburg-Vorpommern&quot;,&quot;Tonga&quot;),
+  (&quot;Hansen&quot;,6636,&quot;Gangtok&quot;,&quot;Cheshire&quot;,&quot;Algeria&quot;),
+  (&quot;Robles&quot;,8977,&quot;Antofagasta&quot;,&quot;Leinster&quot;,&quot;Chad&quot;),
+  (&quot;Weber&quot;,5162,&quot;Timaukel&quot;,&quot;Catalunya&quot;,&quot;Iceland&quot;),
+  (&quot;George&quot;,3879,&quot;Delhi&quot;,&quot;Stockholms län&quot;,&quot;Maldives&quot;),
+  (&quot;Wright&quot;,2788,&quot;Andalo&quot;,&quot;Punjab&quot;,&quot;Iceland&quot;),
+  (&quot;Singleton&quot;,4500,&quot;Puno&quot;,&quot;Ulster&quot;,&quot;Oman&quot;),
+  (&quot;Marquez&quot;,8420,&quot;Jeju&quot;,&quot;Cherkasy oblast&quot;,&quot;Norway&quot;),
+  (&quot;Mueller&quot;,3219,&quot;Mattersburg&quot;,&quot;Baja California&quot;,&quot;Dominican Republic&quot;),
+  (&quot;Mcpherson&quot;,7100,&quot;Gongju&quot;,&quot;Basse-Normandie&quot;,&quot;Ireland&quot;);
+INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
+VALUES
+  (&quot;Short&quot;,8976,&quot;Limón (Puerto Limón]&quot;,&quot;Louisiana&quot;,&quot;Nicaragua&quot;),
+  (&quot;Berger&quot;,4781,&quot;Kropyvnytskyi&quot;,&quot;Viken&quot;,&quot;Palestine, State of&quot;),
+  (&quot;Daniels&quot;,5755,&quot;Falun&quot;,&quot;Oryol Oblast&quot;,&quot;Jersey&quot;),
+  (&quot;Mejia&quot;,3524,&quot;Sakhalin&quot;,&quot;Champagne-Ardenne&quot;,&quot;Zimbabwe&quot;),
+  (&quot;Daniel&quot;,5268,&quot;Hattiesburg&quot;,&quot;Cusco&quot;,&quot;Senegal&quot;),
+  (&quot;Diaz&quot;,6382,&quot;Chuncheon&quot;,&quot;Cusco&quot;,&quot;Central African Republic&quot;),
+  (&quot;Vaughn&quot;,6145,&quot;Huesca&quot;,&quot;Ulster&quot;,&quot;Gambia&quot;),
+  (&quot;Schroeder&quot;,8360,&quot;Ramsdonk&quot;,&quot;Aragón&quot;,&quot;Vanuatu&quot;),
+  (&quot;Mack&quot;,9706,&quot;Arequipa&quot;,&quot;Delta&quot;,&quot;Vanuatu&quot;),
+  (&quot;Guy&quot;,7402,&quot;Bajaur Agency&quot;,&quot;Tabasco&quot;,&quot;Saint Pierre and Miquelon&quot;),
+  (&quot;Rollins&quot;,4300,&quot;Mexico City&quot;,&quot;Calabarzon&quot;,&quot;Equatorial Guinea&quot;),
+  (&quot;Navarro&quot;,7275,&quot;Sangju&quot;,&quot;Massachusetts&quot;,&quot;Portugal&quot;),
+  (&quot;Parsons&quot;,6323,&quot;Plauen&quot;,&quot;Gelderland&quot;,&quot;India&quot;),
+  (&quot;Alston&quot;,5378,&quot;Bansberia&quot;,&quot;Gauteng&quot;,&quot;Cuba&quot;),
+  (&quot;Martin&quot;,6502,&quot;Izium&quot;,&quot;Dnipropetrovsk oblast&quot;,&quot;Malaysia&quot;),
+  (&quot;Downs&quot;,8367,&quot;Tabaco&quot;,&quot;Jigawa&quot;,&quot;Nigeria&quot;),
+  (&quot;Shaw&quot;,9622,&quot;Lautaro&quot;,&quot;South Jeolla&quot;,&quot;Svalbard and Jan Mayen Islands&quot;),
+  (&quot;Nixon&quot;,4899,&quot;Mahikeng&quot;,&quot;Gauteng&quot;,&quot;New Zealand&quot;),
+  (&quot;Dyer&quot;,5368,&quot;Kediri&quot;,&quot;Queensland&quot;,&quot;Austria&quot;),
+  (&quot;Clemons&quot;,7657,&quot;Melilla&quot;,&quot;North Sulawesi&quot;,&quot;Guadeloupe&quot;),
+  (&quot;Campos&quot;,4977,&quot;Kharkiv&quot;,&quot;Punjab&quot;,&quot;Brazil&quot;),
+  (&quot;Atkinson&quot;,8831,&quot;Konya&quot;,&quot;Zachodniopomorskie&quot;,&quot;Spain&quot;),
+  (&quot;Charles&quot;,1277,&quot;Ulyanovsk&quot;,&quot;Östergötlands län&quot;,&quot;Palestine, State of&quot;),
+  (&quot;Nelson&quot;,3417,&quot;Motala&quot;,&quot;Limousin&quot;,&quot;Honduras&quot;),
+  (&quot;Wilson&quot;,5757,&quot;Hubei&quot;,&quot;Ilocos Region&quot;,&quot;Kiribati&quot;),
+  (&quot;Huff&quot;,9424,&quot;Bauchi&quot;,&quot;Newfoundland and Labrador&quot;,&quot;Thailand&quot;),
+  (&quot;Wolfe&quot;,2698,&quot;Murcia&quot;,&quot;Eastern Cape&quot;,&quot;Virgin Islands, United States&quot;),
+  (&quot;Good&quot;,5713,&quot;Santa Inês&quot;,&quot;Biobío&quot;,&quot;French Guiana&quot;),
+  (&quot;Russell&quot;,7263,&quot;Asan&quot;,&quot;North Island&quot;,&quot;Guinea&quot;),
+  (&quot;Langley&quot;,3954,&quot;Lerum&quot;,&quot;Soccsksargen&quot;,&quot;Nepal&quot;),
+  (&quot;Matthews&quot;,4332,&quot;Magangué&quot;,&quot;Melilla&quot;,&quot;Somalia&quot;),
+  (&quot;Stein&quot;,9015,&quot;Tuscaloosa&quot;,&quot;Bengkulu&quot;,&quot;Romania&quot;),
+  (&quot;Forbes&quot;,6504,&quot;Pohang&quot;,&quot;Bayern&quot;,&quot;Korea, North&quot;),
+  (&quot;Spencer&quot;,4454,&quot;Juliaca&quot;,&quot;Santa Catarina&quot;,&quot;Finland&quot;),
+  (&quot;Emerson&quot;,9838,&quot;Fortaleza&quot;,&quot;Namen&quot;,&quot;Mozambique&quot;),
+  (&quot;Compton&quot;,4849,&quot;Nodebais&quot;,&quot;Wyoming&quot;,&quot;Mongolia&quot;),
+  (&quot;Mcconnell&quot;,6478,&quot;Manila&quot;,&quot;Dolnośląskie&quot;,&quot;Tunisia&quot;),
+  (&quot;Barton&quot;,2240,&quot;Mexico City&quot;,&quot;Borno&quot;,&quot;French Guiana&quot;),
+  (&quot;Gomez&quot;,7513,&quot;Sagrada Familia&quot;,&quot;Nuevo León&quot;,&quot;Jamaica&quot;),
+  (&quot;Murray&quot;,7995,&quot;Bontang&quot;,&quot;Novgorod Oblast&quot;,&quot;Colombia&quot;),
+  (&quot;Blankenship&quot;,7022,&quot;Astore&quot;,&quot;Northern Cape&quot;,&quot;Saint Kitts and Nevis&quot;),
+  (&quot;Lowe&quot;,6729,&quot;Dunedin&quot;,&quot;Banten&quot;,&quot;Bermuda&quot;),
+  (&quot;Clarke&quot;,8865,&quot;Cannock&quot;,&quot;Magdalena&quot;,&quot;Haiti&quot;),
+  (&quot;Conner&quot;,6751,&quot;Pabianice&quot;,&quot;Languedoc-Roussillon&quot;,&quot;Mozambique&quot;),
+  (&quot;Drake&quot;,7876,&quot;Silay&quot;,&quot;Namen&quot;,&quot;Djibouti&quot;),
+  (&quot;Carroll&quot;,8820,&quot;Pangkalpinang&quot;,&quot;łódzkie&quot;,&quot;United States Minor Outlying Islands&quot;),
+  (&quot;Lowe&quot;,9536,&quot;Boksburg&quot;,&quot;Dnipropetrovsk oblast&quot;,&quot;Ethiopia&quot;),
+  (&quot;Hanson&quot;,8358,&quot;Santander&quot;,&quot;Colorado&quot;,&quot;Antarctica&quot;),
+  (&quot;Salazar&quot;,2144,&quot;Albano di Lucania&quot;,&quot;Brussels Hoofdstedelijk Gewest&quot;,&quot;Australia&quot;),
+  (&quot;Stanton&quot;,2737,&quot;İslahiye&quot;,&quot;Vienna&quot;,&quot;Botswana&quot;);
+INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
+VALUES
+  (&quot;Mejia&quot;,8068,&quot;General Escobedo&quot;,&quot;Khyber Pakhtoonkhwa&quot;,&quot;Romania&quot;),
+  (&quot;Ford&quot;,1587,&quot;San Diego&quot;,&quot;Eastern Visayas&quot;,&quot;Montserrat&quot;),
+  (&quot;Henson&quot;,5429,&quot;Rivne&quot;,&quot;East Region&quot;,&quot;Saint Barthélemy&quot;),
+  (&quot;Rodriguez&quot;,9124,&quot;Bucheon&quot;,&quot;Alajuela&quot;,&quot;Georgia&quot;),
+  (&quot;Dominguez&quot;,5316,&quot;Okpoko&quot;,&quot;Chihuahua&quot;,&quot;Saint Lucia&quot;),
+  (&quot;Moon&quot;,5288,&quot;Ch‰tillon&quot;,&quot;Pernambuco&quot;,&quot;Australia&quot;),
+  (&quot;Pennington&quot;,2694,&quot;Bandar Lampung&quot;,&quot;Huádōng&quot;,&quot;Lebanon&quot;),
+  (&quot;Montgomery&quot;,6921,&quot;Nghĩa Lộ&quot;,&quot;Cornwall&quot;,&quot;Nauru&quot;),
+  (&quot;Burke&quot;,6607,&quot;Alice&quot;,&quot;Zeeland&quot;,&quot;Western Sahara&quot;),
+  (&quot;Farrell&quot;,6420,&quot;Neunkirchen&quot;,&quot;Central Kalimantan&quot;,&quot;Taiwan&quot;),
+  (&quot;Vargas&quot;,4554,&quot;San Juan de Pasto&quot;,&quot;Hidalgo&quot;,&quot;Holy See (Vatican City State)&quot;),
+  (&quot;Hudson&quot;,6569,&quot;Seogwipo&quot;,&quot;Västra Götalands län&quot;,&quot;Belgium&quot;),
+  (&quot;Poole&quot;,7200,&quot;Đồng Xoài&quot;,&quot;Nord-Pas-de-Calais&quot;,&quot;Romania&quot;),
+  (&quot;Maddox&quot;,4855,&quot;Alingsås&quot;,&quot;Midi-Pyrénées&quot;,&quot;Qatar&quot;),
+  (&quot;Dudley&quot;,2237,&quot;Dutse&quot;,&quot;Pará&quot;,&quot;Norfolk Island&quot;),
+  (&quot;Pope&quot;,7935,&quot;Cork&quot;,&quot;Voronezh Oblast&quot;,&quot;Isle of Man&quot;),
+  (&quot;Cross&quot;,9591,&quot;Khanewal&quot;,&quot;Western Australia&quot;,&quot;Brazil&quot;),
+  (&quot;Hogan&quot;,7086,&quot;Siverek&quot;,&quot;Umbria&quot;,&quot;Gambia&quot;),
+  (&quot;Nunez&quot;,1078,&quot;Shandong&quot;,&quot;Bắc Kạn&quot;,&quot;Martinique&quot;),
+  (&quot;Mcleod&quot;,3936,&quot;Bonn&quot;,&quot;Cartago&quot;,&quot;Palestine, State of&quot;),
+  (&quot;Mclaughlin&quot;,6746,&quot;Gansu&quot;,&quot;Valle del Cauca&quot;,&quot;Ethiopia&quot;),
+  (&quot;Griffith&quot;,9750,&quot;Chiclayo&quot;,&quot;İzmir&quot;,&quot;Cape Verde&quot;),
+  (&quot;Acosta&quot;,6986,&quot;Móstoles&quot;,&quot;Zuid Holland&quot;,&quot;Libya&quot;),
+  (&quot;Best&quot;,7209,&quot;Kozan&quot;,&quot;Saskatchewan&quot;,&quot;Zimbabwe&quot;),
+  (&quot;Curry&quot;,2204,&quot;Ravenstein&quot;,&quot;Champagne-Ardenne&quot;,&quot;Nigeria&quot;),
+  (&quot;Mccarty&quot;,5637,&quot;Motta Sant'Anastasia&quot;,&quot;İzmir&quot;,&quot;Samoa&quot;),
+  (&quot;Serrano&quot;,3402,&quot;Mukachevo&quot;,&quot;Central Visayas&quot;,&quot;American Samoa&quot;),
+  (&quot;Ochoa&quot;,3644,&quot;Adelaide&quot;,&quot;South Gyeongsang&quot;,&quot;Andorra&quot;),
+  (&quot;Porter&quot;,7351,&quot;Cork&quot;,&quot;Nordland&quot;,&quot;Nigeria&quot;),
+  (&quot;Manning&quot;,9311,&quot;Baden&quot;,&quot;Lampung&quot;,&quot;Yemen&quot;),
+  (&quot;Snider&quot;,6422,&quot;Buenaventura&quot;,&quot;East Region&quot;,&quot;United States&quot;),
+  (&quot;Cooley&quot;,2192,&quot;Barranca&quot;,&quot;Munster&quot;,&quot;French Southern Territories&quot;),
+  (&quot;Bauer&quot;,4102,&quot;Paal&quot;,&quot;Quebec&quot;,&quot;South Georgia and The South Sandwich Islands&quot;),
+  (&quot;Jennings&quot;,5791,&quot;Alto Baudó&quot;,&quot;Bryansk Oblast&quot;,&quot;Cayman Islands&quot;),
+  (&quot;Brady&quot;,6004,&quot;Saint-Vincent&quot;,&quot;Leinster&quot;,&quot;Antarctica&quot;),
+  (&quot;Boone&quot;,4918,&quot;Campinas&quot;,&quot;Maranhão&quot;,&quot;Svalbard and Jan Mayen Islands&quot;),
+  (&quot;Marks&quot;,9046,&quot;Gujranwala&quot;,&quot;Piemonte&quot;,&quot;Gibraltar&quot;),
+  (&quot;Landry&quot;,4243,&quot;Betim&quot;,&quot;North Island&quot;,&quot;Burundi&quot;),
+  (&quot;Chapman&quot;,2671,&quot;San Rafael&quot;,&quot;Limousin&quot;,&quot;Saint Kitts and Nevis&quot;),
+  (&quot;Bowen&quot;,3423,&quot;Queenstown&quot;,&quot;British Columbia&quot;,&quot;Norway&quot;),
+  (&quot;Hahn&quot;,4740,&quot;Henstedt-Ulzburg&quot;,&quot;West Nusa Tenggara&quot;,&quot;Israel&quot;),
+  (&quot;Newton&quot;,5428,&quot;Piła&quot;,&quot;Alabama&quot;,&quot;Tunisia&quot;),
+  (&quot;Wiggins&quot;,8941,&quot;Mannheim&quot;,&quot;Pskov Oblast&quot;,&quot;United States&quot;),
+  (&quot;Hunter&quot;,4512,&quot;Ludvika&quot;,&quot;Georgia&quot;,&quot;Oman&quot;),
+  (&quot;Wade&quot;,5470,&quot;Zaporizhzhia&quot;,&quot;Utrecht&quot;,&quot;Antigua and Barbuda&quot;),
+  (&quot;Wyatt&quot;,7432,&quot;Penrith&quot;,&quot;Lâm Đồng&quot;,&quot;Botswana&quot;),
+  (&quot;Michael&quot;,5329,&quot;Huaral&quot;,&quot;Nordrhein-Westphalen&quot;,&quot;Azerbaijan&quot;),
+  (&quot;Henson&quot;,3671,&quot;New Galloway&quot;,&quot;Loreto&quot;,&quot;Macao&quot;),
+  (&quot;Jacobs&quot;,3581,&quot;Pioneer&quot;,&quot;Diyarbakır&quot;,&quot;Serbia&quot;),
+  (&quot;Harper&quot;,2457,&quot;Ełk&quot;,&quot;New South Wales&quot;,&quot;El Salvador&quot;);
+INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
+VALUES
+  (&quot;Holmes&quot;,4198,&quot;Bislig&quot;,&quot;South Island&quot;,&quot;Cyprus&quot;),
+  (&quot;Woodard&quot;,9032,&quot;Okpoko&quot;,&quot;Saarland&quot;,&quot;Guyana&quot;),
+  (&quot;Green&quot;,5234,&quot;Ludwigsburg&quot;,&quot;Irkutsk Oblast&quot;,&quot;Grenada&quot;),
+  (&quot;Armstrong&quot;,8291,&quot;Imphal&quot;,&quot;Virginia&quot;,&quot;Kiribati&quot;),
+  (&quot;Bailey&quot;,5904,&quot;Montpellier&quot;,&quot;Gilgit Baltistan&quot;,&quot;Burkina Faso&quot;),
+  (&quot;Mcleod&quot;,5408,&quot;Otukpo&quot;,&quot;Putumayo&quot;,&quot;Virgin Islands, United States&quot;),
+  (&quot;Clayton&quot;,4272,&quot;Tomsk&quot;,&quot;Bình Phước&quot;,&quot;Belize&quot;),
+  (&quot;Howell&quot;,5571,&quot;Jurong West&quot;,&quot;Bursa&quot;,&quot;Ireland&quot;),
+  (&quot;Blackwell&quot;,1072,&quot;Wolfurt&quot;,&quot;Hessen&quot;,&quot;Guyana&quot;),
+  (&quot;Hicks&quot;,3138,&quot;Queenstown&quot;,&quot;Ulster&quot;,&quot;Uzbekistan&quot;),
+  (&quot;Walsh&quot;,8040,&quot;Gore&quot;,&quot;South Sumatra&quot;,&quot;Namibia&quot;),
+  (&quot;Kemp&quot;,5621,&quot;Santander&quot;,&quot;KwaZulu-Natal&quot;,&quot;Mozambique&quot;),
+  (&quot;Moran&quot;,6374,&quot;Icheon&quot;,&quot;Zeeland&quot;,&quot;Haiti&quot;),
+  (&quot;Carpenter&quot;,5416,&quot;Galway&quot;,&quot;Metropolitana de Santiago&quot;,&quot;Croatia&quot;),
+  (&quot;Hanson&quot;,3047,&quot;Warri&quot;,&quot;East Java&quot;,&quot;Benin&quot;),
+  (&quot;Robertson&quot;,8799,&quot;Irkutsk&quot;,&quot;Zachodniopomorskie&quot;,&quot;Norway&quot;),
+  (&quot;Franklin&quot;,9214,&quot;San Luis Potosí&quot;,&quot;Sonora&quot;,&quot;Brazil&quot;),
+  (&quot;Woods&quot;,4339,&quot;Canberra&quot;,&quot;Sindh&quot;,&quot;Argentina&quot;),
+  (&quot;Bryant&quot;,4911,&quot;Daman&quot;,&quot;Bà Rịa–Vũng Tàu&quot;,&quot;Panama&quot;),
+  (&quot;Rios&quot;,1743,&quot;Anamur&quot;,&quot;Burgenland&quot;,&quot;Belize&quot;),
+  (&quot;Lyons&quot;,1940,&quot;Hougang&quot;,&quot;Warmińsko-mazurskie&quot;,&quot;Trinidad and Tobago&quot;),
+  (&quot;England&quot;,6402,&quot;Moradabad&quot;,&quot;North Island&quot;,&quot;San Marino&quot;),
+  (&quot;Clark&quot;,2538,&quot;Schifferstadt&quot;,&quot;Nuevo León&quot;,&quot;Vanuatu&quot;),
+  (&quot;Norton&quot;,6049,&quot;Nelson&quot;,&quot;Kocaeli&quot;,&quot;Slovakia&quot;),
+  (&quot;Pate&quot;,6397,&quot;Cusco&quot;,&quot;Azad Kashmir&quot;,&quot;Nicaragua&quot;),
+  (&quot;Walls&quot;,1333,&quot;Mexico City&quot;,&quot;Kocaeli&quot;,&quot;Albania&quot;),
+  (&quot;Hansen&quot;,7665,&quot;Flint&quot;,&quot;Gävleborgs län&quot;,&quot;Nicaragua&quot;),
+  (&quot;Howell&quot;,8044,&quot;Siquirres&quot;,&quot;Madrid&quot;,&quot;Nigeria&quot;),
+  (&quot;Lott&quot;,6252,&quot;Koszalin&quot;,&quot;Maryland&quot;,&quot;Antarctica&quot;),
+  (&quot;Thornton&quot;,7484,&quot;Straits View&quot;,&quot;KwaZulu-Natal&quot;,&quot;Peru&quot;),
+  (&quot;Ward&quot;,6124,&quot;Aiseau-Presles&quot;,&quot;Leinster&quot;,&quot;Puerto Rico&quot;),
+  (&quot;Charles&quot;,6534,&quot;Ibadan&quot;,&quot;Sachsen&quot;,&quot;Guatemala&quot;),
+  (&quot;Rice&quot;,9349,&quot;Altavilla Irpina&quot;,&quot;Zhōngnán&quot;,&quot;Denmark&quot;),
+  (&quot;Roy&quot;,7715,&quot;Pioneer&quot;,&quot;KwaZulu-Natal&quot;,&quot;Gibraltar&quot;),
+  (&quot;Blanchard&quot;,1384,&quot;Berdychiv&quot;,&quot;South Island&quot;,&quot;Uruguay&quot;),
+  (&quot;Chan&quot;,3420,&quot;Shandong&quot;,&quot;Gelderland&quot;,&quot;Chile&quot;),
+  (&quot;Gill&quot;,3797,&quot;Calama&quot;,&quot;Atacama&quot;,&quot;Singapore&quot;),
+  (&quot;Sherman&quot;,4659,&quot;Cork&quot;,&quot;East Region&quot;,&quot;Cameroon&quot;),
+  (&quot;Jacobs&quot;,1355,&quot;Van&quot;,&quot;Sumy oblast&quot;,&quot;Bahamas&quot;),
+  (&quot;Forbes&quot;,9899,&quot;Balanga&quot;,&quot;Alajuela&quot;,&quot;Saint Kitts and Nevis&quot;),
+  (&quot;Juarez&quot;,7215,&quot;Waiheke Island&quot;,&quot;Manitoba&quot;,&quot;Cuba&quot;),
+  (&quot;Adkins&quot;,2980,&quot;Thanh Hóa&quot;,&quot;Ceuta&quot;,&quot;Uzbekistan&quot;),
+  (&quot;Weiss&quot;,1864,&quot;Kendari&quot;,&quot;West Bengal&quot;,&quot;Bolivia&quot;),
+  (&quot;Glass&quot;,4564,&quot;Tongyeong&quot;,&quot;Lubuskie&quot;,&quot;Bahamas&quot;),
+  (&quot;Kane&quot;,5595,&quot;Aizwal&quot;,&quot;Namen&quot;,&quot;Syria&quot;),
+  (&quot;Chang&quot;,8739,&quot;Collines-de-l'Outaouais&quot;,&quot;Xīběi&quot;,&quot;Cuba&quot;),
+  (&quot;Hurley&quot;,7939,&quot;Sint-Agatha-Berchem&quot;,&quot;Eastern Visayas&quot;,&quot;Austria&quot;),
+  (&quot;Mercer&quot;,7014,&quot;Sankt Johann im Pongau&quot;,&quot;Cantabria&quot;,&quot;Bhutan&quot;),
+  (&quot;Medina&quot;,8221,&quot;Sullana&quot;,&quot;Brussels Hoofdstedelijk Gewest&quot;,&quot;Congo (Brazzaville)&quot;),
+  (&quot;Mitchell&quot;,7628,&quot;Fossato di Vico&quot;,&quot;Salzburg&quot;,&quot;Brazil&quot;);
+INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
+VALUES
+  (&quot;Bartlett&quot;,3631,&quot;Peshawar&quot;,&quot;West-Vlaanderen&quot;,&quot;Uzbekistan&quot;),
+  (&quot;Mcknight&quot;,4962,&quot;Teruel&quot;,&quot;Aquitaine&quot;,&quot;Hungary&quot;),
+  (&quot;Cash&quot;,1776,&quot;Sibasa&quot;,&quot;Sindh&quot;,&quot;Serbia&quot;),
+  (&quot;Griffith&quot;,1678,&quot;Helmond&quot;,&quot;West Region&quot;,&quot;Belgium&quot;),
+  (&quot;Kidd&quot;,2925,&quot;Ghanche&quot;,&quot;Paraná&quot;,&quot;Nauru&quot;),
+  (&quot;Wells&quot;,8761,&quot;Kharagpur&quot;,&quot;Rogaland&quot;,&quot;Colombia&quot;),
+  (&quot;Saunders&quot;,9718,&quot;West Vancouver&quot;,&quot;Bihar&quot;,&quot;Greenland&quot;),
+  (&quot;Singleton&quot;,6909,&quot;Beypazarı&quot;,&quot;Central Region&quot;,&quot;Colombia&quot;),
+  (&quot;Dunn&quot;,6498,&quot;Córdoba&quot;,&quot;Hessen&quot;,&quot;Antarctica&quot;),
+  (&quot;Padilla&quot;,9124,&quot;IJlst&quot;,&quot;Herefordshire&quot;,&quot;Mayotte&quot;),
+  (&quot;Lang&quot;,7234,&quot;Profondeville&quot;,&quot;Bayern&quot;,&quot;Mauritius&quot;),
+  (&quot;West&quot;,7293,&quot;Mataram&quot;,&quot;Luhansk oblast&quot;,&quot;Senegal&quot;),
+  (&quot;Robinson&quot;,2436,&quot;Knittelfeld&quot;,&quot;Limpopo&quot;,&quot;Serbia&quot;),
+  (&quot;Sweeney&quot;,6186,&quot;Hoogeveen&quot;,&quot;Connacht&quot;,&quot;Australia&quot;),
+  (&quot;Wiley&quot;,7251,&quot;Suncheon&quot;,&quot;Corse&quot;,&quot;French Polynesia&quot;),
+  (&quot;Fox&quot;,7804,&quot;Banjarmasin&quot;,&quot;Luxemburg&quot;,&quot;Mali&quot;),
+  (&quot;Vaughn&quot;,8103,&quot;Cannes&quot;,&quot;Ulster&quot;,&quot;Belarus&quot;),
+  (&quot;Hicks&quot;,7715,&quot;Khrustalnyi&quot;,&quot;Madrid&quot;,&quot;Ireland&quot;),
+  (&quot;Skinner&quot;,3911,&quot;Virginia Beach&quot;,&quot;Nuevo León&quot;,&quot;Sudan&quot;),
+  (&quot;Pratt&quot;,8663,&quot;Naushahro Firoze&quot;,&quot;Jönköpings län&quot;,&quot;Austria&quot;),
+  (&quot;Norton&quot;,6962,&quot;Oostkerk&quot;,&quot;Bremen&quot;,&quot;Rwanda&quot;),
+  (&quot;Luna&quot;,2837,&quot;Kallang&quot;,&quot;Møre og Romsdal&quot;,&quot;Poland&quot;),
+  (&quot;Emerson&quot;,7540,&quot;Idaho Falls&quot;,&quot;Yucatán&quot;,&quot;Norway&quot;),
+  (&quot;Allison&quot;,7576,&quot;Cabadbaran&quot;,&quot;Ogun&quot;,&quot;Comoros&quot;),
+  (&quot;Garrison&quot;,6843,&quot;Jeonju&quot;,&quot;Languedoc-Roussillon&quot;,&quot;Yemen&quot;),
+  (&quot;Acevedo&quot;,4652,&quot;Heilongjiang&quot;,&quot;Santa Catarina&quot;,&quot;Sweden&quot;),
+  (&quot;Henderson&quot;,1468,&quot;Canberra&quot;,&quot;Sindh&quot;,&quot;Singapore&quot;),
+  (&quot;Delaney&quot;,1835,&quot;Camaçari&quot;,&quot;Maluku&quot;,&quot;Central African Republic&quot;),
+  (&quot;Cain&quot;,3899,&quot;Narowal&quot;,&quot;Carinthia&quot;,&quot;Lithuania&quot;),
+  (&quot;Thomas&quot;,9377,&quot;Tebing Tinggi&quot;,&quot;Riau Islands&quot;,&quot;Virgin Islands, United States&quot;),
+  (&quot;Bruce&quot;,9062,&quot;Brecon&quot;,&quot;Lubuskie&quot;,&quot;Bahrain&quot;),
+  (&quot;Mcdonald&quot;,8451,&quot;Avesta&quot;,&quot;Uttar Pradesh&quot;,&quot;Solomon Islands&quot;),
+  (&quot;Carey&quot;,7440,&quot;Guadalajara&quot;,&quot;Dolnośląskie&quot;,&quot;Comoros&quot;),
+  (&quot;Campos&quot;,5040,&quot;Bursa&quot;,&quot;Cordillera Administrative Region&quot;,&quot;Kenya&quot;),
+  (&quot;Duncan&quot;,6199,&quot;Hofheim am Taunus&quot;,&quot;Azad Kashmir&quot;,&quot;Iran&quot;),
+  (&quot;Everett&quot;,9215,&quot;Ulsan&quot;,&quot;Newfoundland and Labrador&quot;,&quot;Norfolk Island&quot;),
+  (&quot;Anthony&quot;,2565,&quot;Phalaborwa&quot;,&quot;Innlandet&quot;,&quot;Cameroon&quot;),
+  (&quot;Wise&quot;,6736,&quot;Guihulngan&quot;,&quot;North Region&quot;,&quot;Brazil&quot;),
+  (&quot;Garcia&quot;,9282,&quot;Eisenstadt&quot;,&quot;Karnataka&quot;,&quot;Falkland Islands&quot;),
+  (&quot;Petty&quot;,7993,&quot;Tehuacán&quot;,&quot;Innlandet&quot;,&quot;French Polynesia&quot;),
+  (&quot;Mclean&quot;,1354,&quot;Boryspil&quot;,&quot;South Island&quot;,&quot;Christmas Island&quot;),
+  (&quot;Pacheco&quot;,8643,&quot;St. Neots&quot;,&quot;Ceará&quot;,&quot;Paraguay&quot;),
+  (&quot;Phillips&quot;,1625,&quot;Wakefield&quot;,&quot;Tripura&quot;,&quot;Germany&quot;),
+  (&quot;Mcpherson&quot;,1151,&quot;Jaén&quot;,&quot;Gangwon&quot;,&quot;Nauru&quot;),
+  (&quot;Thomas&quot;,7515,&quot;Cork&quot;,&quot;Namen&quot;,&quot;Tonga&quot;),
+  (&quot;Henry&quot;,1706,&quot;Yahyalı&quot;,&quot;Antioquia&quot;,&quot;France&quot;),
+  (&quot;Hopkins&quot;,6463,&quot;Jeonju&quot;,&quot;Queensland&quot;,&quot;Rwanda&quot;),
+  (&quot;Gonzales&quot;,6699,&quot;Tuas&quot;,&quot;West Region&quot;,&quot;Palestine, State of&quot;),
+  (&quot;Roman&quot;,8835,&quot;Egersund&quot;,&quot;Magallanes y Antártica Chilena&quot;,&quot;Nigeria&quot;),
+  (&quot;Snow&quot;,1159,&quot;Panjim&quot;,&quot;Cà Mau&quot;,&quot;Malaysia&quot;);
 
 INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
 VALUES
@@ -1169,7 +1237,7 @@ VALUES
   (&quot;Watkins&quot;,5676,&quot;Dublin&quot;,&quot;Sindh&quot;,&quot;Ethiopia&quot;),
   (&quot;Fuentes&quot;,2892,&quot;Makati&quot;,&quot;Cantabria&quot;,&quot;Sao Tome and Principe&quot;),
   (&quot;Nichols&quot;,6498,&quot;Baden&quot;,&quot;Phú Thọ&quot;,&quot;Finland&quot;),
-  (&quot;Foreman&quot;,5667,&quot;Piedras Negras&quot;,&quot;North Gyeongsang&quot;,&quot;Ireland&quot;);
+  (&quot;Foreman&quot;,5667,&quot;Piedras Negras&quot;,&quot;North Gyeongsang&quot;,&quot;Ireland&quot;);
   
 INSERT INTO `direcciones` (`street`,`number`,`city`,`province`,`country`)
 VALUES
@@ -1641,6 +1709,8 @@ VALUES
   (&quot;Downs&quot;,4047,&quot;Cherbourg-Octeville&quot;,&quot;Limpopo&quot;,&quot;Botswana&quot;);
 </sql><sql name="PROBLEMATICA DOS">/*SEGUNDA PROBLEMATICA*/
 
+/*Una vez ejecutada la problemática uno*/
+
 /*
  Crear una vista con las columnas id, numero sucursal, nombre, apellido, DNI
   y edad de la tabla cliente calculada a partir de la fecha de nacimiento
@@ -1649,7 +1719,7 @@ CREATE VIEW v_cliente AS
 SELECT customer_id, branch_id, customer_name, customer_surname, customer_DNI,
 (strftime('%Y', 'now') - strftime('%Y', dob)) 
      - (strftime('%m-%d', 'now') &lt; strftime('%m-%d', dob) ) AS edad
-FROM cliente;
+FROM cliente;
 
 /*
   Mostrar las columnas de los clientes, ordenadas por el DNI de menor
@@ -1658,7 +1728,7 @@ FROM cliente;
 SELECT *
 FROM v_cliente
 WHERE edad &gt; 40
-ORDER BY customer_DNI;
+ORDER BY customer_DNI;
 
 /*
   Mostrar todos los clientes que se llaman “Anne” o “Tyler” ordenados
@@ -1667,18 +1737,18 @@ ORDER BY customer_DNI;
 SELECT *
 FROM v_cliente
 WHERE customer_name = &quot;Anne&quot; OR customer_name = &quot;Tyler&quot;
-ORDER BY edad;
+ORDER BY edad;
 
 /*
-#  Insertar 5 nuevos clientes en la base de datos y
+   Insertar 5 nuevos clientes en la base de datos y
    verificar que se haya realizado con éxito la inserción
 */
-INSERT INTO cliente (customer_name, customer_surname, customer_DNI, dob, branch_id)
-VALUES (&quot;Lois&quot;, &quot;Stout&quot;, 47730534, &quot;1984-07-07&quot;, 80),
-	   (&quot;Hall&quot;, &quot;Mconnell&quot;, 52055464, &quot;1968-04-30&quot;, 45),
-	   (&quot;Hilel&quot;, &quot;Mclean&quot;, 43625213, &quot;1993-03-28&quot;, 77),
-	   (&quot;Jin&quot;, &quot;Cooley&quot;, 21207908, &quot;1959-08-24&quot;, 96),
-	   (&quot;Gabriel&quot;, &quot;Harmon&quot;, 57063950, &quot;1976-04-01&quot;, 27);
+INSERT INTO cliente (customer_name, customer_surname, customer_DNI, dob, branch_id, client_id, address_id)
+VALUES (&quot;Lois&quot;, &quot;Stout&quot;, 47730534, &quot;1984-07-07&quot;, 80, 1, 450),
+	   (&quot;Hall&quot;, &quot;Mconnell&quot;, 52055464, &quot;1968-04-30&quot;, 45, 3, 320),
+	   (&quot;Hilel&quot;, &quot;Mclean&quot;, 43625213, &quot;1993-03-28&quot;, 77, 2, 125),
+	   (&quot;Jin&quot;, &quot;Cooley&quot;, 21207908, &quot;1959-08-24&quot;, 96, 3, 101),
+	   (&quot;Gabriel&quot;, &quot;Harmon&quot;, 57063950, &quot;1976-04-01&quot;, 27, 1, 580);
 	   
 /*
   Actualizar 5 clientes recientemente agregados en la base de datos dado que
@@ -1687,14 +1757,14 @@ VALUES (&quot;Lois&quot;, &quot;Stout&quot;, 47730534, &quot;1984-07-07&quot;, 8
 */
 UPDATE cliente
 SET branch_id = 10
-WHERE customer_id &gt;= 501 AND customer_id &lt;= 505
+WHERE customer_id &gt;= 501 AND customer_id &lt;= 505;
 
 /*
   Eliminar el registro correspondiente a “Noel David” realizando la selección
    por el nombre y apellido
 */
 DELETE FROM cliente
-WHERE customer_name = &quot;Noel&quot; AND customer_surname = &quot;David&quot;
+WHERE customer_name = &quot;Noel&quot; AND customer_surname = &quot;David&quot;;
 
 /*
   Consultar sobre cuál es el tipo de préstamo de mayor importe
@@ -1702,30 +1772,27 @@ WHERE customer_name = &quot;Noel&quot; AND customer_surname = &quot;David&quot;
 SELECT loan_type
 FROM prestamo
 ORDER BY loan_total DESC
-LIMIT 1</sql><sql name="PROBLEMATICA TRES">/* TERCERA PROBLEMÁTICA*/
+LIMIT 1;</sql><sql name="PROBLEMATICA TRES">/*TERCERA PROBLEMÁTICA*/
 
-/*&gt;&gt;&gt;Seleccionar las cuentas con saldo negativo&lt;&lt;&lt; */
-/*OPCIÓN 1*/
-SELECT customer_id, account_id, balance
-FROM cuenta
-WHERE balance LIKE '-%'
-ORDER BY customer_id;
-/*OPCIÓN 2*/
+/* Seleccionar las cuentas con saldo negativo */
+
 SELECT customer_id, account_id, balance
 FROM cuenta
 WHERE balance&lt;0
 ORDER BY customer_id;
 
 
-/*&gt;&gt;&gt;Seleccionar el nombre, apellido y edad de los clientes que tengan en el apellido la letra Z&lt;&lt;&lt; */
+/* Seleccionar el nombre, apellido y edad de los clientes que tengan en el apellido la letra Z */
+
 SELECT customer_name, customer_surname, (strftime('%Y', 'now') - strftime('%Y', dob)) 
      - (strftime('%m-%d', 'now') &lt; strftime('%m-%d', dob)) as edad
 FROM cliente
 WHERE customer_surname LIKE '%z%';
 
 
-/*&gt;&gt;&gt;Seleccionar el nombre, apellido, edad y nombre de sucursal de las personas cuyo nombre sea “Brendan”
- y el resultado ordenarlo por nombre de sucursal&lt;&lt;&lt;*/
+/* Seleccionar el nombre, apellido, edad y nombre de sucursal de las personas cuyo nombre sea “Brendan”
+ y el resultado ordenarlo por nombre de sucursal */
+ 
 SELECT customer_name, customer_surname, (strftime('%Y', 'now') - strftime('%Y', dob)) 
      - (strftime('%m-%d', 'now') &lt; strftime('%m-%d', dob)) as edad, sucursal.branch_name
 FROM cliente, sucursal
@@ -1733,22 +1800,22 @@ WHERE customer_name LIKE 'Brendan'
 ORDER BY branch_name;
 
 
-/*&gt;&gt;&gt; Seleccionar de la tabla de préstamos, los préstamos con un importe mayor a $80.000 y los préstamos prendarios 
-utilizando la unión de tablas/consultas (recordar que en las bases de datos la moneda se guarda como integer, en este caso con 2 centavos)&lt;&lt;&lt;*/
-SELECT loan_type, loan_total, loan_total/100 as totalPesos
-/* totalPesos: hace referencia al total sin centavos */
+/* Seleccionar de la tabla de préstamos, los préstamos con un importe mayor a $80.000 y los préstamos prendarios 
+utilizando la unión de tablas/consultas */
+
+SELECT loan_type, loan_total, loan_total/100 as totalPesos /* totalPesos: hace referencia al total sin centavos */
 FROM prestamo 
 WHERE loan_total&gt;8000000 
 UNION
 SELECT loan_type, loan_total, loan_total/100
 FROM prestamo as prestamo_prendario
 WHERE loan_type LIKE 'PRENDARIO'
-ORDER BY totalPesos
+ORDER BY totalPesos;
 /*La consulta devuelve tipos de prestamos mayores a 80.000 pesos y
 todos los prestamos PRENDARIOS (incluídos los que son menores a 80.000 pesos)*/
 
 
-/* Seleccionar los prestamos cuyo importe sea mayor que el importe medio de todos los prestamos*/
+/* Seleccionar los prestamos cuyo importe sea mayor que el importe medio de todos los prestamos */
 SELECT loan_id, loan_total
 FROM	prestamo,
 				(
@@ -1756,12 +1823,11 @@ FROM	prestamo,
 				FROM prestamo
 				) as tabla_promedio
 WHERE loan_total &gt; tabla_promedio.promedio_prestamos
-ORDER BY loan_total
+ORDER BY loan_total;
 /*EXPLICACIÓN: 
 	Se calcula el promedio en la subconsulta (devuelve un solo valor).
 	La consulta global toma la tabla &quot;prestamos&quot; completa y el resultado de la subconsulta.
-	La condición, que se encuentra dentro del WHERE, muestra las filas de loan_toal mayores que el promedio.
-*/
+	La condición, que se encuentra dentro del WHERE, muestra las filas de loan_toal mayores que el promedio.*/
 
 
 /* Contar la cantidad de clientes menores a 50 años */
@@ -1769,15 +1835,15 @@ SELECT COUNT(tablaSub50.edadSub50) as cantidad_sub50
 FROM (SELECT ( ((strftime('%Y', 'now') - strftime('%Y', dob)) 
 		- (strftime('%m-%d', 'now') &lt; strftime('%m-%d', dob)))&lt;50 ) as edadSub50
 		FROM cliente
-		WHERE edadSub50!=0) as tablaSub50
-/* EXPLICACIÓN:
+		WHERE edadSub50!=0) as tablaSub50;
+/*EXPLICACIÓN:
 	La consulta general tiene una subconsulta en el FROM, 
 	que devuelve la columna: edadSub50. La cual contiene los verdaderos(1) de la comparación &lt;50. 
 	Como la subconsulta se encuentra en el FROM de la consulta general, su alias será correspondiente a: tablaSub50.
-	En la consulta general se cuenta la cantidad de valores que devuelve la columna edadSub50 de la tablaSub50. */
+	En la consulta general se cuenta la cantidad de valores que devuelve la columna edadSub50 de la tablaSub50.*/
 
 	
-/*&gt;&gt;&gt;Seleccionar las primeras 5 cuentas con saldo mayor a 8.000$&lt;&lt;&lt;*/
+/* Seleccionar las primeras 5 cuentas con saldo mayor a 8.000$ */
 SELECT account_id, balance
 FROM cuenta
 WHERE balance&gt;800000
@@ -1785,30 +1851,31 @@ ORDER BY balance
 LIMIT 5;
 
 
-/*&gt;&gt;&gt;Seleccionar los préstamos que tengan fecha en abril, junio y agosto, ordenándolos por importe&lt;&lt;&lt;*/
+/* Seleccionar los préstamos que tengan fecha en abril, junio y agosto, ordenándolos por importe */
+
 SELECT loan_id, loan_date, loan_total as importe
 FROM prestamo
 WHERE strftime('%m', loan_date) IN ('04','06','08')
-ORDER BY loan_total
+ORDER BY loan_total;
 
 
-/*&gt;&gt;&gt;Obtener el importe total de los prestamos agrupados por tipo de préstamos. 
-Por cada tipo de préstamo de la tabla préstamo, calcular la suma de sus importes. 
-Renombrar la columna como loan_total_accu&lt;&lt;&lt;*/
+/* Obtener el importe total de los prestamos agrupados por tipo de préstamos. 
+Por cada tipo de préstamo de la tabla préstamo, calcular la suma de sus importes. */
+
 SELECT loan_type, sum(loan_total) as loan_total_accu
 FROM prestamo
 GROUP BY loan_type;</sql><sql name="PROBLEMATICA CUATRO">/*CUARTA PROBLEMATICA*/
 
-/*	Listar la cantidad de clientes por nombre de sucursal ordenando de mayor a menor	*/
+/* Listar la cantidad de clientes por nombre de sucursal ordenando de mayor a menor */
 
-SELECT s.branch_name AS &quot;Sucursal&quot;,count(s.branch_id) AS &quot;Cantidad de clientes&quot;
+SELECT s.branch_name AS &quot;Sucursal&quot;,count(c.branch_id) AS &quot;Cantidad de clientes&quot;
 FROM cliente AS c 
 LEFT JOIN sucursal AS s ON s.branch_id = c.branch_id 
 GROUP BY s.branch_id 
 ORDER BY count(s.branch_id) DESC;
 
 
-/*	Obtener la cantidad de empleados por cliente por sucursal en un número real	*/
+/* Obtener la cantidad de empleados por cliente por sucursal en un número real	*/
 
 SELECT &quot;Sucursal&quot;, round((qEmpleados*1.0/qClientes*1.0), 2) as &quot;Empleados por clientes&quot;
 FROM (
@@ -1827,7 +1894,7 @@ FROM (
 ORDER BY &quot;Sucursal&quot;;
 
 
-/*	Obtener la cantidad de tarjetas de crédito por tipo por sucursal	*/
+/*	Obtener la cantidad de tarjetas de crédito por tipo por sucursal */
 
 SELECT sucursal.branch_name AS &quot;Sucursal&quot;, &quot;Cantidad Visa&quot;, &quot;Cantidad Mastercard&quot;, &quot;Cantidad American Express&quot;
 FROM sucursal
@@ -1865,8 +1932,7 @@ LEFT JOIN(
 ORDER BY sucursal.branch_name;
 
 
-/*	Crear un trigger que después de actualizar en la tabla cuentas los campos balance, IBAN o tipo de cuenta registre en la tabla auditoria	*/
-/*	Restar $100 a las cuentas 10,11,12,13,14	*/
+/*	Crear un trigger que después de actualizar en la tabla cuentas los campos: balance, IBAN o tipo de cuenta, registre en la tabla auditoria	*/
 
 CREATE TABLE auditoria_cuenta(
 	audit_id INTEGER NOT NULL PRIMARY KEY,
@@ -1881,7 +1947,6 @@ CREATE TABLE auditoria_cuenta(
 	user_action TEXT,
 	created_at TEXT);
 
-DELETE FROM auditoria_cuenta;
 	
 CREATE TRIGGER audit AFTER UPDATE OF balance, iban, cuenta_id
 ON cuenta
@@ -1896,26 +1961,11 @@ BEGIN
 				 datetime(&quot;now&quot;));
 END;
 
+/* Restar $100 a las cuentas 10,11,12,13,14 */
 
 UPDATE cuenta
 SET balance = balance - 10000
-WHERE account_id = 10;
-
-UPDATE cuenta
-SET balance = balance - 10000
-WHERE account_id = 11;
-
-UPDATE cuenta
-SET balance = balance - 10000
-WHERE account_id = 12;
-
-UPDATE cuenta
-SET balance = balance - 10000
-WHERE account_id = 13;
-
-UPDATE cuenta
-SET balance = balance - 10000
-WHERE account_id = 14;
+WHERE account_id &gt;= 10 AND account_id &lt;= 14;
 
 
 /*	Mediante índices mejorar la performance la búsqueda de clientes por DNI	*/
@@ -1935,9 +1985,10 @@ CREATE TABLE movimientos (
 	transaction_type TEXT NOT NULL,
 	transaction_time TEXT NOT NULL);
 	
-	
-COMMIT;
+/* Previo a ejecutar la transacción realizar el commit */	
 
+COMMIT;
+/*Ejecutar por separado la transacción, si falla ejecutar el ROLLBACK*/
 BEGIN TRANSACTION;
 	UPDATE cuenta
 	SET balance = balance - 100000
@@ -1951,9 +2002,9 @@ BEGIN TRANSACTION;
 	VALUES (200,100000,&quot;Enviado&quot;,datetime(&quot;now&quot;));
 	
 	INSERT INTO movimientos (account_number,amount,transaction_type,transaction_time)
-	VALUES (400,100000,&quot;Recivido&quot;,datetime(&quot;now&quot;));
-	
+	VALUES (400,100000,&quot;Recibido&quot;,datetime(&quot;now&quot;));
+	
+/* ACLARACIÓN: -&gt; si la transacción fué correcta ejecutar: COMMIT para guardar los resultados.*/	
 COMMIT;
-
-ROLLBACK;
-</sql><current_tab id="1"/></tab_sql></sqlb_project>
+/*ROLLBACK;    -&gt; si fué incorrecta ejecutar ROLLBACK en lugar del COMMIT. */
+</sql><current_tab id="5"/></tab_sql></sqlb_project>
