@@ -2,13 +2,15 @@
 :root {
   /*color header*/
   --clr-header: lightblue;
+  /* color background */
+  --clr-bg: rgb(234, 236, 235);
   /*color side-bar*/
   --clr-small-box: #324596;
   --clr-small-box-hover: #0b5ed7;
   --clr-border-gray: #d2d2d2;
   /*color cards*/
   --purple-color: #6f42c1;
-  --gradient-color: linear-gradient(-10deg, rgb(48, 70, 151) 25%,rgb(142, 115, 178));
+  --gradient-color: linear-gradient(-10deg, rgb(45, 98, 150) 25%, rgb(48, 70, 151));
 }
 
 /*--box sizing--*/
@@ -31,6 +33,7 @@ body {
   font-size: 1.6rem;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "roboto";
+  background-color: var(--clr-bg)
   /*height: 100vh;*/
   /*overflow: auto;*/
 }
@@ -131,16 +134,17 @@ body {
   grid-template-columns: 1fr 1fr;
   background: var(--gradient-color);
   align-items: center;
+  height: 5rem;
 }
 
 .logo {
-  width: 20rem;
+  width: 15rem;
   margin-left: 2.5rem;
   text-align: left;
   align-items: center;
-  padding: 1.5rem 0;
+  /*padding: 1.5rem 0;*/
 }
- 
+
 .logo img {
   max-width: 100%;
 }
@@ -286,10 +290,116 @@ a:active{
   border-radius: 0.7rem;
 }
 
-.analizador-gastos img {
-  max-width: 100%;
-  margin: 0;
+.card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 4rem 1fr 1fr;
 }
+
+.floating-card {
+    justify-self: center;
+    width: 25rem;
+    height: 15rem;
+    border-radius: 2rem;
+    /* background-color: red; */
+    z-index: 1;
+    grid-column: 1;
+    grid-row: 1 / 3;
+    box-shadow: 0.5rem 0.5rem 1rem rgb(172, 173, 172), -0.5rem 0.5rem 1rem rgb(172, 173, 172);
+
+    background: #bab3b3;
+    background: -webkit-linear-gradient(120deg, #bab3b3 0%, #566054 100%);
+    background: linear-gradient(120deg, #bab3b3 0%, #566054 100%);
+
+}
+
+.balls {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background-color: red;
+}
+
+.balls::before {
+    content: '';
+    display: block;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background-color: orange;
+    margin: 0 0 0 2rem;
+}
+
+.under-card {
+    display: grid;
+    justify-self: center;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 12rem 12rem;
+    align-content: end;
+    width: 30rem;
+    height: 35rem;
+    border-radius: 2rem;
+    background-color: white;
+    grid-column: 1;
+    grid-row: 2 / 4;
+}
+
+.grey-text {
+    color: grey;
+}
+
+.balance {
+    grid-column: 1 / 3;
+    grid-row: 1;
+    padding: 0 0 0 2rem;
+}
+
+.balance span {
+    font-size: 3rem;
+}
+
+.received, .spent {
+    width: 100%;
+    text-align: center;
+}
+
+.received span, .spent span {
+    font-weight: bold;
+}
+
+.bar {
+    width: 10rem;
+    height: 1rem;
+    background-color: var(--clr-bg);
+    margin: 0 auto;
+    border-radius: 5rem;
+}
+
+.blue-bar::before{
+    content: '';
+    display: block;
+    width: 7.5rem;
+    height: 1rem;
+    background: #7a3596;
+    background: -webkit-linear-gradient(93deg, #7a3596 0%, #0016ff 100%);
+    background: linear-gradient(93deg, #7a3596 0%, #0016ff 100%);
+    border-radius: 5rem;
+}
+
+.red-bar::before{
+    content: '';
+    display: block;
+    width: 5rem;
+    height: 1rem;
+    background: #db8521;
+    background: -webkit-linear-gradient(93deg, #db8521 0%, #f01010 100%);
+    background: linear-gradient(93deg, #db8521 0%, #f01010 100%);
+    border-radius: 5rem;
+}
+/* .analizador-gastos img { */
+/*   max-width: 100%; */
+/*   margin: 0; */
+/* } */
 
 .small-card {
   display: grid;
@@ -298,6 +408,7 @@ a:active{
   border: 0.2rem solid var(--clr-small-box);
   border-radius: 0.7rem;
   align-items: center;
+  background-color: white;
 }
 
 .small-card:hover {
@@ -348,6 +459,7 @@ a:active{
   width: 100%;
   box-shadow: 0 0 7px 1px grey;
   border-top: 2px solid blue;
+  background-color: white;
 }
 
 .dolar-nombre {
@@ -428,6 +540,7 @@ a:active{
     /*padding: 0;*/
     /*margin: 0;*/
     width: 100%;
+    background-color: var(--clr-bg);
   }
 
   .box-white {
@@ -436,6 +549,7 @@ a:active{
     text-align: center;
     padding: 2rem;
     margin-bottom: 0.7rem;
+    background-color: white;
   }
 
   a {
@@ -506,12 +620,12 @@ a:active{
     align-self: center;
   }
 
-  .div-0 .dolar-compra, 
+  .div-0 .dolar-compra,
   .div-0 .dolar-venta {
     text-align: center;
   }
 
-  .div-0 .dolar-compra span, 
+  .div-0 .dolar-compra span,
   .div-0 .dolar-venta span {
     font-size: 3rem;
   }
@@ -534,7 +648,7 @@ a:active{
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem;
     justify-items: start;
-    width: 100%; 
+    width: 100%;
 
     border-top: 2px solid blue;
     box-shadow: 0px 0px 7px 1px grey;
