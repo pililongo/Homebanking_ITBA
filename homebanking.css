@@ -396,6 +396,47 @@ a:active{
     background: linear-gradient(93deg, #db8521 0%, #f01010 100%);
     border-radius: 5rem;
 }
+
+.personal-info {
+    background-color: white;
+    border-radius: 1rem;
+}
+
+.user-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--gradient-color);
+    padding: 2rem 1rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+
+.user-display p {
+    font-size: 2rem;
+}
+
+.profile-picture {
+    width: 7rem;
+    height: 7rem;
+    border: 0.2rem solid black;
+    border-radius: 50%;
+}
+
+.user-picture {
+    max-width: 100%;
+}
+
+.user-data, .account-info {
+    padding: 2rem 1rem;
+}
+
+.p-title {
+    font-size: 1.7rem;
+    font-weight: 700;
+}
+
+
 /* .analizador-gastos img { */
 /*   max-width: 100%; */
 /*   margin: 0; */
