@@ -1,0 +1,68 @@
+{% extends base-form.html %}
+
+{% block title %} ITBANK {% endblock %}
+
+{% block main %}
+<main>
+    <div>
+        <div class="caja_fondo">
+            <div class="caja_fondo_login">
+                <h3>¿Ya tienes una cuenta?</h3>
+                <p>Inicia sesión para entrar en la página.</p>
+                <button id="btn_iniciar_sesion">Iniciar Sesión</button>
+            </div>
+            <div class="caja_fondo_registro">
+                <h3>¿Aún no tienes una cuenta?</h3>
+                <p>Registrarse para iniciar sesión. </p>
+                <button id="btn_registro">Registrarse</button>
+            </div>
+        </div>
+        <div>
+            <form class="form-login">
+                <div class="grupo__usuario">
+                    <input class="controls form_input" type="text" id="usuario" name="usuario" value="" placeholder="Usuario">
+                    <i class="icon fas fa-times-circle"></i>
+                </div>
+                <div class="grupo__contraseña">
+                    <input class="controls form_input" type="password" id="contraseña" name="contraseña" value=""
+                        placeholder="Contraseña">
+                    <i class="icon fas fa-check-circle"></i>
+                </div>
+                <a href="homebanking.html">
+                    <button type="button" class="buttons" name="Ingresar">Ingresar</button>
+                </a>
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">Recordar usuario</label>
+                <p class="recuperar">
+                    <a href="" class="a1">
+                        Olvidé mi contraseña.
+                    </a>
+                </p>
+            </form>
+            <form class="form-register"  action="">
+                <div>
+                    <input type="text" name="usuario">
+                </div>
+                <div>
+                    <input type="text" name="nombre">
+                </div>
+                <div>
+                    <input type="text" name="apellido">
+                </div>
+                <div>
+                    <input type="number" name="dni">
+                </div>
+                <div>
+                    <input type="email" name="email">
+                </div>
+                <div>
+                    <input type="password" name="password">
+                </div>
+                <div>
+                    <input type="password" name="password2">
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock %}
