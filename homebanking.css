@@ -269,6 +269,23 @@ a:active{
   background-color: var(--clr-small-box-hover);
 }
 
+.colored { 
+  display: grid;
+  grid-template-columns: 20% 1fr;
+  text-align: center;
+  align-items: center;
+  border: none;
+  background-color: var(--clr-small-box);
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 0.7rem;
+}
+
+.colored:active {
+  background-color: var(--clr-small-box-hover);
+}
+
 .icon {
   font-size: 2.5rem;
 }
@@ -722,4 +739,74 @@ a:active{
     margin-bottom: 0;
     font-size: 1.5rem;
   }
+}
+
+/* ----------------------- AGREGADO ----------------------- */
+.a:selected, .colored:selected{
+  background-color: var(--clr-small-box-hover);  
+}
+
+.section-info{
+  align-items: center;
+  min-width: 100%;
+  margin: 0 auto;
+}
+
+.personal-info {
+  background-color: white;
+  border-radius: 1rem;
+}
+
+.user-display-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--gradient-color);
+  padding: 1rem 1rem;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.user-display-info h1 {
+  color: white;
+  font-weight: 500;
+  padding-left: 1rem;
+}
+
+.subtitle-info {
+  padding: 1rem 1rem;
+  margin: 1rem 2rem;
+
+}
+
+.title-info {
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+
+.below-entry {
+  color: rgb(36, 35, 35);
+  font-size: small;
+}
+
+input {
+  font-size: 0.875em;
+  width: 420px;
+  height: 50px;
+  padding: 0px 15px 0px 15px;
+  margin-top: 5px;
+  margin: 0 auto;
+  
+  background: transparent;
+  outline: none;
+  color: #181818;
+  mask-type: none;
+
+  border: none;
+  border-bottom: solid 1px #b3aca7;
+  
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
 }
