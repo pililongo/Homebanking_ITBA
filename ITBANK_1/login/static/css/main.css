@@ -27,9 +27,8 @@ html {
 
 /*--body--*/
 body {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  display: grid;
+  grid-template-rows: 5rem 1fr 5.6rem;
   font-size: 1.6rem;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "roboto";
@@ -309,103 +308,65 @@ a:active {
 }
 
 .card-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 4rem 1fr 1fr;
   margin: 4rem 0 0;
 }
 
 .floating-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(4, 1fr);
   justify-self: center;
-  width: 20rem;
-  height: 12rem;
-  padding: 0 1rem;
+  width: 30rem;
+  height: 20rem;
+  padding: 0 1.7rem;
   border-radius: 2rem;
   z-index: 1;
   grid-column: 1;
   grid-row: 1 / 3;
   box-shadow: 0.5rem 0.5rem 1rem rgb(172, 173, 172), -0.5rem 0.5rem 1rem rgb(172, 173, 172);
 
-  background: #bab3b3;
-  background: -webkit-linear-gradient(120deg, #bab3b3 0%, #566054 100%);
+  /* background: #bab3b3; */
+  /* background: -webkit-linear-gradient(120deg, #bab3b3 0%, #566054 100%); */
   background: linear-gradient(120deg, #bab3b3 0%, #566054 100%);
 
 }
 
-.under-card {
-  display: grid;
+.floating-card p {
+    margin: 0;
+}
+
+.bank {
+  align-self: center;
+}
+
+.card-type {
+  justify-self: end;
+  align-self: center;
+}
+
+.card-num {
+  font-size: 2rem;
+  letter-spacing: 0.2rem;
+  grid-column: span 2;
+  align-self: end;
   justify-self: center;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 12rem 12rem;
-  align-content: end;
-  width: 25rem;
-  height: 35rem;
-  border-radius: 2rem;
-  background-color: white;
-  grid-column: 1;
-  grid-row: 2 / 4;
 }
 
-.grey-text {
-  color: grey;
+.card-exp {
+  grid-column: span 2;
+  align-self: end;
 }
 
-.balance {
-  grid-column: 1 / 3;
-  grid-row: 1;
-  padding: 0 0 0 3rem;
+.card-own {
+  align-self: start;
 }
 
-.balance span {
-  font-size: 3rem;
+.card-brand {
+  justify-self: end;
 }
 
-.received,
-.spent {
-  width: 100%;
-  text-align: center;
-}
-
-.received span,
-.spent span {
-  font-weight: bold;
-}
-
-.bar {
-  width: 10rem;
-  height: 1rem;
-  background-color: var(--clr-bg);
-  margin: 0 auto;
-  border-radius: 5rem;
-}
-
-.blue-bar::before {
-  content: '';
-  display: block;
-  width: 7.5rem;
-  height: 1rem;
-  background: #7a3596;
-  background: -webkit-linear-gradient(93deg, #7a3596 0%, #0016ff 100%);
-  background: linear-gradient(93deg, #7a3596 0%, #0016ff 100%);
-  border-radius: 5rem;
-}
-
-.red-bar::before {
-  content: '';
-  display: block;
-  width: 5rem;
-  height: 1rem;
-  background: #db8521;
-  background: -webkit-linear-gradient(93deg, #db8521 0%, #f01010 100%);
-  background: linear-gradient(93deg, #db8521 0%, #f01010 100%);
-  border-radius: 5rem;
-}
-
-.empty-card {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+.bank {
+    font-size: 2.3rem;
 }
 
 .personal-info {
@@ -785,6 +746,7 @@ a:active {
     align-self: center;
     justify-content: center;
     gap: 2rem;
+    flex-wrap: wrap;
 }
 
 .subtitle-info {
