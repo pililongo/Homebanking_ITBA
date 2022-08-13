@@ -36,3 +36,8 @@ def Security(request):
 @login_required
 def Cards(request):
     return render(request, 'bank/cards.html')
+
+
+@login_required
+def Help(request):
+    return render(request, 'bank/ayuda.html')
