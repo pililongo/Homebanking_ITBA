@@ -10,7 +10,6 @@ class UserRegisterForm(UserCreationForm):
 
     email = forms.EmailField(
         label=_("Email:"),
-
     )
     
     first_name = forms.CharField(

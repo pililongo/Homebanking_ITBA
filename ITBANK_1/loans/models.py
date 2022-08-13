@@ -10,5 +10,5 @@ class Prestamo(models.Model):
     customer_id = models.ForeignKey(Cliente, on_delete=models.DO_NOTHING)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'prestamo'
