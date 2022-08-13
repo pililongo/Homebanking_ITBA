@@ -1,0 +1,33 @@
+{% extends "bank/base_home.html" %}
+
+{% block section %}
+<section class="section-info">
+    <div class="user-display-info section-cards">
+        <h1>Tus tarjetas</h1>
+    </div>
+    <div class="cards-container">
+        <div class="card-grid">
+            <div class="floating-card">
+                <p></p>
+                <p></p>
+            </div>
+            <div class="under-card">
+                <div class="balance">
+                    <p class="grey-text">BALANCE</p>
+                    <span>$4,904.91 USD</span>
+                </div>
+                <div class="received">
+                    <p class="grey-text">Received</p>
+                    <span>+1392$</span>
+                    <div class="bar blue-bar"></div>
+                </div>
+                <div class="spent">
+                    <p class="grey-text">Spent</p>
+                    <span>-980$</span>
+                    <div class="bar red-bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock section %}
