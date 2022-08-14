@@ -289,6 +289,7 @@ a:active {
   color: black;
 }
 
+
 /*--cards--*/
 
 .section-grid {
@@ -627,6 +628,10 @@ a > h2, h2 + p {
   .logout-white{
     background-color: white;
     color: black;
+  }
+
+  .logout-white:hover {
+      background-color: white;
   }
 
   .big-card {

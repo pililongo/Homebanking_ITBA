@@ -137,5 +137,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.outlook.office365.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER  = 'itbnk.validacion@outlook.com'
+EMAIL_HOST_USER  = 'itbnk_register@outlook.com'
 EMAIL_HOST_PASSWORD = 'itbank1234'
