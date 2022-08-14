@@ -107,7 +107,7 @@ function getExpense(){
       let newExpenseData = document.createElement('p');
       let newExpense = document.createTextNode(`$${amount}`);
       newExpenseData.appendChild(newExpense);
-      document.getElementById(`desgloseExpenses${name}`).appendChild(newExpenseData);
+      document.getElementById(`desgloseExpenses${name}`)?.appendChild(newExpenseData);
 
       let newDescriptionData = document.createElement('p');
       let newDescription = document.createTextNode(`${description}`);
