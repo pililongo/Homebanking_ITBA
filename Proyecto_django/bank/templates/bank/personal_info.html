@@ -1,0 +1,19 @@
+{% extends "bank/base_home.html" %}
+
+{% block section %}
+    <section class="section-info">
+        <div class="personal-info">
+            <div class="user-display-info">
+                <h1>Tus datos</h1>
+            </div>
+            <div class="subtitle-info">
+                <p class="title-info">Datos de usuario</p>
+                <p>Nombre Completo: {{user.get_full_name}}</p>
+                <p>Fecha de Nacimiento: {{ dob }}</p>
+                <p>DNI: {{ dni }}</p>
+                <p>Dirección: {{ address }}</p>
+                <p>Email: {{user.email}}</p>
+            </div>
+        </div>
+    </section>
+{% endblock section %}
