@@ -34,7 +34,6 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "roboto";
   background-color: var(--clr-bg);
   height: 100vh;
-    /*overflow: auto;*/
 }
 
 .big-card {
@@ -232,7 +231,7 @@ footer {
   position: relative;
   background-color: white;
   width: 100%;
-  /* height: 100vh; */
+  height: 100vh;
 }
 
 .link-list {
@@ -444,6 +443,14 @@ a:active {
   text-align: center;
 }
 
+a {
+text-decoration: none;
+}
+
+a > h2, h2 + p {
+  color: black;
+}
+
 /*--cotizaciones--*/
 
 .cotizaciones {
@@ -564,9 +571,6 @@ a:active {
     background-color: white;
   }
 
-  a {
-    text-decoration: none;
-  }
 
   .colored {
     align-items: center;
@@ -712,13 +716,8 @@ a:active {
 
 .section-info{
   align-items: center;
-  min-width: 100%;
+  width: 100%;
   margin: 0 auto;
-}
-
-.personal-info {
-  background-color: white;
-  border-radius: 1rem;
 }
 
 .user-display-info {
@@ -866,14 +865,14 @@ input {
   color: #566054;
 }
 
-.img-slide{ 
+.img-slide{
   max-width: 100%;
 }
 
 .container-slide {
   margin: 0 auto;
   position: relative;
-  max-width: 500px; 
+  max-width: 500px;
   width: 80%;
   border-radius: 10px;
   overflow: hidden;
@@ -905,7 +904,7 @@ input {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  width: 100%; 
+  width: 100%;
 }
 
 .pagination-item {
