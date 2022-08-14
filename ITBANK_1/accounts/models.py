@@ -13,7 +13,7 @@ class TipoCuenta(models.Model):
 
 class Cuenta(models.Model):
     account_id = models.AutoField(primary_key=True)
-    customer_id = models.ForeignKey(Cliente, on_delete = models.CASCADE)
+    customer_id = models.ForeignKey(Cliente, db_column="customer_id", on_delete = models.CASCADE)
     balance = models.IntegerField()
     iban = models.TextField()
     cuenta = models.ForeignKey(TipoCuenta, on_delete = models.DO_NOTHING)

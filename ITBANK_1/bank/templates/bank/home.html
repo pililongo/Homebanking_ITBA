@@ -12,12 +12,20 @@
                 </div>
                 <div class="user-data">
                     <p class="p-title">Datos de usuario</p>
-                    <p>Usted es cliente: </p>
-                    <p>Pertenece a la sucursal: </p>
+                    <p>Usted es cliente: {{client_type}}</p>
+                    <p>Pertenece a la sucursal: {{branch_name}}</p>
                 </div>
                 <div class="account-info">
                     <p class="p-title">Info de cuenta</p>
-                    <p>Sus cuentas disponibles: </p>
+                    {% if accounts %}
+                        <p>Sus cuentas disponibles son: </p>
+                        {% for account in accounts %}
+                            <p>Tipo de cuenta: {{ account.cuenta.account_type }}</p>
+                            <p>Balance: {{ account.balance }}</p>
+                        {% endfor %}
+                    {% else %}
+                        <p>Usted no tiene cuentas en ITBANK</p>
+                    {% endif %}
                 </div>
             </div>
         </div>

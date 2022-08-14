@@ -745,7 +745,8 @@ a:active {
     display: flex;
     align-self: center;
     justify-content: center;
-    gap: 2rem;
+    gap: 5rem;
+    margin: 5rem 0;
     flex-wrap: wrap;
 }
 
