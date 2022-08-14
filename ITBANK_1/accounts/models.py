@@ -19,5 +19,5 @@ class Cuenta(models.Model):
     cuenta = models.ForeignKey(TipoCuenta, on_delete = models.DO_NOTHING)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'cuenta'

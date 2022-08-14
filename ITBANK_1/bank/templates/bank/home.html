@@ -66,8 +66,8 @@
                     {% if accounts %}
                         <p>Sus cuentas disponibles son: </p>
                         {% for account in accounts %}
-                            <p>Tipo de cuenta: {{ account.cuenta.account_type }}</p>
-                            <p>Balance: {{ account.balance }}</p>
+                            <p><b>Tipo de cuenta:</b> {{ account.cuenta.account_type }}</p>
+                            <p><b>Balance:</b> {{ account.balance }}</p>
                         {% endfor %}
                     {% else %}
                         <p>Usted no tiene cuentas en ITBANK</p>
@@ -116,8 +116,10 @@
         <div class="small-card">
             <i class="fa-solid fa-handshake icon-cards"></i>
             <div class="card-content">
-                <h2>Prestamos</h2>
-                <p>Pedi tus prestamos con el mejor interes.</p>
+                <a href="{% url 'loans-form' %}">
+                    <h2>Prestamos</h2>
+                    <p>Pedi tus prestamos con el mejor interes.</p>
+                </a>
             </div>
         </div>
     </section>

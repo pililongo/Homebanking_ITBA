@@ -63,7 +63,9 @@ def Cards(request):
 def Help(request):
     return render(request, 'bank/ayuda.html')
 
-
+@login_required
+def Expenses(request):
+    return render(request, 'bank/app_gastos.html')
 
 def get_loged_client(request):
     user = request.user
