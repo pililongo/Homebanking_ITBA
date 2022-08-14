@@ -1,0 +1,72 @@
+{% extends "bank/base_home.html" %}
+
+{% block section %}
+    <section class="section-grid">
+        <div class="big-card">
+            <div class="personal-info">
+                <div class="user-display">
+                    <p>{{ user.get_full_name }}</p>
+                    <div class="profile-picture">
+                        <img class="user-picture" src="" alt=""/>
+                    </div>
+                </div>
+                <div class="user-data">
+                    <p class="p-title">Datos de usuario</p>
+                    <p>Usted es cliente: </p>
+                    <p>Pertenece a la sucursal: </p>
+                </div>
+                <div class="account-info">
+                    <p class="p-title">Info de cuenta</p>
+                    <p>Sus cuentas disponibles: </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="small-card">
+            <i class="fa-solid fa-money-bill-transfer icon-cards"></i>
+            <div class="card-content">
+                <h2>Transferencias</h2>
+                <p>Envia dinero por transferencia de forma instantanea.</p>
+            </div>
+        </div>
+        <div class="small-card">
+            <i class="fa-solid fa-money-bill-trend-up icon-cards"></i>
+            <div class="card-content">
+                <h2>Inversiones</h2>
+                <p>Obtiene el mejor rendimiento de tus activos.</p>
+            </div>
+        </div>
+        <div class="small-card">
+            <i class="fa-solid fa-list icon-cards"></i>
+            <div class="card-content">
+                <h2>Movimientos</h2>
+                <p>Revisa los ultimos movimientos de tu cuenta.</p>
+            </div>
+        </div>
+        <div class="small-card">
+            <i class="fa-solid fa-gift icon-cards"></i>
+            <div class="card-content">
+                <h2>Puntos ITBANK</h2>
+                <p>Canjea tus puntos por diferentes premios.</p>
+            </div>
+        </div>
+        <div class="small-card">
+            <i class="fa-solid fa-receipt icon-cards"></i>
+            <div class="card-content">
+                <h2>Pago de servicios</h2>
+                <p>Paga todos los servicios de la manera mas comoda.</p>
+            </div>
+        </div>
+        <div class="small-card">
+            <i class="fa-solid fa-handshake icon-cards"></i>
+            <div class="card-content">
+                <h2>Prestamos</h2>
+                <p>Pedi tus prestamos con el mejor interes.</p>
+            </div>
+        </div>
+    </section>
+    <section class="cotizaciones">
+        <h2 class="head-cotizaciones"> Cotizaciones </h2>
+    </section>
+
+{% endblock section %}
