@@ -14,3 +14,5 @@ button.addEventListener('click', () => {
     }
 })
 
+const placeholder = document.querySelector('#id_loan_date')
+placeholder.setAttribute('placeholder', 'Formato: aaaa-mm-dd')

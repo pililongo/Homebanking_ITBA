@@ -31,30 +31,30 @@ def LoansFormView(request):
                 account = get_caja_de_ahorro(accounts)
                 account.balance += int(request.POST.get('loan_total'))
                 account.save()
-                
+
                 context = {
-                    "title" : "Tu prestamo ha sido aprobado",
-                    "description" : "Revisa tu balance wachin",
-                    "link_message" : "Vuelve al inicio",
+                    "title" : "Tu préstamo ha sido aprobado",
+                    "description" : "Revisa tu balance",
+                    "link_message" : "Volver",
                 }
-                return render(request, 'loans/base_message_loans.html', context) 
+                return render(request, 'loans/base_message_loans.html', context)
             else:
                 context = {
-                    "title" : "Solicitud de prestamo denegada",
-                    "description" : "No podes pedir tanto",
-                    "link_message" : "Vuelve al inicio",
+                    "title" : "Solicitud de préstamo denegada",
+                    "description" : "Ha superado su limite máximo de solicitud",
+                    "link_message" : "Volver",
                 }
-                return render(request, 'loans/base_message_loans.html', context) 
+                return render(request, 'loans/base_message_loans.html', context)
         else:
             context = {
-                "title" : "Solicitud de prestamo denegada",
-                "description" : "No tenes cuenta",
-                "link_message" : "Vuelve al inicio",
+                "title" : "Solicitud de préstamo denegada",
+                "description" : "No posee caja de ahorro en pesos",
+                "link_message" : "Volver",
             }
             return render(request, 'loans/base_message_loans.html', context)
     else:
         form = LoansForm()
-    
+
     context = {
         "form": form
     }

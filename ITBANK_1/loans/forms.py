@@ -14,7 +14,7 @@ class LoansForm(forms.ModelForm):
 
     loan_date = forms.CharField(
         label= _("Fecha de inicio:"),
-        help_text=_("Formato: aaaa-mm-dd"),
+        # help_text=_("Formato: aaaa-mm-dd"),
     )
 
     loan_total = forms.IntegerField(
