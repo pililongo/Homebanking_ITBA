@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -139,3 +141,16 @@ EMAIL_HOST = 'smtp.outlook.office365.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER  = 'itbnk_register@outlook.com'
 EMAIL_HOST_PASSWORD = 'itbank1234'
+
+# Rest framework Config
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES" : [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication'
+        ],
+    "DEFAULT_PERMISSION_CLASSES" : [
+    'rest_framework.permissions.IsAuthenticated',
+    'api.permissions.IsAuthenticatedClient'
+        ]
+}
