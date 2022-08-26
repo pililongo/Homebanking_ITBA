@@ -7,7 +7,7 @@ class Prestamo(models.Model):
     loan_type = models.TextField()
     loan_date = models.TextField()
     loan_total = models.IntegerField()
-    customer_id = models.ForeignKey(Cliente, db_column= 'customer_id',  on_delete=models.DO_NOTHING)
+    customer_id = models.ForeignKey(Cliente, db_column= 'customer_id', related_name='prestamo',  on_delete=models.DO_NOTHING)
 
     class Meta:
         managed = True

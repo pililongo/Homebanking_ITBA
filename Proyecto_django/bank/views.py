@@ -1,9 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import  login_required
-from clients.models import Cliente
-from login.models import Relation
 from accounts.models import Cuenta
 from cards.models import Tarjeta
+from .utils import get_loged_client
 
 # Create your views here.
 
@@ -67,7 +66,3 @@ def Help(request):
 def Expenses(request):
     return render(request, 'bank/app_gastos.html')
 
-def get_loged_client(request):
-    user = request.user
-    cliente_id = Relation.objects.filter(user_id=user.pk).first().cliente_id
-    return Cliente.objects.filter(customer_id= cliente_id).first()
