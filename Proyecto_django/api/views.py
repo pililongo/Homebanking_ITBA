@@ -1,4 +1,3 @@
-
 from rest_framework import generics
 from rest_framework.permissions import IsAdminUser
 from rest_framework.mixins import ListModelMixin
@@ -12,6 +11,7 @@ from accounts.models import Cuenta
 from .permissions import IsClientOwner
 from bank.utils import get_loged_client
 from .mixins import MultipleFieldLookupMixin
+
 
 # Create your views here.
 
@@ -39,6 +39,7 @@ class ClientLoansAPIView(generics.ListAPIView):
         return Prestamo.objects.filter(customer_id=cliente.pk)
 
 
+
 # class BranchLoansAPIView(ListModelMixin,generics.GenericAPIView):
 #     serializer_class = BranchLoansSerializer
 #     permission_classes = [IsAdminUser]
@@ -59,7 +60,6 @@ class ClientLoansAPIView(generics.ListAPIView):
 #         return queryset.intersection(*lista)
     
 
-
 class BranchLoansAPIView(generics.ListAPIView):
     serializer_class = ClientLoansSerializer
     permission_classes = [IsAdminUser]
@@ -76,3 +76,4 @@ class BranchLoansAPIView(generics.ListAPIView):
                 queryset = queryset.union(qs2)
 
         return queryset
+

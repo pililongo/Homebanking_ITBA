@@ -53,18 +53,17 @@ class ClientLoansSerializer(serializers.ModelSerializer):
             "loan_total"
         ]
 
-# class LoansSerializer(serializers.Serializer):
-#     loan_type = serializers.CharField(read_only=True)
-#     loan_total = serializers.CharField(read_only=True)
+class BranchLoansSerializer(serializers.ModelSerializer):
+    branch = serializers.SerializerMethodField(read_only=True)
 
+    class Meta:
+        model = Prestamo
+        fields = [
+            "branch", 
+            "loan_type",
+            "loan_total"
+        ]
 
-
-# class BranchLoansSerializer(serializers.ModelSerializer):
-#     loans = serializers.SerializerMethodField(read_only=True)
-
-#     class Meta:
-#         model = Cliente
-#         fields = [
-#             'customer_id',
-#             'customer_name',
-#         ]
+    def get_branch(self, obj):
+        return obj.customer_id.branch_id.branch_name
+    
