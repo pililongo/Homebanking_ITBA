@@ -1,8 +1,12 @@
+from dataclasses import field, fields
 from rest_framework import serializers
 from loans.models import Prestamo
 from clients.models import Cliente
 from accounts.models import Cuenta
 from bank.utils import get_loged_user
+from cards.models import Tarjeta
+from bank.models import Sucursal, Direcciones
+
 
 class ClienteSerializer(serializers.ModelSerializer):
     birthday = serializers.CharField(source="dob", read_only=True)
@@ -67,3 +71,53 @@ class BranchLoansSerializer(serializers.ModelSerializer):
     def get_branch(self, obj):
         return obj.customer_id.branch_id.branch_name
     
+class CardsSerializer(serializers.ModelSerializer):
+    owner = serializers.SerializerMethodField(read_only=True)
+    brand = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = Tarjeta
+        fields = [
+            'owner',
+            'card_number',
+            'card_grant_date',
+            'card_expiration_date',
+            'card_type',
+            'brand',
+        ]
+    
+    def get_owner(self, obj):
+        name = obj.customer.customer_name
+        surname = obj.customer.customer_surname
+        return f'{name} {surname}'
+
+    def get_brand(self, obj):
+        return obj.brand.card_brand
+
+class AddressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Direcciones
+        fields = [
+            'street',
+            'number',
+            'city',
+            'province',
+            'country',
+        ]
+
+
+class BranchSerializer(serializers.ModelSerializer):
+    address = serializers.SerializerMethodField(read_only=True)
+    
+    class Meta:
+        model = Sucursal
+        fields = [
+            'branch_name',
+            'branch_number',
+            'address'
+        ]
+
+    def get_address(self, obj):
+        return f"{obj.address.street} {str(obj.address.number)}, {obj.address.city}, {obj.address.country}"
+
+

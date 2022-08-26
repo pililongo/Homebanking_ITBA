@@ -1,16 +1,18 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAdminUser
-from rest_framework.mixins import ListModelMixin
 from loans.models import Prestamo
 from clients.models import Cliente
 from .serializers import (
     ClienteSerializer, 
     ClientAccountSerializer, 
-    ClientLoansSerializer)
+    ClientLoansSerializer,
+    CardsSerializer,
+    BranchSerializer,
+    AddressSerializer)
 from accounts.models import Cuenta
-from .permissions import IsClientOwner
+from .permissions import IsClientOwner, IsStaffOrClient
 from bank.utils import get_loged_client
-from .mixins import MultipleFieldLookupMixin
+from bank.models import Sucursal, Direcciones
 
 
 # Create your views here.
@@ -39,27 +41,6 @@ class ClientLoansAPIView(generics.ListAPIView):
         return Prestamo.objects.filter(customer_id=cliente.pk)
 
 
-
-# class BranchLoansAPIView(ListModelMixin,generics.GenericAPIView):
-#     serializer_class = BranchLoansSerializer
-#     permission_classes = [IsAdminUser]
-
-#     def get(self, request, *args, **kwargs):
-#         return self.list(request, *args, **kwargs)
-
-#     def get_queryset(self):
-#         queryset = Prestamo.objects.all()
-#         lista = list()
-#         clientes = Cliente.objects.filter(branch_id=3)
-#         print(clientes)
-#         for cliente in clientes:
-#             qs = cliente.prestamo_set.all()
-#             print(qs)
-#             if len(qs) !=0:
-#                 lista.append(qs)
-#         return queryset.intersection(*lista)
-    
-
 class BranchLoansAPIView(generics.ListAPIView):
     serializer_class = ClientLoansSerializer
     permission_classes = [IsAdminUser]
@@ -77,3 +58,26 @@ class BranchLoansAPIView(generics.ListAPIView):
 
         return queryset
 
+class CardsAPIView(generics.ListAPIView):
+    serializer_class = CardsSerializer
+    permission_classes = [IsAdminUser]
+
+    def get_queryset(self):
+        client_id = self.request.parser_context.get("kwargs")
+        cliente = Cliente.objects.filter(**client_id).first()
+        return cliente.tarjeta_set.all()
+
+class AddressAPIView(generics.RetrieveUpdateAPIView):
+    serializer_class = AddressSerializer
+    queryset = Direcciones.objects.all()
+    permission_classes = [IsStaffOrClient]
+
+    def perform_update(self, serializer):
+        instance = serializer.save()
+
+class BranchAPIView(generics.ListAPIView):
+    serializer_class = BranchSerializer
+    permission_classes = []
+    authentication_classes = []
+    queryset = Sucursal.objects.all()
+    

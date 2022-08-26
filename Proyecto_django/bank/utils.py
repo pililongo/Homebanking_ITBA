@@ -5,7 +5,10 @@ from django.contrib.auth.models import User
 
 def get_loged_client(request):
     user = request.user
-    cliente_id = Relation.objects.filter(user_id=user.pk).first().cliente_id
+    try:
+        cliente_id = Relation.objects.filter(user_id=user.pk).first().cliente_id
+    except:
+        return None
     return Cliente.objects.filter(customer_id= cliente_id).first()
 
 def get_loged_user(cliente):
