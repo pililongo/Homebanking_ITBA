@@ -94,6 +94,15 @@ class CardsSerializer(serializers.ModelSerializer):
     def get_brand(self, obj):
         return obj.brand.card_brand
 
+class LoansSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Prestamo
+        fields = [
+            'loan_type',
+            'loan_date',
+            'loan_total',
+        ]
+
 class AddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = Direcciones

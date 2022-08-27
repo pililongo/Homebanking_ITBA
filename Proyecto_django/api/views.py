@@ -8,12 +8,13 @@ from .serializers import (
     ClientLoansSerializer,
     CardsSerializer,
     BranchSerializer,
-    AddressSerializer)
+    AddressSerializer,
+    LoansSerializer)
 from accounts.models import Cuenta
 from .permissions import IsClientOwner, IsStaffOrClient
 from bank.utils import get_loged_client
 from bank.models import Sucursal, Direcciones
-
+from rest_framework.exceptions import ValidationError
 
 # Create your views here.
 
@@ -67,17 +68,46 @@ class CardsAPIView(generics.ListAPIView):
         cliente = Cliente.objects.filter(**client_id).first()
         return cliente.tarjeta_set.all()
 
+class LoanCreateAPIView(generics.CreateAPIView):
+    queryset = Prestamo.objects.all()
+    serializer_class = LoansSerializer
+    permission_classes = [IsAdminUser]
+
+    def perform_create(self, serializer):
+        client_id = self.request.parser_context.get("kwargs")
+        cliente = Cliente.objects.filter(**client_id).first()
+        ammount = serializer.validated_data.get('loan_total')
+        account = cliente.cuenta_set.filter(cuenta_id = 1).first()
+        if account:
+            serializer.save(customer_id = cliente)
+            account.balance += ammount
+            account.save()
+        else:
+            raise ValidationError('Este cliente no posee caja de ahorro en pesos')
+
+class LoanDestroyAPIView(generics.DestroyAPIView):
+    queryset = Prestamo.objects.all()
+    serializer_class = LoansSerializer
+    permission_classes = [IsAdminUser]
+
+    def perform_destroy(self, instance):
+        ammount = instance.loan_total
+        cliente = instance.customer_id
+        account = cliente.cuenta_set.filter(cuenta_id = 1).first()
+        account.balance -= ammount
+        account.save()
+        super().perform_destroy(instance)
+
 class AddressAPIView(generics.RetrieveUpdateAPIView):
     serializer_class = AddressSerializer
     queryset = Direcciones.objects.all()
     permission_classes = [IsStaffOrClient]
 
     def perform_update(self, serializer):
-        instance = serializer.save()
+        serializer.save()
 
 class BranchAPIView(generics.ListAPIView):
     serializer_class = BranchSerializer
     permission_classes = []
     authentication_classes = []
     queryset = Sucursal.objects.all()
-    
