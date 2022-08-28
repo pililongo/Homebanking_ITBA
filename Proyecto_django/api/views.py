@@ -53,9 +53,8 @@ class BranchLoansAPIView(generics.ListAPIView):
               
         for cliente in clientes:
             qs = Prestamo.objects.filter(customer_id = cliente.pk)
-            if len(qs) !=0:
-                qs2 = Prestamo.objects.all().intersection(qs)
-                queryset = queryset.union(qs2)
+            if qs:
+                queryset = queryset.union(qs)
 
         return queryset
 
@@ -85,7 +84,7 @@ class LoanCreateAPIView(generics.CreateAPIView):
         else:
             raise ValidationError('Este cliente no posee caja de ahorro en pesos')
 
-class LoanDestroyAPIView(generics.DestroyAPIView):
+class LoanDestroyAPIView(generics.RetrieveDestroyAPIView):
     queryset = Prestamo.objects.all()
     serializer_class = LoansSerializer
     permission_classes = [IsAdminUser]

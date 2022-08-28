@@ -1,23 +1,14 @@
 from django.urls import path
-from .views import (
-    ClientDetailAPIView, 
-    ClientAccountAPIView, 
-    ClientLoansAPIView,
-    BranchLoansAPIView,
-    CardsAPIView,
-    BranchAPIView,
-    AddressAPIView,
-    LoanCreateAPIView,
-    LoanDestroyAPIView)
-
+from . import views
+  
 urlpatterns = [
-    path('cliente/', ClientDetailAPIView.as_view()),
-    path('cuenta/', ClientAccountAPIView.as_view()),
-    path('prestamo/', ClientLoansAPIView.as_view()),
-    path('sucursal-prestamo/<int:branch_id>/', BranchLoansAPIView.as_view()),
-    path('tarjeta/<int:pk>/', CardsAPIView.as_view()),
-    path('sucursales/', BranchAPIView.as_view()),
-    path('modificar-direccion/<int:pk>/', AddressAPIView.as_view()),
-    path('crear-prestamo/<int:pk>/', LoanCreateAPIView.as_view()),
-    path('borrar-prestamo/<int:pk>/', LoanDestroyAPIView.as_view()),
+    path('cliente/', views.ClientDetailAPIView.as_view()),
+    path('cuenta/', views.ClientAccountAPIView.as_view()),
+    path('prestamo/', views.ClientLoansAPIView.as_view()),
+    path('prestamo/sucursal/<int:branch_id>/', views.BranchLoansAPIView.as_view()),
+    path('tarjeta/<int:pk>/', views.CardsAPIView.as_view()),
+    path('sucursales/', views.BranchAPIView.as_view()),
+    path('direccion/modificar/<int:pk>/', views.AddressAPIView.as_view()),
+    path('prestamo/crear/<int:pk>/', views.LoanCreateAPIView.as_view()),
+    path('prestamo/borrar/<int:pk>/', views.LoanDestroyAPIView.as_view()),
 ]
